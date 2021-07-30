@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, InputBase, CssBaseline, IconButton, Grid }
 import { alpha, makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
 import { DataGrid } from '@material-ui/data-grid';
+import { Sparklines, SparklinesLine } from 'react-sparklines';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +83,25 @@ function App() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState('');
 
-  const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()))
+  const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()));
+
+  const rows = [];
+
+  filteredCoins.forEach(coin => {
+    rows.push({
+      id: coin.id,
+      img: coin.image,
+      name: coin.name,
+      symbol: coin.symbol,
+      price: coin.current_price,
+      priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? "%null" : coin.price_change_percentage_1h_in_currency.toFixed(1),
+      priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? "%null" : coin.price_change_percentage_24h_in_currency.toFixed(1),
+      priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? "%null" : coin.price_change_percentage_7d_in_currency.toFixed(1),
+      volume: coin.total_volume.toLocaleString(),
+      marketcap: coin.market_cap.toLocaleString(),
+      sparkline: coin.sparkline_in_7d.price
+    })
+  });
 
   const columns = [
     {
@@ -90,7 +109,7 @@ function App() {
       headerName: 'Name',
       width: 150,
       renderCell: (params) => (
-        <Fragment><img src={params.getValue(params.id, 'img')} width="20%" style={{ marginRight: 10 }} alt="img"></img> {params.value}</Fragment>
+        <Fragment><img src={params.row.img} width="20%" style={{ marginRight: 10 }} alt="img"></img> {params.value}</Fragment>
       ),
     },
     {
@@ -167,27 +186,20 @@ function App() {
         return `${params.value}  USD`;
       },
     },
+    {
+      field: 'sparkline',
+      headerName: 'Last 7 Days',
+      width: 170,
+      renderCell: (params) => (
+        <Sparklines data={params.value}>
+          <SparklinesLine color="#4eaf0a" />
+        </Sparklines>
+      ),
+    },
   ];
 
-  const rows = [];
-
-  filteredCoins.forEach(coin => {
-    rows.push({
-      id: coin.id,
-      img: coin.image,
-      name: coin.name,
-      symbol: coin.symbol,
-      price: coin.current_price,
-      priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? "%null" : coin.price_change_percentage_1h_in_currency.toFixed(1),
-      priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? "%null" : coin.price_change_percentage_24h_in_currency.toFixed(1),
-      priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? "%null" : coin.price_change_percentage_7d_in_currency.toFixed(1),
-      volume: coin.total_volume.toLocaleString(),
-      marketcap: coin.market_cap.toLocaleString()
-    })
-  });
-
   useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d')
+    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
       .then(res => {
         setCoins(res.data);
       }).catch(error => console.log(error))
@@ -219,7 +231,7 @@ function App() {
         <Grid container direction="column" alignItems="center">
           <div className={classes.dataTable}>
             <div style={{ flexGrow: 1 }}>
-              <DataGrid rows={rows} columns={columns} />
+              <DataGrid rows={rows} columns={columns} pageSize={25} />
             </div>
           </div>
         </Grid>
