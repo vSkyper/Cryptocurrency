@@ -83,6 +83,13 @@ function App() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState('');
 
+  useEffect(() => {
+    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
+      .then(res => {
+        setCoins(res.data);
+      }).catch(error => console.log(error))
+  }, []);
+
   const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()));
 
   const rows = [];
@@ -94,11 +101,11 @@ function App() {
       name: coin.name,
       symbol: coin.symbol,
       price: coin.current_price,
-      priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? "%null" : coin.price_change_percentage_1h_in_currency.toFixed(1),
-      priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? "%null" : coin.price_change_percentage_24h_in_currency.toFixed(1),
-      priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? "%null" : coin.price_change_percentage_7d_in_currency.toFixed(1),
-      volume: coin.total_volume.toLocaleString(),
-      marketcap: coin.market_cap.toLocaleString(),
+      priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? "" : coin.price_change_percentage_1h_in_currency.toFixed(2),
+      priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? "" : coin.price_change_percentage_24h_in_currency.toFixed(2),
+      priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? "" : coin.price_change_percentage_7d_in_currency.toFixed(2),
+      volume: coin.total_volume,
+      marketcap: coin.market_cap,
       sparkline: coin.sparkline_in_7d.price
     })
   });
@@ -118,6 +125,7 @@ function App() {
       width: 150,
     },
     {
+      type: 'number',
       field: 'price',
       headerName: 'Price',
       width: 150,
@@ -126,11 +134,16 @@ function App() {
       },
     },
     {
+      type: 'number',
       field: 'priceChange1h',
       headerName: '1h',
       width: 120,
       valueFormatter: (params) => {
-        return `${params.value}%`;
+        if (params.value !== "") {
+          return `${params.value}%`;
+        } else {
+          return `${params.value}`;
+        }
       },
       cellClassName: (params) => {
         if (params.value < 0) {
@@ -141,11 +154,16 @@ function App() {
       },
     },
     {
+      type: 'number',
       field: 'priceChange24h',
       headerName: '24h',
       width: 120,
       valueFormatter: (params) => {
-        return `${params.value}%`;
+        if (params.value !== "") {
+          return `${params.value}%`;
+        } else {
+          return `${params.value}`;
+        }
       },
       cellClassName: (params) => {
         if (params.value < 0) {
@@ -156,11 +174,16 @@ function App() {
       },
     },
     {
+      type: 'number',
       field: 'priceChange7d',
       headerName: '7d',
       width: 120,
       valueFormatter: (params) => {
-        return `${params.value}%`;
+        if (params.value !== "") {
+          return `${params.value}%`;
+        } else {
+          return `${params.value}`;
+        }
       },
       cellClassName: (params) => {
         if (params.value < 0) {
@@ -171,19 +194,21 @@ function App() {
       },
     },
     {
+      type: 'number',
       field: 'volume',
       headerName: 'Volume',
       width: 170,
       valueFormatter: (params) => {
-        return `${params.value}  USD`;
+        return `${params.value.toLocaleString()}  USD`;
       },
     },
     {
+      type: 'number',
       field: 'marketcap',
       headerName: 'Market Cap',
       width: 170,
       valueFormatter: (params) => {
-        return `${params.value}  USD`;
+        return `${params.value.toLocaleString()}  USD`;
       },
     },
     {
@@ -197,13 +222,6 @@ function App() {
       ),
     },
   ];
-
-  useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
-      .then(res => {
-        setCoins(res.data);
-      }).catch(error => console.log(error))
-  }, []);
 
   return (
     <div className={classes.root}>
