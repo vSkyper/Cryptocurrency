@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { AppBar, Toolbar, Typography, InputBase, CssBaseline, IconButton, Grid } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, InputBase, CssBaseline, IconButton, Grid, Link } from '@material-ui/core';
 import { alpha, makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
 import { DataGrid } from '@material-ui/data-grid';
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#4eaf0a',
     },
     display: 'flex',
-    height: 1000,
+    height: '88vh',
     width: "100%",
     [theme.breakpoints.up('sm')]: {
       width: '80%',
@@ -84,10 +84,20 @@ function App() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
+    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
       .then(res => {
         setCoins(res.data);
-      }).catch(error => console.log(error))
+      })
+      .catch(error => console.log(error));
+    setInterval(
+      () => {
+        axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
+          .then(res => {
+            setCoins(res.data);
+          })
+          .catch(error => console.log(error));
+      }, 20000
+    );
   }, []);
 
   const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()));
@@ -217,7 +227,7 @@ function App() {
       width: 170,
       renderCell: (params) => (
         <Sparklines data={params.value}>
-          <SparklinesLine color="#4eaf0a" />
+          <SparklinesLine color={params.getValue(params.id, 'priceChange7d') < 0 ? '#e15241' : '#4eaf0a'} />
         </Sparklines>
       ),
     },
@@ -227,10 +237,10 @@ function App() {
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="relative">
+        <AppBar position="relative" color={darkMode ? 'default' : 'primary'}>
           <Toolbar>
             <Typography className={classes.title} variant="h6" noWrap>
-              Cryptocurrency
+              <Link href="/" color="inherit">Cryptocurrency</Link>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
