@@ -89,22 +89,19 @@ function App() {
         setCoins(res.data);
       })
       .catch(error => console.log(error));
-    setInterval(
-      () => {
-        axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
-          .then(res => {
-            setCoins(res.data);
-          })
-          .catch(error => console.log(error));
-      }, 20000
+    setInterval(() => {
+      axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
+        .then(res => {
+          setCoins(res.data);
+        })
+        .catch(error => console.log(error));
+    }, 20000
     );
   }, []);
 
-  const filteredCoins = coins.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase()));
-
   const rows = [];
 
-  filteredCoins.forEach(coin => {
+  coins.forEach(coin => {
     rows.push({
       id: coin.id,
       img: coin.image,
@@ -259,7 +256,14 @@ function App() {
         <Grid container direction="column" alignItems="center">
           <div className={classes.dataTable}>
             <div style={{ flexGrow: 1 }}>
-              <DataGrid rows={rows} columns={columns} pageSize={25} />
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={25}
+                filterModel={{
+                  items: [{ columnField: 'name', operatorValue: 'contains', value: search }],
+                }}
+              />
             </div>
           </div>
         </Grid>
