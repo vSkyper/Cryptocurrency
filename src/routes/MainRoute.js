@@ -1,8 +1,9 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Grid } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,10 +49,11 @@ function getCoins(setCoins) {
 }
 
 function MainRoute() {
-
   const classes = useStyles();
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
+
+  let history = useHistory();
 
   useEffect(() => {
     getCoins(setCoins);
@@ -68,7 +70,7 @@ function MainRoute() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Fragment><img src={params.row.img} width="20%" style={{ marginRight: 10 }} alt="img"></img> {params.value}</Fragment>
+          <Link color="inherit" onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width="20%" style={{ marginRight: 10, verticalAlign: 'middle' }} alt="img"></img> {params.value}</Link>
         ),
       },
       {
@@ -174,7 +176,7 @@ function MainRoute() {
         ),
       },
     ])
-  }, []);
+  }, [history]);
 
   return (
     <Grid container direction="column" alignItems="center">

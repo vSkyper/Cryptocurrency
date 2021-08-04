@@ -3,9 +3,11 @@ import { AppBar, Toolbar, Typography, InputBase, CssBaseline, IconButton, Link }
 import { alpha, makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 import axios from 'axios';
 import MainRoute from './routes/MainRoute';
+import Coin from './routes/Coin';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,13 +61,14 @@ function App() {
     }
   });
   const [coins, setCoins] = useState([]);
+  const history = createBrowserHistory({ forceRefresh: true });
 
   useEffect(() => {
     axios.get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
-    .then(res => {
-      setCoins(res.data);
-    })
-    .catch(error => console.log(error));
+      .then(res => {
+        setCoins(res.data);
+      })
+      .catch(error => console.log(error));
   }, []);
 
   const defaultFilterOptions = createFilterOptions({
@@ -73,7 +76,7 @@ function App() {
   });
   const filterOptions = (options, state) => {
     return defaultFilterOptions(options, state).slice(0, 10);
-  };  
+  };
 
   return (
     <div className={classes.root}>
@@ -82,7 +85,7 @@ function App() {
         <AppBar position="relative" color={darkMode ? 'default' : 'primary'}>
           <Toolbar>
             <Typography className={classes.title} variant="h6" noWrap>
-              <Link href="/" color="inherit">Cryptocurrency</Link>
+              <Link color="inherit" underline="none" onClick={() => history.push("/")}>Cryptocurrency</Link>
             </Typography>
             <Autocomplete
               id="coins-search"
@@ -90,6 +93,9 @@ function App() {
               filterOptions={filterOptions}
               getOptionLabel={(option) => option.name}
               className={classes.search}
+              onChange={(event, value) => {
+                history.push(`/coins/${value.id}`);
+              }}
               renderInput={(params) => (
                 <div ref={params.InputProps.ref}>
                   <div className={classes.searchIcon}>
@@ -109,6 +115,7 @@ function App() {
         </AppBar>
         <Router>
           <Route path="/" exact render={(props) => <MainRoute />} />
+          <Route path="/coins/:id" exact render={(props) => <Coin />} />
         </Router>
       </ThemeProvider>
     </div>
