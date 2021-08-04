@@ -47,7 +47,7 @@ function getCoins(setCoins) {
     .catch(error => console.log(error));
 }
 
-function MainRoute({ searchData }) {
+function MainRoute() {
 
   const classes = useStyles();
   const [coins, setCoins] = useState([]);
@@ -184,9 +184,6 @@ function MainRoute({ searchData }) {
             rows={coins}
             columns={columns}
             pageSize={25}
-            filterModel={{
-              items: [{ columnField: 'name', operatorValue: 'contains', value: searchData }],
-            }}
           />
         </div>
       </div>

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, InputBase, CssBaseline, IconButton, Link } from '@material-ui/core';
 import { alpha, makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Autocomplete, createFilterOptions } from '@material-ui/lab';
+import axios from 'axios';
 import MainRoute from './routes/MainRoute';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,14 +47,6 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
   },
 }));
 
@@ -64,7 +58,22 @@ function App() {
       type: darkMode ? 'dark' : 'light',
     }
   });
-  const [search, setSearch] = useState('');
+  const [coins, setCoins] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
+    .then(res => {
+      setCoins(res.data);
+    })
+    .catch(error => console.log(error));
+  }, []);
+
+  const defaultFilterOptions = createFilterOptions({
+    matchFrom: 'start',
+  });
+  const filterOptions = (options, state) => {
+    return defaultFilterOptions(options, state).slice(0, 10);
+  };  
 
   return (
     <div className={classes.root}>
@@ -75,12 +84,21 @@ function App() {
             <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/" color="inherit">Cryptocurrency</Link>
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput, }} inputProps={{ 'aria-label': 'search' }} onChange={(e) => { setSearch(e.target.value); }} />
-            </div>
+            <Autocomplete
+              id="coins-search"
+              options={coins}
+              filterOptions={filterOptions}
+              getOptionLabel={(option) => option.name}
+              className={classes.search}
+              renderInput={(params) => (
+                <div ref={params.InputProps.ref}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput, }} {...params.inputProps} />
+                </div>
+              )}
+            />
             <IconButton color="inherit" onClick={() => setDarkMode(!darkMode)}>
               {darkMode ?
                 (<Brightness7Icon />) :
@@ -90,7 +108,7 @@ function App() {
           </Toolbar>
         </AppBar>
         <Router>
-          <Route path="/" exact render={(props) => <MainRoute searchData={search} />} />
+          <Route path="/" exact render={(props) => <MainRoute />} />
         </Router>
       </ThemeProvider>
     </div>
