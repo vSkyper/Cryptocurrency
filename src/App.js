@@ -124,7 +124,7 @@ function App() {
           <Route path="/coins/:id" exact render={(props) => <Coin />} />
         </Router>
       </ThemeProvider>
-    </div >
+    </div>
   );
 }
 

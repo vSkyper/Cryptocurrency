@@ -203,7 +203,7 @@ function Coin() {
           </Paper>
         </Grid>
       </Grid>
-    </main >
+    </main>
   );
 }
 
