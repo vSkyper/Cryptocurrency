@@ -69,6 +69,9 @@ function App() {
         setCoins(res.data);
       })
       .catch(error => console.log(error));
+    return () => {
+      setCoins([]);
+    };
   }, []);
 
   const defaultFilterOptions = createFilterOptions({
@@ -84,6 +87,9 @@ function App() {
         <CssBaseline />
         <AppBar position="relative" color={darkMode ? 'default' : 'primary'}>
           <Toolbar>
+            <IconButton onClick={() => history.push("/")}>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BTC_Logo.svg/1024px-BTC_Logo.svg.png" width="30vh" alt="logo"></img>
+            </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               <Link color="inherit" underline="none" onClick={() => history.push("/")}>Cryptocurrency</Link>
             </Typography>
@@ -118,7 +124,7 @@ function App() {
           <Route path="/coins/:id" exact render={(props) => <Coin />} />
         </Router>
       </ThemeProvider>
-    </div>
+    </div >
   );
 }
 

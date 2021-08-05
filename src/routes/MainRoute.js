@@ -57,10 +57,14 @@ function MainRoute() {
 
   useEffect(() => {
     getCoins(setCoins);
-    setInterval(() => {
+    const IntervalID = setInterval(() => {
       getCoins(setCoins);
     }, 20000
     );
+    return () => {
+      setCoins([]);
+      clearInterval(IntervalID);
+    };
   }, []);
 
   useEffect(() => {
@@ -176,6 +180,9 @@ function MainRoute() {
         ),
       },
     ])
+    return () => {
+      setColumns([]);
+    };
   }, [history]);
 
   return (
