@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import { makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -20,6 +20,15 @@ function App() {
       type: darkMode ? 'dark' : 'light',
     }
   });
+
+  useEffect(() => {
+    const parsedTheme = Boolean(JSON.parse(window.localStorage.getItem('localTheme')) || false);
+    setDarkMode(parsedTheme);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('localTheme', darkMode)
+  }, [darkMode]);
 
   return (
     <div className={classes.root}>
