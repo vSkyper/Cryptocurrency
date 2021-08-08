@@ -22,7 +22,7 @@ function App() {
   });
 
   useEffect(() => {
-    const parsedTheme = Boolean(JSON.parse(localStorage.getItem('localTheme')) || true);
+    const parsedTheme = Boolean(JSON.parse(localStorage.getItem('localTheme')));
     setDarkMode(parsedTheme);
   }, []);
 
