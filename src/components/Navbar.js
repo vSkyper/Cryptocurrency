@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, InputBase, IconButton, Link } from '@mater
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ function Navbar(props) {
   const classes = useStyles();
   const [coins, setCoins] = useState([]);
 
-  let history = useHistory();
+  const history = createBrowserHistory({ forceRefresh: true });
 
   useEffect(() => {
     axios.get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')

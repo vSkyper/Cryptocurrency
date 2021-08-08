@@ -25,8 +25,8 @@ function App() {
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
         <Router basename={process.env.PUBLIC_URL}>
-          <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
           <Route path="/" exact component={(props) => <MainRoute />} />
           <Route path="/coins/:id" exact component={(props) => <Coin />} />
         </Router>
