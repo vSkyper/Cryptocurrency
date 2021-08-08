@@ -22,12 +22,12 @@ function App() {
   });
 
   useEffect(() => {
-    const parsedTheme = Boolean(JSON.parse(window.localStorage.getItem('localTheme')) || false);
+    const parsedTheme = Boolean(JSON.parse(localStorage.getItem('localTheme')) || true);
     setDarkMode(parsedTheme);
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem('localTheme', darkMode)
+    localStorage.setItem('localTheme', darkMode)
   }, [darkMode]);
 
   return (
