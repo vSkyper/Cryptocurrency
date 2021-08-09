@@ -109,7 +109,7 @@ function Coin() {
   return (
     <main>
       <Paper className={classes.name}>
-        <img src={coin.img} style={{ marginRight: 10 }} width="40vw" alt="img"></img>
+        <img src={coin.img} style={{ marginRight: 10 }} width="35vw" alt="img"></img>
         <Typography variant="h5">{coin.name}</Typography>
       </Paper>
       <Grid container justifyContent="center" wrap="wrap-reverse" style={{ gap: 30 }}>
@@ -146,61 +146,61 @@ function Coin() {
               </ResponsiveContainer>}
           </Paper>
         </Grid>
-        <Grid item lg={4}>
+        <Grid item xs={12} lg={4}>
           <Grid container direction="column">
-            <Grid item>
+            <Grid item xs={12}>
               <Paper className={classes.card}>
-                <Typography variant="h4">{coin.price} USD</Typography>
+                <Typography variant="h5">{coin.price} USD</Typography>
                 <Typography variant="subtitle1">
                   Price
                 </Typography>
               </Paper>
             </Grid>
-            <Grid item lg={12}>
+            <Grid item xs={12}>
               <Grid container justifyContent="center" style={{ gap: 30, marginTop: 30 }}>
-                <Grid item xs={8} sm={5} md={3} lg={5}>
+                <Grid item xs={5} sm={3} lg={5}>
                   <Paper className={(coin.price_change_24h < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                    <Typography variant="h4">{coin.price_change_24h} %</Typography>
+                    <Typography variant="h5">{coin.price_change_24h} %</Typography>
                     <Typography variant="subtitle1">
                       Price Change 24h
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={8} sm={5} md={3} lg={5}>
+                <Grid item xs={5} sm={3} lg={5}>
                   <Paper className={(coin.price_change_7d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                    <Typography variant="h4">{coin.price_change_7d} %</Typography>
+                    <Typography variant="h5">{coin.price_change_7d} %</Typography>
                     <Typography variant="subtitle1">
                       Price Change 7d
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={8} sm={5} md={3} lg={5}>
+                <Grid item xs={5} sm={3} lg={5}>
                   <Paper className={(coin.price_change_14d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                    <Typography variant="h4">{coin.price_change_14d} %</Typography>
+                    <Typography variant="h5">{coin.price_change_14d} %</Typography>
                     <Typography variant="subtitle1">
                       Price Change 14d
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={8} sm={5} md={3} lg={5}>
+                <Grid item xs={5} sm={3} lg={5}>
                   <Paper className={(coin.price_change_30d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                    <Typography variant="h4">{coin.price_change_30d} %</Typography>
+                    <Typography variant="h5">{coin.price_change_30d} %</Typography>
                     <Typography variant="subtitle1">
                       Price Change 30d
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={8} sm={5} md={3} lg={5}>
+                <Grid item xs={5} sm={3} lg={5}>
                   <Paper className={(coin.price_change_60d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                    <Typography variant="h4">{coin.price_change_60d} %</Typography>
+                    <Typography variant="h5">{coin.price_change_60d} %</Typography>
                     <Typography variant="subtitle1">
                       Price Change 60d
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={8} sm={5} md={3} lg={5}>
+                <Grid item xs={5} sm={3} lg={5}>
                   <Paper className={(coin.price_change_1y < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                    <Typography variant="h4">{coin.price_change_1y} %</Typography>
+                    <Typography variant="h5">{coin.price_change_1y} %</Typography>
                     <Typography variant="subtitle1">
                       Price Change 1y
                     </Typography>
@@ -212,9 +212,9 @@ function Coin() {
         </Grid>
       </Grid>
       <Grid container justifyContent="center" style={{ gap: 30, marginTop: 30 }}>
-      <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={5}>
           <Paper className={classes.card}>
-            <Typography variant="h4">{coin.market_cap} USD</Typography>
+            <Typography variant="h5">{coin.market_cap} USD</Typography>
             <Typography variant="subtitle1">
               Market Cap
             </Typography>
@@ -222,7 +222,7 @@ function Coin() {
         </Grid>
         <Grid item xs={12} md={5}>
           <Paper className={classes.card}>
-            <Typography variant="h4">{coin.volume} USD</Typography>
+            <Typography variant="h5">{coin.volume} USD</Typography>
             <Typography variant="subtitle1">
               Volume
             </Typography>
