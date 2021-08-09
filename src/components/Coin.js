@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Grid, Paper } from '@material-ui/core';
+import { Typography, Grid, Paper, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
@@ -17,14 +17,21 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: theme.spacing(2, 0),
   },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexWrap: 'wrap',
+    gap: 10,
+    padding: theme.spacing(1, 0),
+  },
   chart: {
     boxShadow: 'none',
     height: 300,
     [theme.breakpoints.up('sm')]: {
       height: 495,
     },
+    padding: theme.spacing(2, 2),
     color: 'black',
-    padding: theme.spacing(3, 3),
   },
   card: {
     boxShadow: 'none',
@@ -73,6 +80,7 @@ function Coin() {
   const classes = useStyles();
   const [coin, setCoin] = useState([]);
   const [sparkline, setSparkline] = useState([]);
+  const [days, setDays] = useState('7');
 
   let { id } = useParams();
 
@@ -89,7 +97,7 @@ function Coin() {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`)
+    axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`)
       .then(res => {
         const temp_data = [];
         res.data.prices.forEach(data => {
@@ -102,9 +110,9 @@ function Coin() {
       })
       .catch(error => console.log(error));
     return () => {
-
+      setSparkline([]);
     };
-  }, [id]);
+  }, [id, days]);
 
   return (
     <main>
@@ -114,6 +122,29 @@ function Coin() {
       </Paper>
       <Grid container justifyContent="center" wrap="wrap-reverse" style={{ gap: 30 }}>
         <Grid item xs={12} lg={7}>
+          <Box className={classes.buttons}>
+            <Button variant="contained" color={(days === '1') ? 'primary' : 'default'} onClick={() => setDays('1')}>
+              1D
+            </Button>
+            <Button variant="contained" color={(days === '7') ? 'primary' : 'default'} onClick={() => setDays('7')}>
+              1W
+            </Button>
+            <Button variant="contained" color={(days === '30') ? 'primary' : 'default'} onClick={() => setDays('30')}>
+              1M
+            </Button>
+            <Button variant="contained" color={(days === '90') ? 'primary' : 'default'} onClick={() => setDays('90')}>
+              3M
+            </Button>
+            <Button variant="contained" color={(days === '180') ? 'primary' : 'default'} onClick={() => setDays('180')}>
+              6M
+            </Button>
+            <Button variant="contained" color={(days === '365') ? 'primary' : 'default'} onClick={() => setDays('365')}>
+              1Y
+            </Button>
+            <Button variant="contained" color={(days === 'max') ? 'primary' : 'default'} onClick={() => setDays('max')}>
+              MAX
+            </Button>
+          </Box>
           <Paper className={classes.chart}>
             {sparkline.length > 0 &&
               <ResponsiveContainer>
@@ -129,15 +160,22 @@ function Coin() {
                     dataKey="date"
                     axisLine={false}
                     tickLine={false}
-                    interval={24}
-                    tickFormatter={value => format(new Date(value), "MMM, d")}
+                    tickFormatter={value => {
+                      if (days === '1') {
+                        return format(new Date(value), "| hh:mm |");
+                      } else if (days === 'max') {
+                        return format(new Date(value), "| y MMM |");
+                      } else {
+                        return format(new Date(value), "| MMM, d |");
+                      }
+                    }}
                   />
                   <YAxis
                     dataKey="value"
                     domain={["auto", "auto"]}
                     axisLine={false}
                     tickLine={false}
-                    tickCount={10}
+                    tickCount={8}
                     tickFormatter={value => `$${value}`}
                   />
                   <Tooltip />
