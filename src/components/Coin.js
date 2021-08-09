@@ -27,10 +27,17 @@ const useStyles = makeStyles((theme) => ({
   chart: {
     boxShadow: 'none',
     height: 300,
+    paddingTop: 15,
+    paddingBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 10,
     [theme.breakpoints.up('sm')]: {
       height: 495,
+      paddingTop: 30,
+      paddingBottom: 15,
+      paddingLeft: 20,
+      paddingRight: 20,
     },
-    padding: theme.spacing(2, 2),
     color: 'black',
   },
   card: {
@@ -123,25 +130,25 @@ function Coin() {
       <Grid container justifyContent="center" wrap="wrap-reverse" style={{ gap: 30 }}>
         <Grid item xs={12} lg={7}>
           <Box className={classes.buttons}>
-            <Button variant="contained" color={(days === '1') ? 'primary' : 'default'} onClick={() => setDays('1')}>
+            <Button color={(days === '1') ? 'primary' : 'default'} onClick={() => setDays('1')}>
               1D
             </Button>
-            <Button variant="contained" color={(days === '7') ? 'primary' : 'default'} onClick={() => setDays('7')}>
+            <Button color={(days === '7') ? 'primary' : 'default'} onClick={() => setDays('7')}>
               1W
             </Button>
-            <Button variant="contained" color={(days === '30') ? 'primary' : 'default'} onClick={() => setDays('30')}>
+            <Button color={(days === '30') ? 'primary' : 'default'} onClick={() => setDays('30')}>
               1M
             </Button>
-            <Button variant="contained" color={(days === '90') ? 'primary' : 'default'} onClick={() => setDays('90')}>
+            <Button color={(days === '90') ? 'primary' : 'default'} onClick={() => setDays('90')}>
               3M
             </Button>
-            <Button variant="contained" color={(days === '180') ? 'primary' : 'default'} onClick={() => setDays('180')}>
+            <Button color={(days === '180') ? 'primary' : 'default'} onClick={() => setDays('180')}>
               6M
             </Button>
-            <Button variant="contained" color={(days === '365') ? 'primary' : 'default'} onClick={() => setDays('365')}>
+            <Button color={(days === '365') ? 'primary' : 'default'} onClick={() => setDays('365')}>
               1Y
             </Button>
-            <Button variant="contained" color={(days === 'max') ? 'primary' : 'default'} onClick={() => setDays('max')}>
+            <Button color={(days === 'max') ? 'primary' : 'default'} onClick={() => setDays('max')}>
               MAX
             </Button>
           </Box>
