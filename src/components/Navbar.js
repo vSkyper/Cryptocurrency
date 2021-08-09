@@ -74,7 +74,7 @@ function Navbar(props) {
     <AppBar position="relative" color={props.darkMode ? 'default' : 'primary'}>
       <Toolbar>
         <IconButton onClick={() => history.push("/")}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BTC_Logo.svg/1024px-BTC_Logo.svg.png" width="30vh" alt="logo"></img>
+          <img src="https://logodix.com/logo/2079330.jpg" width="30vh" alt="logo"></img>
         </IconButton>
         <Typography className={classes.title} variant="h6" noWrap>
           <Link color="inherit" underline="none" onClick={() => history.push("/")}>Cryptocurrency</Link>
