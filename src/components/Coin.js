@@ -70,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function getCoin(setCoin, id, setSparkline) {
-  axios.get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false&sparkline=true`)
+function getCoin(setCoin, id) {
+  axios.get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
     .then(res => {
       let coin = res.data;
       setCoin({
@@ -101,9 +101,9 @@ function Coin() {
   let { id } = useParams();
 
   useEffect(() => {
-    getCoin(setCoin, id, setSparkline);
+    getCoin(setCoin, id);
     const IntervalID = setInterval(() => {
-      getCoin(setCoin, id, setSparkline);
+      getCoin(setCoin, id);
     }, 5000
     );
     return () => {
