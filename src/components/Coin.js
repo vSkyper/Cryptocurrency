@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
 import { format } from 'date-fns';
+import { ArrowUpward as ArrowUpwardIcon, ArrowDownward as ArrowDownwardIcon } from '@material-ui/icons';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +18,20 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: theme.spacing(2, 0),
   },
+  down: {
+    marginLeft: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: 'center',
+    color: '#e15241',
+  },
+  up: {
+    marginLeft: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: 'center',
+    color: '#4eaf0a',
+  },
   buttons: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -27,16 +42,10 @@ const useStyles = makeStyles((theme) => ({
   chart: {
     boxShadow: 'none',
     height: 300,
-    paddingTop: 15,
-    paddingBottom: 5,
-    paddingLeft: 5,
-    paddingRight: 10,
+    padding: theme.spacing(2, 1, 1, 1),
     [theme.breakpoints.up('sm')]: {
       height: 495,
-      paddingTop: 30,
-      paddingBottom: 15,
-      paddingLeft: 20,
-      paddingRight: 20,
+      padding: theme.spacing(4, 3, 2, 2),
     },
     color: 'black',
   },
@@ -126,6 +135,18 @@ function Coin() {
       <Paper className={classes.name}>
         <img src={coin.img} style={{ marginRight: 10 }} width="35vw" alt="img"></img>
         <Typography variant="h5">{coin.name}</Typography>
+        {coin.price_change_24h < 0 &&
+          <Typography variant="subtitle1" className={classes.down}>
+            {coin.price_change_24h}
+            <ArrowDownwardIcon style={{ fontSize: 20 }} />
+          </Typography>
+        }
+        {coin.price_change_24h >= 0 &&
+          <Typography variant="subtitle1" className={classes.up}>
+            {coin.price_change_24h}
+            <ArrowUpwardIcon style={{ fontSize: 20 }} />
+          </Typography>
+        }
       </Paper>
       <Grid container justifyContent="center" wrap="wrap-reverse" style={{ gap: 30 }}>
         <Grid item xs={12} lg={7}>
