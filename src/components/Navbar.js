@@ -86,7 +86,7 @@ function Navbar(props) {
           getOptionLabel={(option) => option.name}
           className={classes.search}
           onChange={(event, value) => {
-            history.push(`/coins/${value.id}`);
+            if (value != null) { history.push(`/coins/${value.id}`) }
           }}
           renderInput={(params) => (
             <div ref={params.InputProps.ref}>
