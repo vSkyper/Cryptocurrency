@@ -5,6 +5,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { CircleLoader } from 'react-spinners';
 
 const useStyles = makeStyles((theme) => ({
   dataTable: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getCoins(setCoins) {
+function getCoins(setCoins, setLoading) {
   axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
     .then(res => {
       const rows = [];
@@ -44,6 +45,7 @@ function getCoins(setCoins) {
         })
       })
       setCoins(rows);
+      setLoading(false);
     })
     .catch(error => console.log(error));
 }
@@ -52,13 +54,15 @@ function MainRoute() {
   const classes = useStyles();
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   let history = useHistory();
 
   useEffect(() => {
-    getCoins(setCoins);
+    setLoading(true);
+    getCoins(setCoins, setLoading);
     const IntervalID = setInterval(() => {
-      getCoins(setCoins);
+      getCoins(setCoins, setLoading);
     }, 20000
     );
     return () => {
@@ -186,16 +190,19 @@ function MainRoute() {
   }, [history]);
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <div className={classes.dataTable}>
-        <div style={{ flexGrow: 1 }}>
-          <DataGrid
-            rows={coins}
-            columns={columns}
-            pageSize={25}
-          />
+    <Grid container justifyContent="center">
+      <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
+      {!loading &&
+        <div className={classes.dataTable}>
+          <div style={{ flexGrow: 1 }}>
+            <DataGrid
+              rows={coins}
+              columns={columns}
+              pageSize={25}
+            />
+          </div>
         </div>
-      </div>
+      }
     </Grid>
   );
 }
