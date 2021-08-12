@@ -31,8 +31,8 @@ function App() {
         <Navbar />
       </ThemeContext.Provider>
       <Router basename={process.env.PUBLIC_URL}>
-        <Route path='/' exact component={(props) => <MainRoute />} />
-        <Route path='/coins/:id' exact component={(props) => <Coin />} />
+        <Route exact path='/'><MainRoute /></Route>
+        <Route exact path='/coins/:id'><Coin /></Route>
       </Router>
     </ThemeProvider>
   );
