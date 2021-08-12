@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import MainRoute from './components/MainRoute';
 import Coin from './components/Coin';
+import { ThemeContext } from './contexts/ThemeContext';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -26,7 +27,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
+      <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+        <Navbar />
+      </ThemeContext.Provider>
       <Router basename={process.env.PUBLIC_URL}>
         <Route path='/' exact component={(props) => <MainRoute />} />
         <Route path='/coins/:id' exact component={(props) => <Coin />} />

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AppBar, Toolbar, Typography, InputBase, IconButton, Link } from '@material-ui/core';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -46,9 +47,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar(props) {
+function Navbar() {
   const classes = useStyles();
-  const [coins, setCoins] = useState([{id: 'loading', symbol: 'loading', name: 'Loading...'}]);
+  const [coins, setCoins] = useState([{ id: 'loading', symbol: 'loading', name: 'Loading...' }]);
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   const history = createBrowserHistory({ forceRefresh: true });
 
@@ -71,7 +73,7 @@ function Navbar(props) {
   };
 
   return (
-    <AppBar position='relative' color={props.darkMode ? 'default' : 'primary'}>
+    <AppBar position='relative' color={darkMode ? 'default' : 'primary'}>
       <Toolbar>
         <IconButton onClick={() => history.push('/')}>
           <img src='https://logodix.com/logo/2079330.jpg' width='30vh' alt='logo'></img>
@@ -97,8 +99,8 @@ function Navbar(props) {
             </div>
           )}
         />
-        <IconButton color='inherit' onClick={() => props.setDarkMode(!props.darkMode)}>
-          {props.darkMode ?
+        <IconButton color='inherit' onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ?
             (<Brightness7Icon />) :
             (<Brightness4Icon />)
           }
