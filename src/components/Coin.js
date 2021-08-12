@@ -13,23 +13,23 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     paddingTop: 20,
     marginBottom: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: theme.spacing(2, 0),
   },
   down: {
     marginLeft: 10,
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
     color: '#e15241',
   },
   up: {
     marginLeft: 10,
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
     color: '#4eaf0a',
   },
@@ -80,14 +80,14 @@ function getCoin(setCoin, id, setLoading) {
         name: coin.name,
         img: coin.image.large,
         price: coin.market_data.current_price.usd,
-        market_cap: (coin.market_data.market_cap.usd === null) ? "" : coin.market_data.market_cap.usd.toLocaleString(),
-        volume: (coin.market_data.total_volume.usd === null) ? "" : coin.market_data.total_volume.usd.toLocaleString(),
-        price_change_24h: (coin.market_data.price_change_percentage_24h === null) ? "" : coin.market_data.price_change_percentage_24h.toFixed(2),
-        price_change_7d: (coin.market_data.price_change_percentage_7d === null) ? "" : coin.market_data.price_change_percentage_7d.toFixed(2),
-        price_change_14d: (coin.market_data.price_change_percentage_14d === null) ? "" : coin.market_data.price_change_percentage_14d.toFixed(2),
-        price_change_30d: (coin.market_data.price_change_percentage_30d === null) ? "" : coin.market_data.price_change_percentage_30d.toFixed(2),
-        price_change_60d: (coin.market_data.price_change_percentage_60d === null) ? "" : coin.market_data.price_change_percentage_60d.toFixed(2),
-        price_change_1y: (coin.market_data.price_change_percentage_1y === null) ? "" : coin.market_data.price_change_percentage_1y.toFixed(2)
+        market_cap: (coin.market_data.market_cap.usd === null) ? '' : coin.market_data.market_cap.usd.toLocaleString(),
+        volume: (coin.market_data.total_volume.usd === null) ? '' : coin.market_data.total_volume.usd.toLocaleString(),
+        price_change_24h: (coin.market_data.price_change_percentage_24h === null) ? '' : coin.market_data.price_change_percentage_24h.toFixed(2),
+        price_change_7d: (coin.market_data.price_change_percentage_7d === null) ? '' : coin.market_data.price_change_percentage_7d.toFixed(2),
+        price_change_14d: (coin.market_data.price_change_percentage_14d === null) ? '' : coin.market_data.price_change_percentage_14d.toFixed(2),
+        price_change_30d: (coin.market_data.price_change_percentage_30d === null) ? '' : coin.market_data.price_change_percentage_30d.toFixed(2),
+        price_change_60d: (coin.market_data.price_change_percentage_60d === null) ? '' : coin.market_data.price_change_percentage_60d.toFixed(2),
+        price_change_1y: (coin.market_data.price_change_percentage_1y === null) ? '' : coin.market_data.price_change_percentage_1y.toFixed(2)
       });
       setLoading(false);
     })
@@ -124,7 +124,7 @@ function Coin() {
         const temp_data = [];
         res.data.prices.forEach(data => {
           temp_data.push({
-            date: format(new Date(data[0]), "MMM d y, hh:mm:ss"),
+            date: format(new Date(data[0]), 'MMM d y, hh:mm:ss'),
             value: data[1],
           })
         })
@@ -140,29 +140,29 @@ function Coin() {
   return (
     <main>
       {loading &&
-        <Grid container justifyContent="center">
+        <Grid container justifyContent='center'>
           <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
         </Grid>
       }
       {!loading &&
         <Fragment>
           <Paper className={classes.name}>
-            <img src={coin.img} style={{ marginRight: 10 }} width="35vw" alt="img"></img>
-            <Typography variant="h5">{coin.name}</Typography>
+            <img src={coin.img} style={{ marginRight: 10 }} width='35vw' alt='img'></img>
+            <Typography variant='h5'>{coin.name}</Typography>
             {coin.price_change_24h < 0 &&
-              <Typography variant="subtitle1" className={classes.down}>
+              <Typography variant='subtitle1' className={classes.down}>
                 {coin.price_change_24h}%
                 <ArrowDownwardIcon style={{ fontSize: 20 }} />
               </Typography>
             }
             {coin.price_change_24h >= 0 &&
-              <Typography variant="subtitle1" className={classes.up}>
+              <Typography variant='subtitle1' className={classes.up}>
                 {coin.price_change_24h}%
                 <ArrowUpwardIcon style={{ fontSize: 20 }} />
               </Typography>
             }
           </Paper>
-          <Grid container justifyContent="center" wrap="wrap-reverse" style={{ gap: 30 }}>
+          <Grid container justifyContent='center' wrap='wrap-reverse' style={{ gap: 30 }}>
             <Grid item xs={12} lg={7}>
               <Box className={classes.buttons}>
                 <Button color={(days === '1') ? 'primary' : 'default'} onClick={() => setDays('1')}>
@@ -189,7 +189,7 @@ function Coin() {
               </Box>
               <Paper className={classes.chart}>
                 {loadingSparkline &&
-                  <Grid container alignItems="center" justifyContent="center">
+                  <Grid container alignItems='center' justifyContent='center'>
                     <CircleLoader loading={loadingSparkline} color={'#648dae'} size={150} />
                   </Grid>
                 }
@@ -197,29 +197,29 @@ function Coin() {
                   <ResponsiveContainer>
                     <AreaChart data={sparkline}>
                       <defs>
-                        <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#648dae" stopOpacity={0.4} />
-                          <stop offset="75%" stopColor="#648dae" stopOpacity={0.05} />
+                        <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
+                          <stop offset='5%' stopColor='#648dae' stopOpacity={0.4} />
+                          <stop offset='75%' stopColor='#648dae' stopOpacity={0.05} />
                         </linearGradient>
                       </defs>
-                      <Area dataKey="value" stroke="#648dae" fill="url(#color)" />
+                      <Area dataKey='value' stroke='#648dae' fill='url(#color)' />
                       <XAxis
-                        dataKey="date"
+                        dataKey='date'
                         axisLine={false}
                         tickLine={false}
                         tickFormatter={value => {
                           if (days === '1') {
-                            return format(new Date(value), "| hh:mm |");
+                            return format(new Date(value), '| hh:mm |');
                           } else if (days === 'max') {
-                            return format(new Date(value), "| y MMM |");
+                            return format(new Date(value), '| y MMM |');
                           } else {
-                            return format(new Date(value), "| MMM, d |");
+                            return format(new Date(value), '| MMM, d |');
                           }
                         }}
                       />
                       <YAxis
-                        dataKey="value"
-                        domain={["auto", "auto"]}
+                        dataKey='value'
+                        domain={['auto', 'auto']}
                         axisLine={false}
                         tickLine={false}
                         tickCount={8}
@@ -232,61 +232,61 @@ function Coin() {
               </Paper>
             </Grid>
             <Grid item xs={12} lg={4}>
-              <Grid container direction="column">
+              <Grid container direction='column'>
                 <Grid item xs={12}>
                   <Paper className={classes.card}>
-                    <Typography variant="h5">{coin.price} USD</Typography>
-                    <Typography variant="subtitle1">
+                    <Typography variant='h5'>{coin.price} USD</Typography>
+                    <Typography variant='subtitle1'>
                       Price
                     </Typography>
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid container justifyContent="center" style={{ gap: 30, marginTop: 30 }}>
+                  <Grid container justifyContent='center' style={{ gap: 30, marginTop: 30 }}>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_24h < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                        <Typography variant="h5">{coin.price_change_24h}%</Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant='h5'>{coin.price_change_24h}%</Typography>
+                        <Typography variant='subtitle1'>
                           Price Change 24h
                         </Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_7d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                        <Typography variant="h5">{coin.price_change_7d}%</Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant='h5'>{coin.price_change_7d}%</Typography>
+                        <Typography variant='subtitle1'>
                           Price Change 7d
                         </Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_14d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                        <Typography variant="h5">{coin.price_change_14d}%</Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant='h5'>{coin.price_change_14d}%</Typography>
+                        <Typography variant='subtitle1'>
                           Price Change 14d
                         </Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_30d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                        <Typography variant="h5">{coin.price_change_30d}%</Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant='h5'>{coin.price_change_30d}%</Typography>
+                        <Typography variant='subtitle1'>
                           Price Change 30d
                         </Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_60d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                        <Typography variant="h5">{coin.price_change_60d}%</Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant='h5'>{coin.price_change_60d}%</Typography>
+                        <Typography variant='subtitle1'>
                           Price Change 60d
                         </Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_1y < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
-                        <Typography variant="h5">{coin.price_change_1y}%</Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant='h5'>{coin.price_change_1y}%</Typography>
+                        <Typography variant='subtitle1'>
                           Price Change 1y
                         </Typography>
                       </Paper>
@@ -296,19 +296,19 @@ function Coin() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justifyContent="center" style={{ gap: 30, marginTop: 30 }}>
+          <Grid container justifyContent='center' style={{ gap: 30, marginTop: 30 }}>
             <Grid item xs={12} md={5}>
               <Paper className={classes.card}>
-                <Typography variant="h5">{coin.market_cap} USD</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant='h5'>{coin.market_cap} USD</Typography>
+                <Typography variant='subtitle1'>
                   Market Cap
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs={12} md={5}>
               <Paper className={classes.card}>
-                <Typography variant="h5">{coin.volume} USD</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant='h5'>{coin.volume} USD</Typography>
+                <Typography variant='subtitle1'>
                   Volume
                 </Typography>
               </Paper>

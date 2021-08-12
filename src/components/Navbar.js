@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar(props) {
   const classes = useStyles();
-  const [coins, setCoins] = useState([]);
+  const [coins, setCoins] = useState([{id: 'loading', symbol: 'loading', name: 'Loading...'}]);
 
   const history = createBrowserHistory({ forceRefresh: true });
 
@@ -71,16 +71,16 @@ function Navbar(props) {
   };
 
   return (
-    <AppBar position="relative" color={props.darkMode ? 'default' : 'primary'}>
+    <AppBar position='relative' color={props.darkMode ? 'default' : 'primary'}>
       <Toolbar>
-        <IconButton onClick={() => history.push("/")}>
-          <img src="https://logodix.com/logo/2079330.jpg" width="30vh" alt="logo"></img>
+        <IconButton onClick={() => history.push('/')}>
+          <img src='https://logodix.com/logo/2079330.jpg' width='30vh' alt='logo'></img>
         </IconButton>
-        <Typography className={classes.title} variant="h6" noWrap>
-          <Link color="inherit" underline="none" onClick={() => history.push("/")}>Cryptocurrency</Link>
+        <Typography className={classes.title} variant='h6' noWrap>
+          <Link color='inherit' underline='none' onClick={() => history.push('/')}>Cryptocurrency</Link>
         </Typography>
         <Autocomplete
-          id="coins-search"
+          id='coins-search'
           options={coins}
           filterOptions={filterOptions}
           getOptionLabel={(option) => option.name}
@@ -93,11 +93,11 @@ function Navbar(props) {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput, }} {...params.inputProps} />
+              <InputBase placeholder='Search…' classes={{ root: classes.inputRoot, input: classes.inputInput, }} {...params.inputProps} />
             </div>
           )}
         />
-        <IconButton color="inherit" onClick={() => props.setDarkMode(!props.darkMode)}>
+        <IconButton color='inherit' onClick={() => props.setDarkMode(!props.darkMode)}>
           {props.darkMode ?
             (<Brightness7Icon />) :
             (<Brightness4Icon />)

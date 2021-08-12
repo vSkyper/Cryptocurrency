@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     display: 'flex',
     height: '88vh',
-    width: "100%",
+    width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: '80%',
     },
@@ -36,9 +36,9 @@ function getCoins(setCoins, setLoading) {
           name: coin.name,
           symbol: coin.symbol,
           price: coin.current_price,
-          priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? "" : coin.price_change_percentage_1h_in_currency.toFixed(2),
-          priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? "" : coin.price_change_percentage_24h_in_currency.toFixed(2),
-          priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? "" : coin.price_change_percentage_7d_in_currency.toFixed(2),
+          priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? '' : coin.price_change_percentage_1h_in_currency.toFixed(2),
+          priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? '' : coin.price_change_percentage_24h_in_currency.toFixed(2),
+          priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? '' : coin.price_change_percentage_7d_in_currency.toFixed(2),
           volume: coin.total_volume,
           marketcap: coin.market_cap,
           sparkline: coin.sparkline_in_7d.price
@@ -78,7 +78,7 @@ function MainRoute() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color="inherit" onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width="20%" style={{ marginRight: 10, verticalAlign: 'middle' }} alt="img"></img> {params.value}</Link>
+          <Link color='inherit' onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='20%' style={{ marginRight: 10, verticalAlign: 'middle' }} alt='img'></img> {params.value}</Link>
         ),
       },
       {
@@ -101,7 +101,7 @@ function MainRoute() {
         headerName: '1h',
         width: 120,
         valueFormatter: (params) => {
-          if (params.value !== "") {
+          if (params.value !== '') {
             return `${params.value}%`;
           } else {
             return `${params.value}`;
@@ -121,7 +121,7 @@ function MainRoute() {
         headerName: '24h',
         width: 120,
         valueFormatter: (params) => {
-          if (params.value !== "") {
+          if (params.value !== '') {
             return `${params.value}%`;
           } else {
             return `${params.value}`;
@@ -141,7 +141,7 @@ function MainRoute() {
         headerName: '7d',
         width: 120,
         valueFormatter: (params) => {
-          if (params.value !== "") {
+          if (params.value !== '') {
             return `${params.value}%`;
           } else {
             return `${params.value}`;
@@ -190,20 +190,22 @@ function MainRoute() {
   }, [history]);
 
   return (
-    <Grid container justifyContent="center">
-      <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
-      {!loading &&
-        <div className={classes.dataTable}>
-          <div style={{ flexGrow: 1 }}>
-            <DataGrid
-              rows={coins}
-              columns={columns}
-              pageSize={25}
-            />
+    <main>
+      <Grid container justifyContent='center'>
+        <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
+        {!loading &&
+          <div className={classes.dataTable}>
+            <div style={{ flexGrow: 1 }}>
+              <DataGrid
+                rows={coins}
+                columns={columns}
+                pageSize={25}
+              />
+            </div>
           </div>
-        </div>
-      }
-    </Grid>
+        }
+      </Grid>
+    </main>
   );
 }
 
