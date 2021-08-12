@@ -78,7 +78,7 @@ function MainRoute() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color='inherit' onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='20%' style={{ marginRight: 10, verticalAlign: 'middle' }} alt='img'></img> {params.value}</Link>
+          <Link color='inherit' onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='25vh' style={{ marginRight: 10, verticalAlign: 'middle' }} alt='img'></img> {params.value}</Link>
         ),
       },
       {

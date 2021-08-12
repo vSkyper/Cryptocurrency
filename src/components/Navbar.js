@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AppBar, Toolbar, Typography, InputBase, IconButton, Link } from '@material-ui/core';
 import { alpha, makeStyles } from '@material-ui/core/styles';
-import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@material-ui/icons';
+import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon, EuroSymbol as EuroSymbolIcon } from '@material-ui/icons';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
@@ -49,15 +49,18 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
   const classes = useStyles();
-  const [coins, setCoins] = useState([{ id: 'loading', symbol: 'loading', name: 'Loading...' }]);
-  const { darkMode, setDarkMode } = useContext(ThemeContext);
+  const [coins, setCoins] = useState([]);
+  const { themeMode, setThemeMode } = useContext(ThemeContext);
+  const [loading, setLoading] = useState(true);
 
   const history = createBrowserHistory({ forceRefresh: true });
 
   useEffect(() => {
+    setLoading(true);
     axios.get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
       .then(res => {
         setCoins(res.data);
+        setLoading(false);
       })
       .catch(error => console.log(error));
     return () => {
@@ -73,16 +76,17 @@ function Navbar() {
   };
 
   return (
-    <AppBar position='relative' color={darkMode ? 'default' : 'primary'}>
+    <AppBar position='relative' color={themeMode ? 'primary' : 'default'}>
       <Toolbar>
-        <IconButton onClick={() => history.push('/')}>
-          <img src='https://logodix.com/logo/2079330.jpg' width='30vh' alt='logo'></img>
+        <IconButton color='inherit' onClick={() => history.push('/')}>
+          <EuroSymbolIcon />
         </IconButton>
         <Typography className={classes.title} variant='h6' noWrap>
           <Link color='inherit' underline='none' onClick={() => history.push('/')}>Cryptocurrency</Link>
         </Typography>
         <Autocomplete
           id='coins-search'
+          loading={loading}
           options={coins}
           filterOptions={filterOptions}
           getOptionLabel={(option) => option.name}
@@ -99,10 +103,10 @@ function Navbar() {
             </div>
           )}
         />
-        <IconButton color='inherit' onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ?
-            (<Brightness7Icon />) :
-            (<Brightness4Icon />)
+        <IconButton color='inherit' onClick={() => setThemeMode(!themeMode)}>
+          {themeMode ?
+            <Brightness4Icon /> :
+            <Brightness7Icon />
           }
         </IconButton>
       </Toolbar>

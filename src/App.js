@@ -8,26 +8,26 @@ import Coin from './components/Coin';
 import { ThemeContext } from './contexts/ThemeContext';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [themeMode, setThemeMode] = useState(false);
   const theme = createTheme({
     palette: {
-      type: darkMode ? 'dark' : 'light',
+      type: themeMode ? 'light' : 'dark',
     }
   });
 
   useEffect(() => {
     const parsedTheme = Boolean(JSON.parse(localStorage.getItem('localTheme')));
-    setDarkMode(parsedTheme);
+    setThemeMode(parsedTheme);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('localTheme', darkMode)
-  }, [darkMode]);
+    localStorage.setItem('localTheme', themeMode)
+  }, [themeMode]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+      <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
         <Navbar />
       </ThemeContext.Provider>
       <Router basename={process.env.PUBLIC_URL}>
