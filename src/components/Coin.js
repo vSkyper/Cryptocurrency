@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Typography, Grid, Paper, Button, Box } from '@material-ui/core';
+import { Typography, Grid, Paper, Button, Box, InputBase } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
 import { format } from 'date-fns';
-import { ArrowUpward as ArrowUpwardIcon, ArrowDownward as ArrowDownwardIcon } from '@material-ui/icons';
+import { ArrowUpward as ArrowUpwardIcon, ArrowDownward as ArrowDownwardIcon, SwapHoriz as SwapHorizIcon } from '@material-ui/icons';
 import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
 
@@ -44,19 +44,34 @@ const Buttons = styled(Box)(({ theme }) => ({
 }));
 
 const Chart = styled(Paper)(({ theme }) => ({
-  boxShadow: 'none',
-  height: 495,
+  height: 350,
   padding: theme.spacing(2, 1, 1, 1),
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4, 3, 2, 2),
+    height: 495,
+    padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
 }));
 
 const Card = styled(Paper)(({ theme }) => ({
-  boxShadow: 'none',
   textAlign: 'center',
   padding: theme.spacing(2, 0),
+}));
+
+const InputBaseExchange = styled(InputBase)(({ theme }) => ({
+  ml: 1,
+  flex: 1,
+  '& input[type=number]': {
+    '-moz-appearance': 'textfield'
+  },
+  '& input[type=number]::-webkit-outer-spin-button': {
+    '-webkit-appearance': 'none',
+    margin: 0
+  },
+  '& input[type=number]::-webkit-inner-spin-button': {
+    '-webkit-appearance': 'none',
+    margin: 0
+  }
 }));
 
 function getCoin(setCoin, id, setLoading) {
@@ -65,6 +80,7 @@ function getCoin(setCoin, id, setLoading) {
       let coin = res.data;
       setCoin({
         id: coin.id,
+        symbol: coin.symbol,
         name: coin.name,
         img: coin.image.large,
         price: coin.market_data.current_price.usd,
@@ -88,8 +104,19 @@ function Coin() {
   const [days, setDays] = useState('7');
   const [loading, setLoading] = useState(true);
   const [loadingSparkline, setLoadingSparkline] = useState(true);
+  const [amount, setAmount] = useState();
+  const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState(true);
 
   let { id } = useParams();
+
+  let currency, crypto;
+  if (fromCryptoToCurrency) {
+    crypto = amount;
+    currency = amount * coin.price;
+  } else {
+    currency = amount;
+    crypto = amount / coin.price;
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -149,7 +176,7 @@ function Coin() {
               </ArrowUp>
             }
           </Name>
-          <Grid container justifyContent='center' wrap='wrap-reverse' sx={{ gap: 4 }}>
+          <Grid container justifyContent='center' direction={{ xs: 'column-reverse', sm: 'row' }} sx={{ gap: 4 }}>
             <Grid item xs={12} lg={7}>
               <Buttons>
                 <Button color={(days === '1') ? 'primary' : 'inherit'} onClick={() => setDays('1')}>
@@ -161,13 +188,13 @@ function Coin() {
                 <Button color={(days === '30') ? 'primary' : 'inherit'} onClick={() => setDays('30')}>
                   1M
                 </Button>
-                <Button color={(days === '90') ? 'primary' : 'inherit'} onClick={() => setDays('90')}>
+                <Button color={(days === '90') ? 'primary' : 'inherit'} sx={{ display: { xs: 'none', sm: 'block' } }} onClick={() => setDays('90')}>
                   3M
                 </Button>
                 <Button color={(days === '180') ? 'primary' : 'inherit'} onClick={() => setDays('180')}>
                   6M
                 </Button>
-                <Button color={(days === '365') ? 'primary' : 'inherit'} onClick={() => setDays('365')}>
+                <Button color={(days === '365') ? 'primary' : 'inherit'} sx={{ display: { xs: 'none', sm: 'block' } }} onClick={() => setDays('365')}>
                   1Y
                 </Button>
                 <Button color={(days === 'max') ? 'primary' : 'inherit'} onClick={() => setDays('max')}>
@@ -283,7 +310,7 @@ function Coin() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justifyContent='center' sx={{ gap: 4, marginTop: 3 }}>
+          <Grid container justifyContent='center' sx={{ gap: 4, mt: 4 }}>
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>{coin.market_cap} USD</Typography>
@@ -301,9 +328,28 @@ function Coin() {
               </Card>
             </Grid>
           </Grid>
+          <Grid container justifyContent='center' alignItems='center' sx={{ mt: 4, mb: 3 }}>
+            <Grid item>
+              <Paper sx={{ p: [2, 2], display: 'flex', alignItems: 'center', width: 300 }}>
+                <Typography sx={{ p: 1 }}>
+                  {coin.symbol.toUpperCase()}
+                </Typography>
+                <InputBaseExchange type='number' value={crypto} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(true); }} />
+              </Paper>
+            </Grid>
+            <SwapHorizIcon fontSize='large' sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }} />
+            <Grid item>
+              <Paper sx={{ p: [2, 2], display: 'flex', alignItems: 'center', width: 300 }}>
+                <Typography sx={{ p: 1 }}>
+                  USD
+                </Typography>
+                <InputBaseExchange type='number' value={currency} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(false); }} />
+              </Paper>
+            </Grid>
+          </Grid>
         </Fragment>
       }
-    </main>
+    </main >
   );
 }
 

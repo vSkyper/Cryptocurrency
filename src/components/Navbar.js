@@ -91,13 +91,13 @@ function Navbar() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder='Search…'
                 {...params.inputProps}
               />
             </div>
           )}
         />
-        <IconButton color='inherit' size="large" onClick={() => setThemeMode(!themeMode)}>
+        <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
           {themeMode ?
             <Brightness4Icon /> :
             <Brightness7Icon />

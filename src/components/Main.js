@@ -75,7 +75,7 @@ function Main() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color='inherit' underline="hover" sx={{ display: 'flex', alignItems: 'center', gap: 1 }} onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='25vh' alt='img'></img> {params.value}</Link>
+          <Link color='inherit' underline='hover' sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }} onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='25vh' alt='img'></img> {params.value}</Link>
         ),
       },
       {
