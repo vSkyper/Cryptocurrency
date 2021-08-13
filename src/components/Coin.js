@@ -1,30 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Typography, Grid, Paper, Button, Box } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
 import { useParams } from 'react-router-dom';
 import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
 import { format } from 'date-fns';
 import { ArrowUpward as ArrowUpwardIcon, ArrowDownward as ArrowDownwardIcon } from '@material-ui/icons';
 import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
-
-const useStyles = makeStyles((theme) => ({
-  cardPercentageNegative: {
-    boxShadow: 'none',
-    textAlign: 'center',
-    padding: theme.spacing(2, 0),
-    color: '#571313',
-    backgroundColor: theme.palette.error.light,
-  },
-  cardPercentagePositive: {
-    boxShadow: 'none',
-    textAlign: 'center',
-    padding: theme.spacing(2, 0),
-    color: '#1d471f',
-    backgroundColor: theme.palette.success.light,
-  }
-}));
 
 const Name = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
@@ -101,7 +83,6 @@ function getCoin(setCoin, id, setLoading) {
 }
 
 function Coin() {
-  const classes = useStyles();
   const [coin, setCoin] = useState([]);
   const [sparkline, setSparkline] = useState([]);
   const [days, setDays] = useState('7');
@@ -250,52 +231,52 @@ function Coin() {
                 <Grid item xs={12}>
                   <Grid container justifyContent='center' sx={{ gap: 3, marginTop: 3 }}>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Paper className={(coin.price_change_24h < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
+                      <Card sx={(coin.price_change_24h < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_24h}%</Typography>
                         <Typography variant='subtitle1'>
                           Price Change 24h
                         </Typography>
-                      </Paper>
+                      </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Paper className={(coin.price_change_7d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
+                      <Card sx={(coin.price_change_7d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_7d}%</Typography>
                         <Typography variant='subtitle1'>
                           Price Change 7d
                         </Typography>
-                      </Paper>
+                      </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Paper className={(coin.price_change_14d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
+                      <Card sx={(coin.price_change_14d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_14d}%</Typography>
                         <Typography variant='subtitle1'>
                           Price Change 14d
                         </Typography>
-                      </Paper>
+                      </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Paper className={(coin.price_change_30d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
+                      <Card sx={(coin.price_change_30d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_30d}%</Typography>
                         <Typography variant='subtitle1'>
                           Price Change 30d
                         </Typography>
-                      </Paper>
+                      </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Paper className={(coin.price_change_60d < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
+                      <Card sx={(coin.price_change_60d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_60d}%</Typography>
                         <Typography variant='subtitle1'>
                           Price Change 60d
                         </Typography>
-                      </Paper>
+                      </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Paper className={(coin.price_change_1y < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
+                      <Card sx={(coin.price_change_1y < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_1y}%</Typography>
                         <Typography variant='subtitle1'>
                           Price Change 1y
                         </Typography>
-                      </Paper>
+                      </Card>
                     </Grid>
                   </Grid>
                 </Grid>
