@@ -149,7 +149,7 @@ function Coin() {
               </ArrowUp>
             }
           </Name>
-          <Grid container justifyContent='center' wrap='wrap-reverse' sx={{ gap: 3 }}>
+          <Grid container justifyContent='center' wrap='wrap-reverse' sx={{ gap: 4 }}>
             <Grid item xs={12} lg={7}>
               <Buttons>
                 <Button color={(days === '1') ? 'primary' : 'inherit'} onClick={() => setDays('1')}>
@@ -229,7 +229,7 @@ function Coin() {
                   </Card>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid container justifyContent='center' sx={{ gap: 3, marginTop: 3 }}>
+                  <Grid container justifyContent='center' sx={{ gap: 4, marginTop: 3 }}>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card sx={(coin.price_change_24h < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
                         <Typography variant='h5'>{coin.price_change_24h}%</Typography>
@@ -283,7 +283,7 @@ function Coin() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justifyContent='center' sx={{ gap: 3, marginTop: 3 }}>
+          <Grid container justifyContent='center' sx={{ gap: 4, marginTop: 3 }}>
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>{coin.market_cap} USD</Typography>
