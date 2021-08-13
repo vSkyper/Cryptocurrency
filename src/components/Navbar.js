@@ -1,54 +1,46 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AppBar, Toolbar, Typography, InputBase, IconButton, Link } from '@material-ui/core';
-import { alpha, makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, IconButton, Link, InputBase } from '@material-ui/core';
+import { styled, alpha } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon, EuroSymbol as EuroSymbolIcon } from '@material-ui/icons';
-import { Autocomplete, createFilterOptions } from '@material-ui/lab';
+import Autocomplete, { createFilterOptions } from '@material-ui/core/Autocomplete';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+const Search = styled(Autocomplete)(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
   },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
   },
 }));
 
 function Navbar() {
-  const classes = useStyles();
   const [coins, setCoins] = useState([]);
   const { themeMode, setThemeMode } = useContext(ThemeContext);
   const [loading, setLoading] = useState(true);
@@ -76,34 +68,36 @@ function Navbar() {
   };
 
   return (
-    <AppBar position='relative' color={themeMode ? 'primary' : 'default'}>
+    <AppBar position='static' color={themeMode ? 'primary' : 'default'}>
       <Toolbar>
-        <IconButton color='inherit' onClick={() => history.push('/')}>
+        <IconButton color='inherit' size='large' edge='start' onClick={() => history.push('/')}>
           <EuroSymbolIcon />
         </IconButton>
-        <Typography className={classes.title} variant='h6' noWrap>
+        <Typography variant='h6' noWrap sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
           <Link color='inherit' underline='none' onClick={() => history.push('/')}>Cryptocurrency</Link>
         </Typography>
-        <Autocomplete
+        <Search
           id='coins-search'
           loading={loading}
           options={coins}
           filterOptions={filterOptions}
           getOptionLabel={(option) => option.name}
-          className={classes.search}
           onChange={(event, value) => {
             if (value != null) { history.push(`/coins/${value.id}`) }
           }}
           renderInput={(params) => (
             <div ref={params.InputProps.ref}>
-              <div className={classes.searchIcon}>
+              <SearchIconWrapper>
                 <SearchIcon />
-              </div>
-              <InputBase placeholder='Search…' classes={{ root: classes.inputRoot, input: classes.inputInput, }} {...params.inputProps} />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                {...params.inputProps}
+              />
             </div>
           )}
         />
-        <IconButton color='inherit' onClick={() => setThemeMode(!themeMode)}>
+        <IconButton color='inherit' size="large" onClick={() => setThemeMode(!themeMode)}>
           {themeMode ?
             <Brightness4Icon /> :
             <Brightness7Icon />

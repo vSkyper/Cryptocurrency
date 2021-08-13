@@ -11,7 +11,7 @@ function App() {
   const [themeMode, setThemeMode] = useState(false);
   const theme = createTheme({
     palette: {
-      type: themeMode ? 'light' : 'dark',
+      mode: themeMode ? 'light' : 'dark',
     }
   });
 

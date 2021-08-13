@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Typography, Grid, Paper, Button, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { useParams } from 'react-router-dom';
 import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
 import { format } from 'date-fns';
@@ -9,52 +10,6 @@ import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
 
 const useStyles = makeStyles((theme) => ({
-  name: {
-    boxShadow: 'none',
-    paddingTop: 20,
-    marginBottom: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing(2, 0),
-  },
-  down: {
-    marginLeft: 10,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#e15241',
-  },
-  up: {
-    marginLeft: 10,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#4eaf0a',
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    flexWrap: 'wrap',
-    gap: 10,
-    padding: theme.spacing(1, 0),
-  },
-  chart: {
-    boxShadow: 'none',
-    height: 300,
-    padding: theme.spacing(2, 1, 1, 1),
-    [theme.breakpoints.up('sm')]: {
-      height: 495,
-      padding: theme.spacing(4, 3, 2, 2),
-    },
-    color: 'black',
-  },
-  card: {
-    boxShadow: 'none',
-    textAlign: 'center',
-    padding: theme.spacing(2, 0),
-  },
   cardPercentageNegative: {
     boxShadow: 'none',
     textAlign: 'center',
@@ -69,6 +24,57 @@ const useStyles = makeStyles((theme) => ({
     color: '#1d471f',
     backgroundColor: theme.palette.success.light,
   }
+}));
+
+const Name = styled(Paper)(({ theme }) => ({
+  boxShadow: 'none',
+  paddingTop: 20,
+  marginBottom: 20,
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(2.5, 0),
+}));
+
+const ArrowDown = styled(Typography)(({ theme }) => ({
+  marginLeft: 10,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#e15241',
+}));
+
+const ArrowUp = styled(Typography)(({ theme }) => ({
+  marginLeft: 10,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#4eaf0a',
+}));
+
+const Buttons = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  flexWrap: 'wrap',
+  gap: 10,
+  padding: theme.spacing(1, 0),
+}));
+
+const Chart = styled(Paper)(({ theme }) => ({
+  boxShadow: 'none',
+  height: 495,
+  padding: theme.spacing(2, 1, 1, 1),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4, 3, 2, 2),
+  },
+  color: 'black',
+}));
+
+const Card = styled(Paper)(({ theme }) => ({
+  boxShadow: 'none',
+  textAlign: 'center',
+  padding: theme.spacing(2, 0),
 }));
 
 function getCoin(setCoin, id, setLoading) {
@@ -146,48 +152,48 @@ function Coin() {
       }
       {!loading &&
         <Fragment>
-          <Paper className={classes.name}>
+          <Name>
             <img src={coin.img} style={{ marginRight: 10 }} width='35vw' alt='img'></img>
             <Typography variant='h5'>{coin.name}</Typography>
             {coin.price_change_24h < 0 &&
-              <Typography variant='subtitle1' className={classes.down}>
+              <ArrowDown variant='subtitle1'>
                 {coin.price_change_24h}%
-                <ArrowDownwardIcon style={{ fontSize: 20 }} />
-              </Typography>
+                <ArrowDownwardIcon sx={{ fontSize: 20 }} />
+              </ArrowDown>
             }
             {coin.price_change_24h >= 0 &&
-              <Typography variant='subtitle1' className={classes.up}>
+              <ArrowUp variant='subtitle1'>
                 {coin.price_change_24h}%
-                <ArrowUpwardIcon style={{ fontSize: 20 }} />
-              </Typography>
+                <ArrowUpwardIcon sx={{ fontSize: 20 }} />
+              </ArrowUp>
             }
-          </Paper>
-          <Grid container justifyContent='center' wrap='wrap-reverse' style={{ gap: 30 }}>
+          </Name>
+          <Grid container justifyContent='center' wrap='wrap-reverse' sx={{ gap: 3 }}>
             <Grid item xs={12} lg={7}>
-              <Box className={classes.buttons}>
-                <Button color={(days === '1') ? 'primary' : 'default'} onClick={() => setDays('1')}>
+              <Buttons>
+                <Button color={(days === '1') ? 'primary' : 'inherit'} onClick={() => setDays('1')}>
                   1D
                 </Button>
-                <Button color={(days === '7') ? 'primary' : 'default'} onClick={() => setDays('7')}>
+                <Button color={(days === '7') ? 'primary' : 'inherit'} onClick={() => setDays('7')}>
                   1W
                 </Button>
-                <Button color={(days === '30') ? 'primary' : 'default'} onClick={() => setDays('30')}>
+                <Button color={(days === '30') ? 'primary' : 'inherit'} onClick={() => setDays('30')}>
                   1M
                 </Button>
-                <Button color={(days === '90') ? 'primary' : 'default'} onClick={() => setDays('90')}>
+                <Button color={(days === '90') ? 'primary' : 'inherit'} onClick={() => setDays('90')}>
                   3M
                 </Button>
-                <Button color={(days === '180') ? 'primary' : 'default'} onClick={() => setDays('180')}>
+                <Button color={(days === '180') ? 'primary' : 'inherit'} onClick={() => setDays('180')}>
                   6M
                 </Button>
-                <Button color={(days === '365') ? 'primary' : 'default'} onClick={() => setDays('365')}>
+                <Button color={(days === '365') ? 'primary' : 'inherit'} onClick={() => setDays('365')}>
                   1Y
                 </Button>
-                <Button color={(days === 'max') ? 'primary' : 'default'} onClick={() => setDays('max')}>
+                <Button color={(days === 'max') ? 'primary' : 'inherit'} onClick={() => setDays('max')}>
                   MAX
                 </Button>
-              </Box>
-              <Paper className={classes.chart}>
+              </Buttons>
+              <Chart>
                 {loadingSparkline &&
                   <Grid container alignItems='center' justifyContent='center'>
                     <CircleLoader loading={loadingSparkline} color={'#648dae'} size={150} />
@@ -229,20 +235,20 @@ function Coin() {
                       <CartesianGrid opacity={0.05} vertical={false} />
                     </AreaChart>
                   </ResponsiveContainer>}
-              </Paper>
+              </Chart>
             </Grid>
             <Grid item xs={12} lg={4}>
               <Grid container direction='column'>
                 <Grid item xs={12}>
-                  <Paper className={classes.card}>
+                  <Card>
                     <Typography variant='h5'>{coin.price} USD</Typography>
                     <Typography variant='subtitle1'>
                       Price
                     </Typography>
-                  </Paper>
+                  </Card>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid container justifyContent='center' style={{ gap: 30, marginTop: 30 }}>
+                  <Grid container justifyContent='center' sx={{ gap: 3, marginTop: 3 }}>
                     <Grid item xs={5} sm={3} lg={5}>
                       <Paper className={(coin.price_change_24h < 0) ? classes.cardPercentageNegative : classes.cardPercentagePositive}>
                         <Typography variant='h5'>{coin.price_change_24h}%</Typography>
@@ -296,22 +302,22 @@ function Coin() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justifyContent='center' style={{ gap: 30, marginTop: 30 }}>
+          <Grid container justifyContent='center' sx={{ gap: 3, marginTop: 3 }}>
             <Grid item xs={12} md={5}>
-              <Paper className={classes.card}>
+              <Card>
                 <Typography variant='h5'>{coin.market_cap} USD</Typography>
                 <Typography variant='subtitle1'>
                   Market Cap
                 </Typography>
-              </Paper>
+              </Card>
             </Grid>
             <Grid item xs={12} md={5}>
-              <Paper className={classes.card}>
+              <Card>
                 <Typography variant='h5'>{coin.volume} USD</Typography>
                 <Typography variant='subtitle1'>
                   Volume
                 </Typography>
-              </Paper>
+              </Card>
             </Grid>
           </Grid>
         </Fragment>

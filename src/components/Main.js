@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { styled } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
 
-const useStyles = makeStyles((theme) => ({
-  dataTable: {
-    '& .negative': {
-      color: '#e15241',
-    },
-    '& .positive': {
-      color: '#4eaf0a',
-    },
-    display: 'flex',
-    height: '88vh',
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '80%',
-    },
-    marginTop: 20,
+const DataTable = styled('div')(({ theme }) => ({
+  '& .negative': {
+    color: '#e15241',
   },
+  '& .positive': {
+    color: '#4eaf0a',
+  },
+  display: 'flex',
+  height: '88vh',
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    width: '80%',
+  },
+  marginTop: 20,
 }));
 
 function getCoins(setCoins, setLoading) {
@@ -51,7 +49,6 @@ function getCoins(setCoins, setLoading) {
 }
 
 function Main() {
-  const classes = useStyles();
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,7 +75,7 @@ function Main() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color='inherit' onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='25vh' style={{ marginRight: 10, verticalAlign: 'middle' }} alt='img'></img> {params.value}</Link>
+          <Link color='inherit' underline="hover" sx={{ display: 'flex', alignItems: 'center', gap: 1 }} onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='25vh' alt='img'></img> {params.value}</Link>
         ),
       },
       {
@@ -194,7 +191,7 @@ function Main() {
       <Grid container justifyContent='center'>
         <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
         {!loading &&
-          <div className={classes.dataTable}>
+          <DataTable>
             <div style={{ flexGrow: 1 }}>
               <DataGrid
                 rows={coins}
@@ -202,7 +199,7 @@ function Main() {
                 pageSize={25}
               />
             </div>
-          </div>
+          </DataTable>
         }
       </Grid>
     </main>
