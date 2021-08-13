@@ -9,10 +9,10 @@ import { CircleLoader } from 'react-spinners';
 
 const DataTable = styled('div')(({ theme }) => ({
   '& .negative': {
-    color: '#e15241',
+    color: theme.palette.error.light,
   },
   '& .positive': {
-    color: '#4eaf0a',
+    color: theme.palette.success.light,
   },
   display: 'flex',
   height: '88vh',
@@ -176,7 +176,7 @@ function Main() {
         width: 170,
         renderCell: (params) => (
           <Sparklines data={params.value}>
-            <SparklinesLine color={params.getValue(params.id, 'priceChange7d') < 0 ? '#e15241' : '#4eaf0a'} />
+            <SparklinesLine color='#648dae' />
           </Sparklines>
         ),
       },
@@ -189,7 +189,7 @@ function Main() {
   return (
     <main>
       <Grid container justifyContent='center'>
-        <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
+        <CircleLoader loading={loading} color='#648dae' size={150} css={{ marginTop: 20 }} />
         {!loading &&
           <DataTable>
             <div style={{ flexGrow: 1 }}>

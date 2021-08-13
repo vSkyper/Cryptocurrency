@@ -91,8 +91,8 @@ function Navbar() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                inputProps={params.inputProps}
                 placeholder='Search…'
-                {...params.inputProps}
               />
             </div>
           )}

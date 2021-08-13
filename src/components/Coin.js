@@ -24,7 +24,7 @@ const ArrowDown = styled(Typography)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: '#e15241',
+  color: theme.palette.error.light,
 }));
 
 const ArrowUp = styled(Typography)(({ theme }) => ({
@@ -32,7 +32,7 @@ const ArrowUp = styled(Typography)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: '#4eaf0a',
+  color: theme.palette.success.light,
 }));
 
 const Buttons = styled(Box)(({ theme }) => ({
@@ -62,14 +62,14 @@ const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   ml: 1,
   flex: 1,
   '& input[type=number]': {
-    '-moz-appearance': 'textfield'
+    MozAppearance: 'textfield'
   },
   '& input[type=number]::-webkit-outer-spin-button': {
-    '-webkit-appearance': 'none',
+    WebkitAppearance: 'none',
     margin: 0
   },
   '& input[type=number]::-webkit-inner-spin-button': {
-    '-webkit-appearance': 'none',
+    WebkitAppearance: 'none',
     margin: 0
   }
 }));
@@ -104,7 +104,7 @@ function Coin() {
   const [days, setDays] = useState('7');
   const [loading, setLoading] = useState(true);
   const [loadingSparkline, setLoadingSparkline] = useState(true);
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState('');
   const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState(true);
 
   let { id } = useParams();
@@ -155,7 +155,7 @@ function Coin() {
     <main>
       {loading &&
         <Grid container justifyContent='center'>
-          <CircleLoader loading={loading} color={'#648dae'} size={150} css={{ marginTop: 20 }} />
+          <CircleLoader loading={loading} color='#648dae' size={150} css={{ marginTop: 20 }} />
         </Grid>
       }
       {!loading &&
@@ -204,7 +204,7 @@ function Coin() {
               <Chart>
                 {loadingSparkline &&
                   <Grid container alignItems='center' justifyContent='center'>
-                    <CircleLoader loading={loadingSparkline} color={'#648dae'} size={150} />
+                    <CircleLoader loading={loadingSparkline} color='#648dae' size={150} />
                   </Grid>
                 }
                 {!loadingSparkline &&
@@ -349,7 +349,7 @@ function Coin() {
           </Grid>
         </Fragment>
       }
-    </main >
+    </main>
   );
 }
 
