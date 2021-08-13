@@ -3,7 +3,7 @@ import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
-import MainRoute from './components/MainRoute';
+import Main from './components/Main';
 import Coin from './components/Coin';
 import { ThemeContext } from './contexts/ThemeContext';
 
@@ -31,7 +31,7 @@ function App() {
         <Navbar />
       </ThemeContext.Provider>
       <Router basename={process.env.PUBLIC_URL}>
-        <Route exact path='/'><MainRoute /></Route>
+        <Route exact path='/'><Main /></Route>
         <Route exact path='/coins/:id'><Coin /></Route>
       </Router>
     </ThemeProvider>

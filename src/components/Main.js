@@ -50,7 +50,7 @@ function getCoins(setCoins, setLoading) {
     .catch(error => console.log(error));
 }
 
-function MainRoute() {
+function Main() {
   const classes = useStyles();
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -209,4 +209,4 @@ function MainRoute() {
   );
 }
 
-export default MainRoute;
+export default Main;
