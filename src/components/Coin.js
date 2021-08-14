@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Typography, Grid, Paper, Button, Box, InputBase } from '@material-ui/core';
+import { Typography, Grid, Paper, Button, Box, InputBase, FormControl, Select, MenuItem } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
@@ -104,6 +104,9 @@ function Coin() {
   const [days, setDays] = useState('7');
   const [loading, setLoading] = useState(true);
   const [loadingSparkline, setLoadingSparkline] = useState(true);
+  const [currencies, setCurrencies] = useState([]);
+  const [currencyOption, setCurrencyOption] = useState('usd');
+  const [exchangeRate, setExchangeRate] = useState('');
   const [amount, setAmount] = useState('');
   const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState(true);
 
@@ -112,10 +115,16 @@ function Coin() {
   let currency, crypto;
   if (fromCryptoToCurrency) {
     crypto = amount;
-    currency = amount * coin.price;
+    currency = amount * exchangeRate;
+    if (!isFinite(currency)){
+      currency = '';
+    }
   } else {
     currency = amount;
-    crypto = amount / coin.price;
+    crypto = amount / exchangeRate;
+    if (!isFinite(crypto)){
+      crypto = '';
+    }
   }
 
   useEffect(() => {
@@ -150,6 +159,28 @@ function Coin() {
       setSparkline([]);
     };
   }, [id, days]);
+
+  useEffect(() => {
+    axios.get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
+      .then(res => {
+        setCurrencies(res.data);
+      })
+      .catch(error => console.log(error));
+    return () => {
+      setCurrencies([]);
+    };
+  }, []);
+
+  useEffect(() => {
+    axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`)
+      .then(res => {
+        setExchangeRate(res.data[id][currencyOption]);
+      })
+      .catch(error => console.log(error));
+    return () => {
+      setExchangeRate('');
+    };
+  }, [id, currencyOption]);
 
   return (
     <main>
@@ -339,10 +370,16 @@ function Coin() {
             </Grid>
             <SwapHorizIcon fontSize='large' sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }} />
             <Grid item>
-              <Paper sx={{ p: [2, 2], display: 'flex', alignItems: 'center', width: 300 }}>
-                <Typography sx={{ p: 1 }}>
-                  USD
-                </Typography>
+              <Paper sx={{ p: [2, 1.5], display: 'flex', alignItems: 'center', width: 300 }}>
+                <FormControl variant='standard' sx={{ p: 1 }}>
+                  {currencies.length > 0 &&
+                    <Select id='currencies-select' value={currencyOption} onChange={(e) => setCurrencyOption(e.target.value)}>
+                      {currencies.map(currency_opt => (
+                        <MenuItem key={currency_opt} value={currency_opt}>{currency_opt.toUpperCase()}</MenuItem>
+                      ))}
+                    </Select>
+                  }
+                </FormControl>
                 <InputBaseExchange type='number' value={currency} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(false); }} />
               </Paper>
             </Grid>
