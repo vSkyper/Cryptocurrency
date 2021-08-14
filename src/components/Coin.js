@@ -341,7 +341,32 @@ function Coin() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justifyContent='center' sx={{ gap: 4, mt: 4 }}>
+          <Grid container justifyContent='center' alignItems='center' sx={{ mt: 4 }}>
+            <Grid item>
+              <Paper sx={{ p: [2, 2], display: 'flex', alignItems: 'center', width: 300 }}>
+                <Typography sx={{ p: 1 }}>
+                  {coin.symbol.toUpperCase()}
+                </Typography>
+                <InputBaseExchange type='number' value={crypto} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(true); }} />
+              </Paper>
+            </Grid>
+            <SwapHorizIcon fontSize='large' sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }} />
+            <Grid item>
+              <Paper sx={{ p: [2, 1.5], display: 'flex', alignItems: 'center', width: 300 }}>
+                <FormControl variant='standard'>
+                  {currencies.length > 0 &&
+                    <Select sx={{ m: 1, pl: 1}} id='currencies-select' value={currencyOption} onChange={(e) => setCurrencyOption(e.target.value)}>
+                      {currencies.map(currency_opt => (
+                        <MenuItem key={currency_opt} value={currency_opt}>{currency_opt.toUpperCase()}</MenuItem>
+                      ))}
+                    </Select>
+                  }
+                </FormControl>
+                <InputBaseExchange type='number' value={currency} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(false); }} />
+              </Paper>
+            </Grid>
+          </Grid>
+          <Grid container justifyContent='center' sx={{ gap: 4, mt: 4, mb: 3 }}>
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>{coin.market_cap} USD</Typography>
@@ -357,31 +382,6 @@ function Coin() {
                   Volume
                 </Typography>
               </Card>
-            </Grid>
-          </Grid>
-          <Grid container justifyContent='center' alignItems='center' sx={{ mt: 4, mb: 3 }}>
-            <Grid item>
-              <Paper sx={{ p: [2, 2], display: 'flex', alignItems: 'center', width: 300 }}>
-                <Typography sx={{ p: 1 }}>
-                  {coin.symbol.toUpperCase()}
-                </Typography>
-                <InputBaseExchange type='number' value={crypto} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(true); }} />
-              </Paper>
-            </Grid>
-            <SwapHorizIcon fontSize='large' sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }} />
-            <Grid item>
-              <Paper sx={{ p: [2, 1.5], display: 'flex', alignItems: 'center', width: 300 }}>
-                <FormControl variant='standard' sx={{ p: 1 }}>
-                  {currencies.length > 0 &&
-                    <Select id='currencies-select' value={currencyOption} onChange={(e) => setCurrencyOption(e.target.value)}>
-                      {currencies.map(currency_opt => (
-                        <MenuItem key={currency_opt} value={currency_opt}>{currency_opt.toUpperCase()}</MenuItem>
-                      ))}
-                    </Select>
-                  }
-                </FormControl>
-                <InputBaseExchange type='number' value={currency} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(false); }} />
-              </Paper>
             </Grid>
           </Grid>
         </Fragment>
