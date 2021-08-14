@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Link, InputBase } from '@material-ui/core';
 import { styled, alpha } from '@material-ui/core/styles';
-import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon, EuroSymbol as EuroSymbolIcon } from '@material-ui/icons';
+import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon, EuroSymbol as EuroSymbolIcon, GitHub as GitHubIcon } from '@material-ui/icons';
 import Autocomplete, { createFilterOptions } from '@material-ui/core/Autocomplete';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
@@ -97,6 +97,9 @@ function Navbar() {
             </div>
           )}
         />
+        <IconButton color='inherit' size='large' onClick={() => window.location.href='https://github.com/vSkyper/react_cryptocurrency'}>
+          <GitHubIcon />
+        </IconButton>
         <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
           {themeMode ?
             <Brightness4Icon /> :
