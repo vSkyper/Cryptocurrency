@@ -116,13 +116,13 @@ function Coin() {
   if (fromCryptoToCurrency) {
     crypto = amount;
     currency = amount * exchangeRate;
-    if (!isFinite(currency)){
+    if (!isFinite(currency)) {
       currency = '';
     }
   } else {
     currency = amount;
     crypto = amount / exchangeRate;
-    if (!isFinite(crypto)){
+    if (!isFinite(crypto)) {
       crypto = '';
     }
   }
@@ -225,10 +225,10 @@ function Coin() {
                 <Button color={(days === '180') ? 'primary' : 'inherit'} onClick={() => setDays('180')}>
                   6M
                 </Button>
-                <Button color={(days === '365') ? 'primary' : 'inherit'} sx={{ display: { xs: 'none', sm: 'block' } }} onClick={() => setDays('365')}>
+                <Button color={(days === '365') ? 'primary' : 'inherit'} onClick={() => setDays('365')}>
                   1Y
                 </Button>
-                <Button color={(days === 'max') ? 'primary' : 'inherit'} onClick={() => setDays('max')}>
+                <Button color={(days === 'max') ? 'primary' : 'inherit'} sx={{ display: { xs: 'none', sm: 'block' } }} onClick={() => setDays('max')}>
                   MAX
                 </Button>
               </Buttons>
@@ -355,7 +355,7 @@ function Coin() {
               <Paper sx={{ p: [2, 1.5], display: 'flex', alignItems: 'center', width: 300 }}>
                 <FormControl variant='standard'>
                   {currencies.length > 0 &&
-                    <Select sx={{ m: 1, pl: 1}} id='currencies-select' value={currencyOption} onChange={(e) => setCurrencyOption(e.target.value)}>
+                    <Select sx={{ m: 1, pl: 1 }} id='currencies-select' value={currencyOption} onChange={(e) => setCurrencyOption(e.target.value)}>
                       {currencies.map(currency_opt => (
                         <MenuItem key={currency_opt} value={currency_opt}>{currency_opt.toUpperCase()}</MenuItem>
                       ))}
