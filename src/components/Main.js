@@ -15,12 +15,12 @@ const DataTable = styled('div')(({ theme }) => ({
     color: theme.palette.success.light,
   },
   display: 'flex',
-  height: '88vh',
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     width: '80%',
   },
   marginTop: 20,
+  marginBottom: 20,
 }));
 
 function getCoins(setCoins, setLoading) {
@@ -75,7 +75,10 @@ function Main() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color='inherit' underline='hover' sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }} onClick={() => history.push(`/coins/${params.row.id}`)}><img src={params.row.img} width='25vh' alt='img'></img> {params.value}</Link>
+          <Link color='inherit' underline='hover' sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }} onClick={() => history.push(`/coins/${params.row.id}`)}>
+            <img src={params.row.img} width='25vh' alt='img'></img>
+            {params.value}
+          </Link>
         ),
       },
       {
@@ -194,6 +197,7 @@ function Main() {
           <DataTable>
             <div style={{ flexGrow: 1 }}>
               <DataGrid
+                autoHeight
                 rows={coins}
                 columns={columns}
                 pageSize={25}

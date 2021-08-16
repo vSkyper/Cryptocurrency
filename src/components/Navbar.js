@@ -68,7 +68,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position='static' color={themeMode ? 'primary' : 'default'}>
+    <AppBar position='static'>
       <Toolbar>
         <IconButton color='inherit' size='large' edge='start' onClick={() => history.push('/')}>
           <EuroSymbolIcon />
@@ -97,13 +97,13 @@ function Navbar() {
             </div>
           )}
         />
-        <IconButton color='inherit' size='large' onClick={() => window.location.href='https://github.com/vSkyper/react_cryptocurrency'}>
+        <IconButton color='inherit' size='large' onClick={() => window.location.href = 'https://github.com/vSkyper/react_cryptocurrency'}>
           <GitHubIcon />
         </IconButton>
         <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
           {themeMode ?
-            <Brightness4Icon /> :
-            <Brightness7Icon />
+            <Brightness7Icon /> :
+            <Brightness4Icon />
           }
         </IconButton>
       </Toolbar>

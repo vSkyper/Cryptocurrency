@@ -8,20 +8,22 @@ import Coin from './components/Coin';
 import { ThemeContext } from './contexts/ThemeContext';
 
 function App() {
-  const [themeMode, setThemeMode] = useState(false);
+  const [themeMode, setThemeMode] = useState(true);
   const theme = createTheme({
     palette: {
-      mode: themeMode ? 'light' : 'dark',
+      mode: themeMode ? 'dark' : 'light',
     }
   });
 
   useEffect(() => {
-    const parsedTheme = Boolean(JSON.parse(localStorage.getItem('localTheme')));
-    setThemeMode(parsedTheme);
+    const storedTheme = localStorage.getItem('localTheme');
+    if (typeof storedTheme === 'string'){
+      setThemeMode(Boolean(JSON.parse(storedTheme)));
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('localTheme', themeMode)
+    localStorage.setItem('localTheme', JSON.stringify(themeMode))
   }, [themeMode]);
 
   return (
