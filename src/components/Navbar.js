@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Link, InputBase } from '@material-ui/core';
+import { Box, useScrollTrigger, Slide, AppBar, Toolbar, Typography, IconButton, Link, InputBase } from '@material-ui/core';
 import { styled, alpha } from '@material-ui/core/styles';
 import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon, EuroSymbol as EuroSymbolIcon, GitHub as GitHubIcon } from '@material-ui/icons';
 import Autocomplete, { createFilterOptions } from '@material-ui/core/Autocomplete';
@@ -40,6 +40,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+function HideOnScroll({ children }) {
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction='down' in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
 function Navbar() {
   const [coins, setCoins] = useState([]);
   const { themeMode, setThemeMode } = useContext(ThemeContext);
@@ -68,46 +78,51 @@ function Navbar() {
   };
 
   return (
-    <AppBar position='static'>
-      <Toolbar>
-        <IconButton color='inherit' size='large' edge='start' onClick={() => history.push('/')}>
-          <EuroSymbolIcon />
-        </IconButton>
-        <Typography variant='h6' noWrap sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-          <Link color='inherit' underline='none' onClick={() => history.push('/')}>Cryptocurrency</Link>
-        </Typography>
-        <Search
-          id='coins-search'
-          loading={loading}
-          options={coins}
-          filterOptions={filterOptions}
-          getOptionLabel={(option) => option.name}
-          onChange={(event, value) => {
-            if (value != null) { history.push(`/coins/${value.id}`) }
-          }}
-          renderInput={(params) => (
-            <div ref={params.InputProps.ref}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                inputProps={params.inputProps}
-                placeholder='Search…'
-              />
-            </div>
-          )}
-        />
-        <IconButton color='inherit' size='large' onClick={() => window.location.href = 'https://github.com/vSkyper/react_cryptocurrency'}>
-          <GitHubIcon />
-        </IconButton>
-        <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
-          {themeMode ?
-            <Brightness7Icon /> :
-            <Brightness4Icon />
-          }
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+    <Box sx={{ flexGrow: 1 }}>
+      <HideOnScroll>
+        <AppBar>
+          <Toolbar>
+            <IconButton color='inherit' size='large' edge='start' sx={{ mr: 2 }} onClick={() => history.push('/')}>
+              <EuroSymbolIcon />
+            </IconButton>
+            <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+              <Link color='inherit' underline='none' onClick={() => history.push('/')}>Cryptocurrency</Link>
+            </Typography>
+            <Search
+              id='coins-search'
+              loading={loading}
+              options={coins}
+              filterOptions={filterOptions}
+              getOptionLabel={(option) => option.name}
+              onChange={(event, value) => {
+                if (value != null) { history.push(`/coins/${value.id}`) }
+              }}
+              renderInput={(params) => (
+                <div ref={params.InputProps.ref}>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    inputProps={params.inputProps}
+                    placeholder='Search…'
+                  />
+                </div>
+              )}
+            />
+            <IconButton color='inherit' size='large' onClick={() => window.location.href = 'https://github.com/vSkyper/react_cryptocurrency'}>
+              <GitHubIcon />
+            </IconButton>
+            <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
+              {themeMode ?
+                <Brightness7Icon /> :
+                <Brightness4Icon />
+              }
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+      <Toolbar id='back-to-top-anchor' />
+    </Box>
   );
 }
 

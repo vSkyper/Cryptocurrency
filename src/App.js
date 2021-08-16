@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import Main from './components/Main';
 import Coin from './components/Coin';
+import BackToTop from './components/BackToTop';
 import { ThemeContext } from './contexts/ThemeContext';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route exact path='/coins/:id'><Coin /></Route>
         </Switch>
       </Router>
+      <BackToTop />
     </ThemeProvider>
   );
 }
