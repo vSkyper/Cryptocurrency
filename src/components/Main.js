@@ -3,7 +3,7 @@ import { styled } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
-import { useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
 
@@ -53,8 +53,6 @@ function Main() {
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  let history = useHistory();
-
   useEffect(() => {
     setLoading(true);
     getCoins(setCoins, setLoading);
@@ -75,7 +73,7 @@ function Main() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color='inherit' underline='hover' sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }} onClick={() => history.push(`/coins/${params.row.id}`)}>
+          <Link color='inherit' underline='hover' sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }} component={RouterLink} to={`/coins/${params.row.id}`}>
             <img src={params.row.img} width='25vh' alt='img'></img>
             {params.value}
           </Link>
@@ -187,7 +185,7 @@ function Main() {
     return () => {
       setColumns([]);
     };
-  }, [history]);
+  }, []);
 
   return (
     <main>

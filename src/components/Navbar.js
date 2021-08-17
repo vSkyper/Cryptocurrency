@@ -82,11 +82,11 @@ function Navbar() {
       <HideOnScroll>
         <AppBar>
           <Toolbar>
-            <IconButton color='inherit' size='large' edge='start' sx={{ mr: 2 }} onClick={() => history.push('/')}>
+            <IconButton color='inherit' size='large' edge='start' sx={{ mr: 2 }} href='/'>
               <EuroSymbolIcon />
             </IconButton>
             <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-              <Link color='inherit' underline='none' onClick={() => history.push('/')}>Cryptocurrency</Link>
+              <Link color='inherit' underline='none' href='/'>Cryptocurrency</Link>
             </Typography>
             <Search
               id='coins-search'
@@ -109,7 +109,7 @@ function Navbar() {
                 </div>
               )}
             />
-            <IconButton color='inherit' size='large' onClick={() => window.location.href = 'https://github.com/vSkyper/react_cryptocurrency'}>
+            <IconButton color='inherit' size='large' href='https://github.com/vSkyper/react_cryptocurrency'>
               <GitHubIcon />
             </IconButton>
             <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
