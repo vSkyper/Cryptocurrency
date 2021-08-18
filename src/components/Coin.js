@@ -98,6 +98,14 @@ function getCoin(setCoin, id, setLoading) {
     .catch(error => console.log(error));
 }
 
+function getCoinPrice(setExchangeRate, id, currencyOption) {
+  axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`)
+    .then(res => {
+      setExchangeRate(res.data[id][currencyOption]);
+    })
+    .catch(error => console.log(error));
+}
+
 function Coin() {
   const [coin, setCoin] = useState([]);
   const [sparkline, setSparkline] = useState([]);
@@ -172,13 +180,14 @@ function Coin() {
   }, []);
 
   useEffect(() => {
-    axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`)
-      .then(res => {
-        setExchangeRate(res.data[id][currencyOption]);
-      })
-      .catch(error => console.log(error));
+    getCoinPrice(setExchangeRate, id, currencyOption);
+    const IntervalID = setInterval(() => {
+      getCoinPrice(setExchangeRate, id, currencyOption);
+    }, 5000
+    );
     return () => {
       setExchangeRate('');
+      clearInterval(IntervalID);
     };
   }, [id, currencyOption]);
 
