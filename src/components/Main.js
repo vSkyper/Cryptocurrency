@@ -24,28 +24,40 @@ const DataTable = styled('div')(({ theme }) => ({
 }));
 
 function getCoins(setCoins, setLoading) {
-  axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
-    .then(res => {
+  axios
+    .get(
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
+    )
+    .then((res) => {
       const rows = [];
-      res.data.forEach(coin => {
+      res.data.forEach((coin) => {
         rows.push({
           id: coin.id,
           img: coin.image,
           name: coin.name,
           symbol: coin.symbol,
           price: coin.current_price,
-          priceChange1h: (coin.price_change_percentage_1h_in_currency === null) ? '' : coin.price_change_percentage_1h_in_currency.toFixed(2),
-          priceChange24h: (coin.price_change_percentage_24h_in_currency === null) ? '' : coin.price_change_percentage_24h_in_currency.toFixed(2),
-          priceChange7d: (coin.price_change_percentage_7d_in_currency === null) ? '' : coin.price_change_percentage_7d_in_currency.toFixed(2),
+          priceChange1h:
+            coin.price_change_percentage_1h_in_currency === null
+              ? ''
+              : coin.price_change_percentage_1h_in_currency.toFixed(2),
+          priceChange24h:
+            coin.price_change_percentage_24h_in_currency === null
+              ? ''
+              : coin.price_change_percentage_24h_in_currency.toFixed(2),
+          priceChange7d:
+            coin.price_change_percentage_7d_in_currency === null
+              ? ''
+              : coin.price_change_percentage_7d_in_currency.toFixed(2),
           volume: coin.total_volume,
           marketcap: coin.market_cap,
-          sparkline: coin.sparkline_in_7d.price
-        })
-      })
+          sparkline: coin.sparkline_in_7d.price,
+        });
+      });
       setCoins(rows);
       setLoading(false);
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 }
 
 function Main() {
@@ -58,8 +70,7 @@ function Main() {
     getCoins(setCoins, setLoading);
     const IntervalID = setInterval(() => {
       getCoins(setCoins, setLoading);
-    }, 20000
-    );
+    }, 20000);
     return () => {
       setCoins([]);
       clearInterval(IntervalID);
@@ -73,7 +84,13 @@ function Main() {
         headerName: 'Name',
         width: 150,
         renderCell: (params) => (
-          <Link color='inherit' underline='hover' sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }} component={RouterLink} to={`/coins/${params.row.id}`}>
+          <Link
+            color='inherit'
+            underline='hover'
+            sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}
+            component={RouterLink}
+            to={`/coins/${params.row.id}`}
+          >
             <img src={params.row.img} width='25vh' alt='img'></img>
             {params.value}
           </Link>
@@ -181,7 +198,7 @@ function Main() {
           </Sparklines>
         ),
       },
-    ])
+    ]);
     return () => {
       setColumns([]);
     };
@@ -190,8 +207,13 @@ function Main() {
   return (
     <main>
       <Grid container justifyContent='center'>
-        <CircleLoader loading={loading} color='#648dae' size={150} css={{ marginTop: 20 }} />
-        {!loading &&
+        <CircleLoader
+          loading={loading}
+          color='#648dae'
+          size={150}
+          css={{ marginTop: 20 }}
+        />
+        {!loading && (
           <DataTable>
             <div style={{ flexGrow: 1 }}>
               <DataGrid
@@ -202,7 +224,7 @@ function Main() {
               />
             </div>
           </DataTable>
-        }
+        )}
       </Grid>
     </main>
   );

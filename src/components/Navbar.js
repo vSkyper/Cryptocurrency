@@ -1,8 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Box, useScrollTrigger, Slide, AppBar, Toolbar, Typography, IconButton, Link, InputBase } from '@material-ui/core';
+import {
+  Box,
+  useScrollTrigger,
+  Slide,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Link,
+  InputBase,
+} from '@material-ui/core';
 import { styled, alpha } from '@material-ui/core/styles';
-import { Search as SearchIcon, Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon, EuroSymbol as EuroSymbolIcon, GitHub as GitHubIcon } from '@material-ui/icons';
-import Autocomplete, { createFilterOptions } from '@material-ui/core/Autocomplete';
+import {
+  Search as SearchIcon,
+  Brightness4 as Brightness4Icon,
+  Brightness7 as Brightness7Icon,
+  EuroSymbol as EuroSymbolIcon,
+  GitHub as GitHubIcon,
+} from '@material-ui/icons';
+import Autocomplete, {
+  createFilterOptions,
+} from '@material-ui/core/Autocomplete';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -59,12 +77,13 @@ function Navbar() {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
-      .then(res => {
+    axios
+      .get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
+      .then((res) => {
         setCoins(res.data);
         setLoading(false);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
     return () => {
       setCoins([]);
     };
@@ -82,11 +101,24 @@ function Navbar() {
       <HideOnScroll>
         <AppBar>
           <Toolbar>
-            <IconButton color='inherit' size='large' edge='start' sx={{ mr: 2 }} href='/'>
+            <IconButton
+              color='inherit'
+              size='large'
+              edge='start'
+              sx={{ mr: 2 }}
+              href='/'
+            >
               <EuroSymbolIcon />
             </IconButton>
-            <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-              <Link color='inherit' underline='none' href='/'>Cryptocurrency</Link>
+            <Typography
+              variant='h6'
+              noWrap
+              component='div'
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              <Link color='inherit' underline='none' href='/'>
+                Cryptocurrency
+              </Link>
             </Typography>
             <Search
               id='coins-search'
@@ -95,7 +127,9 @@ function Navbar() {
               filterOptions={filterOptions}
               getOptionLabel={(option) => option.name}
               onChange={(event, value) => {
-                if (value != null) { history.push(`/coins/${value.id}`) }
+                if (value != null) {
+                  history.push(`/coins/${value.id}`);
+                }
               }}
               renderInput={(params) => (
                 <div ref={params.InputProps.ref}>
@@ -109,14 +143,19 @@ function Navbar() {
                 </div>
               )}
             />
-            <IconButton color='inherit' size='large' href='https://github.com/vSkyper/react_cryptocurrency'>
+            <IconButton
+              color='inherit'
+              size='large'
+              href='https://github.com/vSkyper/react_cryptocurrency'
+            >
               <GitHubIcon />
             </IconButton>
-            <IconButton color='inherit' size='large' onClick={() => setThemeMode(!themeMode)}>
-              {themeMode ?
-                <Brightness7Icon /> :
-                <Brightness4Icon />
-              }
+            <IconButton
+              color='inherit'
+              size='large'
+              onClick={() => setThemeMode(!themeMode)}
+            >
+              {themeMode ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Toolbar>
         </AppBar>

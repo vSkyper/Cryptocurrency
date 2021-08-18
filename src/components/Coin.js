@@ -1,10 +1,32 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Typography, Grid, Paper, Button, Box, InputBase, FormControl, Select, MenuItem } from '@material-ui/core';
+import {
+  Typography,
+  Grid,
+  Paper,
+  Button,
+  Box,
+  InputBase,
+  FormControl,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, ResponsiveContainer, Area } from 'recharts';
+import {
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  AreaChart,
+  ResponsiveContainer,
+  Area,
+} from 'recharts';
 import { format } from 'date-fns';
-import { ArrowUpward as ArrowUpwardIcon, ArrowDownward as ArrowDownwardIcon, SwapHoriz as SwapHorizIcon } from '@material-ui/icons';
+import {
+  ArrowUpward as ArrowUpwardIcon,
+  ArrowDownward as ArrowDownwardIcon,
+  SwapHoriz as SwapHorizIcon,
+} from '@material-ui/icons';
 import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
 
@@ -62,21 +84,22 @@ const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   ml: 1,
   flex: 1,
   '& input[type=number]': {
-    MozAppearance: 'textfield'
+    MozAppearance: 'textfield',
   },
   '& input[type=number]::-webkit-outer-spin-button': {
     WebkitAppearance: 'none',
-    margin: 0
+    margin: 0,
   },
   '& input[type=number]::-webkit-inner-spin-button': {
     WebkitAppearance: 'none',
-    margin: 0
-  }
+    margin: 0,
+  },
 }));
 
 function getCoin(setCoin, id, setLoading) {
-  axios.get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
-    .then(res => {
+  axios
+    .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
+    .then((res) => {
       let coin = res.data;
       setCoin({
         id: coin.id,
@@ -84,26 +107,53 @@ function getCoin(setCoin, id, setLoading) {
         name: coin.name,
         img: coin.image.large,
         price: coin.market_data.current_price.usd,
-        market_cap: (coin.market_data.market_cap.usd === null) ? '' : coin.market_data.market_cap.usd.toLocaleString(),
-        volume: (coin.market_data.total_volume.usd === null) ? '' : coin.market_data.total_volume.usd.toLocaleString(),
-        price_change_24h: (coin.market_data.price_change_percentage_24h === null) ? '' : coin.market_data.price_change_percentage_24h.toFixed(2),
-        price_change_7d: (coin.market_data.price_change_percentage_7d === null) ? '' : coin.market_data.price_change_percentage_7d.toFixed(2),
-        price_change_14d: (coin.market_data.price_change_percentage_14d === null) ? '' : coin.market_data.price_change_percentage_14d.toFixed(2),
-        price_change_30d: (coin.market_data.price_change_percentage_30d === null) ? '' : coin.market_data.price_change_percentage_30d.toFixed(2),
-        price_change_60d: (coin.market_data.price_change_percentage_60d === null) ? '' : coin.market_data.price_change_percentage_60d.toFixed(2),
-        price_change_1y: (coin.market_data.price_change_percentage_1y === null) ? '' : coin.market_data.price_change_percentage_1y.toFixed(2)
+        market_cap:
+          coin.market_data.market_cap.usd === null
+            ? ''
+            : coin.market_data.market_cap.usd.toLocaleString(),
+        volume:
+          coin.market_data.total_volume.usd === null
+            ? ''
+            : coin.market_data.total_volume.usd.toLocaleString(),
+        price_change_24h:
+          coin.market_data.price_change_percentage_24h === null
+            ? ''
+            : coin.market_data.price_change_percentage_24h.toFixed(2),
+        price_change_7d:
+          coin.market_data.price_change_percentage_7d === null
+            ? ''
+            : coin.market_data.price_change_percentage_7d.toFixed(2),
+        price_change_14d:
+          coin.market_data.price_change_percentage_14d === null
+            ? ''
+            : coin.market_data.price_change_percentage_14d.toFixed(2),
+        price_change_30d:
+          coin.market_data.price_change_percentage_30d === null
+            ? ''
+            : coin.market_data.price_change_percentage_30d.toFixed(2),
+        price_change_60d:
+          coin.market_data.price_change_percentage_60d === null
+            ? ''
+            : coin.market_data.price_change_percentage_60d.toFixed(2),
+        price_change_1y:
+          coin.market_data.price_change_percentage_1y === null
+            ? ''
+            : coin.market_data.price_change_percentage_1y.toFixed(2),
       });
       setLoading(false);
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 }
 
 function getCoinPrice(setExchangeRate, id, currencyOption) {
-  axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`)
-    .then(res => {
+  axios
+    .get(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`
+    )
+    .then((res) => {
       setExchangeRate(res.data[id][currencyOption]);
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 }
 
 function Coin() {
@@ -140,8 +190,7 @@ function Coin() {
     getCoin(setCoin, id, setLoading);
     const IntervalID = setInterval(() => {
       getCoin(setCoin, id, setLoading);
-    }, 5000
-    );
+    }, 5000);
     return () => {
       setCoin([]);
       clearInterval(IntervalID);
@@ -150,30 +199,34 @@ function Coin() {
 
   useEffect(() => {
     setLoadingSparkline(true);
-    axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`)
-      .then(res => {
+    axios
+      .get(
+        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`
+      )
+      .then((res) => {
         const temp_data = [];
-        res.data.prices.forEach(data => {
+        res.data.prices.forEach((data) => {
           temp_data.push({
             date: format(new Date(data[0]), 'MMM d y, hh:mm:ss'),
             value: data[1],
-          })
-        })
+          });
+        });
         setSparkline(temp_data);
         setLoadingSparkline(false);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
     return () => {
       setSparkline([]);
     };
   }, [id, days]);
 
   useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
-      .then(res => {
+    axios
+      .get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
+      .then((res) => {
         setCurrencies(res.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
     return () => {
       setCurrencies([]);
     };
@@ -183,8 +236,7 @@ function Coin() {
     getCoinPrice(setExchangeRate, id, currencyOption);
     const IntervalID = setInterval(() => {
       getCoinPrice(setExchangeRate, id, currencyOption);
-    }, 5000
-    );
+    }, 5000);
     return () => {
       setExchangeRate('');
       clearInterval(IntervalID);
@@ -193,75 +245,129 @@ function Coin() {
 
   return (
     <main>
-      {loading &&
+      {loading && (
         <Grid container justifyContent='center'>
-          <CircleLoader loading={loading} color='#648dae' size={150} css={{ marginTop: 20 }} />
+          <CircleLoader
+            loading={loading}
+            color='#648dae'
+            size={150}
+            css={{ marginTop: 20 }}
+          />
         </Grid>
-      }
-      {!loading &&
+      )}
+      {!loading && (
         <Fragment>
           <Name>
-            <img src={coin.img} style={{ marginRight: 10 }} width='35vw' alt='img'></img>
+            <img
+              src={coin.img}
+              style={{ marginRight: 10 }}
+              width='35vw'
+              alt='img'
+            ></img>
             <Typography variant='h5'>{coin.name}</Typography>
-            {coin.price_change_24h < 0 &&
+            {coin.price_change_24h < 0 && (
               <ArrowDown variant='subtitle1'>
                 {coin.price_change_24h}%
                 <ArrowDownwardIcon sx={{ fontSize: 20 }} />
               </ArrowDown>
-            }
-            {coin.price_change_24h >= 0 &&
+            )}
+            {coin.price_change_24h >= 0 && (
               <ArrowUp variant='subtitle1'>
                 {coin.price_change_24h}%
                 <ArrowUpwardIcon sx={{ fontSize: 20 }} />
               </ArrowUp>
-            }
+            )}
           </Name>
-          <Grid container justifyContent='center' direction={{ xs: 'column-reverse', sm: 'row' }} sx={{ gap: 4 }}>
+          <Grid
+            container
+            justifyContent='center'
+            direction={{ xs: 'column-reverse', sm: 'row' }}
+            sx={{ gap: 4 }}
+          >
             <Grid item xs={12} lg={7}>
               <Buttons>
-                <Button color={(days === '1') ? 'primary' : 'inherit'} onClick={() => setDays('1')}>
+                <Button
+                  color={days === '1' ? 'primary' : 'inherit'}
+                  onClick={() => setDays('1')}
+                >
                   1D
                 </Button>
-                <Button color={(days === '7') ? 'primary' : 'inherit'} onClick={() => setDays('7')}>
+                <Button
+                  color={days === '7' ? 'primary' : 'inherit'}
+                  onClick={() => setDays('7')}
+                >
                   1W
                 </Button>
-                <Button color={(days === '30') ? 'primary' : 'inherit'} onClick={() => setDays('30')}>
+                <Button
+                  color={days === '30' ? 'primary' : 'inherit'}
+                  onClick={() => setDays('30')}
+                >
                   1M
                 </Button>
-                <Button color={(days === '90') ? 'primary' : 'inherit'} sx={{ display: { xs: 'none', sm: 'block' } }} onClick={() => setDays('90')}>
+                <Button
+                  color={days === '90' ? 'primary' : 'inherit'}
+                  sx={{ display: { xs: 'none', sm: 'block' } }}
+                  onClick={() => setDays('90')}
+                >
                   3M
                 </Button>
-                <Button color={(days === '180') ? 'primary' : 'inherit'} onClick={() => setDays('180')}>
+                <Button
+                  color={days === '180' ? 'primary' : 'inherit'}
+                  onClick={() => setDays('180')}
+                >
                   6M
                 </Button>
-                <Button color={(days === '365') ? 'primary' : 'inherit'} onClick={() => setDays('365')}>
+                <Button
+                  color={days === '365' ? 'primary' : 'inherit'}
+                  onClick={() => setDays('365')}
+                >
                   1Y
                 </Button>
-                <Button color={(days === 'max') ? 'primary' : 'inherit'} sx={{ display: { xs: 'none', sm: 'block' } }} onClick={() => setDays('max')}>
+                <Button
+                  color={days === 'max' ? 'primary' : 'inherit'}
+                  sx={{ display: { xs: 'none', sm: 'block' } }}
+                  onClick={() => setDays('max')}
+                >
                   MAX
                 </Button>
               </Buttons>
               <Chart>
-                {loadingSparkline &&
+                {loadingSparkline && (
                   <Grid container alignItems='center' justifyContent='center'>
-                    <CircleLoader loading={loadingSparkline} color='#648dae' size={150} />
+                    <CircleLoader
+                      loading={loadingSparkline}
+                      color='#648dae'
+                      size={150}
+                    />
                   </Grid>
-                }
-                {!loadingSparkline &&
+                )}
+                {!loadingSparkline && (
                   <ResponsiveContainer>
                     <AreaChart data={sparkline}>
                       <defs>
                         <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
-                          <stop offset='5%' stopColor='#648dae' stopOpacity={0.4} />
-                          <stop offset='75%' stopColor='#648dae' stopOpacity={0.05} />
+                          <stop
+                            offset='5%'
+                            stopColor='#648dae'
+                            stopOpacity={0.4}
+                          />
+                          <stop
+                            offset='75%'
+                            stopColor='#648dae'
+                            stopOpacity={0.05}
+                          />
                         </linearGradient>
                       </defs>
-                      <Area dataKey='value' stroke='#648dae' fill='url(#color)' />
+                      <Area
+                        dataKey='value'
+                        stroke='#648dae'
+                        fill='url(#color)'
+                      />
                       <XAxis
                         dataKey='date'
                         axisLine={false}
                         tickLine={false}
-                        tickFormatter={value => {
+                        tickFormatter={(value) => {
                           if (days === '1') {
                             return format(new Date(value), '| hh:mm |');
                           } else if (days === 'max') {
@@ -277,12 +383,13 @@ function Coin() {
                         axisLine={false}
                         tickLine={false}
                         tickCount={8}
-                        tickFormatter={value => `$${value}`}
+                        tickFormatter={(value) => `$${value}`}
                       />
                       <Tooltip />
                       <CartesianGrid opacity={0.05} vertical={false} />
                     </AreaChart>
-                  </ResponsiveContainer>}
+                  </ResponsiveContainer>
+                )}
               </Chart>
             </Grid>
             <Grid item xs={12} lg={4}>
@@ -290,56 +397,106 @@ function Coin() {
                 <Grid item xs={12}>
                   <Card>
                     <Typography variant='h5'>{coin.price} USD</Typography>
-                    <Typography variant='subtitle1'>
-                      Price
-                    </Typography>
+                    <Typography variant='subtitle1'>Price</Typography>
                   </Card>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid container justifyContent='center' sx={{ gap: 4, marginTop: 3 }}>
+                  <Grid
+                    container
+                    justifyContent='center'
+                    sx={{ gap: 4, marginTop: 3 }}
+                  >
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Card sx={(coin.price_change_24h < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
-                        <Typography variant='h5'>{coin.price_change_24h}%</Typography>
+                      <Card
+                        sx={
+                          coin.price_change_24h < 0
+                            ? { color: 'error.light' }
+                            : { color: 'success.light' }
+                        }
+                      >
+                        <Typography variant='h5'>
+                          {coin.price_change_24h}%
+                        </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 24h
                         </Typography>
                       </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Card sx={(coin.price_change_7d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
-                        <Typography variant='h5'>{coin.price_change_7d}%</Typography>
+                      <Card
+                        sx={
+                          coin.price_change_7d < 0
+                            ? { color: 'error.light' }
+                            : { color: 'success.light' }
+                        }
+                      >
+                        <Typography variant='h5'>
+                          {coin.price_change_7d}%
+                        </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 7d
                         </Typography>
                       </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Card sx={(coin.price_change_14d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
-                        <Typography variant='h5'>{coin.price_change_14d}%</Typography>
+                      <Card
+                        sx={
+                          coin.price_change_14d < 0
+                            ? { color: 'error.light' }
+                            : { color: 'success.light' }
+                        }
+                      >
+                        <Typography variant='h5'>
+                          {coin.price_change_14d}%
+                        </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 14d
                         </Typography>
                       </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Card sx={(coin.price_change_30d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
-                        <Typography variant='h5'>{coin.price_change_30d}%</Typography>
+                      <Card
+                        sx={
+                          coin.price_change_30d < 0
+                            ? { color: 'error.light' }
+                            : { color: 'success.light' }
+                        }
+                      >
+                        <Typography variant='h5'>
+                          {coin.price_change_30d}%
+                        </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 30d
                         </Typography>
                       </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Card sx={(coin.price_change_60d < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
-                        <Typography variant='h5'>{coin.price_change_60d}%</Typography>
+                      <Card
+                        sx={
+                          coin.price_change_60d < 0
+                            ? { color: 'error.light' }
+                            : { color: 'success.light' }
+                        }
+                      >
+                        <Typography variant='h5'>
+                          {coin.price_change_60d}%
+                        </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 60d
                         </Typography>
                       </Card>
                     </Grid>
                     <Grid item xs={5} sm={3} lg={5}>
-                      <Card sx={(coin.price_change_1y < 0) ? { color: 'error.light' } : { color: 'success.light' }}>
-                        <Typography variant='h5'>{coin.price_change_1y}%</Typography>
+                      <Card
+                        sx={
+                          coin.price_change_1y < 0
+                            ? { color: 'error.light' }
+                            : { color: 'success.light' }
+                        }
+                      >
+                        <Typography variant='h5'>
+                          {coin.price_change_1y}%
+                        </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 1y
                         </Typography>
@@ -350,28 +507,71 @@ function Coin() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justifyContent='center' alignItems='center' sx={{ mt: 4 }}>
+          <Grid
+            container
+            justifyContent='center'
+            alignItems='center'
+            sx={{ mt: 4 }}
+          >
             <Grid item>
-              <Paper sx={{ p: [2, 2], display: 'flex', alignItems: 'center', width: 300 }}>
+              <Paper
+                sx={{
+                  p: [2, 2],
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: 300,
+                }}
+              >
                 <Typography sx={{ p: 1 }}>
                   {coin.symbol.toUpperCase()}
                 </Typography>
-                <InputBaseExchange type='number' value={crypto} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(true); }} />
+                <InputBaseExchange
+                  type='number'
+                  value={crypto}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                    setFromCryptoToCurrency(true);
+                  }}
+                />
               </Paper>
             </Grid>
-            <SwapHorizIcon fontSize='large' sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }} />
+            <SwapHorizIcon
+              fontSize='large'
+              sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }}
+            />
             <Grid item>
-              <Paper sx={{ p: [2, 1.5], display: 'flex', alignItems: 'center', width: 300 }}>
+              <Paper
+                sx={{
+                  p: [2, 1.5],
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: 300,
+                }}
+              >
                 <FormControl variant='standard'>
-                  {currencies.length > 0 &&
-                    <Select sx={{ m: 1, pl: 1 }} id='currencies-select' value={currencyOption} onChange={(e) => setCurrencyOption(e.target.value)}>
-                      {currencies.map(currency_opt => (
-                        <MenuItem key={currency_opt} value={currency_opt}>{currency_opt.toUpperCase()}</MenuItem>
+                  {currencies.length > 0 && (
+                    <Select
+                      sx={{ m: 1, pl: 1 }}
+                      id='currencies-select'
+                      value={currencyOption}
+                      onChange={(e) => setCurrencyOption(e.target.value)}
+                    >
+                      {currencies.map((currency_opt) => (
+                        <MenuItem key={currency_opt} value={currency_opt}>
+                          {currency_opt.toUpperCase()}
+                        </MenuItem>
                       ))}
                     </Select>
-                  }
+                  )}
                 </FormControl>
-                <InputBaseExchange type='number' value={currency} onChange={(e) => { setAmount(e.target.value); setFromCryptoToCurrency(false); }} />
+                <InputBaseExchange
+                  type='number'
+                  value={currency}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                    setFromCryptoToCurrency(false);
+                  }}
+                />
               </Paper>
             </Grid>
           </Grid>
@@ -379,22 +579,18 @@ function Coin() {
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>{coin.market_cap} USD</Typography>
-                <Typography variant='subtitle1'>
-                  Market Cap
-                </Typography>
+                <Typography variant='subtitle1'>Market Cap</Typography>
               </Card>
             </Grid>
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>{coin.volume} USD</Typography>
-                <Typography variant='subtitle1'>
-                  Volume
-                </Typography>
+                <Typography variant='subtitle1'>Volume</Typography>
               </Card>
             </Grid>
           </Grid>
         </Fragment>
-      }
+      )}
     </main>
   );
 }

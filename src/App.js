@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Coin from './components/Coin';
 import BackToTop from './components/BackToTop';
@@ -13,7 +13,7 @@ function App() {
   const theme = createTheme({
     palette: {
       mode: themeMode ? 'dark' : 'light',
-    }
+    },
   });
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('localTheme', JSON.stringify(themeMode))
+    localStorage.setItem('localTheme', JSON.stringify(themeMode));
   }, [themeMode]);
 
   return (
@@ -35,8 +35,12 @@ function App() {
       </ThemeContext.Provider>
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route exact path='/'><Main /></Route>
-          <Route exact path='/coins/:id'><Coin /></Route>
+          <Route exact path='/'>
+            <Main />
+          </Route>
+          <Route exact path='/coins/:id'>
+            <Coin />
+          </Route>
         </Switch>
       </Router>
       <BackToTop />
