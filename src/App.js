@@ -30,10 +30,10 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
-        <Navbar />
-      </ThemeContext.Provider>
       <Router basename={process.env.PUBLIC_URL}>
+        <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
+          <Navbar />
+        </ThemeContext.Provider>
         <Switch>
           <Route exact path='/'>
             <Main />

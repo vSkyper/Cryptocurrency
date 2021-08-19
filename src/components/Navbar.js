@@ -21,7 +21,7 @@ import {
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/core/Autocomplete';
-import { createBrowserHistory } from 'history';
+import { useHistory, Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../contexts/ThemeContext';
 
@@ -70,10 +70,11 @@ const HideOnScroll = ({ children }) => {
 
 const Navbar = () => {
   const [coins, setCoins] = useState([]);
+  const [value, setValue] = useState('');
   const { themeMode, setThemeMode } = useContext(ThemeContext);
   const [loading, setLoading] = useState(true);
 
-  const history = createBrowserHistory({ forceRefresh: true });
+  const history = useHistory();
 
   useEffect(() => {
     setLoading(true);
@@ -106,7 +107,8 @@ const Navbar = () => {
               size='large'
               edge='start'
               sx={{ mr: 2 }}
-              href='/'
+              component={RouterLink}
+              to='/'
             >
               <EuroSymbolIcon />
             </IconButton>
@@ -116,18 +118,26 @@ const Navbar = () => {
               component='div'
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              <Link color='inherit' underline='none' href='/'>
+              <Link
+                color='inherit'
+                underline='none'
+                component={RouterLink}
+                to='/'
+              >
                 Cryptocurrency
               </Link>
             </Typography>
             <Search
               id='coins-search'
+              inputValue={value}
+              value={null}
               loading={loading}
               options={coins}
               filterOptions={filterOptions}
               getOptionLabel={(option) => option.name}
               onChange={(event, value) => {
                 if (value != null) {
+                  setValue('');
                   history.push(`/coins/${value.id}`);
                 }
               }}
@@ -138,6 +148,9 @@ const Navbar = () => {
                   </SearchIconWrapper>
                   <StyledInputBase
                     inputProps={params.inputProps}
+                    onChange={(e) => {
+                      setValue(e.target.value);
+                    }}
                     placeholder='Search…'
                   />
                 </div>
