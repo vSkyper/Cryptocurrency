@@ -2,7 +2,7 @@ import React from 'react';
 import { useScrollTrigger, Box, Fab, Zoom } from '@material-ui/core';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 
-function ScrollTop({ children }) {
+const ScrollTop = ({ children }) => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 100,
@@ -32,9 +32,9 @@ function ScrollTop({ children }) {
       </Box>
     </Zoom>
   );
-}
+};
 
-function BackToTop() {
+const BackToTop = () => {
   return (
     <ScrollTop>
       <Fab color='secondary' size='small' aria-label='scroll back to top'>
@@ -42,6 +42,6 @@ function BackToTop() {
       </Fab>
     </ScrollTop>
   );
-}
+};
 
 export default BackToTop;

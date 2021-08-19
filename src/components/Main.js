@@ -23,44 +23,19 @@ const DataTable = styled('div')(({ theme }) => ({
   marginBottom: 20,
 }));
 
-function getCoins(setCoins, setLoading) {
+const getCoins = async (setCoins, setLoading) => {
   axios
     .get(
       'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
     )
     .then((res) => {
-      const rows = [];
-      res.data.forEach((coin) => {
-        rows.push({
-          id: coin.id,
-          img: coin.image,
-          name: coin.name,
-          symbol: coin.symbol,
-          price: coin.current_price,
-          priceChange1h:
-            coin.price_change_percentage_1h_in_currency === null
-              ? ''
-              : coin.price_change_percentage_1h_in_currency.toFixed(2),
-          priceChange24h:
-            coin.price_change_percentage_24h_in_currency === null
-              ? ''
-              : coin.price_change_percentage_24h_in_currency.toFixed(2),
-          priceChange7d:
-            coin.price_change_percentage_7d_in_currency === null
-              ? ''
-              : coin.price_change_percentage_7d_in_currency.toFixed(2),
-          volume: coin.total_volume,
-          marketcap: coin.market_cap,
-          sparkline: coin.sparkline_in_7d.price,
-        });
-      });
-      setCoins(rows);
+      setCoins(res.data);
       setLoading(false);
     })
     .catch((error) => console.log(error));
-}
+};
 
-function Main() {
+const Main = () => {
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -91,7 +66,7 @@ function Main() {
             component={RouterLink}
             to={`/coins/${params.row.id}`}
           >
-            <img src={params.row.img} width='25vh' alt='img'></img>
+            <img src={params.row.image} width='25vh' alt='img'></img>
             {params.value}
           </Link>
         ),
@@ -103,7 +78,7 @@ function Main() {
       },
       {
         type: 'number',
-        field: 'price',
+        field: 'current_price',
         headerName: 'Price',
         width: 150,
         valueFormatter: (params) => {
@@ -112,18 +87,14 @@ function Main() {
       },
       {
         type: 'number',
-        field: 'priceChange1h',
+        field: 'price_change_percentage_1h_in_currency',
         headerName: '1h',
         width: 120,
         valueFormatter: (params) => {
-          if (params.value !== '') {
-            return `${params.value}%`;
-          } else {
-            return `${params.value}`;
-          }
+          return `${Number(params.value).toFixed(2)}%`;
         },
         cellClassName: (params) => {
-          if (params.value < 0) {
+          if (Number(params.value) < 0) {
             return 'negative';
           } else {
             return 'positive';
@@ -132,18 +103,14 @@ function Main() {
       },
       {
         type: 'number',
-        field: 'priceChange24h',
+        field: 'price_change_percentage_24h_in_currency',
         headerName: '24h',
         width: 120,
         valueFormatter: (params) => {
-          if (params.value !== '') {
-            return `${params.value}%`;
-          } else {
-            return `${params.value}`;
-          }
+          return `${Number(params.value).toFixed(2)}%`;
         },
         cellClassName: (params) => {
-          if (params.value < 0) {
+          if (Number(params.value) < 0) {
             return 'negative';
           } else {
             return 'positive';
@@ -152,18 +119,14 @@ function Main() {
       },
       {
         type: 'number',
-        field: 'priceChange7d',
+        field: 'price_change_percentage_7d_in_currency',
         headerName: '7d',
         width: 120,
         valueFormatter: (params) => {
-          if (params.value !== '') {
-            return `${params.value}%`;
-          } else {
-            return `${params.value}`;
-          }
+          return `${Number(params.value).toFixed(2)}%`;
         },
         cellClassName: (params) => {
-          if (params.value < 0) {
+          if (Number(params.value) < 0) {
             return 'negative';
           } else {
             return 'positive';
@@ -172,28 +135,28 @@ function Main() {
       },
       {
         type: 'number',
-        field: 'volume',
+        field: 'total_volume',
         headerName: 'Volume',
         width: 170,
         valueFormatter: (params) => {
-          return `${params.value.toLocaleString()}  USD`;
+          return `${Number(params.value).toLocaleString()}  USD`;
         },
       },
       {
         type: 'number',
-        field: 'marketcap',
+        field: 'market_cap',
         headerName: 'Market Cap',
         width: 170,
         valueFormatter: (params) => {
-          return `${params.value.toLocaleString()}  USD`;
+          return `${Number(params.value).toLocaleString()}  USD`;
         },
       },
       {
-        field: 'sparkline',
+        field: 'sparkline_in_7d',
         headerName: 'Last 7 Days',
         width: 170,
         renderCell: (params) => (
-          <Sparklines data={params.value}>
+          <Sparklines data={params.value.price}>
             <SparklinesLine color='#648dae' />
           </Sparklines>
         ),
@@ -228,6 +191,6 @@ function Main() {
       </Grid>
     </main>
   );
-}
+};
 
 export default Main;

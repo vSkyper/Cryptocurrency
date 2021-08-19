@@ -8,7 +8,7 @@ import Coin from './components/Coin';
 import BackToTop from './components/BackToTop';
 import { ThemeContext } from './contexts/ThemeContext';
 
-function App() {
+const App = () => {
   const [themeMode, setThemeMode] = useState(true);
   const theme = createTheme({
     palette: {
@@ -46,6 +46,6 @@ function App() {
       <BackToTop />
     </ThemeProvider>
   );
-}
+};
 
 export default App;

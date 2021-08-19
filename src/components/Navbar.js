@@ -58,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function HideOnScroll({ children }) {
+const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
 
   return (
@@ -66,9 +66,9 @@ function HideOnScroll({ children }) {
       {children}
     </Slide>
   );
-}
+};
 
-function Navbar() {
+const Navbar = () => {
   const [coins, setCoins] = useState([]);
   const { themeMode, setThemeMode } = useContext(ThemeContext);
   const [loading, setLoading] = useState(true);
@@ -163,6 +163,6 @@ function Navbar() {
       <Toolbar id='back-to-top-anchor' />
     </Box>
   );
-}
+};
 
 export default Navbar;
