@@ -9,6 +9,8 @@ import {
   FormControl,
   Select,
   MenuItem,
+  Backdrop,
+  CircularProgress,
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
@@ -28,7 +30,6 @@ import {
   SwapHoriz as SwapHorizIcon,
 } from '@material-ui/icons';
 import axios from 'axios';
-import { CircleLoader } from 'react-spinners';
 
 const Name = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
@@ -96,12 +97,11 @@ const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const getCoin = async (setCoin, id, setLoading) => {
+const getCoin = async (setCoin, id) => {
   axios
     .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
     .then((res) => {
       setCoin(res.data);
-      setLoading(false);
     })
     .catch((error) => console.log(error));
 };
@@ -118,11 +118,9 @@ const getCoinPrice = async (setExchangeRate, id, currencyOption) => {
 };
 
 const Coin = () => {
-  const [coin, setCoin] = useState([]);
+  const [coin, setCoin] = useState({});
   const [sparkline, setSparkline] = useState([]);
   const [days, setDays] = useState('7');
-  const [loading, setLoading] = useState(true);
-  const [loadingSparkline, setLoadingSparkline] = useState(true);
   const [currencies, setCurrencies] = useState([]);
   const [currencyOption, setCurrencyOption] = useState('usd');
   const [exchangeRate, setExchangeRate] = useState('');
@@ -147,10 +145,9 @@ const Coin = () => {
   }
 
   useEffect(() => {
-    setLoading(true);
-    getCoin(setCoin, id, setLoading);
+    getCoin(setCoin, id);
     const IntervalID = setInterval(() => {
-      getCoin(setCoin, id, setLoading);
+      getCoin(setCoin, id);
     }, 5000);
     return () => {
       setCoin([]);
@@ -159,7 +156,6 @@ const Coin = () => {
   }, [id]);
 
   useEffect(() => {
-    setLoadingSparkline(true);
     axios
       .get(
         `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`
@@ -171,7 +167,6 @@ const Coin = () => {
             value: data[1],
           }))
         );
-        setLoadingSparkline(false);
       })
       .catch((error) => console.log(error));
     return () => {
@@ -204,17 +199,13 @@ const Coin = () => {
 
   return (
     <main>
-      {loading && (
-        <Grid container justifyContent='center'>
-          <CircleLoader
-            loading={loading}
-            color='#648dae'
-            size={150}
-            css={{ marginTop: 20 }}
-          />
-        </Grid>
-      )}
-      {!loading && (
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={Object.keys(coin).length === 0 || sparkline.length === 0}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
+      {Object.keys(coin).length > 0 && (
         <Fragment>
           <Name>
             <img
@@ -291,16 +282,7 @@ const Coin = () => {
                 </Button>
               </Buttons>
               <Chart>
-                {loadingSparkline && (
-                  <Grid container alignItems='center' justifyContent='center'>
-                    <CircleLoader
-                      loading={loadingSparkline}
-                      color='#648dae'
-                      size={150}
-                    />
-                  </Grid>
-                )}
-                {!loadingSparkline && (
+                {sparkline.length > 0 && (
                   <ResponsiveContainer>
                     <AreaChart data={sparkline}>
                       <defs>

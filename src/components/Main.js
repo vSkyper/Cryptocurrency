@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@material-ui/core/styles';
-import { Grid, Link } from '@material-ui/core';
+import { Grid, Link, Backdrop, CircularProgress } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
-import { CircleLoader } from 'react-spinners';
 
 const DataTable = styled('div')(({ theme }) => ({
   '& .negative': {
@@ -23,14 +22,13 @@ const DataTable = styled('div')(({ theme }) => ({
   marginBottom: 20,
 }));
 
-const getCoins = async (setCoins, setLoading) => {
+const getCoins = async (setCoins) => {
   axios
     .get(
       'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
     )
     .then((res) => {
       setCoins(res.data);
-      setLoading(false);
     })
     .catch((error) => console.log(error));
 };
@@ -38,13 +36,11 @@ const getCoins = async (setCoins, setLoading) => {
 const Main = () => {
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    getCoins(setCoins, setLoading);
+    getCoins(setCoins);
     const IntervalID = setInterval(() => {
-      getCoins(setCoins, setLoading);
+      getCoins(setCoins);
     }, 20000);
     return () => {
       setCoins([]);
@@ -175,14 +171,14 @@ const Main = () => {
 
   return (
     <main>
-      <Grid container justifyContent='center'>
-        <CircleLoader
-          loading={loading}
-          color='#648dae'
-          size={150}
-          css={{ marginTop: 20 }}
-        />
-        {!loading && (
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={coins.length === 0}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
+      {coins.length > 0 && (
+        <Grid container justifyContent='center'>
           <DataTable>
             <div style={{ flexGrow: 1 }}>
               <DataGrid
@@ -193,8 +189,8 @@ const Main = () => {
               />
             </div>
           </DataTable>
-        )}
-      </Grid>
+        </Grid>
+      )}
     </main>
   );
 };

@@ -72,17 +72,14 @@ const Navbar = () => {
   const [coins, setCoins] = useState([]);
   const [value, setValue] = useState('');
   const { themeMode, setThemeMode } = useContext(ThemeContext);
-  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
       .then((res) => {
         setCoins(res.data);
-        setLoading(false);
       })
       .catch((error) => console.log(error));
     return () => {
@@ -131,12 +128,14 @@ const Navbar = () => {
               id='coins-search'
               inputValue={value}
               value={null}
-              loading={loading}
+              loading={coins.length === 0}
               options={coins}
               filterOptions={filterOptions}
               getOptionLabel={(option) => option.name}
               onInputChange={(e) => {
-                setValue(e.target.value);
+                if (e != null) {
+                  setValue(e.target.value);
+                }
               }}
               onChange={(e, value) => {
                 if (value != null) {
