@@ -135,7 +135,10 @@ const Navbar = () => {
               options={coins}
               filterOptions={filterOptions}
               getOptionLabel={(option) => option.name}
-              onChange={(event, value) => {
+              onInputChange={(e) => {
+                setValue(e.target.value);
+              }}
+              onChange={(e, value) => {
                 if (value != null) {
                   setValue('');
                   history.push(`/coins/${value.id}`);
@@ -148,9 +151,6 @@ const Navbar = () => {
                   </SearchIconWrapper>
                   <StyledInputBase
                     inputProps={params.inputProps}
-                    onChange={(e) => {
-                      setValue(e.target.value);
-                    }}
                     placeholder='Search…'
                   />
                 </div>

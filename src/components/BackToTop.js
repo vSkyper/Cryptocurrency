@@ -8,8 +8,8 @@ const ScrollTop = ({ children }) => {
     threshold: 100,
   });
 
-  const handleClick = (event) => {
-    const anchor = (event.target.ownerDocument || document).querySelector(
+  const handleClick = (e) => {
+    const anchor = (e.target.ownerDocument || document).querySelector(
       '#back-to-top-anchor'
     );
 
