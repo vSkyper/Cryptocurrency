@@ -157,7 +157,13 @@ const Main = () => {
         width: 170,
         renderCell: (params) => (
           <Sparklines data={params.value.price}>
-            <SparklinesLine color={params.row.price_change_percentage_7d_in_currency < 0 ? '#e57373' : '#81c784'} />
+            <SparklinesLine
+              color={
+                params.row.price_change_percentage_7d_in_currency < 0
+                  ? '#e57373'
+                  : '#81c784'
+              }
+            />
           </Sparklines>
         ),
       },
