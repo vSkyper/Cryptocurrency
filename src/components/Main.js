@@ -202,7 +202,7 @@ const Main = () => {
                 autoHeight
                 rows={coins}
                 columns={columns}
-                pageSize={25}
+                pageSize={50}
               />
             </div>
           </DataTable>

@@ -3,10 +3,7 @@ import { useScrollTrigger, Box, Fab, Zoom } from '@material-ui/core';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 
 const ScrollTop = ({ children }) => {
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 100,
-  });
+  const trigger = useScrollTrigger();
 
   const handleClick = (e) => {
     const anchor = (e.target.ownerDocument || document).querySelector(

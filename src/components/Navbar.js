@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {
   Box,
-  useScrollTrigger,
-  Slide,
   AppBar,
   Toolbar,
   Typography,
@@ -58,16 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const HideOnScroll = ({ children }) => {
-  const trigger = useScrollTrigger();
-
-  return (
-    <Slide appear={false} direction='down' in={!trigger}>
-      {children}
-    </Slide>
-  );
-};
-
 const Navbar = () => {
   const [coins, setCoins] = useState([]);
   const [value, setValue] = useState('');
@@ -96,82 +84,80 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <HideOnScroll>
-        <AppBar>
-          <Toolbar>
-            <IconButton
+      <AppBar>
+        <Toolbar>
+          <IconButton
+            color='inherit'
+            size='large'
+            edge='start'
+            sx={{ mr: 2 }}
+            component={RouterLink}
+            to='/'
+          >
+            <EuroSymbolIcon />
+          </IconButton>
+          <Typography
+            variant='h6'
+            noWrap
+            component='div'
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            <Link
               color='inherit'
-              size='large'
-              edge='start'
-              sx={{ mr: 2 }}
+              underline='none'
               component={RouterLink}
               to='/'
             >
-              <EuroSymbolIcon />
-            </IconButton>
-            <Typography
-              variant='h6'
-              noWrap
-              component='div'
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            >
-              <Link
-                color='inherit'
-                underline='none'
-                component={RouterLink}
-                to='/'
-              >
-                Cryptocurrency
-              </Link>
-            </Typography>
-            <Search
-              id='coins-search'
-              inputValue={value}
-              value={null}
-              loading={coins.length === 0}
-              options={coins}
-              filterOptions={filterOptions}
-              getOptionLabel={(option) => option.name}
-              onInputChange={(e) => {
-                if (e != null) {
-                  setValue(e.target.value);
-                }
-              }}
-              onChange={(e, value) => {
-                if (value != null) {
-                  setValue('');
-                  history.push(`/coins/${value.id}`);
-                }
-              }}
-              renderInput={(params) => (
-                <div ref={params.InputProps.ref}>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    inputProps={params.inputProps}
-                    placeholder='Search…'
-                  />
-                </div>
-              )}
-            />
-            <IconButton
-              color='inherit'
-              size='large'
-              href='https://github.com/vSkyper/react_cryptocurrency'
-            >
-              <GitHubIcon />
-            </IconButton>
-            <IconButton
-              color='inherit'
-              size='large'
-              onClick={() => setThemeMode(!themeMode)}
-            >
-              {themeMode ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
+              Cryptocurrency
+            </Link>
+          </Typography>
+          <Search
+            id='coins-search'
+            inputValue={value}
+            value={null}
+            loading={coins.length === 0}
+            options={coins}
+            filterOptions={filterOptions}
+            getOptionLabel={(option) => option.name}
+            onInputChange={(e) => {
+              if (e != null) {
+                setValue(e.target.value);
+              }
+            }}
+            onChange={(e, value) => {
+              if (value != null) {
+                setValue('');
+                history.push(`/coins/${value.id}`);
+              }
+            }}
+            renderInput={(params) => (
+              <div ref={params.InputProps.ref}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  inputProps={params.inputProps}
+                  placeholder='Search…'
+                />
+              </div>
+            )}
+          />
+          <IconButton
+            color='inherit'
+            size='large'
+            href='https://github.com/vSkyper/react_cryptocurrency'
+          >
+            <GitHubIcon />
+          </IconButton>
+          <IconButton
+            color='inherit'
+            size='large'
+            onClick={() => setThemeMode(!themeMode)}
+          >
+            {themeMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
       <Toolbar id='back-to-top-anchor' />
     </Box>
   );
