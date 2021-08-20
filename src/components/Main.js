@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@material-ui/core/styles';
 import { Grid, Link, Backdrop, CircularProgress } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
-import { Sparklines, SparklinesLine } from 'react-sparklines';
+import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
 import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
 
@@ -151,17 +151,34 @@ const Main = () => {
         field: 'sparkline_in_7d',
         headerName: 'Last 7 Days',
         width: 170,
-        renderCell: (params) => (
-          <Sparklines data={params.value.price}>
-            <SparklinesLine
-              color={
-                params.row.price_change_percentage_7d_in_currency < 0
-                  ? '#e57373'
-                  : '#81c784'
-              }
-            />
-          </Sparklines>
-        ),
+        renderCell: (params) => {
+          const color =
+            params.row.price_change_percentage_7d_in_currency < 0
+              ? '#e57373'
+              : '#81c784';
+          return (
+            <ResponsiveContainer>
+              <AreaChart data={params.value.price}>
+                <defs>
+                  <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
+                    <stop offset='5%' stopColor={color} stopOpacity={0.4} />
+                    <stop offset='75%' stopColor={color} stopOpacity={0.05} />
+                  </linearGradient>
+                </defs>
+                <Area
+                  dataKey={(value) => value}
+                  stroke={color}
+                  fill='url(#color)'
+                />
+                <YAxis
+                  dataKey={(value) => value}
+                  domain={['auto', 'auto']}
+                  hide
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          );
+        },
       },
     ]);
     return () => {
