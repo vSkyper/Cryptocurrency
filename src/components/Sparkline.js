@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Grid,
-  Paper,
-  Button,
-  Box,
-  Backdrop,
-  CircularProgress,
-} from '@material-ui/core';
+import { Grid, Paper, Button, Box } from '@material-ui/core';
 import {
   CartesianGrid,
   XAxis,
@@ -40,9 +33,8 @@ const Chart = styled(Paper)(({ theme }) => ({
 }));
 
 const Sparkline = () => {
-  const [sparkline, setSparkline] = useState([]);
   const [days, setDays] = useState('7');
-  const { id } = useContext(SparklineContext);
+  const { id, sparkline, setSparkline } = useContext(SparklineContext);
 
   useEffect(() => {
     let source = axios.CancelToken.source();
@@ -66,7 +58,7 @@ const Sparkline = () => {
       setSparkline([]);
       source.cancel();
     };
-  }, [id, days]);
+  }, [id, days, setSparkline]);
 
   return (
     <Grid item xs={12} lg={7}>
@@ -117,12 +109,6 @@ const Sparkline = () => {
         </Button>
       </Buttons>
       <Chart>
-        <Backdrop
-          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={sparkline.length === 0}
-        >
-          <CircularProgress color='inherit' />
-        </Backdrop>
         {sparkline.length > 0 && (
           <ResponsiveContainer>
             <AreaChart data={sparkline}>

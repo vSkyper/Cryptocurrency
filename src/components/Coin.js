@@ -63,6 +63,7 @@ const getCoin = async (setCoin, id, source) => {
 
 const Coin = () => {
   const [coin, setCoin] = useState({});
+  const [sparkline, setSparkline] = useState([]);
 
   let { id } = useParams();
 
@@ -83,7 +84,7 @@ const Coin = () => {
     <main>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={Object.keys(coin).length === 0}
+        open={Object.keys(coin).length === 0 || sparkline.length === 0}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
@@ -116,7 +117,7 @@ const Coin = () => {
             direction={{ xs: 'column-reverse', sm: 'row' }}
             sx={{ gap: 4 }}
           >
-            <SparklineContext.Provider value={{ id }}>
+            <SparklineContext.Provider value={{ id, sparkline, setSparkline }}>
               <Sparkline />
             </SparklineContext.Provider>
             <Grid item xs={12} lg={4}>
