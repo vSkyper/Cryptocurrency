@@ -29,10 +29,13 @@ const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const getCoinPrice = async (setExchangeRate, id, currencyOption) => {
+const getCoinPrice = async (setExchangeRate, id, currencyOption, source) => {
   axios
     .get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`,
+      {
+        cancelToken: source.token,
+      }
     )
     .then((res) => {
       setExchangeRate(res.data[id][currencyOption]);
@@ -76,13 +79,15 @@ const Exchange = () => {
   }, []);
 
   useEffect(() => {
-    getCoinPrice(setExchangeRate, id, currencyOption);
+    let source = axios.CancelToken.source();
+    getCoinPrice(setExchangeRate, id, currencyOption, source);
     const IntervalID = setInterval(() => {
-      getCoinPrice(setExchangeRate, id, currencyOption);
+      getCoinPrice(setExchangeRate, id, currencyOption, source);
     }, 5000);
     return () => {
       setExchangeRate('');
       clearInterval(IntervalID);
+      source.cancel();
     };
   }, [id, currencyOption]);
 

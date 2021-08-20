@@ -45,9 +45,13 @@ const Sparkline = () => {
   const { id } = useContext(SparklineContext);
 
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`
+        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`,
+        {
+          cancelToken: source.token,
+        }
       )
       .then((res) => {
         setSparkline(
@@ -60,6 +64,7 @@ const Sparkline = () => {
       .catch((error) => console.log(error));
     return () => {
       setSparkline([]);
+      source.cancel();
     };
   }, [id, days]);
 

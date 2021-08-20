@@ -50,9 +50,11 @@ const Card = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2, 0),
 }));
 
-const getCoin = async (setCoin, id) => {
+const getCoin = async (setCoin, id, source) => {
   axios
-    .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
+    .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`, {
+      cancelToken: source.token,
+    })
     .then((res) => {
       setCoin(res.data);
     })
@@ -65,13 +67,15 @@ const Coin = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    getCoin(setCoin, id);
+    let source = axios.CancelToken.source();
+    getCoin(setCoin, id, source);
     const IntervalID = setInterval(() => {
-      getCoin(setCoin, id);
+      getCoin(setCoin, id, source);
     }, 5000);
     return () => {
-      setCoin([]);
+      setCoin({});
       clearInterval(IntervalID);
+      source.cancel();
     };
   }, [id]);
 
