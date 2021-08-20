@@ -67,7 +67,7 @@ const Buttons = styled(Box)(({ theme }) => ({
 }));
 
 const Chart = styled(Paper)(({ theme }) => ({
-  height: 350,
+  height: 295,
   padding: theme.spacing(2, 1, 1, 1),
   [theme.breakpoints.up('sm')]: {
     height: 495,
