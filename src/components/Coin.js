@@ -9,8 +9,8 @@ import {
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import {
-  ArrowUpward as ArrowUpwardIcon,
-  ArrowDownward as ArrowDownwardIcon,
+  TrendingUp as TrendingUpIcon,
+  TrendingDown as TrendingDownIcon,
 } from '@material-ui/icons';
 import axios from 'axios';
 import Sparkline from './Sparkline';
@@ -29,20 +29,10 @@ const Name = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2.5, 0),
 }));
 
-const ArrowDown = styled(Typography)(({ theme }) => ({
+const Percentage = styled(Typography)(({ theme }) => ({
   marginLeft: 10,
   display: 'flex',
-  justifyContent: 'center',
   alignItems: 'center',
-  color: theme.palette.error.light,
-}));
-
-const ArrowUp = styled(Typography)(({ theme }) => ({
-  marginLeft: 10,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: theme.palette.success.light,
 }));
 
 const Card = styled(Paper)(({ theme }) => ({
@@ -98,17 +88,28 @@ const Coin = () => {
               alt='img'
             ></img>
             <Typography variant='h5'>{coin.name}</Typography>
-            {coin.price_change_24h < 0 && (
-              <ArrowDown variant='subtitle1'>
-                {coin.price_change_24h}%
-                <ArrowDownwardIcon sx={{ fontSize: 20 }} />
-              </ArrowDown>
-            )}
-            {coin.price_change_24h >= 0 && (
-              <ArrowUp variant='subtitle1'>
-                {coin.price_change_24h}%
-                <ArrowUpwardIcon sx={{ fontSize: 20 }} />
-              </ArrowUp>
+            {coin.market_data.price_change_percentage_24h < 0 ? (
+              <Percentage sx={{ color: 'error.light' }}>
+                {Number(
+                  coin.market_data.price_change_percentage_24h / 100
+                ).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  style: 'percent',
+                })}
+                <TrendingDownIcon />
+              </Percentage>
+            ) : (
+              <Percentage sx={{ color: 'success.light' }}>
+                {Number(
+                  coin.market_data.price_change_percentage_24h / 100
+                ).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  style: 'percent',
+                })}
+                <TrendingUpIcon />
+              </Percentage>
             )}
           </Name>
           <Grid
@@ -125,7 +126,14 @@ const Coin = () => {
                 <Grid item xs={12}>
                   <Card>
                     <Typography variant='h5'>
-                      {coin.market_data.current_price.usd} USD
+                      {Number(
+                        coin.market_data.current_price.usd
+                      ).toLocaleString('en-US', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 8,
+                        style: 'currency',
+                        currency: 'USD',
+                      })}
                     </Typography>
                     <Typography variant='subtitle1'>Price</Typography>
                   </Card>
@@ -134,23 +142,25 @@ const Coin = () => {
                   <Grid
                     container
                     justifyContent='center'
-                    sx={{ gap: 4, marginTop: 3 }}
+                    sx={{ gap: 4, mt: 3 }}
                   >
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card
                         sx={
-                          Number(
-                            coin.market_data.price_change_percentage_24h
-                          ).toFixed(2) < 0
+                          Number(coin.market_data.price_change_percentage_24h) <
+                          0
                             ? { color: 'error.light' }
                             : { color: 'success.light' }
                         }
                       >
                         <Typography variant='h5'>
                           {Number(
-                            coin.market_data.price_change_percentage_24h
-                          ).toFixed(2)}
-                          %
+                            coin.market_data.price_change_percentage_24h / 100
+                          ).toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            style: 'percent',
+                          })}
                         </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 24h
@@ -160,18 +170,20 @@ const Coin = () => {
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card
                         sx={
-                          Number(
-                            coin.market_data.price_change_percentage_7d
-                          ).toFixed(2) < 0
+                          Number(coin.market_data.price_change_percentage_7d) <
+                          0
                             ? { color: 'error.light' }
                             : { color: 'success.light' }
                         }
                       >
                         <Typography variant='h5'>
                           {Number(
-                            coin.market_data.price_change_percentage_7d
-                          ).toFixed(2)}
-                          %
+                            coin.market_data.price_change_percentage_7d / 100
+                          ).toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            style: 'percent',
+                          })}
                         </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 7d
@@ -181,18 +193,20 @@ const Coin = () => {
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card
                         sx={
-                          Number(
-                            coin.market_data.price_change_percentage_14d
-                          ).toFixed(2) < 0
+                          Number(coin.market_data.price_change_percentage_14d) <
+                          0
                             ? { color: 'error.light' }
                             : { color: 'success.light' }
                         }
                       >
                         <Typography variant='h5'>
                           {Number(
-                            coin.market_data.price_change_percentage_14d
-                          ).toFixed(2)}
-                          %
+                            coin.market_data.price_change_percentage_14d / 100
+                          ).toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            style: 'percent',
+                          })}
                         </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 14d
@@ -202,18 +216,20 @@ const Coin = () => {
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card
                         sx={
-                          Number(
-                            coin.market_data.price_change_percentage_30d
-                          ).toFixed(2) < 0
+                          Number(coin.market_data.price_change_percentage_30d) <
+                          0
                             ? { color: 'error.light' }
                             : { color: 'success.light' }
                         }
                       >
                         <Typography variant='h5'>
                           {Number(
-                            coin.market_data.price_change_percentage_30d
-                          ).toFixed(2)}
-                          %
+                            coin.market_data.price_change_percentage_30d / 100
+                          ).toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            style: 'percent',
+                          })}
                         </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 30d
@@ -223,18 +239,20 @@ const Coin = () => {
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card
                         sx={
-                          Number(
-                            coin.market_data.price_change_percentage_60d
-                          ).toFixed(2) < 0
+                          Number(coin.market_data.price_change_percentage_60d) <
+                          0
                             ? { color: 'error.light' }
                             : { color: 'success.light' }
                         }
                       >
                         <Typography variant='h5'>
                           {Number(
-                            coin.market_data.price_change_percentage_60d
-                          ).toFixed(2)}
-                          %
+                            coin.market_data.price_change_percentage_60d / 100
+                          ).toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            style: 'percent',
+                          })}
                         </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 60d
@@ -244,18 +262,20 @@ const Coin = () => {
                     <Grid item xs={5} sm={3} lg={5}>
                       <Card
                         sx={
-                          Number(
-                            coin.market_data.price_change_percentage_1y
-                          ).toFixed(2) < 0
+                          Number(coin.market_data.price_change_percentage_1y) <
+                          0
                             ? { color: 'error.light' }
                             : { color: 'success.light' }
                         }
                       >
                         <Typography variant='h5'>
                           {Number(
-                            coin.market_data.price_change_percentage_1y
-                          ).toFixed(2)}
-                          %
+                            coin.market_data.price_change_percentage_1y / 100
+                          ).toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            style: 'percent',
+                          })}
                         </Typography>
                         <Typography variant='subtitle1'>
                           Price Change 1y
@@ -274,18 +294,33 @@ const Coin = () => {
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>
-                  {Number(coin.market_data.market_cap.usd).toLocaleString()} USD
+                  {Number(coin.market_data.market_cap.usd).toLocaleString(
+                    'en-US',
+                    {
+                      maximumFractionDigits: 0,
+                      style: 'currency',
+                      currency: 'USD',
+                    }
+                  )}
                 </Typography>
-                <Typography variant='subtitle1'>Market Cap</Typography>
+                <Typography variant='subtitle1'>
+                  Market Capitalization
+                </Typography>
               </Card>
             </Grid>
             <Grid item xs={12} md={5}>
               <Card>
                 <Typography variant='h5'>
-                  {Number(coin.market_data.total_volume.usd).toLocaleString()}{' '}
-                  USD
+                  {Number(coin.market_data.total_volume.usd).toLocaleString(
+                    'en-US',
+                    {
+                      maximumFractionDigits: 0,
+                      style: 'currency',
+                      currency: 'USD',
+                    }
+                  )}
                 </Typography>
-                <Typography variant='subtitle1'>Volume</Typography>
+                <Typography variant='subtitle1'>24h Trading Volume</Typography>
               </Card>
             </Grid>
           </Grid>

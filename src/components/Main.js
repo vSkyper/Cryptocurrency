@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@material-ui/core/styles';
-import { Grid, Link, Backdrop, CircularProgress } from '@material-ui/core';
+import { Container, Link, Backdrop, CircularProgress } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
 import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
+import GlobalData from './GlobalData';
+import { GlobalDataContext } from '../contexts/GlobalDataContext';
 
 const DataTable = styled('div')(({ theme }) => ({
   '& .negative': {
@@ -14,10 +16,6 @@ const DataTable = styled('div')(({ theme }) => ({
     color: theme.palette.success.light,
   },
   display: 'flex',
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    width: '80%',
-  },
   marginTop: 20,
   marginBottom: 20,
 }));
@@ -34,6 +32,7 @@ const getCoins = async (setCoins) => {
 };
 
 const Main = () => {
+  const [globalData, setGlobalData] = useState({});
   const [coins, setCoins] = useState([]);
   const [columns, setColumns] = useState([]);
 
@@ -53,7 +52,7 @@ const Main = () => {
       {
         field: 'name',
         headerName: 'Name',
-        width: 150,
+        width: 170,
         renderCell: (params) => (
           <Link
             color='inherit'
@@ -70,7 +69,10 @@ const Main = () => {
       {
         field: 'symbol',
         headerName: 'Symbol',
-        width: 150,
+        width: 140,
+        valueFormatter: (params) => {
+          return params.value.toUpperCase();
+        },
       },
       {
         type: 'number',
@@ -78,7 +80,12 @@ const Main = () => {
         headerName: 'Price',
         width: 150,
         valueFormatter: (params) => {
-          return `${params.value}  USD`;
+          return Number(params.value).toLocaleString('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 8,
+            style: 'currency',
+            currency: 'USD',
+          });
         },
       },
       {
@@ -87,7 +94,11 @@ const Main = () => {
         headerName: '1h',
         width: 120,
         valueFormatter: (params) => {
-          return `${Number(params.value).toFixed(2)}%`;
+          return Number(params.value / 100).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            style: 'percent',
+          });
         },
         cellClassName: (params) => {
           if (Number(params.value) < 0) {
@@ -103,7 +114,11 @@ const Main = () => {
         headerName: '24h',
         width: 120,
         valueFormatter: (params) => {
-          return `${Number(params.value).toFixed(2)}%`;
+          return Number(params.value / 100).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            style: 'percent',
+          });
         },
         cellClassName: (params) => {
           if (Number(params.value) < 0) {
@@ -119,7 +134,11 @@ const Main = () => {
         headerName: '7d',
         width: 120,
         valueFormatter: (params) => {
-          return `${Number(params.value).toFixed(2)}%`;
+          return Number(params.value / 100).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            style: 'percent',
+          });
         },
         cellClassName: (params) => {
           if (Number(params.value) < 0) {
@@ -132,10 +151,14 @@ const Main = () => {
       {
         type: 'number',
         field: 'total_volume',
-        headerName: 'Volume',
+        headerName: '24h Volume',
         width: 170,
         valueFormatter: (params) => {
-          return `${Number(params.value).toLocaleString()}  USD`;
+          return Number(params.value).toLocaleString('en-US', {
+            maximumFractionDigits: 0,
+            style: 'currency',
+            currency: 'USD',
+          });
         },
       },
       {
@@ -144,13 +167,17 @@ const Main = () => {
         headerName: 'Market Cap',
         width: 170,
         valueFormatter: (params) => {
-          return `${Number(params.value).toLocaleString()}  USD`;
+          return Number(params.value).toLocaleString('en-US', {
+            maximumFractionDigits: 0,
+            style: 'currency',
+            currency: 'USD',
+          });
         },
       },
       {
         field: 'sparkline_in_7d',
         headerName: 'Last 7 Days',
-        width: 170,
+        width: 180,
         renderCell: (params) => {
           const color =
             params.row.price_change_percentage_7d_in_currency < 0
@@ -196,12 +223,15 @@ const Main = () => {
     <main>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={coins.length === 0}
+        open={coins.length === 0 || Object.keys(globalData).length === 0}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
       {coins.length > 0 && (
-        <Grid container justifyContent='center'>
+        <Container maxWidth='xl'>
+          <GlobalDataContext.Provider value={{ globalData, setGlobalData }}>
+            <GlobalData />
+          </GlobalDataContext.Provider>
           <DataTable>
             <div style={{ flexGrow: 1 }}>
               <DataGrid
@@ -212,7 +242,7 @@ const Main = () => {
               />
             </div>
           </DataTable>
-        </Grid>
+        </Container>
       )}
     </main>
   );

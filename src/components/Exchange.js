@@ -51,21 +51,6 @@ const Exchange = () => {
   const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState(true);
   const { id, symbol } = useContext(ExchangeContext);
 
-  let currency, crypto;
-  if (fromCryptoToCurrency) {
-    crypto = amount;
-    currency = amount * exchangeRate;
-    if (!isFinite(currency)) {
-      currency = '';
-    }
-  } else {
-    currency = amount;
-    crypto = amount / exchangeRate;
-    if (!isFinite(crypto)) {
-      crypto = '';
-    }
-  }
-
   useEffect(() => {
     axios
       .get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
@@ -90,6 +75,21 @@ const Exchange = () => {
       source.cancel();
     };
   }, [id, currencyOption]);
+
+  let currency, crypto;
+  if (fromCryptoToCurrency) {
+    crypto = amount;
+    currency = amount * exchangeRate;
+    if (!isFinite(currency)) {
+      currency = '';
+    }
+  } else {
+    currency = amount;
+    crypto = amount / exchangeRate;
+    if (!isFinite(crypto)) {
+      crypto = '';
+    }
+  }
 
   return (
     <Grid container justifyContent='center' alignItems='center' sx={{ mt: 4 }}>
