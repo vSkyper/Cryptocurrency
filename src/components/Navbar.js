@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
   Link,
+  Tooltip,
   InputBase,
 } from '@material-ui/core';
 import { styled, alpha } from '@material-ui/core/styles';
@@ -86,16 +87,18 @@ const Navbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar>
         <Toolbar>
-          <IconButton
-            color='inherit'
-            size='large'
-            edge='start'
-            sx={{ mr: 2 }}
-            component={RouterLink}
-            to='/'
-          >
-            <EuroSymbolIcon />
-          </IconButton>
+          <Tooltip title='Homepage'>
+            <IconButton
+              color='inherit'
+              size='large'
+              edge='start'
+              sx={{ mr: 2 }}
+              component={RouterLink}
+              to='/'
+            >
+              <EuroSymbolIcon />
+            </IconButton>
+          </Tooltip>
           <Typography
             variant='h6'
             noWrap
@@ -142,20 +145,24 @@ const Navbar = () => {
               </div>
             )}
           />
-          <IconButton
-            color='inherit'
-            size='large'
-            href='https://github.com/vSkyper/react_cryptocurrency'
-          >
-            <GitHubIcon />
-          </IconButton>
-          <IconButton
-            color='inherit'
-            size='large'
-            onClick={() => setThemeMode(!themeMode)}
-          >
-            {themeMode ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
+          <Tooltip title='GitHub repository'>
+            <IconButton
+              color='inherit'
+              size='large'
+              href='https://github.com/vSkyper/react_cryptocurrency'
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Toggle light/dark theme'>
+            <IconButton
+              color='inherit'
+              size='large'
+              onClick={() => setThemeMode(!themeMode)}
+            >
+              {themeMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Toolbar id='back-to-top-anchor' />
