@@ -33,6 +33,7 @@ const Percentage = styled(Typography)(({ theme }) => ({
   marginLeft: 10,
   display: 'flex',
   alignItems: 'center',
+  fontWeight: 300,
 }));
 
 const Card = styled(Paper)(({ theme }) => ({
@@ -135,7 +136,12 @@ const Coin = () => {
                         currency: 'USD',
                       })}
                     </Typography>
-                    <Typography variant='subtitle1'>Price</Typography>
+                    <Typography
+                      variant='subtitle1'
+                      fontWeight='fontWeightLight'
+                    >
+                      Price
+                    </Typography>
                   </Card>
                 </Grid>
                 <Grid item xs={12}>
@@ -162,7 +168,10 @@ const Coin = () => {
                             style: 'percent',
                           })}
                         </Typography>
-                        <Typography variant='subtitle1'>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='fontWeightLight'
+                        >
                           Price Change 24h
                         </Typography>
                       </Card>
@@ -185,7 +194,10 @@ const Coin = () => {
                             style: 'percent',
                           })}
                         </Typography>
-                        <Typography variant='subtitle1'>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='fontWeightLight'
+                        >
                           Price Change 7d
                         </Typography>
                       </Card>
@@ -208,7 +220,10 @@ const Coin = () => {
                             style: 'percent',
                           })}
                         </Typography>
-                        <Typography variant='subtitle1'>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='fontWeightLight'
+                        >
                           Price Change 14d
                         </Typography>
                       </Card>
@@ -231,7 +246,10 @@ const Coin = () => {
                             style: 'percent',
                           })}
                         </Typography>
-                        <Typography variant='subtitle1'>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='fontWeightLight'
+                        >
                           Price Change 30d
                         </Typography>
                       </Card>
@@ -254,7 +272,10 @@ const Coin = () => {
                             style: 'percent',
                           })}
                         </Typography>
-                        <Typography variant='subtitle1'>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='fontWeightLight'
+                        >
                           Price Change 60d
                         </Typography>
                       </Card>
@@ -277,7 +298,10 @@ const Coin = () => {
                             style: 'percent',
                           })}
                         </Typography>
-                        <Typography variant='subtitle1'>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='fontWeightLight'
+                        >
                           Price Change 1y
                         </Typography>
                       </Card>
@@ -303,7 +327,7 @@ const Coin = () => {
                     }
                   )}
                 </Typography>
-                <Typography variant='subtitle1'>
+                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
                   Market Capitalization
                 </Typography>
               </Card>
@@ -320,7 +344,9 @@ const Coin = () => {
                     }
                   )}
                 </Typography>
-                <Typography variant='subtitle1'>24h Trading Volume</Typography>
+                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                  24h Trading Volume
+                </Typography>
               </Card>
             </Grid>
           </Grid>

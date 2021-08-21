@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, Fragment } from 'react';
 import {
   Grid,
   Box,
-  FormGroup,
   FormControlLabel,
   Typography,
   Switch,
@@ -69,7 +68,7 @@ const IOSSwitch = styled((props) => (
 
 const Card = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
-  padding: theme.spacing(2, 0),
+  padding: theme.spacing(1.5, 0),
 }));
 
 const GlobalData = () => {
@@ -144,24 +143,26 @@ const GlobalData = () => {
       {Object.keys(globalData).length > 0 && (
         <Fragment>
           <Box>
-            <FormGroup row sx={{ mt: 2, mb: 1 }}>
-              <Typography variant='h5' sx={{ mt: 1, mr: 2 }}>
+            <Grid container alignItems='center' sx={{ mt: 2, mb: 1 }}>
+              <Typography variant='h5'>
                 Cryptocurrency Prices by Market Cap
               </Typography>
               <FormControlLabel
                 control={
                   <IOSSwitch
+                    checked={toggle}
                     sx={{ mr: 1 }}
                     onChange={() => setToggle(!toggle)}
                   />
                 }
                 label='Show Stats'
-                sx={{ ml: 0.1, mt: 1 }}
+                sx={{ ml: 1.3, display: { xs: 'none', sm: 'block' } }}
               />
-            </FormGroup>
-            <Typography>
+            </Grid>
+            <Typography fontWeight='fontWeightLight'>
               The global cryptocurrency market cap today is {marketCap}, a{' '}
               <Typography
+                fontWeight='fontWeightLight'
                 component='span'
                 sx={
                   marketCapPercentage < 0
@@ -178,8 +179,19 @@ const GlobalData = () => {
               {cryptocurrencies} cryptocurrencies.
             </Typography>
           </Box>
+          <FormControlLabel
+            control={
+              <IOSSwitch
+                checked={toggle}
+                sx={{ mr: 1 }}
+                onChange={() => setToggle(!toggle)}
+              />
+            }
+            label='Show Stats'
+            sx={{ ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
+          />
           {toggle && (
-            <Grid container justifyContent='center' sx={{ gap: 4, mt: 2 }}>
+            <Grid container justifyContent='center' sx={{ gap: 2, mt: 2 }}>
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>
@@ -188,6 +200,7 @@ const GlobalData = () => {
                       <Grid item sx={{ ml: 1 }}>
                         {marketCapPercentage < 0 ? (
                           <Typography
+                            fontWeight='fontWeightLight'
                             component='span'
                             sx={{
                               display: 'flex',
@@ -200,6 +213,7 @@ const GlobalData = () => {
                           </Typography>
                         ) : (
                           <Typography
+                            fontWeight='fontWeightLight'
                             component='span'
                             sx={{
                               display: 'flex',
@@ -214,7 +228,7 @@ const GlobalData = () => {
                       </Grid>
                     </Grid>
                   </Typography>
-                  <Typography variant='subtitle1'>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
                     Market Capitalization
                   </Typography>
                 </Card>
@@ -222,7 +236,7 @@ const GlobalData = () => {
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>{totalVolume}</Typography>
-                  <Typography variant='subtitle1'>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
                     24h Trading Volume
                   </Typography>
                 </Card>
@@ -230,7 +244,7 @@ const GlobalData = () => {
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
-                  <Typography variant='subtitle1'>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
                     Bitcoin Market Cap Dominance
                   </Typography>
                 </Card>
@@ -238,7 +252,9 @@ const GlobalData = () => {
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>{cryptocurrencies}</Typography>
-                  <Typography variant='subtitle1'># of Coins</Typography>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                    # of Coins
+                  </Typography>
                 </Card>
               </Grid>
             </Grid>
