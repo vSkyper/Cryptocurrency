@@ -26,7 +26,7 @@ const Chart = styled(Paper)(({ theme }) => ({
   height: 250,
   padding: theme.spacing(2, 1, 1, 0.8),
   [theme.breakpoints.up('sm')]: {
-    height: 525,
+    height: 500,
     padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
