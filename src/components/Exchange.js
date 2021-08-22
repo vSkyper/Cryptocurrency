@@ -92,7 +92,7 @@ const Exchange = () => {
   }
 
   return (
-    <Grid container justifyContent='center' alignItems='center' sx={{ mt: 4 }}>
+    <Grid container justifyContent='center' alignItems='center' sx={{ mt: 3 }}>
       <Grid item>
         <Paper
           sx={{

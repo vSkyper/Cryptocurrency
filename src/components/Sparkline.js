@@ -23,14 +23,34 @@ const Buttons = styled(Box)(({ theme }) => ({
 }));
 
 const Chart = styled(Paper)(({ theme }) => ({
-  height: 295,
-  padding: theme.spacing(2, 1, 1, 1),
+  height: 250,
+  padding: theme.spacing(2, 1, 1, 0.8),
   [theme.breakpoints.up('sm')]: {
-    height: 495,
+    height: 525,
     padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
 }));
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <Paper sx={{ opacity: 0.6, padding: 2 }}>
+        <Box>{format(new Date(label), 'eeee, d MMM, yyyy')}</Box>
+        <Box>
+          {Number(payload[0].value).toLocaleString('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 8,
+            style: 'currency',
+            currency: 'USD',
+          })}
+        </Box>
+      </Paper>
+    );
+  }
+
+  return null;
+};
 
 const Sparkline = () => {
   const [days, setDays] = useState('7');
@@ -141,7 +161,7 @@ const Sparkline = () => {
                 tickCount={8}
                 tickFormatter={(value) => `$${value}`}
               />
-              <Tooltip />
+              <Tooltip content={<CustomTooltip />} />
               <CartesianGrid opacity={0.05} vertical={false} />
             </AreaChart>
           </ResponsiveContainer>

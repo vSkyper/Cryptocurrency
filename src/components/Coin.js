@@ -8,32 +8,23 @@ import {
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import {
-  TrendingUpRounded as TrendingUpIcon,
-  TrendingDownRounded as TrendingDownIcon,
-} from '@material-ui/icons';
+import { AllInclusiveRounded as AllInclusiveIcon } from '@material-ui/icons';
 import axios from 'axios';
 import Sparkline from './Sparkline';
+import Price from './Price';
 import Exchange from './Exchange';
 import { SparklineContext } from '../contexts/SparklineContext';
+import { PriceContext } from '../contexts/PriceContext';
 import { ExchangeContext } from '../contexts/ExchangeContext';
 
 const Name = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
-  paddingTop: 20,
   marginBottom: 20,
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
   padding: theme.spacing(2.5, 0),
-}));
-
-const Percentage = styled(Typography)(({ theme }) => ({
-  marginLeft: 10,
-  display: 'flex',
-  alignItems: 'center',
-  fontWeight: 300,
 }));
 
 const Card = styled(Paper)(({ theme }) => ({
@@ -89,233 +80,25 @@ const Coin = () => {
               alt='img'
             ></img>
             <Typography variant='h5'>{coin.name}</Typography>
-            {coin.market_data.price_change_percentage_24h < 0 ? (
-              <Percentage sx={{ color: 'error.light' }}>
-                {Number(
-                  coin.market_data.price_change_percentage_24h / 100
-                ).toLocaleString('en-US', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  style: 'percent',
-                })}
-                <TrendingDownIcon />
-              </Percentage>
-            ) : (
-              <Percentage sx={{ color: 'success.light' }}>
-                {Number(
-                  coin.market_data.price_change_percentage_24h / 100
-                ).toLocaleString('en-US', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  style: 'percent',
-                })}
-                <TrendingUpIcon />
-              </Percentage>
-            )}
           </Name>
           <Grid
             container
             justifyContent='center'
-            direction={{ xs: 'column-reverse', sm: 'row' }}
+            direction={{ xs: 'column-reverse', lg: 'row' }}
             sx={{ gap: 4 }}
           >
             <SparklineContext.Provider value={{ id, sparkline, setSparkline }}>
               <Sparkline />
             </SparklineContext.Provider>
-            <Grid item xs={12} lg={4}>
-              <Grid container direction='column'>
-                <Grid item xs={12}>
-                  <Card>
-                    <Typography variant='h5'>
-                      {Number(
-                        coin.market_data.current_price.usd
-                      ).toLocaleString('en-US', {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 8,
-                        style: 'currency',
-                        currency: 'USD',
-                      })}
-                    </Typography>
-                    <Typography
-                      variant='subtitle1'
-                      fontWeight='fontWeightLight'
-                    >
-                      Price
-                    </Typography>
-                  </Card>
-                </Grid>
-                <Grid item xs={12}>
-                  <Grid
-                    container
-                    justifyContent='center'
-                    sx={{ gap: 4, mt: 3 }}
-                  >
-                    <Grid item xs={5} sm={3} lg={5}>
-                      <Card
-                        sx={
-                          Number(coin.market_data.price_change_percentage_24h) <
-                          0
-                            ? { color: 'error.light' }
-                            : { color: 'success.light' }
-                        }
-                      >
-                        <Typography variant='h5'>
-                          {Number(
-                            coin.market_data.price_change_percentage_24h / 100
-                          ).toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            style: 'percent',
-                          })}
-                        </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='fontWeightLight'
-                        >
-                          Price Change 24h
-                        </Typography>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5} sm={3} lg={5}>
-                      <Card
-                        sx={
-                          Number(coin.market_data.price_change_percentage_7d) <
-                          0
-                            ? { color: 'error.light' }
-                            : { color: 'success.light' }
-                        }
-                      >
-                        <Typography variant='h5'>
-                          {Number(
-                            coin.market_data.price_change_percentage_7d / 100
-                          ).toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            style: 'percent',
-                          })}
-                        </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='fontWeightLight'
-                        >
-                          Price Change 7d
-                        </Typography>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5} sm={3} lg={5}>
-                      <Card
-                        sx={
-                          Number(coin.market_data.price_change_percentage_14d) <
-                          0
-                            ? { color: 'error.light' }
-                            : { color: 'success.light' }
-                        }
-                      >
-                        <Typography variant='h5'>
-                          {Number(
-                            coin.market_data.price_change_percentage_14d / 100
-                          ).toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            style: 'percent',
-                          })}
-                        </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='fontWeightLight'
-                        >
-                          Price Change 14d
-                        </Typography>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5} sm={3} lg={5}>
-                      <Card
-                        sx={
-                          Number(coin.market_data.price_change_percentage_30d) <
-                          0
-                            ? { color: 'error.light' }
-                            : { color: 'success.light' }
-                        }
-                      >
-                        <Typography variant='h5'>
-                          {Number(
-                            coin.market_data.price_change_percentage_30d / 100
-                          ).toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            style: 'percent',
-                          })}
-                        </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='fontWeightLight'
-                        >
-                          Price Change 30d
-                        </Typography>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5} sm={3} lg={5}>
-                      <Card
-                        sx={
-                          Number(coin.market_data.price_change_percentage_60d) <
-                          0
-                            ? { color: 'error.light' }
-                            : { color: 'success.light' }
-                        }
-                      >
-                        <Typography variant='h5'>
-                          {Number(
-                            coin.market_data.price_change_percentage_60d / 100
-                          ).toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            style: 'percent',
-                          })}
-                        </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='fontWeightLight'
-                        >
-                          Price Change 60d
-                        </Typography>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={5} sm={3} lg={5}>
-                      <Card
-                        sx={
-                          Number(coin.market_data.price_change_percentage_1y) <
-                          0
-                            ? { color: 'error.light' }
-                            : { color: 'success.light' }
-                        }
-                      >
-                        <Typography variant='h5'>
-                          {Number(
-                            coin.market_data.price_change_percentage_1y / 100
-                          ).toLocaleString('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            style: 'percent',
-                          })}
-                        </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='fontWeightLight'
-                        >
-                          Price Change 1y
-                        </Typography>
-                      </Card>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+            <PriceContext.Provider value={{ coin, Card }}>
+              <Price />
+            </PriceContext.Provider>
           </Grid>
           <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
             <Exchange />
           </ExchangeContext.Provider>
-          <Grid container justifyContent='center' sx={{ gap: 4, mt: 4, mb: 3 }}>
-            <Grid item xs={12} md={5}>
+          <Grid container justifyContent='center' sx={{ mt: 3, mb: 3 }}>
+            <Grid item xs={12} sm={6} lg={3}>
               <Card>
                 <Typography variant='h5'>
                   {Number(coin.market_data.market_cap.usd).toLocaleString(
@@ -332,7 +115,7 @@ const Coin = () => {
                 </Typography>
               </Card>
             </Grid>
-            <Grid item xs={12} md={5}>
+            <Grid item xs={12} sm={6} lg={3}>
               <Card>
                 <Typography variant='h5'>
                   {Number(coin.market_data.total_volume.usd).toLocaleString(
@@ -346,6 +129,40 @@ const Coin = () => {
                 </Typography>
                 <Typography variant='subtitle1' fontWeight='fontWeightLight'>
                   24h Trading Volume
+                </Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} lg={3}>
+              <Card>
+                <Typography variant='h5'>
+                  {Number(coin.market_data.circulating_supply).toLocaleString(
+                    'en-US',
+                    {
+                      maximumFractionDigits: 0,
+                    }
+                  )}
+                </Typography>
+                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                  Circulating Supply
+                </Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} lg={3}>
+              <Card>
+                <Typography variant='h5'>
+                  {coin.market_data.total_supply === null ? (
+                    <AllInclusiveIcon />
+                  ) : (
+                    Number(coin.market_data.total_supply).toLocaleString(
+                      'en-US',
+                      {
+                        maximumFractionDigits: 0,
+                      }
+                    )
+                  )}
+                </Typography>
+                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                  Total Supply
                 </Typography>
               </Card>
             </Grid>
