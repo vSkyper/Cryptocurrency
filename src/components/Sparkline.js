@@ -25,7 +25,7 @@ const Chart = styled(Paper)(({ theme }) => ({
   height: 250,
   padding: theme.spacing(2, 1, 1, 0.8),
   [theme.breakpoints.up('sm')]: {
-    height: 450,
+    height: 431,
     padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
@@ -67,7 +67,7 @@ const Sparkline = () => {
       .then((res) => {
         setSparkline(
           res.data.prices.map((data) => ({
-            date: format(new Date(data[0]), 'MMM d y, hh:mm:ss'),
+            date: format(new Date(data[0]), 'MMM d y, hh:mm:ss a'),
             value: data[1],
           }))
         );
@@ -144,7 +144,7 @@ const Sparkline = () => {
                 tickLine={false}
                 tickFormatter={(value) => {
                   if (days === '1') {
-                    return format(new Date(value), '| hh:mm |');
+                    return format(new Date(value), '| hh:mm a |');
                   } else if (days === 'max') {
                     return format(new Date(value), '| y MMM |');
                   } else {

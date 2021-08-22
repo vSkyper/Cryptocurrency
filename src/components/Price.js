@@ -47,10 +47,12 @@ const Price = () => {
   let progressBarHigh =
     Number(coin.market_data.high_24h.usd) -
     Number(coin.market_data.low_24h.usd);
-  let progressBar = 100 * (progressBarCurrent / progressBarHigh)
+  let progressBar = 100 * (progressBarCurrent / progressBarHigh);
 
-  if (progressBar > 100){
+  if (progressBar > 100) {
     progressBar = 100;
+  } else if (progressBar < 0) {
+    progressBar = 0;
   }
 
   return (
@@ -109,7 +111,9 @@ const Price = () => {
                     }
                   )}
                 </Grid>
-                <Grid item>24h Range</Grid>
+                <Grid item fontWeight='fontWeightLight'>
+                  24h Range
+                </Grid>
                 <Grid item>
                   {Number(coin.market_data.high_24h.usd).toLocaleString(
                     'en-US',
