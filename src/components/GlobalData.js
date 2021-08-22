@@ -7,7 +7,6 @@ import {
   Switch,
   Collapse,
   Grow,
-  Paper,
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import {
@@ -15,6 +14,7 @@ import {
   TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
 import { GlobalDataContext } from '../contexts/GlobalDataContext';
+import { Card, Percentage } from '../Styled/StyledComponents';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />
@@ -65,11 +65,6 @@ const IOSSwitch = styled((props) => (
       duration: 500,
     }),
   },
-}));
-
-const Card = styled(Paper)(({ theme }) => ({
-  textAlign: 'center',
-  padding: theme.spacing(1.8, 0),
 }));
 
 const GlobalData = () => {
@@ -195,39 +190,26 @@ const GlobalData = () => {
             <Grow in={toggle}>
               <Grid item xs={12} md={6} lg={3}>
                 <Card>
-                  <Typography variant='h5'>
-                    <Grid container justifyContent='center' alignItems='center'>
-                      <Grid item>{marketCap}</Grid>
-                      <Grid item sx={{ ml: 1 }}>
-                        {globalData.market_cap_change_percentage_24h_usd < 0 ? (
-                          <Typography
-                            fontWeight='fontWeightLight'
-                            component='span'
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              color: 'error.light',
-                            }}
-                          >
-                            {marketCapPercentage}
-                            <TrendingDownIcon />
-                          </Typography>
-                        ) : (
-                          <Typography
-                            fontWeight='fontWeightLight'
-                            component='span'
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              color: 'success.light',
-                            }}
-                          >
-                            {marketCapPercentage}
-                            <TrendingUpIcon />
-                          </Typography>
-                        )}
-                      </Grid>
-                    </Grid>
+                  <Typography
+                    variant='h5'
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {marketCap}
+                    {globalData.market_cap_change_percentage_24h_usd < 0 ? (
+                      <Percentage sx={{ color: 'error.light' }}>
+                        {marketCapPercentage}
+                        <TrendingDownIcon />
+                      </Percentage>
+                    ) : (
+                      <Percentage sx={{ color: 'success.light' }}>
+                        {marketCapPercentage}
+                        <TrendingUpIcon />
+                      </Percentage>
+                    )}
                   </Typography>
                   <Typography variant='subtitle1' fontWeight='fontWeightLight'>
                     Market Capitalization

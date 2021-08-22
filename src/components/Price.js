@@ -9,19 +9,7 @@ import {
   TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
 import { PriceContext } from '../contexts/PriceContext';
-
-const PriceCard = styled(Typography)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-}));
-
-const Percentage = styled(Typography)(({ theme }) => ({
-  marginLeft: 10,
-  display: 'flex',
-  alignItems: 'center',
-  fontWeight: 300,
-}));
+import { Card, Percentage } from '../Styled/StyledComponents';
 
 const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -39,7 +27,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const Price = () => {
-  const { coin, Card } = useContext(PriceContext);
+  const { coin } = useContext(PriceContext);
 
   let progressBarCurrent =
     Number(coin.market_data.current_price.usd) -
@@ -60,7 +48,14 @@ const Price = () => {
       <Grid container direction='column'>
         <Grid item xs={12}>
           <Card>
-            <PriceCard variant='h5'>
+            <Typography
+              variant='h5'
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               {Number(coin.market_data.current_price.usd).toLocaleString(
                 'en-US',
                 {
@@ -93,7 +88,7 @@ const Price = () => {
                   <TrendingUpIcon />
                 </Percentage>
               )}
-            </PriceCard>
+            </Typography>
             <Typography variant='subtitle1' fontWeight='fontWeightLight'>
               Price
             </Typography>

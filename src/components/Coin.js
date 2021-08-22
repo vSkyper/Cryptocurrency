@@ -17,6 +17,7 @@ import Exchange from './Exchange';
 import { SparklineContext } from '../contexts/SparklineContext';
 import { PriceContext } from '../contexts/PriceContext';
 import { ExchangeContext } from '../contexts/ExchangeContext';
+import { Card } from '../Styled/StyledComponents';
 
 const Name = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
@@ -28,19 +29,14 @@ const Name = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2.5, 0),
 }));
 
-const Card = styled(Paper)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: theme.spacing(2, 0),
-}));
-
 const getCoin = async (setCoin, id, source) => {
   axios
-    .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`, {
-      cancelToken: source.token,
-    })
+    .get(
+      `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`,
+      {
+        cancelToken: source.token,
+      }
+    )
     .then((res) => {
       setCoin(res.data);
     })
@@ -97,7 +93,7 @@ const Coin = () => {
               >
                 <Sparkline />
               </SparklineContext.Provider>
-              <PriceContext.Provider value={{ coin, Card }}>
+              <PriceContext.Provider value={{ coin }}>
                 <Price />
               </PriceContext.Provider>
             </Grid>
