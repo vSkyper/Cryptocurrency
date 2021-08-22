@@ -11,8 +11,8 @@ import {
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import {
-  TrendingUp as TrendingUpIcon,
-  TrendingDown as TrendingDownIcon,
+  TrendingUpRounded as TrendingUpIcon,
+  TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
 import { GlobalDataContext } from '../contexts/GlobalDataContext';
 
@@ -69,7 +69,7 @@ const IOSSwitch = styled((props) => (
 
 const Card = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
-  padding: theme.spacing(1.5, 0),
+  padding: theme.spacing(1.8, 0),
 }));
 
 const GlobalData = () => {
@@ -77,8 +77,10 @@ const GlobalData = () => {
   const [toggle, setToggle] = useState(false);
 
   let marketCap,
+    marketCapText,
     marketCapPercentage,
     totalVolume,
+    totalVolumeText,
     marketCapPercentageBTC,
     marketCapPercentageETH,
     cryptocurrencies;
@@ -92,6 +94,14 @@ const GlobalData = () => {
       }
     );
 
+    marketCapText = Number(
+      globalData.total_market_cap.usd / 1000000000000
+    ).toLocaleString('en-US', {
+      maximumFractionDigits: 2,
+      style: 'currency',
+      currency: 'USD',
+    });
+
     marketCapPercentage = Number(
       globalData.market_cap_change_percentage_24h_usd / 100
     ).toLocaleString('en-US', {
@@ -101,6 +111,14 @@ const GlobalData = () => {
     });
 
     totalVolume = Number(globalData.total_volume.usd).toLocaleString('en-US', {
+      maximumFractionDigits: 0,
+      style: 'currency',
+      currency: 'USD',
+    });
+
+    totalVolumeText = Number(
+      globalData.total_volume.usd / 1000000000
+    ).toLocaleString('en-US', {
       maximumFractionDigits: 0,
       style: 'currency',
       currency: 'USD',
@@ -148,7 +166,8 @@ const GlobalData = () => {
             />
           </Grid>
           <Typography fontWeight='fontWeightLight'>
-            The global cryptocurrency market cap today is {marketCap}, a{' '}
+            The global cryptocurrency market cap today is {marketCapText}{' '}
+            Trillion, a{' '}
             <Typography
               fontWeight='fontWeightLight'
               component='span'
@@ -161,7 +180,7 @@ const GlobalData = () => {
               {marketCapPercentage}
             </Typography>{' '}
             change in the last 24 hours. Total cryptocurrency trading volume in
-            the last day is at {totalVolume}. Bitcoin dominance is at{' '}
+            the last day is at {totalVolumeText} Billion. Bitcoin dominance is at{' '}
             {marketCapPercentageBTC} and Ethereum dominance is at{' '}
             {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
             {cryptocurrencies} cryptocurrencies.

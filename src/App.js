@@ -18,9 +18,7 @@ const App = () => {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('localTheme');
-    if (typeof storedTheme === 'string') {
-      setThemeMode(Boolean(JSON.parse(storedTheme)));
-    }
+    setThemeMode(storedTheme ? JSON.parse(storedTheme) : true);
   }, []);
 
   useEffect(() => {

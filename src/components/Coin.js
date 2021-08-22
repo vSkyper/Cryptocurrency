@@ -9,8 +9,8 @@ import {
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import {
-  TrendingUp as TrendingUpIcon,
-  TrendingDown as TrendingDownIcon,
+  TrendingUpRounded as TrendingUpIcon,
+  TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
 import axios from 'axios';
 import Sparkline from './Sparkline';
