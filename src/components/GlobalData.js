@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import {
   Grid,
   Box,
   FormControlLabel,
   Typography,
   Switch,
+  Collapse,
+  Grow,
   Paper,
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
@@ -12,7 +14,6 @@ import {
   TrendingUp as TrendingUpIcon,
   TrendingDown as TrendingDownIcon,
 } from '@material-ui/icons';
-import axios from 'axios';
 import { GlobalDataContext } from '../contexts/GlobalDataContext';
 
 const IOSSwitch = styled((props) => (
@@ -72,20 +73,8 @@ const Card = styled(Paper)(({ theme }) => ({
 }));
 
 const GlobalData = () => {
-  const { globalData, setGlobalData } = useContext(GlobalDataContext);
+  const { globalData } = useContext(GlobalDataContext);
   const [toggle, setToggle] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get('https://api.coingecko.com/api/v3/global')
-      .then((res) => {
-        setGlobalData(res.data.data);
-      })
-      .catch((error) => console.log(error));
-    return () => {
-      setGlobalData({});
-    };
-  }, [setGlobalData]);
 
   let marketCap,
     marketCapPercentage,
@@ -140,58 +129,58 @@ const GlobalData = () => {
 
   return (
     <Fragment>
-      {Object.keys(globalData).length > 0 && (
-        <Fragment>
-          <Box>
-            <Grid container alignItems='center' sx={{ mt: 2, mb: 1 }}>
-              <Typography variant='h5'>
-                Cryptocurrency Prices by Market Cap
-              </Typography>
-              <FormControlLabel
-                control={
-                  <IOSSwitch
-                    checked={toggle}
-                    sx={{ mr: 1 }}
-                    onChange={() => setToggle(!toggle)}
-                  />
-                }
-                label='Show Stats'
-                sx={{ ml: 1.3, display: { xs: 'none', sm: 'block' } }}
-              />
-            </Grid>
-            <Typography fontWeight='fontWeightLight'>
-              The global cryptocurrency market cap today is {marketCap}, a{' '}
-              <Typography
-                fontWeight='fontWeightLight'
-                component='span'
-                sx={
-                  marketCapPercentage < 0
-                    ? { color: 'error.light' }
-                    : { color: 'success.light' }
-                }
-              >
-                {marketCapPercentage}
-              </Typography>{' '}
-              change in the last 24 hours. Total cryptocurrency trading volume
-              in the last day is at {totalVolume}. Bitcoin dominance is at{' '}
-              {marketCapPercentageBTC} and Ethereum dominance is at{' '}
-              {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
-              {cryptocurrencies} cryptocurrencies.
+      <Fragment>
+        <Box>
+          <Grid container alignItems='center' sx={{ mt: 2, mb: 1 }}>
+            <Typography variant='h5'>
+              Cryptocurrency Prices by Market Cap
             </Typography>
-          </Box>
-          <FormControlLabel
-            control={
-              <IOSSwitch
-                checked={toggle}
-                sx={{ mr: 1 }}
-                onChange={() => setToggle(!toggle)}
-              />
-            }
-            label='Show Stats'
-            sx={{ ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
-          />
-          {toggle && (
-            <Grid container justifyContent='center' sx={{ gap: 2, mt: 2 }}>
+            <FormControlLabel
+              control={
+                <IOSSwitch
+                  checked={toggle}
+                  sx={{ mr: 1 }}
+                  onChange={() => setToggle(!toggle)}
+                />
+              }
+              label='Show Stats'
+              sx={{ ml: 1.3, display: { xs: 'none', sm: 'block' } }}
+            />
+          </Grid>
+          <Typography fontWeight='fontWeightLight'>
+            The global cryptocurrency market cap today is {marketCap}, a{' '}
+            <Typography
+              fontWeight='fontWeightLight'
+              component='span'
+              sx={
+                marketCapPercentage < 0
+                  ? { color: 'error.light' }
+                  : { color: 'success.light' }
+              }
+            >
+              {marketCapPercentage}
+            </Typography>{' '}
+            change in the last 24 hours. Total cryptocurrency trading volume in
+            the last day is at {totalVolume}. Bitcoin dominance is at{' '}
+            {marketCapPercentageBTC} and Ethereum dominance is at{' '}
+            {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
+            {cryptocurrencies} cryptocurrencies.
+          </Typography>
+        </Box>
+        <FormControlLabel
+          control={
+            <IOSSwitch
+              checked={toggle}
+              sx={{ mr: 1 }}
+              onChange={() => setToggle(!toggle)}
+            />
+          }
+          label='Show Stats'
+          sx={{ ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
+        />
+        <Collapse in={toggle}>
+          <Grid container justifyContent='center' sx={{ gap: 2, mt: 2 }}>
+            <Grow in={toggle}>
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>
@@ -233,6 +222,12 @@ const GlobalData = () => {
                   </Typography>
                 </Card>
               </Grid>
+            </Grow>
+            <Grow
+              in={toggle}
+              style={{ transformOrigin: '0 0 0' }}
+              {...(toggle ? { timeout: 1000 } : {})}
+            >
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>{totalVolume}</Typography>
@@ -241,6 +236,12 @@ const GlobalData = () => {
                   </Typography>
                 </Card>
               </Grid>
+            </Grow>
+            <Grow
+              in={toggle}
+              style={{ transformOrigin: '0 0 0' }}
+              {...(toggle ? { timeout: 2000 } : {})}
+            >
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
@@ -249,6 +250,12 @@ const GlobalData = () => {
                   </Typography>
                 </Card>
               </Grid>
+            </Grow>
+            <Grow
+              in={toggle}
+              style={{ transformOrigin: '0 0 0' }}
+              {...(toggle ? { timeout: 2500 } : {})}
+            >
               <Grid item xs={12} md={5} lg>
                 <Card>
                   <Typography variant='h5'>{cryptocurrencies}</Typography>
@@ -257,10 +264,10 @@ const GlobalData = () => {
                   </Typography>
                 </Card>
               </Grid>
-            </Grid>
-          )}
-        </Fragment>
-      )}
+            </Grow>
+          </Grid>
+        </Collapse>
+      </Fragment>
     </Fragment>
   );
 };

@@ -37,6 +37,18 @@ const Main = () => {
   const [columns, setColumns] = useState([]);
 
   useEffect(() => {
+    axios
+      .get('https://api.coingecko.com/api/v3/global')
+      .then((res) => {
+        setGlobalData(res.data.data);
+      })
+      .catch((error) => console.log(error));
+    return () => {
+      setGlobalData({});
+    };
+  }, []);
+
+  useEffect(() => {
     getCoins(setCoins);
     const IntervalID = setInterval(() => {
       getCoins(setCoins);
@@ -52,7 +64,8 @@ const Main = () => {
       {
         field: 'name',
         headerName: 'Name',
-        width: 170,
+        flex: 1,
+        minWidth: 170,
         renderCell: (params) => (
           <Link
             color='inherit'
@@ -69,7 +82,8 @@ const Main = () => {
       {
         field: 'symbol',
         headerName: 'Symbol',
-        width: 140,
+        flex: 0.9,
+        minWidth: 135,
         valueFormatter: (params) => {
           return params.value.toUpperCase();
         },
@@ -78,7 +92,8 @@ const Main = () => {
         type: 'number',
         field: 'current_price',
         headerName: 'Price',
-        width: 150,
+        flex: 1,
+        minWidth: 150,
         valueFormatter: (params) => {
           return Number(params.value).toLocaleString('en-US', {
             minimumFractionDigits: 0,
@@ -92,7 +107,8 @@ const Main = () => {
         type: 'number',
         field: 'price_change_percentage_1h_in_currency',
         headerName: '1h',
-        width: 120,
+        flex: 0.7,
+        minWidth: 120,
         valueFormatter: (params) => {
           return Number(params.value / 100).toLocaleString('en-US', {
             minimumFractionDigits: 2,
@@ -112,7 +128,8 @@ const Main = () => {
         type: 'number',
         field: 'price_change_percentage_24h_in_currency',
         headerName: '24h',
-        width: 120,
+        flex: 0.7,
+        minWidth: 120,
         valueFormatter: (params) => {
           return Number(params.value / 100).toLocaleString('en-US', {
             minimumFractionDigits: 2,
@@ -132,7 +149,8 @@ const Main = () => {
         type: 'number',
         field: 'price_change_percentage_7d_in_currency',
         headerName: '7d',
-        width: 120,
+        flex: 0.7,
+        minWidth: 120,
         valueFormatter: (params) => {
           return Number(params.value / 100).toLocaleString('en-US', {
             minimumFractionDigits: 2,
@@ -152,7 +170,8 @@ const Main = () => {
         type: 'number',
         field: 'total_volume',
         headerName: '24h Volume',
-        width: 170,
+        flex: 1,
+        minWidth: 180,
         valueFormatter: (params) => {
           return Number(params.value).toLocaleString('en-US', {
             maximumFractionDigits: 0,
@@ -165,7 +184,8 @@ const Main = () => {
         type: 'number',
         field: 'market_cap',
         headerName: 'Market Cap',
-        width: 170,
+        flex: 1,
+        minWidth: 180,
         valueFormatter: (params) => {
           return Number(params.value).toLocaleString('en-US', {
             maximumFractionDigits: 0,
@@ -177,7 +197,8 @@ const Main = () => {
       {
         field: 'sparkline_in_7d',
         headerName: 'Last 7 Days',
-        width: 180,
+        flex: 1,
+        minWidth: 190,
         renderCell: (params) => {
           const color =
             params.row.price_change_percentage_7d_in_currency < 0
@@ -223,13 +244,13 @@ const Main = () => {
     <main>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={coins.length === 0 || Object.keys(globalData).length === 0}
+        open={Object.keys(globalData).length === 0 || coins.length === 0}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {coins.length > 0 && (
+      {Object.keys(globalData).length > 0 && coins.length > 0 && (
         <Container maxWidth='xl'>
-          <GlobalDataContext.Provider value={{ globalData, setGlobalData }}>
+          <GlobalDataContext.Provider value={{ globalData }}>
             <GlobalData />
           </GlobalDataContext.Provider>
           <DataTable>
