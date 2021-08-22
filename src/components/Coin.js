@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import {
+  Container,
   Typography,
   Grid,
   Paper,
@@ -28,7 +29,10 @@ const Name = styled(Paper)(({ theme }) => ({
 }));
 
 const Card = styled(Paper)(({ theme }) => ({
-  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
   padding: theme.spacing(2, 0),
 }));
 
@@ -81,92 +85,101 @@ const Coin = () => {
             ></img>
             <Typography variant='h5'>{coin.name}</Typography>
           </Name>
-          <Grid
-            container
-            justifyContent='center'
-            direction={{ xs: 'column-reverse', lg: 'row' }}
-            sx={{ gap: 4 }}
-          >
-            <SparklineContext.Provider value={{ id, sparkline, setSparkline }}>
-              <Sparkline />
-            </SparklineContext.Provider>
-            <PriceContext.Provider value={{ coin, Card }}>
-              <Price />
-            </PriceContext.Provider>
-          </Grid>
-          <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
-            <Exchange />
-          </ExchangeContext.Provider>
-          <Grid container justifyContent='center' sx={{ mt: 3, mb: 3 }}>
-            <Grid item xs={12} sm={6} lg={3}>
-              <Card>
-                <Typography variant='h5'>
-                  {Number(coin.market_data.market_cap.usd).toLocaleString(
-                    'en-US',
-                    {
-                      maximumFractionDigits: 0,
-                      style: 'currency',
-                      currency: 'USD',
-                    }
-                  )}
-                </Typography>
-                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                  Market Capitalization
-                </Typography>
-              </Card>
+          <Container maxWidth='xl'>
+            <Grid
+              container
+              justifyContent='center'
+              direction={{ xs: 'column-reverse', lg: 'row' }}
+              spacing={3}
+            >
+              <SparklineContext.Provider
+                value={{ id, sparkline, setSparkline }}
+              >
+                <Sparkline />
+              </SparklineContext.Provider>
+              <PriceContext.Provider value={{ coin, Card }}>
+                <Price />
+              </PriceContext.Provider>
             </Grid>
-            <Grid item xs={12} sm={6} lg={3}>
-              <Card>
-                <Typography variant='h5'>
-                  {Number(coin.market_data.total_volume.usd).toLocaleString(
-                    'en-US',
-                    {
-                      maximumFractionDigits: 0,
-                      style: 'currency',
-                      currency: 'USD',
-                    }
-                  )}
-                </Typography>
-                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                  24h Trading Volume
-                </Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} lg={3}>
-              <Card>
-                <Typography variant='h5'>
-                  {Number(coin.market_data.circulating_supply).toLocaleString(
-                    'en-US',
-                    {
-                      maximumFractionDigits: 0,
-                    }
-                  )}
-                </Typography>
-                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                  Circulating Supply
-                </Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} lg={3}>
-              <Card>
-                <Typography variant='h5'>
-                  {coin.market_data.total_supply === null ? (
-                    <AllInclusiveIcon />
-                  ) : (
-                    Number(coin.market_data.total_supply).toLocaleString(
+            <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
+              <Exchange />
+            </ExchangeContext.Provider>
+            <Grid
+              container
+              justifyContent='center'
+              spacing={1}
+              sx={{ mt: 2, mb: 3 }}
+            >
+              <Grid item xs={12} sm={6} lg={3}>
+                <Card>
+                  <Typography variant='h5'>
+                    {Number(coin.market_data.market_cap.usd).toLocaleString(
+                      'en-US',
+                      {
+                        maximumFractionDigits: 0,
+                        style: 'currency',
+                        currency: 'USD',
+                      }
+                    )}
+                  </Typography>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                    Market Capitalization
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} lg={3}>
+                <Card>
+                  <Typography variant='h5'>
+                    {Number(coin.market_data.total_volume.usd).toLocaleString(
+                      'en-US',
+                      {
+                        maximumFractionDigits: 0,
+                        style: 'currency',
+                        currency: 'USD',
+                      }
+                    )}
+                  </Typography>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                    24h Trading Volume
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} lg={3}>
+                <Card>
+                  <Typography variant='h5'>
+                    {Number(coin.market_data.circulating_supply).toLocaleString(
                       'en-US',
                       {
                         maximumFractionDigits: 0,
                       }
-                    )
-                  )}
-                </Typography>
-                <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                  Total Supply
-                </Typography>
-              </Card>
+                    )}
+                  </Typography>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                    Circulating Supply
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} lg={3}>
+                <Card>
+                  <Typography variant='h5'>
+                    {coin.market_data.total_supply === null ? (
+                      <AllInclusiveIcon />
+                    ) : (
+                      Number(coin.market_data.total_supply).toLocaleString(
+                        'en-US',
+                        {
+                          maximumFractionDigits: 0,
+                        }
+                      )
+                    )}
+                  </Typography>
+                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
+                    Total Supply
+                  </Typography>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
+          </Container>
         </Fragment>
       )}
     </main>

@@ -76,74 +76,67 @@ const GlobalData = () => {
   const { globalData } = useContext(GlobalDataContext);
   const [toggle, setToggle] = useState(false);
 
-  let marketCap,
-    marketCapText,
-    marketCapPercentage,
-    totalVolume,
-    totalVolumeText,
-    marketCapPercentageBTC,
-    marketCapPercentageETH,
-    cryptocurrencies;
-  if (Object.keys(globalData).length > 0) {
-    marketCap = Number(globalData.total_market_cap.usd).toLocaleString(
-      'en-US',
-      {
-        maximumFractionDigits: 0,
-        style: 'currency',
-        currency: 'USD',
-      }
-    );
-
-    marketCapText = Number(
-      globalData.total_market_cap.usd / 1000000000000
-    ).toLocaleString('en-US', {
-      maximumFractionDigits: 2,
-      style: 'currency',
-      currency: 'USD',
-    });
-
-    marketCapPercentage = Number(
-      globalData.market_cap_change_percentage_24h_usd / 100
-    ).toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      style: 'percent',
-    });
-
-    totalVolume = Number(globalData.total_volume.usd).toLocaleString('en-US', {
+  let marketCap = Number(globalData.total_market_cap.usd).toLocaleString(
+    'en-US',
+    {
       maximumFractionDigits: 0,
       style: 'currency',
       currency: 'USD',
-    });
+    }
+  );
 
-    totalVolumeText = Number(
-      globalData.total_volume.usd / 1000000000
-    ).toLocaleString('en-US', {
+  let marketCapText = Number(
+    globalData.total_market_cap.usd / 1000000000000
+  ).toLocaleString('en-US', {
+    maximumFractionDigits: 2,
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  let marketCapPercentage = Number(
+    globalData.market_cap_change_percentage_24h_usd / 100
+  ).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    style: 'percent',
+  });
+
+  let totalVolume = Number(globalData.total_volume.usd).toLocaleString(
+    'en-US',
+    {
       maximumFractionDigits: 0,
       style: 'currency',
       currency: 'USD',
-    });
+    }
+  );
 
-    marketCapPercentageBTC = Number(
-      globalData.market_cap_percentage.btc / 100
-    ).toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      style: 'percent',
-    });
+  let totalVolumeText = Number(
+    globalData.total_volume.usd / 1000000000
+  ).toLocaleString('en-US', {
+    maximumFractionDigits: 0,
+    style: 'currency',
+    currency: 'USD',
+  });
 
-    marketCapPercentageETH = Number(
-      globalData.market_cap_percentage.eth / 100
-    ).toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      style: 'percent',
-    });
+  let marketCapPercentageBTC = Number(
+    globalData.market_cap_percentage.btc / 100
+  ).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    style: 'percent',
+  });
 
-    cryptocurrencies = Number(
-      globalData.active_cryptocurrencies
-    ).toLocaleString('en-US');
-  }
+  let marketCapPercentageETH = Number(
+    globalData.market_cap_percentage.eth / 100
+  ).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    style: 'percent',
+  });
+
+  let cryptocurrencies = Number(
+    globalData.active_cryptocurrencies
+  ).toLocaleString('en-US');
 
   return (
     <Fragment>
@@ -172,7 +165,7 @@ const GlobalData = () => {
               fontWeight='fontWeightLight'
               component='span'
               sx={
-                marketCapPercentage < 0
+                globalData.market_cap_change_percentage_24h_usd < 0
                   ? { color: 'error.light' }
                   : { color: 'success.light' }
               }
@@ -180,8 +173,8 @@ const GlobalData = () => {
               {marketCapPercentage}
             </Typography>{' '}
             change in the last 24 hours. Total cryptocurrency trading volume in
-            the last day is at {totalVolumeText} Billion. Bitcoin dominance is at{' '}
-            {marketCapPercentageBTC} and Ethereum dominance is at{' '}
+            the last day is at {totalVolumeText} Billion. Bitcoin dominance is
+            at {marketCapPercentageBTC} and Ethereum dominance is at{' '}
             {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
             {cryptocurrencies} cryptocurrencies.
           </Typography>
@@ -198,15 +191,15 @@ const GlobalData = () => {
           sx={{ ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
         />
         <Collapse in={toggle}>
-          <Grid container justifyContent='center' sx={{ gap: 2, mt: 2 }}>
+          <Grid container justifyContent='center' spacing={2} sx={{ mt: 0.1 }}>
             <Grow in={toggle}>
-              <Grid item xs={12} md={5} lg>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card>
                   <Typography variant='h5'>
                     <Grid container justifyContent='center' alignItems='center'>
                       <Grid item>{marketCap}</Grid>
                       <Grid item sx={{ ml: 1 }}>
-                        {marketCapPercentage < 0 ? (
+                        {globalData.market_cap_change_percentage_24h_usd < 0 ? (
                           <Typography
                             fontWeight='fontWeightLight'
                             component='span'
@@ -247,7 +240,7 @@ const GlobalData = () => {
               style={{ transformOrigin: '0 0 0' }}
               {...(toggle ? { timeout: 1000 } : {})}
             >
-              <Grid item xs={12} md={5} lg>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card>
                   <Typography variant='h5'>{totalVolume}</Typography>
                   <Typography variant='subtitle1' fontWeight='fontWeightLight'>
@@ -261,7 +254,7 @@ const GlobalData = () => {
               style={{ transformOrigin: '0 0 0' }}
               {...(toggle ? { timeout: 2000 } : {})}
             >
-              <Grid item xs={12} md={5} lg>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card>
                   <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
                   <Typography variant='subtitle1' fontWeight='fontWeightLight'>
@@ -275,7 +268,7 @@ const GlobalData = () => {
               style={{ transformOrigin: '0 0 0' }}
               {...(toggle ? { timeout: 2500 } : {})}
             >
-              <Grid item xs={12} md={5} lg>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card>
                   <Typography variant='h5'>{cryptocurrencies}</Typography>
                   <Typography variant='subtitle1' fontWeight='fontWeightLight'>

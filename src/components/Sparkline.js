@@ -18,7 +18,6 @@ const Buttons = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'flex-end',
   flexWrap: 'wrap',
-  gap: 10,
   padding: theme.spacing(1, 0),
 }));
 
@@ -26,7 +25,7 @@ const Chart = styled(Paper)(({ theme }) => ({
   height: 250,
   padding: theme.spacing(2, 1, 1, 0.8),
   [theme.breakpoints.up('sm')]: {
-    height: 500,
+    height: 450,
     padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
