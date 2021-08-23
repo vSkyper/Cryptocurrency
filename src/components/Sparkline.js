@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Grid, Paper, Button, Box } from '@material-ui/core';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
+import { Paper, Button, Box } from '@material-ui/core';
 import {
   CartesianGrid,
   XAxis,
@@ -25,7 +25,7 @@ const Chart = styled(Paper)(({ theme }) => ({
   height: 250,
   padding: theme.spacing(2, 1, 1, 0.8),
   [theme.breakpoints.up('sm')]: {
-    height: 431,
+    height: 416,
     padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
@@ -80,7 +80,7 @@ const Sparkline = () => {
   }, [id, days, setSparkline]);
 
   return (
-    <Grid item xs={12} lg={7}>
+    <Fragment>
       <Buttons>
         <Button
           color={days === '1' ? 'primary' : 'inherit'}
@@ -166,7 +166,7 @@ const Sparkline = () => {
           </ResponsiveContainer>
         )}
       </Chart>
-    </Grid>
+    </Fragment>
   );
 };
 

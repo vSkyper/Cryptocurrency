@@ -135,133 +135,129 @@ const GlobalData = () => {
 
   return (
     <Fragment>
-      <Fragment>
-        <Box>
-          <Grid container alignItems='center' sx={{ mt: 2, mb: 1 }}>
-            <Typography variant='h5'>
-              Cryptocurrency Prices by Market Cap
-            </Typography>
-            <FormControlLabel
-              control={
-                <IOSSwitch
-                  checked={toggle}
-                  sx={{ mr: 1 }}
-                  onChange={() => setToggle(!toggle)}
-                />
-              }
-              label='Show Stats'
-              sx={{ ml: 1.3, display: { xs: 'none', sm: 'block' } }}
-            />
-          </Grid>
-          <Typography fontWeight='fontWeightLight'>
-            The global cryptocurrency market cap today is {marketCapText}{' '}
-            Trillion, a{' '}
-            <Typography
-              fontWeight='fontWeightLight'
-              component='span'
-              sx={
-                globalData.market_cap_change_percentage_24h_usd < 0
-                  ? { color: 'error.light' }
-                  : { color: 'success.light' }
-              }
-            >
-              {marketCapPercentage}
-            </Typography>{' '}
-            change in the last 24 hours. Total cryptocurrency trading volume in
-            the last day is at {totalVolumeText} Billion. Bitcoin dominance is
-            at {marketCapPercentageBTC} and Ethereum dominance is at{' '}
-            {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
-            {cryptocurrencies} cryptocurrencies.
+      <Box>
+        <Grid container alignItems='center' sx={{ mt: 2, mb: 1 }}>
+          <Typography variant='h5'>
+            Cryptocurrency Prices by Market Cap
           </Typography>
-        </Box>
-        <FormControlLabel
-          control={
-            <IOSSwitch
-              checked={toggle}
-              sx={{ mr: 1 }}
-              onChange={() => setToggle(!toggle)}
-            />
-          }
-          label='Show Stats'
-          sx={{ ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
-        />
-        <Collapse in={toggle}>
-          <Grid container justifyContent='center' spacing={2} sx={{ mt: 0.1 }}>
-            <Grow in={toggle}>
-              <Grid item xs={12} md={6} lg={3}>
-                <Card>
-                  <Typography
-                    variant='h5'
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    {marketCap}
-                    {globalData.market_cap_change_percentage_24h_usd < 0 ? (
-                      <Percentage sx={{ color: 'error.light' }}>
-                        {marketCapPercentage}
-                        <TrendingDownIcon />
-                      </Percentage>
-                    ) : (
-                      <Percentage sx={{ color: 'success.light' }}>
-                        {marketCapPercentage}
-                        <TrendingUpIcon />
-                      </Percentage>
-                    )}
-                  </Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    Market Capitalization
-                  </Typography>
-                </Card>
-              </Grid>
-            </Grow>
-            <Grow
-              in={toggle}
-              style={{ transformOrigin: '0 0 0' }}
-              {...(toggle ? { timeout: 1000 } : {})}
-            >
-              <Grid item xs={12} md={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>{totalVolume}</Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    24h Trading Volume
-                  </Typography>
-                </Card>
-              </Grid>
-            </Grow>
-            <Grow
-              in={toggle}
-              style={{ transformOrigin: '0 0 0' }}
-              {...(toggle ? { timeout: 2000 } : {})}
-            >
-              <Grid item xs={12} md={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    Bitcoin Market Cap Dominance
-                  </Typography>
-                </Card>
-              </Grid>
-            </Grow>
-            <Grow
-              in={toggle}
-              style={{ transformOrigin: '0 0 0' }}
-              {...(toggle ? { timeout: 2500 } : {})}
-            >
-              <Grid item xs={12} md={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>{cryptocurrencies}</Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    # of Coins
-                  </Typography>
-                </Card>
-              </Grid>
-            </Grow>
-          </Grid>
-        </Collapse>
-      </Fragment>
+          <FormControlLabel
+            control={
+              <IOSSwitch
+                checked={toggle}
+                sx={{ mr: 1 }}
+                onChange={() => setToggle(!toggle)}
+              />
+            }
+            label='Show Stats'
+            sx={{ ml: 1.3, display: { xs: 'none', sm: 'block' } }}
+          />
+        </Grid>
+        <Typography fontWeight='fontWeightLight'>
+          The global cryptocurrency market cap today is {marketCapText}{' '}
+          Trillion, a{' '}
+          <Typography
+            fontWeight='fontWeightLight'
+            component='span'
+            sx={
+              globalData.market_cap_change_percentage_24h_usd < 0
+                ? { color: 'error.light' }
+                : { color: 'success.light' }
+            }
+          >
+            {marketCapPercentage}
+          </Typography>{' '}
+          change in the last 24 hours. Total cryptocurrency trading volume in
+          the last day is at {totalVolumeText} Billion. Bitcoin dominance is at{' '}
+          {marketCapPercentageBTC} and Ethereum dominance is at{' '}
+          {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
+          {cryptocurrencies} cryptocurrencies.
+        </Typography>
+      </Box>
+      <FormControlLabel
+        control={
+          <IOSSwitch
+            checked={toggle}
+            sx={{ mr: 1 }}
+            onChange={() => setToggle(!toggle)}
+          />
+        }
+        label='Show Stats'
+        sx={{ ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
+      />
+      <Collapse in={toggle}>
+        <Grid container justifyContent='center' spacing={2} sx={{ mt: 0.1 }}>
+          <Grow in={toggle}>
+            <Grid item xs={12} md={6} lg={3}>
+              <Card>
+                <Typography
+                  variant='h5'
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  {marketCap}
+                  {globalData.market_cap_change_percentage_24h_usd < 0 ? (
+                    <Percentage sx={{ color: 'error.light' }}>
+                      {marketCapPercentage}
+                      <TrendingDownIcon />
+                    </Percentage>
+                  ) : (
+                    <Percentage sx={{ color: 'success.light' }}>
+                      {marketCapPercentage}
+                      <TrendingUpIcon />
+                    </Percentage>
+                  )}
+                </Typography>
+                <Typography fontWeight='fontWeightLight'>
+                  Market Capitalization
+                </Typography>
+              </Card>
+            </Grid>
+          </Grow>
+          <Grow
+            in={toggle}
+            style={{ transformOrigin: '0 0 0' }}
+            {...(toggle ? { timeout: 1000 } : {})}
+          >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card>
+                <Typography variant='h5'>{totalVolume}</Typography>
+                <Typography fontWeight='fontWeightLight'>
+                  24h Trading Volume
+                </Typography>
+              </Card>
+            </Grid>
+          </Grow>
+          <Grow
+            in={toggle}
+            style={{ transformOrigin: '0 0 0' }}
+            {...(toggle ? { timeout: 2000 } : {})}
+          >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card>
+                <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
+                <Typography fontWeight='fontWeightLight'>
+                  Bitcoin Market Cap Dominance
+                </Typography>
+              </Card>
+            </Grid>
+          </Grow>
+          <Grow
+            in={toggle}
+            style={{ transformOrigin: '0 0 0' }}
+            {...(toggle ? { timeout: 2500 } : {})}
+          >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card>
+                <Typography variant='h5'>{cryptocurrencies}</Typography>
+                <Typography fontWeight='fontWeightLight'># of Coins</Typography>
+              </Card>
+            </Grid>
+          </Grow>
+        </Grid>
+      </Collapse>
     </Fragment>
   );
 };

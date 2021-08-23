@@ -2,8 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 import {
   Container,
   Typography,
-  Stack,
-  Divider,
   Grid,
   Paper,
   Backdrop,
@@ -11,13 +9,14 @@ import {
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import { AllInclusiveRounded as AllInclusiveIcon } from '@material-ui/icons';
 import axios from 'axios';
 import Sparkline from './Sparkline';
 import Price from './Price';
+import StackData from './StackData';
 import Exchange from './Exchange';
 import { SparklineContext } from '../contexts/SparklineContext';
 import { PriceContext } from '../contexts/PriceContext';
+import { StackDataContext } from '../contexts/StackDataContext';
 import { ExchangeContext } from '../contexts/ExchangeContext';
 
 const Name = styled(Paper)(({ theme }) => ({
@@ -86,77 +85,34 @@ const Coin = () => {
               container
               justifyContent='center'
               direction={{ xs: 'column-reverse', lg: 'row' }}
-              spacing={3}
+              spacing={2}
             >
-              <SparklineContext.Provider
-                value={{ id, sparkline, setSparkline }}
-              >
-                <Sparkline />
-              </SparklineContext.Provider>
-              <PriceContext.Provider value={{ coin }}>
-                <Price />
-              </PriceContext.Provider>
-            </Grid>
-            <Grid container justifyContent='center' direction={{ xs: 'column-reverse', lg: 'row' }} sx={{ mt: 4, mb: 3 }}>
-              <Grid item lg={7}>
-                <Stack
-                  divider={<Divider orientation='horizontal' flexItem />}
-                  spacing={2}
+              <Grid item xs={12} lg={7}>
+                <SparklineContext.Provider
+                  value={{ id, sparkline, setSparkline }}
                 >
-                  <Grid container justifyContent='space-between'>
-                    <Typography>Market Capitalization</Typography>
-                    <Typography>
-                      {Number(coin.market_data.market_cap.usd).toLocaleString(
-                        'en-US',
-                        {
-                          maximumFractionDigits: 0,
-                          style: 'currency',
-                          currency: 'USD',
-                        }
-                      )}
-                    </Typography>
-                  </Grid>
-                  <Grid container justifyContent='space-between'>
-                    <Typography>24h Trading Volume</Typography>
-                    <Typography>
-                      {Number(coin.market_data.total_volume.usd).toLocaleString(
-                        'en-US',
-                        {
-                          maximumFractionDigits: 0,
-                          style: 'currency',
-                          currency: 'USD',
-                        }
-                      )}
-                    </Typography>
-                  </Grid>
-                  <Grid container justifyContent='space-between'>
-                    <Typography>Circulating Supply</Typography>
-                    <Typography>
-                      {Number(
-                        coin.market_data.circulating_supply
-                      ).toLocaleString('en-US', {
-                        maximumFractionDigits: 0,
-                      })}
-                    </Typography>
-                  </Grid>
-                  <Grid container justifyContent='space-between'>
-                    <Typography>Total Supply</Typography>
-                    <Typography>
-                      {coin.market_data.total_supply === null ? (
-                        <AllInclusiveIcon />
-                      ) : (
-                        Number(coin.market_data.total_supply).toLocaleString(
-                          'en-US',
-                          {
-                            maximumFractionDigits: 0,
-                          }
-                        )
-                      )}
-                    </Typography>
-                  </Grid>
-                </Stack>
+                  <Sparkline />
+                </SparklineContext.Provider>
               </Grid>
-              <Grid item lg={5}>
+              <Grid item xs={12} lg={5}>
+                <PriceContext.Provider value={{ coin }}>
+                  <Price />
+                </PriceContext.Provider>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              justifyContent='center'
+              direction={{ xs: 'column-reverse', lg: 'row' }}
+              spacing={2}
+              sx={{ mt: 1, mb: 3 }}
+            >
+              <Grid item xs={12} lg={7}>
+                <StackDataContext.Provider value={{ coin }}>
+                  <StackData />
+                </StackDataContext.Provider>
+              </Grid>
+              <Grid item xs={12} lg={5}>
                 <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
                   <Exchange />
                 </ExchangeContext.Provider>

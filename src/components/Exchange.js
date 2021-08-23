@@ -14,7 +14,7 @@ import axios from 'axios';
 import { ExchangeContext } from '../contexts/ExchangeContext';
 
 const InputBaseExchange = styled(InputBase)(({ theme }) => ({
-  ml: 1,
+  paddingLeft: 1,
   flex: 1,
   '& input[type=number]': {
     MozAppearance: 'textfield',
@@ -26,6 +26,18 @@ const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   '& input[type=number]::-webkit-inner-spin-button': {
     WebkitAppearance: 'none',
     margin: 0,
+  },
+}));
+
+const InputCard = styled(Paper)(({ theme }) => ({
+  paddingLeft: 15,
+  paddingRight: 15,
+  display: 'flex',
+  alignItems: 'center',
+  width: 300,
+  height: 60,
+  [theme.breakpoints.up('lg')]: {
+    height: 70,
   },
 }));
 
@@ -97,20 +109,9 @@ const Exchange = () => {
       justifyContent='center'
       alignItems='center'
       direction={{ md: 'row', lg: 'column' }}
-      sx={{ mb: { xs: 4, lg: 0 } }}
     >
       <Grid item>
-        <Paper
-          sx={{
-            pl: 2,
-            pr: 2,
-            mb: { xs: 0.5, sm: 0 },
-            display: 'flex',
-            alignItems: 'center',
-            width: 300,
-            height: 70,
-          }}
-        >
+        <InputCard sx={{ mb: { xs: 0.5, sm: 0 } }}>
           <Typography sx={{ p: 1 }}>{symbol.toUpperCase()}</Typography>
           <InputBaseExchange
             type='number'
@@ -120,23 +121,14 @@ const Exchange = () => {
               setFromCryptoToCurrency(true);
             }}
           />
-        </Paper>
+        </InputCard>
       </Grid>
       <SwapHorizIcon
         fontSize='large'
         sx={{ display: { xs: 'none', md: 'block' }, m: [1, 1, 1, 1] }}
       />
       <Grid item>
-        <Paper
-          sx={{
-            pl: 2,
-            pr: 2,
-            display: 'flex',
-            alignItems: 'center',
-            width: 300,
-            height: 70,
-          }}
-        >
+        <InputCard>
           <FormControl variant='standard'>
             {currencies.length > 0 && (
               <Select
@@ -161,7 +153,7 @@ const Exchange = () => {
               setFromCryptoToCurrency(false);
             }}
           />
-        </Paper>
+        </InputCard>
       </Grid>
     </Grid>
   );
