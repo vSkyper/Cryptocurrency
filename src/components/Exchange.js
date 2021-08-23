@@ -97,16 +97,18 @@ const Exchange = () => {
       justifyContent='center'
       alignItems='center'
       direction={{ md: 'row', lg: 'column' }}
-      sx={{ mb: 4 }}
+      sx={{ mb: { xs: 4, lg: 0 } }}
     >
       <Grid item>
         <Paper
           sx={{
-            p: [2, 1.05],
+            pl: 2,
+            pr: 2,
             mb: { xs: 0.5, sm: 0 },
             display: 'flex',
             alignItems: 'center',
             width: 300,
+            height: 70,
           }}
         >
           <Typography sx={{ p: 1 }}>{symbol.toUpperCase()}</Typography>
@@ -127,10 +129,12 @@ const Exchange = () => {
       <Grid item>
         <Paper
           sx={{
-            p: [2, 0.5],
+            pl: 2,
+            pr: 2,
             display: 'flex',
             alignItems: 'center',
             width: 300,
+            height: 70,
           }}
         >
           <FormControl variant='standard'>
