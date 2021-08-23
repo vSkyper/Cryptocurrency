@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import {
   Typography,
   Grid,
@@ -97,20 +97,20 @@ const Exchange = () => {
       <Grid item>
         <InputCard>
           <FormControl variant='standard'>
-            {!currenciesLoading&& (
-            <Select
-              sx={{ m: 1, pl: 1 }}
-              id='currencies-select'
-              value={currencyOption}
-              onChange={(e) => setCurrencyOption(e.target.value)}
-            >
-              {currencies.map((currency_opt) => (
-                <MenuItem key={currency_opt} value={currency_opt}>
-                  {currency_opt.toUpperCase()}
-                </MenuItem>
-              ))}
-            </Select>
-            )} 
+            {!currenciesLoading && (
+              <Select
+                sx={{ m: 1, pl: 1 }}
+                id='currencies-select'
+                value={currencyOption}
+                onChange={(e) => setCurrencyOption(e.target.value)}
+              >
+                {currencies.map((currency_opt) => (
+                  <MenuItem key={currency_opt} value={currency_opt}>
+                    {currency_opt.toUpperCase()}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
           </FormControl>
           <InputBaseExchange
             type='number'

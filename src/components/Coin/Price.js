@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Typography, Grid, Box } from '@material-ui/core';
 import LinearProgress, {
   linearProgressClasses,
