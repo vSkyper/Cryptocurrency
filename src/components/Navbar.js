@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Box,
   AppBar,
@@ -21,8 +21,8 @@ import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/core/Autocomplete';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
-import axios from 'axios';
-import { ThemeContext } from '../contexts/ThemeContext';
+import useFetch from '../useFetch';
+import { Context } from '../Context';
 
 const Search = styled(Autocomplete)(({ theme }) => ({
   position: 'relative',
@@ -58,23 +58,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const [coins, setCoins] = useState([]);
   const [value, setValue] = useState('');
-  const { themeMode, setThemeMode } = useContext(ThemeContext);
+  const { themeMode, setThemeMode } = useContext(Context);
 
   const history = useHistory();
 
-  useEffect(() => {
-    axios
-      .get('https://api.coingecko.com/api/v3/coins/list?include_platform=false')
-      .then((res) => {
-        setCoins(res.data);
-      })
-      .catch((error) => console.log(error));
-    return () => {
-      setCoins([]);
-    };
-  }, []);
+  const { data: coinsList, loading: coinsListLoading } = useFetch(
+    'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
+  );
 
   const defaultFilterOptions = createFilterOptions({
     matchFrom: 'start',
@@ -118,8 +109,8 @@ const Navbar = () => {
             id='coins-search'
             inputValue={value}
             value={null}
-            loading={coins.length === 0}
-            options={coins}
+            loading={coinsListLoading}
+            options={coinsList ?? []}
             filterOptions={filterOptions}
             getOptionLabel={(option) => option.name}
             onInputChange={(e) => {

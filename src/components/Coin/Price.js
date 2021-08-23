@@ -8,7 +8,7 @@ import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
-import { PriceContext } from '../../contexts/PriceContext';
+import { Context } from '../../Context';
 import { Card, Percentage } from '../../styled/StyledComponents';
 
 const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -27,7 +27,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const Price = () => {
-  const { coin } = useContext(PriceContext);
+  const { coin } = useContext(Context);
 
   let progressBarCurrent =
     Number(coin.market_data.current_price.usd) -

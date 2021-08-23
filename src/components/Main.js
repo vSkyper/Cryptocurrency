@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { styled } from '@material-ui/core/styles';
 import { Container, Link, Backdrop, CircularProgress } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
 import { Link as RouterLink } from 'react-router-dom';
-import axios from 'axios';
+import useFetch from '../useFetch';
 import GlobalData from './Main/GlobalData';
-import { GlobalDataContext } from '../contexts/GlobalDataContext';
+import { Context } from '../Context';
 
 const DataTable = styled('div')(({ theme }) => ({
   '& .negative': {
@@ -20,43 +20,13 @@ const DataTable = styled('div')(({ theme }) => ({
   marginBottom: 20,
 }));
 
-const getCoins = async (setCoins) => {
-  axios
-    .get(
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
-    )
-    .then((res) => {
-      setCoins(res.data);
-    })
-    .catch((error) => console.log(error));
-};
-
 const Main = () => {
-  const [globalData, setGlobalData] = useState({});
-  const [coins, setCoins] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('https://api.coingecko.com/api/v3/global')
-      .then((res) => {
-        setGlobalData(res.data.data);
-      })
-      .catch((error) => console.log(error));
-    return () => {
-      setGlobalData({});
-    };
-  }, []);
-
-  useEffect(() => {
-    getCoins(setCoins);
-    const IntervalID = setInterval(() => {
-      getCoins(setCoins);
-    }, 10000);
-    return () => {
-      setCoins([]);
-      clearInterval(IntervalID);
-    };
-  }, []);
+  const { data: globalData, loading: globalDataLoading } = useFetch(
+    'https://api.coingecko.com/api/v3/global'
+  );
+  const { data: coins, loading: coinsLoading } = useFetch(
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
+  );
 
   const columns = useRef([
     {
@@ -238,15 +208,15 @@ const Main = () => {
     <main>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={Object.keys(globalData).length === 0 || coins.length === 0}
+        open={globalDataLoading || coinsLoading}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {Object.keys(globalData).length > 0 && coins.length > 0 && (
+      {!globalDataLoading && !coinsLoading && (
         <Container maxWidth='xl'>
-          <GlobalDataContext.Provider value={{ globalData }}>
+          <Context.Provider value={{ globalData: globalData.data }}>
             <GlobalData />
-          </GlobalDataContext.Provider>
+          </Context.Provider>
           <DataTable>
             <div style={{ flexGrow: 1 }}>
               <DataGrid

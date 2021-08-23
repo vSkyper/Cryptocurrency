@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import {
   Container,
   Typography,
@@ -9,15 +9,12 @@ import {
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import useFetch from '../useFetch';
 import Sparkline from './Coin/Sparkline';
 import Price from './Coin/Price';
 import StackData from './Coin/StackData';
 import Exchange from './Coin/Exchange';
-import { SparklineContext } from '../contexts/SparklineContext';
-import { PriceContext } from '../contexts/PriceContext';
-import { StackDataContext } from '../contexts/StackDataContext';
-import { ExchangeContext } from '../contexts/ExchangeContext';
+import { Context } from '../Context';
 
 const Name = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
@@ -28,48 +25,22 @@ const Name = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2.5, 0),
 }));
 
-const getCoin = async (setCoin, id, source) => {
-  axios
-    .get(
-      `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`,
-      {
-        cancelToken: source.token,
-      }
-    )
-    .then((res) => {
-      setCoin(res.data);
-    })
-    .catch((error) => console.log(error));
-};
-
 const Coin = () => {
-  const [coin, setCoin] = useState({});
-  const [sparkline, setSparkline] = useState([]);
-
   let { id } = useParams();
 
-  useEffect(() => {
-    let source = axios.CancelToken.source();
-    getCoin(setCoin, id, source);
-    const IntervalID = setInterval(() => {
-      getCoin(setCoin, id, source);
-    }, 5000);
-    return () => {
-      setCoin({});
-      clearInterval(IntervalID);
-      source.cancel();
-    };
-  }, [id]);
+  const { data: coin, loading: coinLoading } = useFetch(
+    `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
+  );
 
   return (
     <main>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={Object.keys(coin).length === 0 || sparkline.length === 0}
+        open={coinLoading}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {Object.keys(coin).length > 0 && (
+      {!coinLoading && (
         <Fragment>
           <Name>
             <img
@@ -87,16 +58,14 @@ const Coin = () => {
               spacing={2}
             >
               <Grid item xs={12} lg={7}>
-                <SparklineContext.Provider
-                  value={{ id, sparkline, setSparkline }}
-                >
+                <Context.Provider value={{ id }}>
                   <Sparkline />
-                </SparklineContext.Provider>
+                </Context.Provider>
               </Grid>
               <Grid item xs={12} lg={5}>
-                <PriceContext.Provider value={{ coin }}>
+                <Context.Provider value={{ coin }}>
                   <Price />
-                </PriceContext.Provider>
+                </Context.Provider>
               </Grid>
             </Grid>
             <Grid
@@ -106,14 +75,14 @@ const Coin = () => {
               sx={{ mt: 1, mb: 3 }}
             >
               <Grid item xs={12} lg={7}>
-                <StackDataContext.Provider value={{ id, coin: coin.market_data }}>
+                <Context.Provider value={{ id, coin: coin.market_data }}>
                   <StackData />
-                </StackDataContext.Provider>
+                </Context.Provider>
               </Grid>
               <Grid item xs={12} lg={5}>
-                <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
+                <Context.Provider value={{ id, symbol: coin.symbol }}>
                   <Exchange />
-                </ExchangeContext.Provider>
+                </Context.Provider>
               </Grid>
             </Grid>
           </Container>

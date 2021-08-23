@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
-import { Paper, Button, Box } from '@material-ui/core';
+import React, { useState, useContext, Fragment } from 'react';
+import {
+  Paper,
+  Button,
+  Box,
+  Backdrop,
+  CircularProgress,
+} from '@material-ui/core';
 import {
   CartesianGrid,
   XAxis,
@@ -10,9 +16,9 @@ import {
   Area,
 } from 'recharts';
 import { format } from 'date-fns';
-import axios from 'axios';
+import useFetch from '../../useFetch';
 import { styled } from '@material-ui/core/styles';
-import { SparklineContext } from '../../contexts/SparklineContext';
+import { Context } from '../../Context';
 
 const Buttons = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -53,34 +59,25 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const Sparkline = () => {
   const [days, setDays] = useState('7');
-  const { id, sparkline, setSparkline } = useContext(SparklineContext);
+  const { id } = useContext(Context);
 
-  useEffect(() => {
-    let source = axios.CancelToken.source();
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`,
-        {
-          cancelToken: source.token,
-        }
-      )
-      .then((res) => {
-        setSparkline(
-          res.data.prices.map((data) => ({
-            date: format(new Date(data[0]), 'MMM d y, hh:mm:ss a'),
-            value: data[1],
-          }))
-        );
-      })
-      .catch((error) => console.log(error));
-    return () => {
-      setSparkline([]);
-      source.cancel();
-    };
-  }, [id, days, setSparkline]);
+  const { data: sparklineRaw, loading: sparklineLoading } = useFetch(
+    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`
+  );
+
+  const sparkline = sparklineRaw?.prices.map((data) => ({
+    date: format(new Date(data[0]), 'MMM d y, hh:mm:ss a'),
+    value: data[1],
+  }));
 
   return (
     <Fragment>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={sparklineLoading}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
       <Buttons>
         <Button
           color={days === '1' ? 'primary' : 'inherit'}
@@ -128,7 +125,7 @@ const Sparkline = () => {
         </Button>
       </Buttons>
       <Chart>
-        {sparkline.length > 0 && (
+        {!sparklineLoading > 0 && (
           <ResponsiveContainer>
             <AreaChart data={sparkline}>
               <defs>

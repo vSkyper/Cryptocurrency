@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Typography,
   Grid,
@@ -10,8 +10,8 @@ import {
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { SwapHoriz as SwapHorizIcon } from '@material-ui/icons';
-import axios from 'axios';
-import { ExchangeContext } from '../../contexts/ExchangeContext';
+import useFetch from '../../useFetch';
+import { Context } from '../../Context';
 
 const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   paddingLeft: 1,
@@ -41,63 +41,30 @@ const InputCard = styled(Paper)(({ theme }) => ({
   },
 }));
 
-const getCoinPrice = async (setExchangeRate, id, currencyOption, source) => {
-  axios
-    .get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`,
-      {
-        cancelToken: source.token,
-      }
-    )
-    .then((res) => {
-      setExchangeRate(res.data[id][currencyOption]);
-    })
-    .catch((error) => console.log(error));
-};
-
 const Exchange = () => {
-  const [currencies, setCurrencies] = useState([]);
   const [currencyOption, setCurrencyOption] = useState('usd');
-  const [exchangeRate, setExchangeRate] = useState('');
   const [amount, setAmount] = useState('');
   const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState(true);
-  const { id, symbol } = useContext(ExchangeContext);
+  const { id, symbol } = useContext(Context);
 
-  useEffect(() => {
-    axios
-      .get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
-      .then((res) => {
-        setCurrencies(res.data);
-      })
-      .catch((error) => console.log(error));
-    return () => {
-      setCurrencies([]);
-    };
-  }, []);
+  const { data: currencies, loading: currenciesLoading } = useFetch(
+    'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'
+  );
 
-  useEffect(() => {
-    let source = axios.CancelToken.source();
-    getCoinPrice(setExchangeRate, id, currencyOption, source);
-    const IntervalID = setInterval(() => {
-      getCoinPrice(setExchangeRate, id, currencyOption, source);
-    }, 5000);
-    return () => {
-      setExchangeRate('');
-      clearInterval(IntervalID);
-      source.cancel();
-    };
-  }, [id, currencyOption]);
+  const { data: exchangeRate } = useFetch(
+    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`
+  );
 
   let currency, crypto;
   if (fromCryptoToCurrency) {
     crypto = amount;
-    currency = amount * exchangeRate;
+    currency = amount * exchangeRate?.[id]?.[currencyOption];
     if (!isFinite(currency)) {
       currency = '';
     }
   } else {
     currency = amount;
-    crypto = amount / exchangeRate;
+    crypto = amount / exchangeRate?.[id]?.[currencyOption];
     if (!isFinite(crypto)) {
       crypto = '';
     }
@@ -130,20 +97,20 @@ const Exchange = () => {
       <Grid item>
         <InputCard>
           <FormControl variant='standard'>
-            {currencies.length > 0 && (
-              <Select
-                sx={{ m: 1, pl: 1 }}
-                id='currencies-select'
-                value={currencyOption}
-                onChange={(e) => setCurrencyOption(e.target.value)}
-              >
-                {currencies.map((currency_opt) => (
-                  <MenuItem key={currency_opt} value={currency_opt}>
-                    {currency_opt.toUpperCase()}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
+            {!currenciesLoading&& (
+            <Select
+              sx={{ m: 1, pl: 1 }}
+              id='currencies-select'
+              value={currencyOption}
+              onChange={(e) => setCurrencyOption(e.target.value)}
+            >
+              {currencies.map((currency_opt) => (
+                <MenuItem key={currency_opt} value={currency_opt}>
+                  {currency_opt.toUpperCase()}
+                </MenuItem>
+              ))}
+            </Select>
+            )} 
           </FormControl>
           <InputBaseExchange
             type='number'

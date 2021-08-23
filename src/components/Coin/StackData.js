@@ -1,54 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Typography, Stack, Divider, Grid, Paper } from '@material-ui/core';
 import { AllInclusiveRounded as AllInclusiveIcon } from '@material-ui/icons';
 import { format, formatDistance } from 'date-fns';
-import axios from 'axios';
-import { StackDataContext } from '../../contexts/StackDataContext';
+import useFetch from '../../useFetch';
+import { Context } from '../../Context';
 
 const StackData = () => {
-  const [highestPrice, setHighestPrice] = useState([0, 0]);
-  const [lowestPrice, setLowestPrice] = useState([0, 0]);
-  const { id, coin } = useContext(StackDataContext);
+  const { id, coin } = useContext(Context);
 
-  useEffect(() => {
-    let source = axios.CancelToken.source();
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max`,
-        {
-          cancelToken: source.token,
-        }
-      )
-      .then((res) => {
-        let min = +Infinity;
-        let max = -Infinity;
-        let minDate, maxDate;
-        res.data.prices.forEach((data) => {
-          min = Math.min(min, data[1]);
-          if (min === data[1]) {
-            minDate = data[0];
-          }
-          max = Math.max(max, data[1]);
-          if (max === data[1]) {
-            maxDate = data[0];
-          }
-        });
-        setHighestPrice([
-          max,
-          maxDate,
-        ]);
-        setLowestPrice([
-          min,
-          minDate,
-        ]);
-      })
-      .catch((error) => console.log(error));
-    return () => {
-      setHighestPrice([0, 0]);
-      setLowestPrice([0, 0]);
-      source.cancel();
-    };
-  }, [id]);
+  const { data: lowHigh } = useFetch(
+    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max`
+  );
+
+  let min = +Infinity;
+  let max = -Infinity;
+  let minDate, maxDate;
+  lowHigh?.prices.forEach((data) => {
+    min = Math.min(min, data[1]);
+    if (min === data[1]) {
+      minDate = data[0];
+    }
+    max = Math.max(max, data[1]);
+    if (max === data[1]) {
+      maxDate = data[0];
+    }
+  });
+
+  const lowestPrice = [min, minDate];
+  const highestPrice = [max, maxDate];
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -81,16 +60,8 @@ const StackData = () => {
         <Grid container justifyContent='space-between'>
           <Typography>Volume / Market Cap</Typography>
           <Typography>
-            {(isFinite(
-              Number(
-                coin.total_volume.usd /
-                  coin.market_cap.usd
-              )
-            )
-              ? Number(
-                  coin.total_volume.usd /
-                    coin.market_cap.usd
-                )
+            {(isFinite(Number(coin.total_volume.usd / coin.market_cap.usd))
+              ? Number(coin.total_volume.usd / coin.market_cap.usd)
               : 0
             ).toLocaleString('en-US', {
               minimumFractionDigits: 0,
@@ -127,12 +98,9 @@ const StackData = () => {
         <Grid container justifyContent='space-between'>
           <Typography>Circulating Supply</Typography>
           <Typography>
-            {Number(coin.circulating_supply).toLocaleString(
-              'en-US',
-              {
-                maximumFractionDigits: 0,
-              }
-            )}
+            {Number(coin.circulating_supply).toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}
           </Typography>
         </Grid>
         <Grid container justifyContent='space-between'>
@@ -160,10 +128,10 @@ const StackData = () => {
                 })}
               </Typography>
               <Typography align='right' fontWeight='fontWeightLight'>
-                {format(new Date(Number(highestPrice[1])), 'MMM d, y')} (
+                {format(new Date(Number(highestPrice[1] ?? 0)), 'MMM d, y')} (
                 {formatDistance(
                   Date.now(),
-                  new Date(Number(highestPrice[1]))
+                  new Date(Number(highestPrice[1] ?? 0))
                 )}
                 )
               </Typography>
@@ -183,8 +151,12 @@ const StackData = () => {
                 })}
               </Typography>
               <Typography align='right' fontWeight='fontWeightLight'>
-                {format(new Date(Number(lowestPrice[1])), 'MMM d, y')} (
-                {formatDistance(Date.now(), new Date(Number(lowestPrice[1])))})
+                {format(new Date(Number(lowestPrice[1] ?? 0)), 'MMM d, y')} (
+                {formatDistance(
+                  Date.now(),
+                  new Date(Number(lowestPrice[1] ?? 0))
+                )}
+                )
               </Typography>
             </Grid>
           </Grid>

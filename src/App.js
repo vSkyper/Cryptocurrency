@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Coin from './components/Coin';
-import { ThemeContext } from './contexts/ThemeContext';
+import { Context } from './Context';
 
 const App = () => {
   const [themeMode, setThemeMode] = useState(true);
@@ -34,9 +34,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router basename={process.env.PUBLIC_URL}>
-        <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
+        <Context.Provider value={{ themeMode, setThemeMode }}>
           <Navbar />
-        </ThemeContext.Provider>
+        </Context.Provider>
         <Switch>
           <Route exact path='/'>
             <Main />

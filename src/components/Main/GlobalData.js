@@ -13,7 +13,7 @@ import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
-import { GlobalDataContext } from '../../contexts/GlobalDataContext';
+import { Context } from '../../Context';
 import { Card, Percentage } from '../../styled/StyledComponents';
 
 const IOSSwitch = styled((props) => (
@@ -68,8 +68,8 @@ const IOSSwitch = styled((props) => (
 }));
 
 const GlobalData = () => {
-  const { globalData } = useContext(GlobalDataContext);
   const [toggle, setToggle] = useState(false);
+  const { globalData } = useContext(Context);
 
   let marketCap = Number(globalData.total_market_cap.usd).toLocaleString(
     'en-US',
