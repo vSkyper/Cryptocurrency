@@ -92,11 +92,18 @@ const Exchange = () => {
   }
 
   return (
-    <Grid container justifyContent='center' alignItems='center' sx={{ mt: 2.5 }}>
+    <Grid
+      container
+      justifyContent='center'
+      alignItems='center'
+      direction={{ md: 'row', lg: 'column' }}
+      sx={{ mb: 4 }}
+    >
       <Grid item>
         <Paper
           sx={{
-            p: [2, 2],
+            p: [2, 1.05],
+            mb: { xs: 0.5, sm: 0 },
             display: 'flex',
             alignItems: 'center',
             width: 300,
@@ -115,12 +122,12 @@ const Exchange = () => {
       </Grid>
       <SwapHorizIcon
         fontSize='large'
-        sx={{ display: { xs: 'none', md: 'block' }, mr: 2, ml: 2 }}
+        sx={{ display: { xs: 'none', md: 'block' }, m: [1, 1, 1, 1] }}
       />
       <Grid item>
         <Paper
           sx={{
-            p: [2, 1.5],
+            p: [2, 0.5],
             display: 'flex',
             alignItems: 'center',
             width: 300,

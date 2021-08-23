@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import {
   Container,
   Typography,
+  Stack,
+  Divider,
   Grid,
   Paper,
   Backdrop,
@@ -17,13 +19,11 @@ import Exchange from './Exchange';
 import { SparklineContext } from '../contexts/SparklineContext';
 import { PriceContext } from '../contexts/PriceContext';
 import { ExchangeContext } from '../contexts/ExchangeContext';
-import { Card } from '../Styled/StyledComponents';
 
 const Name = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
   marginBottom: 20,
   display: 'flex',
-  flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
   padding: theme.spacing(2.5, 0),
@@ -97,82 +97,69 @@ const Coin = () => {
                 <Price />
               </PriceContext.Provider>
             </Grid>
-            <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
-              <Exchange />
-            </ExchangeContext.Provider>
-            <Grid
-              container
-              justifyContent='center'
-              spacing={1}
-              sx={{ mt: 2, mb: 3 }}
-            >
-              <Grid item xs={12} sm={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>
-                    {Number(coin.market_data.market_cap.usd).toLocaleString(
-                      'en-US',
-                      {
-                        maximumFractionDigits: 0,
-                        style: 'currency',
-                        currency: 'USD',
-                      }
-                    )}
-                  </Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    Market Capitalization
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>
-                    {Number(coin.market_data.total_volume.usd).toLocaleString(
-                      'en-US',
-                      {
-                        maximumFractionDigits: 0,
-                        style: 'currency',
-                        currency: 'USD',
-                      }
-                    )}
-                  </Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    24h Trading Volume
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>
-                    {Number(coin.market_data.circulating_supply).toLocaleString(
-                      'en-US',
-                      {
-                        maximumFractionDigits: 0,
-                      }
-                    )}
-                  </Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    Circulating Supply
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={3}>
-                <Card>
-                  <Typography variant='h5'>
-                    {coin.market_data.total_supply === null ? (
-                      <AllInclusiveIcon />
-                    ) : (
-                      Number(coin.market_data.total_supply).toLocaleString(
+            <Grid container justifyContent='center' direction={{ xs: 'column-reverse', lg: 'row' }} sx={{ mt: 4, mb: 3 }}>
+              <Grid item lg={7}>
+                <Stack
+                  divider={<Divider orientation='horizontal' flexItem />}
+                  spacing={2}
+                >
+                  <Grid container justifyContent='space-between'>
+                    <Typography>Market Capitalization</Typography>
+                    <Typography>
+                      {Number(coin.market_data.market_cap.usd).toLocaleString(
                         'en-US',
                         {
                           maximumFractionDigits: 0,
+                          style: 'currency',
+                          currency: 'USD',
                         }
-                      )
-                    )}
-                  </Typography>
-                  <Typography variant='subtitle1' fontWeight='fontWeightLight'>
-                    Total Supply
-                  </Typography>
-                </Card>
+                      )}
+                    </Typography>
+                  </Grid>
+                  <Grid container justifyContent='space-between'>
+                    <Typography>24h Trading Volume</Typography>
+                    <Typography>
+                      {Number(coin.market_data.total_volume.usd).toLocaleString(
+                        'en-US',
+                        {
+                          maximumFractionDigits: 0,
+                          style: 'currency',
+                          currency: 'USD',
+                        }
+                      )}
+                    </Typography>
+                  </Grid>
+                  <Grid container justifyContent='space-between'>
+                    <Typography>Circulating Supply</Typography>
+                    <Typography>
+                      {Number(
+                        coin.market_data.circulating_supply
+                      ).toLocaleString('en-US', {
+                        maximumFractionDigits: 0,
+                      })}
+                    </Typography>
+                  </Grid>
+                  <Grid container justifyContent='space-between'>
+                    <Typography>Total Supply</Typography>
+                    <Typography>
+                      {coin.market_data.total_supply === null ? (
+                        <AllInclusiveIcon />
+                      ) : (
+                        Number(coin.market_data.total_supply).toLocaleString(
+                          'en-US',
+                          {
+                            maximumFractionDigits: 0,
+                          }
+                        )
+                      )}
+                    </Typography>
+                  </Grid>
+                </Stack>
+              </Grid>
+              <Grid item lg={5}>
+                <ExchangeContext.Provider value={{ id, symbol: coin.symbol }}>
+                  <Exchange />
+                </ExchangeContext.Provider>
               </Grid>
             </Grid>
           </Container>

@@ -165,7 +165,7 @@ const Navbar = () => {
           </Tooltip>
         </Toolbar>
       </AppBar>
-      <Toolbar id='back-to-top-anchor' />
+      <Toolbar />
     </Box>
   );
 };

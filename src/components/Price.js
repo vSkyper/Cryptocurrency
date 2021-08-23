@@ -9,7 +9,7 @@ import {
   TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
 import { PriceContext } from '../contexts/PriceContext';
-import { Card, Percentage } from '../Styled/StyledComponents';
+import { Card, Percentage } from '../styled/StyledComponents';
 
 const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
