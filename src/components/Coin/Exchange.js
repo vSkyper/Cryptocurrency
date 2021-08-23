@@ -11,7 +11,7 @@ import {
 import { styled } from '@material-ui/core/styles';
 import { SwapHoriz as SwapHorizIcon } from '@material-ui/icons';
 import axios from 'axios';
-import { ExchangeContext } from '../contexts/ExchangeContext';
+import { ExchangeContext } from '../../contexts/ExchangeContext';
 
 const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   paddingLeft: 1,

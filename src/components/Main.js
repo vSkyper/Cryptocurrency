@@ -5,7 +5,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
 import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
-import GlobalData from './GlobalData';
+import GlobalData from './Main/GlobalData';
 import { GlobalDataContext } from '../contexts/GlobalDataContext';
 
 const DataTable = styled('div')(({ theme }) => ({

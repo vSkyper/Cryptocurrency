@@ -10,10 +10,10 @@ import {
 import { styled } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Sparkline from './Sparkline';
-import Price from './Price';
-import StackData from './StackData';
-import Exchange from './Exchange';
+import Sparkline from './Coin/Sparkline';
+import Price from './Coin/Price';
+import StackData from './Coin/StackData';
+import Exchange from './Coin/Exchange';
 import { SparklineContext } from '../contexts/SparklineContext';
 import { PriceContext } from '../contexts/PriceContext';
 import { StackDataContext } from '../contexts/StackDataContext';
@@ -83,7 +83,6 @@ const Coin = () => {
           <Container maxWidth='xl'>
             <Grid
               container
-              justifyContent='center'
               direction={{ xs: 'column-reverse', lg: 'row' }}
               spacing={2}
             >
@@ -102,7 +101,6 @@ const Coin = () => {
             </Grid>
             <Grid
               container
-              justifyContent='center'
               direction={{ xs: 'column-reverse', lg: 'row' }}
               spacing={2}
               sx={{ mt: 1, mb: 3 }}

@@ -12,7 +12,7 @@ import {
 import { format } from 'date-fns';
 import axios from 'axios';
 import { styled } from '@material-ui/core/styles';
-import { SparklineContext } from '../contexts/SparklineContext';
+import { SparklineContext } from '../../contexts/SparklineContext';
 
 const Buttons = styled(Box)(({ theme }) => ({
   display: 'flex',

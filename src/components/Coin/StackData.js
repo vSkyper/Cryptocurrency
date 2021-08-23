@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Typography, Stack, Divider, Grid, Paper } from '@material-ui/core';
 import { AllInclusiveRounded as AllInclusiveIcon } from '@material-ui/icons';
-import { StackDataContext } from '../contexts/StackDataContext';
+import { StackDataContext } from '../../contexts/StackDataContext';
 
 const StackData = () => {
   const { coin } = useContext(StackDataContext);
