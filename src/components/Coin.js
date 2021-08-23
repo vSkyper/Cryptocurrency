@@ -106,7 +106,7 @@ const Coin = () => {
               sx={{ mt: 1, mb: 3 }}
             >
               <Grid item xs={12} lg={7}>
-                <StackDataContext.Provider value={{ coin }}>
+                <StackDataContext.Provider value={{ id, coin: coin.market_data }}>
                   <StackData />
                 </StackDataContext.Provider>
               </Grid>
