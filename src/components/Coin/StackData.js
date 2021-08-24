@@ -11,6 +11,7 @@ const StackData = () => {
     <Paper sx={{ p: 2 }}>
       <Stack
         divider={<Divider orientation='horizontal' flexItem />}
+        alignItems='stretch'
         spacing={2}
       >
         <Grid container justifyContent='space-between'>
@@ -105,8 +106,8 @@ const StackData = () => {
                   currency: 'USD',
                 })}{' '}
                 <Typography
-                fontWeight='fontWeightLight'
-                component='span'
+                  fontWeight='fontWeightLight'
+                  component='span'
                   sx={
                     coin.ath_change_percentage.usd < 0
                       ? { color: 'error.light' }
@@ -142,8 +143,8 @@ const StackData = () => {
                   currency: 'USD',
                 })}{' '}
                 <Typography
-                fontWeight='fontWeightLight'
-                component='span'
+                  fontWeight='fontWeightLight'
+                  component='span'
                   sx={
                     coin.atl_change_percentage.usd < 0
                       ? { color: 'error.light' }

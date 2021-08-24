@@ -14,6 +14,7 @@ import Sparkline from './Coin/Sparkline';
 import Price from './Coin/Price';
 import StackData from './Coin/StackData';
 import Exchange from './Coin/Exchange';
+import Links from './Coin/Links';
 import { Context } from '../Context';
 
 const Name = styled(Paper)(({ theme }) => ({
@@ -80,9 +81,18 @@ const Coin = () => {
                 </Context.Provider>
               </Grid>
               <Grid item xs={12} lg={5}>
-                <Context.Provider value={{ id, symbol: coin.symbol }}>
-                  <Exchange />
-                </Context.Provider>
+                <Grid container direction='column'>
+                  <Grid item xs={12}>
+                    <Context.Provider value={{ id, symbol: coin.symbol }}>
+                      <Exchange />
+                    </Context.Provider>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Context.Provider value={{ coin: coin }}>
+                      <Links />
+                    </Context.Provider>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Container>
