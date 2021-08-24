@@ -212,7 +212,7 @@ const Main = () => {
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {!globalDataLoading && !coinsLoading && (
+      {globalData && coins && (
         <Container maxWidth='xl'>
           <Context.Provider value={{ globalData: globalData.data }}>
             <GlobalData />

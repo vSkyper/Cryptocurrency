@@ -41,7 +41,7 @@ const Coin = () => {
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {!coinLoading && (
+      {coin && (
         <Fragment>
           <Name>
             <img

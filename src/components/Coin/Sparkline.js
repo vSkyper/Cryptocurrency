@@ -125,7 +125,7 @@ const Sparkline = () => {
         </Button>
       </Buttons>
       <Chart>
-        {!sparklineLoading > 0 && (
+        {sparkline && (
           <ResponsiveContainer>
             <AreaChart data={sparkline}>
               <defs>

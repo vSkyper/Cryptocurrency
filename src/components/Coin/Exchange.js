@@ -47,7 +47,7 @@ const Exchange = () => {
   const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState(true);
   const { id, symbol } = useContext(Context);
 
-  const { data: currencies, loading: currenciesLoading } = useFetch(
+  const { data: currencies } = useFetch(
     'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'
   );
 
@@ -97,7 +97,7 @@ const Exchange = () => {
       <Grid item>
         <InputCard>
           <FormControl variant='standard'>
-            {!currenciesLoading && (
+            {currencies && (
               <Select
                 sx={{ m: 1, pl: 1 }}
                 id='currencies-select'
