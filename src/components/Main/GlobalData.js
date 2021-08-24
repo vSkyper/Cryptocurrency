@@ -14,7 +14,7 @@ import {
   TrendingDownRounded as TrendingDownIcon,
 } from '@material-ui/icons';
 import { Context } from '../../Context';
-import { Card, Percentage } from '../../styled/StyledComponents';
+import { Card, Percentage } from '../../StyledComponents';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />

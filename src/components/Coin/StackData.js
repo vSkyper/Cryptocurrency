@@ -2,32 +2,10 @@ import { useContext } from 'react';
 import { Typography, Stack, Divider, Grid, Paper } from '@material-ui/core';
 import { AllInclusiveRounded as AllInclusiveIcon } from '@material-ui/icons';
 import { format, formatDistance } from 'date-fns';
-import useFetch from '../../useFetch';
 import { Context } from '../../Context';
 
 const StackData = () => {
-  const { id, coin } = useContext(Context);
-
-  const { data: lowHigh } = useFetch(
-    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max`
-  );
-
-  let min = +Infinity;
-  let max = -Infinity;
-  let minDate, maxDate;
-  lowHigh?.prices.forEach((data) => {
-    min = Math.min(min, data[1]);
-    if (min === data[1]) {
-      minDate = data[0];
-    }
-    max = Math.max(max, data[1]);
-    if (max === data[1]) {
-      maxDate = data[0];
-    }
-  });
-
-  const lowestPrice = [min, minDate];
-  const highestPrice = [max, maxDate];
+  const { coin } = useContext(Context);
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -120,20 +98,34 @@ const StackData = () => {
           <Grid item>
             <Grid container direction='column'>
               <Typography align='right'>
-                {Number(highestPrice[0]).toLocaleString('en-US', {
+                {Number(coin.ath.usd).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
                   currency: 'USD',
-                })}
+                })}{' '}
+                <Typography
+                fontWeight='fontWeightLight'
+                component='span'
+                  sx={
+                    coin.ath_change_percentage.usd < 0
+                      ? { color: 'error.light' }
+                      : { color: 'success.light' }
+                  }
+                >
+                  {Number(coin.ath_change_percentage.usd / 100).toLocaleString(
+                    'en-US',
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                      style: 'percent',
+                    }
+                  )}
+                </Typography>
               </Typography>
               <Typography align='right' fontWeight='fontWeightLight'>
-                {format(new Date(Number(highestPrice[1] ?? 0)), 'MMM d, y')} (
-                {formatDistance(
-                  Date.now(),
-                  new Date(Number(highestPrice[1] ?? 0))
-                )}
-                )
+                {format(new Date(coin.ath_date.usd), 'MMM d, y')} (
+                {formatDistance(Date.now(), new Date(coin.ath_date.usd))})
               </Typography>
             </Grid>
           </Grid>
@@ -143,20 +135,34 @@ const StackData = () => {
           <Grid item>
             <Grid container direction='column'>
               <Typography align='right'>
-                {Number(lowestPrice[0]).toLocaleString('en-US', {
+                {Number(coin.atl.usd).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
                   currency: 'USD',
-                })}
+                })}{' '}
+                <Typography
+                fontWeight='fontWeightLight'
+                component='span'
+                  sx={
+                    coin.atl_change_percentage.usd < 0
+                      ? { color: 'error.light' }
+                      : { color: 'success.light' }
+                  }
+                >
+                  {Number(coin.atl_change_percentage.usd / 100).toLocaleString(
+                    'en-US',
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                      style: 'percent',
+                    }
+                  )}
+                </Typography>
               </Typography>
               <Typography align='right' fontWeight='fontWeightLight'>
-                {format(new Date(Number(lowestPrice[1] ?? 0)), 'MMM d, y')} (
-                {formatDistance(
-                  Date.now(),
-                  new Date(Number(lowestPrice[1] ?? 0))
-                )}
-                )
+                {format(new Date(coin.atl_date.usd), 'MMM d, y')} (
+                {formatDistance(Date.now(), new Date(coin.atl_date.usd))})
               </Typography>
             </Grid>
           </Grid>
