@@ -96,8 +96,8 @@ const Exchange = () => {
       />
       <Grid item>
         <InputCard>
-          <FormControl variant='standard'>
-            {currencies && (
+          {currencies && (
+            <FormControl variant='standard'>
               <Select
                 sx={{ m: 1, pl: 1 }}
                 id='currencies-select'
@@ -110,8 +110,8 @@ const Exchange = () => {
                   </MenuItem>
                 ))}
               </Select>
-            )}
-          </FormControl>
+            </FormControl>
+          )}
           <InputBaseExchange
             type='number'
             value={currency}

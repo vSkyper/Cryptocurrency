@@ -22,7 +22,7 @@ const useFetch = (url) => {
     return () => {
       setData(null);
       setLoading(true);
-      source.cancel();
+      source.cancel('Cancel request');
     };
   }, [url]);
 

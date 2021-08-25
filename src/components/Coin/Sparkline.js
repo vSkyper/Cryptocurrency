@@ -65,7 +65,7 @@ const Sparkline = () => {
     `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`
   );
 
-  const sparkline = sparklineRaw?.prices?.map((data) => ({
+  const sparkline = sparklineRaw?.prices.map((data) => ({
     date: format(new Date(data[0]), 'MMM d y, hh:mm:ss a'),
     value: data[1],
   }));
