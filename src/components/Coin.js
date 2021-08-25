@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import {
   Container,
   Typography,
@@ -33,73 +32,76 @@ const Coin = () => {
     `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
 
-  return (
-    <main>
+  if (coinLoading) {
+    return (
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={coinLoading}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {coin && (
-        <Fragment>
-          <Name>
-            <img
-              src={coin.image.large}
-              style={{ marginRight: 10 }}
-              width='35vw'
-              alt='img'
-            ></img>
-            <Typography variant='h5'>{coin.name}</Typography>
-          </Name>
-          <Container maxWidth='xl'>
-            <Grid
-              container
-              direction={{ xs: 'column-reverse', lg: 'row' }}
-              spacing={2}
-            >
-              <Grid item xs={12} lg={7}>
-                <Context.Provider value={{ id }}>
-                  <Sparkline />
-                </Context.Provider>
-              </Grid>
-              <Grid item xs={12} lg={5}>
-                <Context.Provider value={{ coin }}>
-                  <Price />
-                </Context.Provider>
-              </Grid>
+    );
+  } else if (coin) {
+    return (
+      <main>
+        <Name>
+          <img
+            src={coin.image.large}
+            style={{ marginRight: 10 }}
+            width='35vw'
+            alt='img'
+          ></img>
+          <Typography variant='h5'>{coin.name}</Typography>
+        </Name>
+        <Container maxWidth='xl'>
+          <Grid
+            container
+            direction={{ xs: 'column-reverse', lg: 'row' }}
+            spacing={2}
+          >
+            <Grid item xs={12} lg={7}>
+              <Context.Provider value={{ id }}>
+                <Sparkline />
+              </Context.Provider>
             </Grid>
-            <Grid
-              container
-              direction={{ xs: 'column-reverse', lg: 'row' }}
-              spacing={2}
-              sx={{ mt: 1, mb: 3 }}
-            >
-              <Grid item xs={12} lg={7}>
-                <Context.Provider value={{ coin: coin.market_data }}>
-                  <StackData />
-                </Context.Provider>
-              </Grid>
-              <Grid item xs={12} lg={5}>
-                <Grid container direction='column'>
-                  <Grid item xs={12}>
-                    <Context.Provider value={{ id, symbol: coin.symbol }}>
-                      <Exchange />
-                    </Context.Provider>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Context.Provider value={{ coin: coin }}>
-                      <Links />
-                    </Context.Provider>
-                  </Grid>
+            <Grid item xs={12} lg={5}>
+              <Context.Provider value={{ coin }}>
+                <Price />
+              </Context.Provider>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            direction={{ xs: 'column-reverse', lg: 'row' }}
+            spacing={2}
+            sx={{ mt: 1, mb: 3 }}
+          >
+            <Grid item xs={12} lg={7}>
+              <Context.Provider value={{ coin: coin.market_data }}>
+                <StackData />
+              </Context.Provider>
+            </Grid>
+            <Grid item xs={12} lg={5}>
+              <Grid container direction='column'>
+                <Grid item xs={12}>
+                  <Context.Provider value={{ id, symbol: coin.symbol }}>
+                    <Exchange />
+                  </Context.Provider>
+                </Grid>
+                <Grid item xs={12}>
+                  <Context.Provider value={{ coin: coin }}>
+                    <Links />
+                  </Context.Provider>
                 </Grid>
               </Grid>
             </Grid>
-          </Container>
-        </Fragment>
-      )}
-    </main>
-  );
+          </Grid>
+        </Container>
+      </main>
+    );
+  }
+
+  return null;
 };
 
 export default Coin;

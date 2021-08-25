@@ -204,15 +204,18 @@ const Main = () => {
     },
   ]);
 
-  return (
-    <main>
+  if (globalDataLoading || coinsLoading) {
+    return (
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={globalDataLoading || coinsLoading}
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      {globalData && coins && (
+    );
+  } else if (globalData && coins) {
+    return (
+      <main>
         <Container maxWidth='xl'>
           <Context.Provider value={{ globalData: globalData.data }}>
             <GlobalData />
@@ -228,9 +231,11 @@ const Main = () => {
             </div>
           </DataTable>
         </Container>
-      )}
-    </main>
-  );
+      </main>
+    );
+  }
+
+  return null;
 };
 
 export default Main;
