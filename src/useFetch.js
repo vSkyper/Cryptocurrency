@@ -14,11 +14,9 @@ const useFetch = (url) => {
       })
       .then((res) => {
         setData(res.data);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => {
         setLoading(false);
-      });
+      })
+      .catch((error) => console.log(error));
     return () => {
       setData(null);
       setLoading(true);

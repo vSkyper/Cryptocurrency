@@ -32,16 +32,7 @@ const Coin = () => {
     `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
 
-  if (coinLoading) {
-    return (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={coinLoading}
-      >
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    );
-  } else if (coin) {
+  if (coin) {
     return (
       <main>
         <Name>
@@ -101,7 +92,14 @@ const Coin = () => {
     );
   }
 
-  return null;
+  return (
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={coinLoading}
+    >
+      <CircularProgress color='inherit' />
+    </Backdrop>
+  );
 };
 
 export default Coin;

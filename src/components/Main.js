@@ -52,9 +52,7 @@ const Main = () => {
       headerName: 'Symbol',
       flex: 0.9,
       minWidth: 135,
-      valueFormatter: (params) => {
-        return params.value.toUpperCase();
-      },
+      valueFormatter: (params) => params.value.toUpperCase(),
     },
     {
       type: 'number',
@@ -62,14 +60,13 @@ const Main = () => {
       headerName: 'Price',
       flex: 1,
       minWidth: 150,
-      valueFormatter: (params) => {
-        return Number(params.value).toLocaleString('en-US', {
+      valueFormatter: (params) =>
+        Number(params.value).toLocaleString('en-US', {
           minimumFractionDigits: 0,
           maximumFractionDigits: 8,
           style: 'currency',
           currency: 'USD',
-        });
-      },
+        }),
     },
     {
       type: 'number',
@@ -77,13 +74,12 @@ const Main = () => {
       headerName: '1h',
       flex: 0.7,
       minWidth: 120,
-      valueFormatter: (params) => {
-        return Number(params.value / 100).toLocaleString('en-US', {
+      valueFormatter: (params) =>
+        Number(params.value / 100).toLocaleString('en-US', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           style: 'percent',
-        });
-      },
+        }),
       cellClassName: (params) => {
         if (Number(params.value) < 0) {
           return 'negative';
@@ -98,13 +94,12 @@ const Main = () => {
       headerName: '24h',
       flex: 0.7,
       minWidth: 120,
-      valueFormatter: (params) => {
-        return Number(params.value / 100).toLocaleString('en-US', {
+      valueFormatter: (params) =>
+        Number(params.value / 100).toLocaleString('en-US', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           style: 'percent',
-        });
-      },
+        }),
       cellClassName: (params) => {
         if (Number(params.value) < 0) {
           return 'negative';
@@ -119,13 +114,12 @@ const Main = () => {
       headerName: '7d',
       flex: 0.7,
       minWidth: 120,
-      valueFormatter: (params) => {
-        return Number(params.value / 100).toLocaleString('en-US', {
+      valueFormatter: (params) =>
+        Number(params.value / 100).toLocaleString('en-US', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           style: 'percent',
-        });
-      },
+        }),
       cellClassName: (params) => {
         if (Number(params.value) < 0) {
           return 'negative';
@@ -140,13 +134,12 @@ const Main = () => {
       headerName: '24h Volume',
       flex: 1,
       minWidth: 180,
-      valueFormatter: (params) => {
-        return Number(params.value).toLocaleString('en-US', {
+      valueFormatter: (params) =>
+        Number(params.value).toLocaleString('en-US', {
           maximumFractionDigits: 0,
           style: 'currency',
           currency: 'USD',
-        });
-      },
+        }),
     },
     {
       type: 'number',
@@ -154,13 +147,12 @@ const Main = () => {
       headerName: 'Market Cap',
       flex: 1,
       minWidth: 180,
-      valueFormatter: (params) => {
-        return Number(params.value).toLocaleString('en-US', {
+      valueFormatter: (params) =>
+        Number(params.value).toLocaleString('en-US', {
           maximumFractionDigits: 0,
           style: 'currency',
           currency: 'USD',
-        });
-      },
+        }),
     },
     {
       field: 'sparkline_in_7d',
@@ -204,16 +196,7 @@ const Main = () => {
     },
   ]);
 
-  if (globalDataLoading || coinsLoading) {
-    return (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={globalDataLoading || coinsLoading}
-      >
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    );
-  } else if (globalData && coins) {
+  if (globalData && coins) {
     return (
       <main>
         <Container maxWidth='xl'>
@@ -235,7 +218,14 @@ const Main = () => {
     );
   }
 
-  return null;
+  return (
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={globalDataLoading || coinsLoading}
+    >
+      <CircularProgress color='inherit' />
+    </Backdrop>
+  );
 };
 
 export default Main;

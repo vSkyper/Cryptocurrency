@@ -70,9 +70,9 @@ const Navbar = () => {
   const defaultFilterOptions = createFilterOptions({
     matchFrom: 'start',
   });
-  const filterOptions = (options, state) => {
-    return defaultFilterOptions(options, state).slice(0, 10);
-  };
+  
+  const filterOptions = (options, state) =>
+    defaultFilterOptions(options, state).slice(0, 10);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
