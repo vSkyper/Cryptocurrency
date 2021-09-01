@@ -2,9 +2,10 @@ import { useState, useContext, Fragment } from 'react';
 import {
   Paper,
   Button,
-  Box,
+  Grid,
   Backdrop,
   CircularProgress,
+  Typography,
 } from '@material-ui/core';
 import {
   CartesianGrid,
@@ -20,18 +21,11 @@ import useFetch from '../../useFetch';
 import { styled } from '@material-ui/core/styles';
 import { Context } from '../../Context';
 
-const Buttons = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'flex-end',
-  flexWrap: 'wrap',
-  padding: theme.spacing(1, 0),
-}));
-
 const Chart = styled(Paper)(({ theme }) => ({
   height: 250,
   padding: theme.spacing(2, 1, 1, 0.8),
   [theme.breakpoints.up('sm')]: {
-    height: 416,
+    height: 415,
     padding: theme.spacing(3, 1.5, 1.5, 2),
   },
   color: 'black',
@@ -40,16 +34,24 @@ const Chart = styled(Paper)(({ theme }) => ({
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <Paper sx={{ opacity: 0.6, padding: 2 }}>
-        <Box>{format(new Date(label), 'eeee, d MMM, yyyy')}</Box>
-        <Box>
+      <Paper
+        sx={{
+          opacity: 0.75,
+          padding: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography>{format(new Date(label), 'eeee, d MMM, yyyy')}</Typography>
+        <Typography fontWeight='fontWeightLight'>
           {Number(payload[0].value).toLocaleString('en-US', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 8,
             style: 'currency',
             currency: 'USD',
           })}
-        </Box>
+        </Typography>
       </Paper>
     );
   }
@@ -78,7 +80,7 @@ const Sparkline = () => {
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      <Buttons>
+      <Grid container justifyContent='flex-end' sx={{ py: 1 }}>
         <Button
           color={days === '1' ? 'primary' : 'inherit'}
           onClick={() => setDays('1')}
@@ -123,7 +125,7 @@ const Sparkline = () => {
         >
           MAX
         </Button>
-      </Buttons>
+      </Grid>
       <Chart>
         {sparkline && (
           <ResponsiveContainer>

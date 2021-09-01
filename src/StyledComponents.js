@@ -10,7 +10,7 @@ export const Card = styled(Paper)(({ theme }) => ({
 }));
 
 export const Percentage = styled(Typography)(({ theme }) => ({
-  marginLeft: 10,
+  marginLeft: 5,
   display: 'flex',
   alignItems: 'center',
   fontWeight: 300,
