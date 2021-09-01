@@ -10,7 +10,7 @@ const StackData = () => {
   return (
     <Paper sx={{ p: 2 }}>
       <Stack
-        divider={<Divider orientation='horizontal' flexItem />}
+        divider={<Divider orientation='horizontal' />}
         alignItems='stretch'
         spacing={2}
       >

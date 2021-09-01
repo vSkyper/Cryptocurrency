@@ -4,6 +4,7 @@ import {
   Grid,
   Paper,
   InputBase,
+  Divider,
   FormControl,
   Select,
   MenuItem,
@@ -75,11 +76,12 @@ const Exchange = () => {
       container
       justifyContent='center'
       alignItems='center'
-      direction={{ md: 'row', lg: 'column' }}
+      direction='column'
     >
       <Grid item>
-        <InputCard sx={{ mb: { xs: 0.5, sm: 0 } }}>
-          <Typography sx={{ p: 1 }}>{symbol.toUpperCase()}</Typography>
+        <InputCard>
+          <Typography>{symbol.toUpperCase()}</Typography>
+          <Divider orientation='vertical' sx={{ mx: 2 }} />
           <InputBaseExchange
             type='number'
             value={crypto}
@@ -92,14 +94,14 @@ const Exchange = () => {
       </Grid>
       <SwapHorizIcon
         fontSize='large'
-        sx={{ display: { xs: 'none', md: 'block' }, m: [1, 1, 1, 1] }}
+        sx={{ m: 1 }}
       />
       <Grid item>
         <InputCard>
           {currencies && (
             <FormControl variant='standard'>
               <Select
-                sx={{ m: 1, pl: 1 }}
+                sx={{ pl: 1 }}
                 id='currencies-select'
                 value={currencyOption}
                 onChange={(e) => setCurrencyOption(e.target.value)}
@@ -112,6 +114,7 @@ const Exchange = () => {
               </Select>
             </FormControl>
           )}
+          <Divider orientation='vertical' sx={{ mx: 2 }} />
           <InputBaseExchange
             type='number'
             value={currency}
