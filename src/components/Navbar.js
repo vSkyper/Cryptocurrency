@@ -9,9 +9,7 @@ import {
   Tooltip,
   InputBase,
 } from '@mui/material';
-import Autocomplete, {
-  createFilterOptions,
-} from '@mui/material/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { styled, alpha } from '@mui/material/styles';
 import {
   Search as SearchIcon,

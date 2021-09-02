@@ -7,9 +7,7 @@ import {
   Divider,
   TextField,
 } from '@mui/material';
-import Autocomplete, {
-  createFilterOptions,
-} from '@mui/material/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { styled } from '@mui/material/styles';
 import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
 import useFetch from '../../useFetch';
