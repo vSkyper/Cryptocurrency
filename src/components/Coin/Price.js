@@ -1,13 +1,13 @@
 import { useContext } from 'react';
-import { Typography, Grid, Box } from '@material-ui/core';
+import { Typography, Grid, Box } from '@mui/material';
 import LinearProgress, {
   linearProgressClasses,
-} from '@material-ui/core/LinearProgress';
-import { styled } from '@material-ui/core/styles';
+} from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
 import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { Context } from '../../Context';
 import { Card, Percentage } from '../../StyledComponents';
 

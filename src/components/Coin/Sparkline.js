@@ -6,7 +6,7 @@ import {
   Backdrop,
   CircularProgress,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   CartesianGrid,
   XAxis,
@@ -18,7 +18,7 @@ import {
 } from 'recharts';
 import { format } from 'date-fns';
 import useFetch from '../../useFetch';
-import { styled } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import { Context } from '../../Context';
 
 const Chart = styled(Paper)(({ theme }) => ({

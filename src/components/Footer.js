@@ -1,5 +1,5 @@
-import { Paper, Typography, Link } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Paper, Typography, Link } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 const Foot = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',

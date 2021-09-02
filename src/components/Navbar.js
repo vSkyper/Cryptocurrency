@@ -8,18 +8,18 @@ import {
   Link,
   Tooltip,
   InputBase,
-} from '@material-ui/core';
+} from '@mui/material';
 import Autocomplete, {
   createFilterOptions,
-} from '@material-ui/core/Autocomplete';
-import { styled, alpha } from '@material-ui/core/styles';
+} from '@mui/material/Autocomplete';
+import { styled, alpha } from '@mui/material/styles';
 import {
   Search as SearchIcon,
   Brightness4 as Brightness4Icon,
   Brightness7 as Brightness7Icon,
   EuroSymbol as EuroSymbolIcon,
   GitHub as GitHubIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
 import useFetch from '../useFetch';
 import { Context } from '../Context';

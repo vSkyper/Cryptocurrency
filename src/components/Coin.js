@@ -5,8 +5,8 @@ import {
   Paper,
   Backdrop,
   CircularProgress,
-} from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useParams } from 'react-router-dom';
 import useFetch from '../useFetch';
 import Sparkline from './Coin/Sparkline';

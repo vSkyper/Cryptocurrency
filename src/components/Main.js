@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { styled } from '@material-ui/core/styles';
-import { Container, Link, Backdrop, CircularProgress } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { Container, Link, Backdrop, CircularProgress } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
 import { Link as RouterLink } from 'react-router-dom';

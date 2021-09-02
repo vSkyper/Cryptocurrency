@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { Typography, Stack, Divider, Grid, Paper } from '@material-ui/core';
-import { AllInclusiveRounded as AllInclusiveIcon } from '@material-ui/icons';
+import { Typography, Stack, Divider, Grid, Paper } from '@mui/material';
+import { AllInclusiveRounded as AllInclusiveIcon } from '@mui/icons-material';
 import { format, formatDistance } from 'date-fns';
 import { Context } from '../../Context';
 

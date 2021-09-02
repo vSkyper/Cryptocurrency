@@ -6,12 +6,12 @@ import {
   InputBase,
   Divider,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 import Autocomplete, {
   createFilterOptions,
-} from '@material-ui/core/Autocomplete';
-import { styled } from '@material-ui/core/styles';
-import { SwapHoriz as SwapHorizIcon } from '@material-ui/icons';
+} from '@mui/material/Autocomplete';
+import { styled } from '@mui/material/styles';
+import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
 import useFetch from '../../useFetch';
 import { Context } from '../../Context';
 

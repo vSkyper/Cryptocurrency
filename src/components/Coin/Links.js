@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { Grid, Chip, Avatar } from '@material-ui/core';
+import { Grid, Chip, Avatar } from '@mui/material';
 import {
   Reddit as RedditIcon,
   Facebook as FacebookIcon,
   Twitter as TwitterIcon,
   GitHub as GitHubIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { Context } from '../../Context';
 
 const Links = () => {

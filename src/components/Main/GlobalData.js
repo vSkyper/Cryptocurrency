@@ -7,12 +7,12 @@ import {
   Switch,
   Collapse,
   Grow,
-} from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { Context } from '../../Context';
 import { Card, Percentage } from '../../StyledComponents';
 
