@@ -17,7 +17,6 @@ const DataTable = styled('div')(({ theme }) => ({
   },
   display: 'flex',
   marginTop: 20,
-  marginBottom: 20,
 }));
 
 const Main = () => {
@@ -42,7 +41,7 @@ const Main = () => {
           component={RouterLink}
           to={`/coins/${params.row.id}`}
         >
-          <img src={params.row.image} width='25vh' alt='img'></img>
+          <img src={params.row.image} width='25vh' alt='logo' />
           {params.value}
         </Link>
       ),

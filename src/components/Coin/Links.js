@@ -15,7 +15,7 @@ const Links = () => {
     <Grid container sx={{ ml: 2, mt: 2 }}>
       {coin.links.homepage[0] && (
         <Chip
-          avatar={<Avatar alt='Natacha' src={coin.image.large} />}
+          avatar={<Avatar alt='logo' src={coin.image.large} />}
           label='Homepage'
           component='a'
           href={coin.links.homepage[0]}
@@ -60,7 +60,7 @@ const Links = () => {
           avatar={<TwitterIcon />}
           label='Twitter'
           component='a'
-          href={`https://twitter.com/${coin.links.twitter_screen_name}`}
+          href={`https://twitter.com/${coin.links.twitter_screen_name}/`}
           clickable
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />
@@ -70,7 +70,7 @@ const Links = () => {
           avatar={<FacebookIcon />}
           label='Facebook'
           component='a'
-          href={`https://www.facebook.com/${coin.links.facebook_username}`}
+          href={`https://www.facebook.com/${coin.links.facebook_username}/`}
           clickable
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />

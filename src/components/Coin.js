@@ -40,8 +40,8 @@ const Coin = () => {
             src={coin.image.large}
             style={{ marginRight: 10 }}
             width='35vw'
-            alt='img'
-          ></img>
+            alt='logo'
+          />
           <Typography variant='h5'>{coin.name}</Typography>
         </Name>
         <Container maxWidth='xl'>
@@ -65,7 +65,7 @@ const Coin = () => {
             container
             direction={{ xs: 'column-reverse', lg: 'row' }}
             spacing={2}
-            sx={{ mt: 1, mb: 3 }}
+            sx={{ mt: 1 }}
           >
             <Grid item xs={12} lg={7}>
               <Context.Provider value={{ coin: coin.market_data }}>

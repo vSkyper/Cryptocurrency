@@ -9,11 +9,7 @@ const StackData = () => {
 
   return (
     <Paper sx={{ p: 2 }}>
-      <Stack
-        divider={<Divider orientation='horizontal' />}
-        alignItems='stretch'
-        spacing={2}
-      >
+      <Stack divider={<Divider orientation='horizontal' />} spacing={2}>
         <Grid container justifyContent='space-between'>
           <Typography>Market Capitalization</Typography>
           <Typography>

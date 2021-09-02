@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Coin from './components/Coin';
+import Footer from './components/Footer';
 import { Context } from './Context';
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
             <Coin />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </ThemeProvider>
   );
