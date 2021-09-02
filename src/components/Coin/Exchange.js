@@ -5,10 +5,11 @@ import {
   Paper,
   InputBase,
   Divider,
-  FormControl,
-  Select,
-  MenuItem,
+  TextField,
 } from '@material-ui/core';
+import Autocomplete, {
+  createFilterOptions,
+} from '@material-ui/core/Autocomplete';
 import { styled } from '@material-ui/core/styles';
 import { SwapHoriz as SwapHorizIcon } from '@material-ui/icons';
 import useFetch from '../../useFetch';
@@ -71,6 +72,13 @@ const Exchange = () => {
     }
   }
 
+  const defaultFilterOptions = createFilterOptions({
+    matchFrom: 'start',
+  });
+
+  const filterOptions = (options, state) =>
+    defaultFilterOptions(options, state).slice(0, 5);
+
   return (
     <Grid
       container
@@ -92,28 +100,30 @@ const Exchange = () => {
           />
         </InputCard>
       </Grid>
-      <SwapHorizIcon
-        fontSize='large'
-        sx={{ m: 1 }}
-      />
+      <SwapHorizIcon fontSize='large' sx={{ m: 1 }} />
       <Grid item>
         <InputCard>
-          {currencies && (
-            <FormControl variant='standard'>
-              <Select
-                sx={{ pl: 1 }}
-                id='currencies-select'
-                value={currencyOption}
-                onChange={(e) => setCurrencyOption(e.target.value)}
-              >
-                {currencies.map((currency_opt) => (
-                  <MenuItem key={currency_opt} value={currency_opt}>
-                    {currency_opt.toUpperCase()}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          )}
+          <Autocomplete
+            sx={{ width: 70 }}
+            id='currencies-select'
+            value={currencyOption}
+            options={currencies ?? []}
+            filterOptions={filterOptions}
+            getOptionLabel={(option) => option.toUpperCase()}
+            disableClearable
+            autoComplete
+            onChange={(e, value) => {
+              if (value != null) {
+                setCurrencyOption(value);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField {...params} variant='standard' />
+            )}
+            renderOption={(props, option) => (
+              <li {...props}>{option.toUpperCase()}</li>
+            )}
+          />
           <Divider orientation='vertical' sx={{ mx: 2 }} />
           <InputBaseExchange
             type='number'

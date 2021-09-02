@@ -9,6 +9,9 @@ import {
   Tooltip,
   InputBase,
 } from '@material-ui/core';
+import Autocomplete, {
+  createFilterOptions,
+} from '@material-ui/core/Autocomplete';
 import { styled, alpha } from '@material-ui/core/styles';
 import {
   Search as SearchIcon,
@@ -17,9 +20,6 @@ import {
   EuroSymbol as EuroSymbolIcon,
   GitHub as GitHubIcon,
 } from '@material-ui/icons';
-import Autocomplete, {
-  createFilterOptions,
-} from '@material-ui/core/Autocomplete';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
 import useFetch from '../useFetch';
 import { Context } from '../Context';
@@ -70,7 +70,7 @@ const Navbar = () => {
   const defaultFilterOptions = createFilterOptions({
     matchFrom: 'start',
   });
-  
+
   const filterOptions = (options, state) =>
     defaultFilterOptions(options, state).slice(0, 10);
 
@@ -113,6 +113,8 @@ const Navbar = () => {
             options={coinsList ?? []}
             filterOptions={filterOptions}
             getOptionLabel={(option) => option.name}
+            forcePopupIcon={false}
+            autoComplete
             onInputChange={(e) => {
               if (e != null) {
                 setValue(e.target.value);
