@@ -5,7 +5,7 @@ import {
   createTheme,
   responsiveFontSizes,
 } from '@mui/material/styles';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Coin from './components/Coin';
@@ -38,14 +38,10 @@ const App = () => {
         <Context.Provider value={{ themeMode, setThemeMode }}>
           <Navbar />
         </Context.Provider>
-        <Switch>
-          <Route exact path='/'>
-            <Main />
-          </Route>
-          <Route exact path='/coins/:id'>
-            <Coin />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/coins/:id' element={<Coin />} />
+        </Routes>
         <Footer />
       </Router>
     </ThemeProvider>

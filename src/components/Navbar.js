@@ -18,7 +18,7 @@ import {
   EuroSymbol as EuroSymbolIcon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
-import { useHistory, Link as RouterLink } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import useFetch from '../useFetch';
 import { Context } from '../Context';
 
@@ -59,7 +59,7 @@ const Navbar = () => {
   const [value, setValue] = useState('');
   const { themeMode, setThemeMode } = useContext(Context);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data: coinsList, loading: coinsListLoading } = useFetch(
     'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
@@ -121,7 +121,7 @@ const Navbar = () => {
             onChange={(e, value) => {
               if (value != null) {
                 setValue('');
-                history.push(`/coins/${value.id}`);
+                navigate(`/coins/${value.id}`);
               }
             }}
             renderInput={(params) => (
