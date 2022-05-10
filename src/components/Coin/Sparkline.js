@@ -128,7 +128,7 @@ const Sparkline = () => {
       </Grid>
       <Chart>
         {sparkline && (
-          <ResponsiveContainer>
+          <ResponsiveContainer width="99%" height="100%">
             <AreaChart data={sparkline}>
               <defs>
                 <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
