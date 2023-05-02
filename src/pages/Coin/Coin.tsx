@@ -11,18 +11,16 @@ import { useParams } from 'react-router-dom';
 import { Name } from './styled';
 import useFetch from '../../hooks/useFetch';
 import { ICoin } from '../../interfaces';
-import { Sparkline } from './components';
-// import Sparkline from './Coin/Sparkline';
+import { PriceCard, Sparkline } from './components';
 // import Price from './Coin/Price';
 // import StackData from './Coin/StackData';
 // import Exchange from './Coin/Exchange';
 // import Links from './Coin/Links';
-// import { Context } from '../Context';
 
 export default function Coin() {
   const { id } = useParams();
 
-  const { data: coin, error } = useFetch<ICoin>(
+  const { data, error } = useFetch<ICoin>(
     `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
 
@@ -32,17 +30,17 @@ export default function Coin() {
     </Dialog>
   );
 
-  if (coin) {
+  if (data) {
     return (
       <main>
         <Name>
           <img
-            src={coin.image.large}
+            src={data.image.large}
             style={{ marginRight: 10 }}
             width='35vw'
             alt='logo'
           />
-          <Typography variant='h5'>{coin.name}</Typography>
+          <Typography variant='h5'>{data.name}</Typography>
         </Name>
         <Container maxWidth='xl'>
           <Grid
@@ -51,12 +49,10 @@ export default function Coin() {
             spacing={2}
           >
             <Grid item xs={12} lg={7}>
-              <Sparkline id={id!} />
+              <Sparkline id={id} />
             </Grid>
             <Grid item xs={12} lg={5}>
-              {/* <Context.Provider value={{ coin }}>
-                <Price />
-              </Context.Provider> */}
+              <PriceCard data={data} />
             </Grid>
           </Grid>
           <Grid
@@ -93,7 +89,7 @@ export default function Coin() {
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={coin ? false : true}
+      open={data ? false : true}
     >
       <CircularProgress color='inherit' />
     </Backdrop>

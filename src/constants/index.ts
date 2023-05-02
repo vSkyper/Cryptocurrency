@@ -1,3 +1,4 @@
 import { columns } from './dataTable';
+import { buttons, priceChange } from './coin';
 
-export { columns };
+export { columns, buttons, priceChange };

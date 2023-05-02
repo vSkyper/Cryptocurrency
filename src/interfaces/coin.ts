@@ -25,7 +25,7 @@ export interface ICoin {
   community_score: number;
   liquidity_score: number;
   public_interest_score: number;
-  market_data: MarketData;
+  market_data: IMarketData;
   public_interest_stats: PublicInterestStats;
   status_updates: any[];
   last_updated: string;
@@ -73,7 +73,7 @@ interface Image {
   large: string;
 }
 
-interface MarketData {
+export interface IMarketData {
   current_price: CurrentPrice;
   total_value_locked: any;
   mcap_to_tvl_ratio: any;

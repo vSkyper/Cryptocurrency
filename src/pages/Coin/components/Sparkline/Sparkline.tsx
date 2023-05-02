@@ -11,6 +11,7 @@ import { ISparkline } from '../../../../interfaces';
 import useFetch from '../../../../hooks/useFetch';
 import { Chart } from './styled';
 import { ButtonComponent, ChartComponent } from './components';
+import { buttons } from '../../../../constants';
 
 interface Props {
   id: string;
@@ -27,16 +28,6 @@ export default function Sparkline({ id }: Props) {
     date: format(new Date(data[0]), 'MMM d y, hh:mm:ss a'),
     value: data[1],
   }));
-
-  const buttons = [
-    { displayDays: '1D', displayDaysFormated: '1D', mobileDisappear: false },
-    { displayDays: '7', displayDaysFormated: '1W', mobileDisappear: false },
-    { displayDays: '30', displayDaysFormated: '1M', mobileDisappear: false },
-    { displayDays: '90', displayDaysFormated: '3M', mobileDisappear: true },
-    { displayDays: '180', displayDaysFormated: '6M', mobileDisappear: false },
-    { displayDays: '365', displayDaysFormated: '1Y', mobileDisappear: false },
-    { displayDays: 'max', displayDaysFormated: 'All', mobileDisappear: true },
-  ];
 
   if (error) return (
     <Dialog open={true}>
