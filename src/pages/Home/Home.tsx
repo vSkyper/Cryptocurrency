@@ -1,7 +1,8 @@
-import { Container, Backdrop, CircularProgress, Dialog, Alert } from '@mui/material';
+import { Container } from '@mui/material';
 import useFetch from '../../hooks/useFetch';
 import { Global, Table } from './components';
 import { ICoins, IGlobalData } from '../../interfaces';
+import { ErrorModal, LoadingModal } from '../../components';
 
 export default function Home() {
   const { data: globalData, error: globalDataError } = useFetch<IGlobalData>(
@@ -11,20 +12,9 @@ export default function Home() {
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
   );
 
-  if (globalDataError || coinsError) return (
-    <Dialog open={true}>
-      <Alert severity="error">Something went wrong</Alert>
-    </Dialog>
-  );
+  if (globalDataError || coinsError) return <ErrorModal />
 
-  if (!globalData || !coins) return (
-    <Backdrop
-      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={true}
-    >
-      <CircularProgress color='inherit' />
-    </Backdrop>
-  );
+  if (!globalData || !coins) return <LoadingModal />
 
   return (
     <main>

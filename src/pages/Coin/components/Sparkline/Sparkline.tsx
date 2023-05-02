@@ -1,17 +1,12 @@
 import { useState } from 'react';
-import {
-  Grid,
-  Backdrop,
-  CircularProgress,
-  Dialog,
-  Alert,
-} from '@mui/material';
+import { Grid, Backdrop, CircularProgress } from '@mui/material';
 import { format } from 'date-fns';
 import { ISparkline } from '../../../../interfaces';
 import useFetch from '../../../../hooks/useFetch';
 import { Chart } from './styled';
 import { ButtonComponent, ChartComponent } from './components';
 import { buttons } from '../../../../constants';
+import { ErrorModal } from '../../../../components';
 
 interface Props {
   id: string;
@@ -29,11 +24,7 @@ export default function Sparkline({ id }: Props) {
     value: data[1],
   }));
 
-  if (error) return (
-    <Dialog open={true}>
-      <Alert severity="error">Something went wrong</Alert>
-    </Dialog>
-  );
+  if (error) return <ErrorModal />
 
   return (
     <>

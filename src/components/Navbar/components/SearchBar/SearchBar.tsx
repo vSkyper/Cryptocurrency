@@ -3,10 +3,11 @@ import {
   Search as SearchIcon,
 } from '@mui/icons-material';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
-import { Alert, Dialog, createFilterOptions } from '@mui/material';
+import { createFilterOptions } from '@mui/material';
 import useFetch from '../../../../hooks/useFetch';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
 import { ICoinsList } from '../../../../interfaces';
+import { ErrorModal } from '../../..';
 
 export default function SearchBar() {
   const [value, setValue] = useState<string>('');
@@ -24,11 +25,7 @@ export default function SearchBar() {
   const filterOptions = (options: any, state: any) =>
     defaultFilterOptions(options, state).slice(0, 10);
 
-  if (error) return (
-    <Dialog open={true}>
-      <Alert severity="error">Something went wrong</Alert>
-    </Dialog>
-  );
+  if (error) return <ErrorModal />
 
   return (
     <Search

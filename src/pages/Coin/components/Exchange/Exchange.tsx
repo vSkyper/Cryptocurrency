@@ -1,17 +1,11 @@
 import { useState } from 'react';
-import {
-  Typography,
-  Grid,
-  Divider,
-  TextField,
-  Dialog,
-  Alert,
-} from '@mui/material';
+import { Typography, Grid, Divider, TextField } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
 import useFetch from '../../../../hooks/useFetch';
 import { IExchange } from '../../../../interfaces';
 import { InputBaseExchange, InputCard } from './styled';
+import { ErrorModal } from '../../../../components';
 
 interface Props {
   id: string;
@@ -31,11 +25,7 @@ export default function Exchange({ id, symbol }: Props) {
     `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`
   );
 
-  if (currenciesError || exchangeRateError) return (
-    <Dialog open={true}>
-      <Alert severity="error">Something went wrong</Alert>
-    </Dialog>
-  );
+  if (currenciesError || exchangeRateError) return <ErrorModal />
 
   let currency, crypto;
   if (currencies && exchangeRate) {

@@ -1,17 +1,10 @@
-import {
-  Container,
-  Typography,
-  Grid,
-  Backdrop,
-  CircularProgress,
-  Dialog,
-  Alert,
-} from '@mui/material';
+import { Container, Typography, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Name } from './styled';
 import useFetch from '../../hooks/useFetch';
 import { ICoin } from '../../interfaces';
 import { Exchange, Links, PriceCard, Sparkline, StackData } from './components';
+import { ErrorModal, LoadingModal } from '../../components';
 
 export default function Coin() {
   const { id } = useParams();
@@ -20,20 +13,9 @@ export default function Coin() {
     `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
 
-  if (!id || error) return (
-    <Dialog open={true}>
-      <Alert severity="error">Something went wrong</Alert>
-    </Dialog>
-  );
+  if (!id || error) return <ErrorModal />
 
-  if (!data) return (
-    <Backdrop
-      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={true}
-    >
-      <CircularProgress color='inherit' />
-    </Backdrop>
-  );
+  if (!data) return <LoadingModal />
 
   return (
     <main>
