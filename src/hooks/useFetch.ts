@@ -73,7 +73,7 @@ function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
     return () => {
       cancelRequest.current = true;
     };
-  }, [url]);
+  }, [url, options]);
 
   return state;
 }
