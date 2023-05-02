@@ -3,8 +3,8 @@ import {
   Brightness7 as Brightness7Icon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
-import { useThemeContext } from '../../../../../store';
 import { IconButton, Tooltip } from '@mui/material';
+import { useThemeContext } from '../../../../store';
 
 export default function Tooltips() {
   const { themeMode, setThemeMode } = useThemeContext();

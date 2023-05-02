@@ -8,7 +8,8 @@ import {
 } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './store';
-import { Navbar } from './components/organisms';
+import { Home } from './pages';
+import { Navbar } from './components';
 
 export default function App() {
   const [themeMode, setThemeMode] = useState<boolean>(true);
@@ -37,7 +38,7 @@ export default function App() {
           <Navbar />
         </ThemeContext.Provider>
         <Routes>
-          {/* <Route path='/' element={<Main />} /> */}
+          <Route path='/' element={<Home />} />
           {/* <Route path='/coins/:id' element={<Coin />} /> */}
         </Routes>
         {/* <Footer /> */}

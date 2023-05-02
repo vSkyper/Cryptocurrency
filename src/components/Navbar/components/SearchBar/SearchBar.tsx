@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { Search, SearchIconWrapper, StyledInputBase } from '../../../../../constants/constant';
-import useFetch from '../../../../../hooks/useFetch';
 import {
   Search as SearchIcon,
 } from '@mui/icons-material';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
-import { createFilterOptions } from '@mui/material';
+import { Alert, Dialog, createFilterOptions } from '@mui/material';
+import useFetch from '../../../../hooks/useFetch';
+import { Search, SearchIconWrapper, StyledInputBase } from './styled';
+import { CoinsList } from '../../../../interfaces';
 
 export default function SearchBar() {
   const [value, setValue] = useState<string>('');
 
   const navigate: NavigateFunction = useNavigate();
 
-  const { data: coinsList, loading: coinsListLoading } = useFetch(
+  const { data: coinsList, error } = useFetch<CoinsList[]>(
     'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
   );
 
@@ -23,12 +24,18 @@ export default function SearchBar() {
   const filterOptions = (options: any, state: any) =>
     defaultFilterOptions(options, state).slice(0, 10);
 
+  if (error) return (
+    <Dialog open={true}>
+      <Alert severity="error">Something went wrong</Alert>
+    </Dialog>
+  );
+
   return (
     <Search
       id='coins-search'
       inputValue={value}
       value={null}
-      loading={coinsListLoading}
+      loading={coinsList ? false : true}
       options={coinsList ?? []}
       filterOptions={filterOptions}
       getOptionLabel={(option: any) => option.name}
