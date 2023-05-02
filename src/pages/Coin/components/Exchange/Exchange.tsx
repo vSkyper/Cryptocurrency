@@ -20,7 +20,7 @@ interface Props {
 
 export default function Exchange({ id, symbol }: Props) {
   const [currencyOption, setCurrencyOption] = useState<string>('usd');
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<string>('');
   const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState<boolean>(true);
 
   const { data: currencies, error: currenciesError } = useFetch<string[]>(
@@ -41,13 +41,13 @@ export default function Exchange({ id, symbol }: Props) {
   if (currencies && exchangeRate) {
     if (fromCryptoToCurrency) {
       crypto = amount;
-      currency = amount * exchangeRate[id][currencyOption];
+      currency = Number(amount) * exchangeRate[id][currencyOption];
       if (!isFinite(currency)) {
         currency = '';
       }
     } else {
       currency = amount;
-      crypto = amount / exchangeRate[id][currencyOption];
+      crypto = Number(amount) / exchangeRate[id][currencyOption];
       if (!isFinite(crypto)) {
         crypto = '';
       }
@@ -76,7 +76,7 @@ export default function Exchange({ id, symbol }: Props) {
             type='number'
             value={crypto}
             onChange={(e) => {
-              setAmount(Number(e.target.value));
+              setAmount(e.target.value);
               setFromCryptoToCurrency(true);
             }}
           />
@@ -111,7 +111,7 @@ export default function Exchange({ id, symbol }: Props) {
             type='number'
             value={currency}
             onChange={(e) => {
-              setAmount(Number(e.target.value));
+              setAmount(e.target.value);
               setFromCryptoToCurrency(false);
             }}
           />
