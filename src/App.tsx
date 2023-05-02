@@ -12,7 +12,12 @@ import { Coin, Home } from './pages';
 import { Footer, Navbar } from './components';
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(
+    localStorage.getItem('localTheme')
+      ? JSON.parse(localStorage.getItem('localTheme') || '{}')
+      : true
+  );
+
   let theme: Theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
@@ -20,11 +25,6 @@ export default function App() {
   });
 
   theme = responsiveFontSizes(theme);
-
-  useEffect(() => {
-    const storedTheme: string | null = localStorage.getItem('localTheme');
-    setDarkMode(storedTheme ? JSON.parse(storedTheme) : true);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('localTheme', JSON.stringify(darkMode));
