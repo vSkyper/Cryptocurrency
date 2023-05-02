@@ -6,14 +6,14 @@ import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { Alert, Dialog, createFilterOptions } from '@mui/material';
 import useFetch from '../../../../hooks/useFetch';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
-import { CoinsList } from '../../../../interfaces';
+import { ICoinsList } from '../../../../interfaces';
 
 export default function SearchBar() {
   const [value, setValue] = useState<string>('');
 
   const navigate: NavigateFunction = useNavigate();
 
-  const { data: coinsList, error } = useFetch<CoinsList[]>(
+  const { data: coinsList, error } = useFetch<ICoinsList[]>(
     'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
   );
 

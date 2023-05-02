@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
-import { GlobalData } from "../../../../../../interfaces";
+import { IGlobalData } from "../../../../../../interfaces";
 
 interface Props {
-  globalData: GlobalData;
+  globalData: IGlobalData;
 };
 
 export default function Description({ globalData }: Props) {

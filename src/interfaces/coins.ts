@@ -1,4 +1,4 @@
-export interface Coins {
+export interface ICoins {
   id: string;
   symbol: string;
   name: string;
@@ -31,12 +31,12 @@ export interface Coins {
   price_change_percentage_7d_in_currency?: number;
 }
 
-export interface Roi {
+interface Roi {
   times: number;
   currency: string;
   percentage: number;
 }
 
-export interface SparklineIn7d {
+interface SparklineIn7d {
   price: number[];
 }

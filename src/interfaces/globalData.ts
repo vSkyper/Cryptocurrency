@@ -1,8 +1,8 @@
-export interface GlobalData {
+export interface IGlobalData {
   data: Data;
 }
 
-export interface Data {
+interface Data {
   active_cryptocurrencies: number;
   upcoming_icos: number;
   ongoing_icos: number;
@@ -15,14 +15,14 @@ export interface Data {
   updated_at: number;
 }
 
-export interface TotalMarketCap {
+interface TotalMarketCap {
   [key: string]: number;
 }
 
-export interface TotalVolume {
+interface TotalVolume {
   [key: string]: number;
 }
 
-export interface MarketCapPercentage {
+interface MarketCapPercentage {
   [key: string]: number;
 }

@@ -1,4 +1,4 @@
-import { GlobalData } from "../../../../../../interfaces";
+import { IGlobalData } from "../../../../../../interfaces";
 import {
   Grid,
   Typography,
@@ -12,7 +12,7 @@ import { Card, Percentage } from "../../../../../../styled";
 
 interface Props {
   toggle: boolean;
-  globalData: GlobalData;
+  globalData: IGlobalData;
 };
 
 export default function Cards({ toggle, globalData }: Props) {

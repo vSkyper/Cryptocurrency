@@ -1,10 +1,10 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { columns } from '../../../../constants';
-import { Coins } from '../../../../interfaces/coins';
+import { ICoins } from '../../../../interfaces/coins';
 import { DataTable } from './styled';
 
 interface Props {
-  coins: Coins[]
+  coins: ICoins[]
 };
 
 export default function Table({ coins }: Props) {

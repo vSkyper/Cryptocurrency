@@ -8,14 +8,14 @@ import {
 } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './store';
-import { Home } from './pages';
+import { Coin, Home } from './pages';
 import { Footer, Navbar } from './components';
 
 export default function App() {
-  const [themeMode, setThemeMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
   let theme: Theme = createTheme({
     palette: {
-      mode: themeMode ? 'dark' : 'light',
+      mode: darkMode ? 'dark' : 'light',
     },
   });
 
@@ -23,23 +23,23 @@ export default function App() {
 
   useEffect(() => {
     const storedTheme: string | null = localStorage.getItem('localTheme');
-    setThemeMode(storedTheme ? JSON.parse(storedTheme) : true);
+    setDarkMode(storedTheme ? JSON.parse(storedTheme) : true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('localTheme', JSON.stringify(themeMode));
-  }, [themeMode]);
+    localStorage.setItem('localTheme', JSON.stringify(darkMode));
+  }, [darkMode]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router basename={process.env.PUBLIC_URL}>
-        <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
+        <ThemeContext.Provider value={{ darkMode: darkMode, setDarkMode: setDarkMode }}>
           <Navbar />
         </ThemeContext.Provider>
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='/coins/:id' element={<Coin />} /> */}
+          <Route path='/coins/:id' element={<Coin />} />
         </Routes>
         <Footer />
       </Router>

@@ -5,11 +5,11 @@ import {
   Typography,
   Collapse,
 } from '@mui/material';
-import { GlobalData } from '../../../../interfaces';
+import { IGlobalData } from '../../../../interfaces';
 import { Cards, Description, Switch } from './components';
 
 interface Props {
-  globalData: GlobalData;
+  globalData: IGlobalData;
 };
 
 export default function Global({ globalData }: Props) {

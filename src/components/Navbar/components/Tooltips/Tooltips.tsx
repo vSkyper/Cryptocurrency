@@ -7,7 +7,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { useThemeContext } from '../../../../store';
 
 export default function Tooltips() {
-  const { themeMode, setThemeMode } = useThemeContext();
+  const { darkMode, setDarkMode: setDarkMode } = useThemeContext();
 
   return (
     <>
@@ -24,9 +24,9 @@ export default function Tooltips() {
         <IconButton
           color='inherit'
           size='large'
-          onClick={() => setThemeMode(!themeMode)}
+          onClick={() => setDarkMode(!darkMode)}
         >
-          {themeMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </Tooltip>
     </>

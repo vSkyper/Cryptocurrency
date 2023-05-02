@@ -1,4 +1,4 @@
-export interface CoinsList {
+export interface ICoinsList {
   id: string;
   symbol: string;
   name: string;
