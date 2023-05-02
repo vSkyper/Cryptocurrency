@@ -11,10 +11,10 @@ interface Props {
 
 export default function PriceCard({ data }: Props) {
 
-  let progressBarCurrent =
+  const progressBarCurrent =
     Number(data.market_data.current_price.usd) -
     Number(data.market_data.low_24h.usd);
-  let progressBarHigh =
+  const progressBarHigh =
     Number(data.market_data.high_24h.usd) -
     Number(data.market_data.low_24h.usd);
   let progressBar = 100 * (progressBarCurrent / progressBarHigh);

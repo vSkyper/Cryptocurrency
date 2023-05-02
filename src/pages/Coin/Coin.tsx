@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { Name } from './styled';
 import useFetch from '../../hooks/useFetch';
 import { ICoin } from '../../interfaces';
-import { PriceCard, Sparkline } from './components';
+import { Exchange, Links, PriceCard, Sparkline, StackData } from './components';
 // import Price from './Coin/Price';
 // import StackData from './Coin/StackData';
 // import Exchange from './Coin/Exchange';
@@ -62,21 +62,15 @@ export default function Coin() {
             sx={{ mt: 1 }}
           >
             <Grid item xs={12} lg={7}>
-              {/* <Context.Provider value={{ coin: coin.market_data }}>
-                <StackData />
-              </Context.Provider> */}
+              <StackData marketData={data.market_data} />
             </Grid>
             <Grid item xs={12} lg={5}>
               <Grid container direction='column'>
                 <Grid item xs={12}>
-                  {/* <Context.Provider value={{ id, symbol: coin.symbol }}>
-                    <Exchange />
-                  </Context.Provider> */}
+                  <Exchange id={id} symbol={data.symbol} />
                 </Grid>
                 <Grid item xs={12}>
-                  {/* <Context.Provider value={{ coin: coin }}>
-                    <Links />
-                  </Context.Provider> */}
+                  <Links data={data} />
                 </Grid>
               </Grid>
             </Grid>
