@@ -9,7 +9,7 @@ import {
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './store';
 import { Home } from './pages';
-import { Navbar } from './components';
+import { Footer, Navbar } from './components';
 
 export default function App() {
   const [themeMode, setThemeMode] = useState<boolean>(true);
@@ -41,7 +41,7 @@ export default function App() {
           <Route path='/' element={<Home />} />
           {/* <Route path='/coins/:id' element={<Coin />} /> */}
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </ThemeProvider>
   );
