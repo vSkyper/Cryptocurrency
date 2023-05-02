@@ -17,23 +17,21 @@ export default function Home() {
     </Dialog>
   );
 
-  if (globalData && coins) {
-    return (
-      <main>
-        <Container maxWidth='xl'>
-          <Global globalData={globalData} />
-          <Table coins={coins} />
-        </Container>
-      </main>
-    );
-  }
-
-  return (
+  if (!globalData || !coins) return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={coins ? false : true || globalData ? false : true}
+      open={true}
     >
       <CircularProgress color='inherit' />
     </Backdrop>
+  );
+
+  return (
+    <main>
+      <Container maxWidth='xl'>
+        <Global globalData={globalData} />
+        <Table coins={coins} />
+      </Container>
+    </main>
   );
 };
