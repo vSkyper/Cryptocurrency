@@ -12,10 +12,6 @@ import { Name } from './styled';
 import useFetch from '../../hooks/useFetch';
 import { ICoin } from '../../interfaces';
 import { Exchange, Links, PriceCard, Sparkline, StackData } from './components';
-// import Price from './Coin/Price';
-// import StackData from './Coin/StackData';
-// import Exchange from './Coin/Exchange';
-// import Links from './Coin/Links';
 
 export default function Coin() {
   const { id } = useParams();
