@@ -16,7 +16,7 @@ interface Props {
 };
 
 export default function Cards({ toggle, globalData }: Props) {
-  const marketCap = Number(globalData.data.total_market_cap.usd).toLocaleString(
+  const marketCap: string = (globalData.data.total_market_cap.usd).toLocaleString(
     'en-US',
     {
       maximumFractionDigits: 0,
@@ -25,7 +25,7 @@ export default function Cards({ toggle, globalData }: Props) {
     }
   );
 
-  const marketCapPercentage = Number(
+  const marketCapPercentage: string = (
     globalData.data.market_cap_change_percentage_24h_usd / 100
   ).toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -33,7 +33,7 @@ export default function Cards({ toggle, globalData }: Props) {
     style: 'percent',
   });
 
-  const totalVolume = Number(globalData.data.total_volume.usd).toLocaleString(
+  const totalVolume: string = (globalData.data.total_volume.usd).toLocaleString(
     'en-US',
     {
       maximumFractionDigits: 0,
@@ -42,7 +42,7 @@ export default function Cards({ toggle, globalData }: Props) {
     }
   );
 
-  const marketCapPercentageBTC = Number(
+  const marketCapPercentageBTC: string = (
     globalData.data.market_cap_percentage.btc / 100
   ).toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -50,7 +50,7 @@ export default function Cards({ toggle, globalData }: Props) {
     style: 'percent',
   });
 
-  const cryptocurrencies = Number(
+  const cryptocurrencies: string = (
     globalData.data.active_cryptocurrencies
   ).toLocaleString('en-US');
 

@@ -27,20 +27,20 @@ export default function Exchange({ id, symbol }: Props) {
 
   if (currenciesError || exchangeRateError) return <ErrorModal />
 
-  let currency, crypto;
+  let currency: string | number = '';
+  let crypto: string | number = '';
   if (currencies && exchangeRate) {
-    if (fromCryptoToCurrency) {
-      crypto = amount;
-      currency = Number(amount) * exchangeRate[id][currencyOption];
-      if (!isFinite(currency)) {
-        currency = '';
-      }
-    } else {
-      currency = amount;
-      crypto = Number(amount) / exchangeRate[id][currencyOption];
-      if (!isFinite(crypto)) {
-        crypto = '';
-      }
+    switch (fromCryptoToCurrency) {
+      case true:
+        crypto = amount;
+        currency = Number(amount) * exchangeRate[id][currencyOption];
+        !isFinite(currency) && (currency = '');
+        break;
+      case false:
+        currency = amount;
+        crypto = Number(amount) / exchangeRate[id][currencyOption];
+        !isFinite(crypto) && (crypto = '');
+        break;
     }
   }
 
@@ -84,11 +84,7 @@ export default function Exchange({ id, symbol }: Props) {
             getOptionLabel={(option: any) => option.toUpperCase()}
             disableClearable
             autoComplete
-            onChange={(_, value: string) => {
-              if (value != null) {
-                setCurrencyOption(value);
-              }
-            }}
+            onChange={(_, value: string) => setCurrencyOption(value)}
             renderInput={(params) => (
               <TextField {...params} variant='standard' />
             )}

@@ -6,15 +6,14 @@ interface Props {
 };
 
 export default function Description({ globalData }: Props) {
-  const marketCapText = Number(
-    globalData.data.total_market_cap.usd / Math.pow(10, 12)
+  const marketCapText: string = (globalData.data.total_market_cap.usd / Math.pow(10, 12)
   ).toLocaleString('en-US', {
     maximumFractionDigits: 2,
     style: 'currency',
     currency: 'USD',
   });
 
-  const marketCapPercentage = Number(
+  const marketCapPercentage: string = (
     globalData.data.market_cap_change_percentage_24h_usd / 100
   ).toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -22,7 +21,7 @@ export default function Description({ globalData }: Props) {
     style: 'percent',
   });
 
-  const totalVolumeText = Number(
+  const totalVolumeText: string = (
     globalData.data.total_volume.usd / Math.pow(10, 9)
   ).toLocaleString('en-US', {
     maximumFractionDigits: 0,
@@ -30,7 +29,7 @@ export default function Description({ globalData }: Props) {
     currency: 'USD',
   });
 
-  const marketCapPercentageBTC = Number(
+  const marketCapPercentageBTC: string = (
     globalData.data.market_cap_percentage.btc / 100
   ).toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -38,7 +37,7 @@ export default function Description({ globalData }: Props) {
     style: 'percent',
   });
 
-  const marketCapPercentageETH = Number(
+  const marketCapPercentageETH: string = (
     globalData.data.market_cap_percentage.eth / 100
   ).toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -46,7 +45,7 @@ export default function Description({ globalData }: Props) {
     style: 'percent',
   });
 
-  const cryptocurrencies = Number(
+  const cryptocurrencies: string = (
     globalData.data.active_cryptocurrencies
   ).toLocaleString('en-US');
 
