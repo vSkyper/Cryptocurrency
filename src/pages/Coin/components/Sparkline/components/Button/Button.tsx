@@ -4,20 +4,20 @@ import {
 
 interface Props {
   setDays: React.Dispatch<React.SetStateAction<string>>;
+  actualDays: string;
   days: string;
-  displayDays: string;
-  displayDaysFormated: string;
+  daysFormatted: string;
   mobileDisappear: boolean;
 }
 
-export default function ButtonComponent({ setDays, days, displayDays, displayDaysFormated, mobileDisappear }: Props) {
+export default function ButtonComponent({ setDays, actualDays, days, daysFormatted, mobileDisappear }: Props) {
   return (
     <Button
-      color={days === displayDays ? 'primary' : 'inherit'}
+      color={actualDays === days ? 'primary' : 'inherit'}
       sx={{ display: { xs: mobileDisappear ? 'none' : 'block', sm: 'block' } }}
-      onClick={() => setDays(displayDays)}
+      onClick={() => setDays(days)}
     >
-      {displayDaysFormated}
+      {daysFormatted}
     </Button>
   )
 }

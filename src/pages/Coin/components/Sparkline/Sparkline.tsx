@@ -36,7 +36,7 @@ export default function Sparkline({ id }: Props) {
       </Backdrop>
       <Grid container justifyContent='flex-end' sx={{ py: 1 }}>
         {buttons.map((button) => (
-          <ButtonComponent key={button.displayDays} {...button} setDays={setDays} days={days} />
+          <ButtonComponent key={button.days} {...button} setDays={setDays} actualDays={days} />
         ))}
       </Grid>
       <Chart>
