@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { CssBaseline } from '@mui/material';
 import {
   Theme,

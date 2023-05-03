@@ -1,8 +1,4 @@
-import {
-  Brightness4 as Brightness4Icon,
-  Brightness7 as Brightness7Icon,
-  GitHub as GitHubIcon,
-} from '@mui/icons-material';
+import { GitHub as GitHubIcon } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
 
 export default function Tooltips() {
