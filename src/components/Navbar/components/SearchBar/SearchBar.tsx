@@ -14,7 +14,7 @@ export default function SearchBar() {
 
   const navigate: NavigateFunction = useNavigate();
 
-  const { data: coinsList, error } = useFetch<ICoinsList[]>(
+  const { data, error } = useFetch<ICoinsList[]>(
     'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
   );
 
@@ -32,8 +32,8 @@ export default function SearchBar() {
       id='coins-search'
       inputValue={value}
       value={null}
-      loading={coinsList ? false : true}
-      options={coinsList ?? []}
+      loading={data ? false : true}
+      options={data ?? []}
       filterOptions={filterOptions}
       getOptionLabel={(option: any) => option.name}
       forcePopupIcon={false}
