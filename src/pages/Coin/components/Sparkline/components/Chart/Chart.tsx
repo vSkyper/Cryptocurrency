@@ -64,12 +64,13 @@ export default function ChartComponent({ sparkline, days }: Props) {
           axisLine={false}
           tickLine={false}
           tickFormatter={(value) => {
-            if (days === '1') {
-              return format(new Date(value), '| hh:mm a |');
-            } else if (days === 'max') {
-              return format(new Date(value), '| y MMM |');
-            } else {
-              return format(new Date(value), '| MMM, d |');
+            switch (days) {
+              case '1':
+                return format(new Date(value), '| hh:mm a |');
+              case 'max':
+                return format(new Date(value), '| y MMM |');
+              default:
+                return format(new Date(value), '| MMM, d |');
             }
           }}
         />
