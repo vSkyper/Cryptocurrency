@@ -86,7 +86,7 @@ export interface IMarketData {
   atl_change_percentage: AtlChangePercentage;
   atl_date: AtlDate;
   market_cap: MarketCap;
-  market_cap_rank: number;
+  market_cap_rank?: number;
   fully_diluted_valuation: FullyDilutedValuation;
   total_volume: TotalVolume;
   high_24h: High24h;
@@ -112,7 +112,7 @@ export interface IMarketData {
   price_change_percentage_1y_in_currency: PriceChangePercentage1yInCurrency;
   market_cap_change_24h_in_currency: MarketCapChange24hInCurrency;
   market_cap_change_percentage_24h_in_currency: MarketCapChangePercentage24hInCurrency;
-  total_supply: number;
+  total_supply?: number;
   max_supply: number;
   circulating_supply: number;
   last_updated: string;
