@@ -11,13 +11,13 @@ export const columns: GridColDef[] = [
     minWidth: 170,
     renderCell: (params: GridRenderCellParams) => (
       <Link
-        color="inherit"
-        underline="hover"
+        color='inherit'
+        underline='hover'
         sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}
         component={RouterLink}
         to={`/coins/${params.row.id}`}
       >
-        <img src={params.row.image} width="25vh" alt="logo" />
+        <img src={params.row.image} width='25vh' alt='logo' />
         {params.value}
       </Link>
     ),
@@ -145,13 +145,13 @@ export const columns: GridColDef[] = [
             <defs>
               <linearGradient
                 id={`linearColor${params.row.id}`}
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
+                x1='0'
+                y1='0'
+                x2='0'
+                y2='1'
               >
-                <stop offset="5%" stopColor={color} stopOpacity={0.4} />
-                <stop offset="75%" stopColor={color} stopOpacity={0.05} />
+                <stop offset='5%' stopColor={color} stopOpacity={0.4} />
+                <stop offset='75%' stopColor={color} stopOpacity={0.05} />
               </linearGradient>
             </defs>
             <Area

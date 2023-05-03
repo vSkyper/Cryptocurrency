@@ -1,6 +1,6 @@
-import { Grid, Typography } from "@mui/material";
-import { Card } from "../../../../../../styled";
-import { IMarketData } from "../../../../../../interfaces";
+import { Grid, Typography } from '@mui/material';
+import { Card } from '../../../../../../styled';
+import { IMarketData } from '../../../../../../interfaces';
 
 interface Props {
   marketData: IMarketData;

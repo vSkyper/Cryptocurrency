@@ -35,7 +35,7 @@ export default function ChartComponent({ sparkline, days }: Props) {
         }}
       >
         <Typography>{format(new Date(label), 'eeee, d MMM, yyyy')}</Typography>
-        <Typography fontWeight="fontWeightLight">
+        <Typography fontWeight='fontWeightLight'>
           {Number(payload[0].value).toLocaleString('en-US', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 8,
@@ -50,7 +50,7 @@ export default function ChartComponent({ sparkline, days }: Props) {
 
 
   return (
-    <ResponsiveContainer width="99%" height="100%">
+    <ResponsiveContainer width='99%' height='100%'>
       <AreaChart data={sparkline}>
         <defs>
           <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>

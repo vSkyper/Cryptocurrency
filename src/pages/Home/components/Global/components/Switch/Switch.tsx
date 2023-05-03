@@ -1,5 +1,5 @@
-import { FormControlLabel } from "@mui/material";
-import { IOSSwitch } from "./styled";
+import { FormControlLabel } from '@mui/material';
+import { IOSSwitch } from './styled';
 
 interface Props {
   toggle: boolean;

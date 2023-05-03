@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
-import { IGlobalData } from "../../../../../../interfaces";
+import { Typography } from '@mui/material';
+import { IGlobalData } from '../../../../../../interfaces';
 
 interface Props {
   globalData: IGlobalData;

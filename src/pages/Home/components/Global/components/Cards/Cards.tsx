@@ -1,4 +1,4 @@
-import { IGlobalData } from "../../../../../../interfaces";
+import { IGlobalData } from '../../../../../../interfaces';
 import {
   Grid,
   Typography,
@@ -8,7 +8,7 @@ import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
 } from '@mui/icons-material';
-import { Card, Percentage } from "../../../../../../styled";
+import { Card, Percentage } from '../../../../../../styled';
 
 interface Props {
   toggle: boolean;
