@@ -12,12 +12,12 @@ interface Props {
 export default function PriceCard({ data }: Props) {
 
   const progressBarCurrent: number =
-    Number(data.market_data.current_price.usd) -
-    Number(data.market_data.low_24h.usd);
+    (data.market_data.current_price.usd -
+      data.market_data.low_24h.usd) || 0;
 
   const progressBarHigh: number =
-    Number(data.market_data.high_24h.usd) -
-    Number(data.market_data.low_24h.usd);
+    (data.market_data.high_24h.usd -
+      data.market_data.low_24h.usd) || 1;
 
   let progressBar: number = 100 * (progressBarCurrent / progressBarHigh);
 
@@ -37,7 +37,7 @@ export default function PriceCard({ data }: Props) {
             <StyledLinearProgress variant='determinate' value={progressBar} />
             <Grid container justifyContent='space-between'>
               <Grid item>
-                {Number(data.market_data.low_24h.usd).toLocaleString('en-US', {
+                {(data.market_data.low_24h.usd || 0).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
@@ -48,7 +48,7 @@ export default function PriceCard({ data }: Props) {
                 24h Range
               </Grid>
               <Grid item>
-                {Number(data.market_data.high_24h.usd).toLocaleString('en-US', {
+                {(data.market_data.high_24h.usd || 0).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',

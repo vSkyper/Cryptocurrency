@@ -21,7 +21,7 @@ export default function PriceChange({ marketData, days }: Props) {
       >
         <Typography variant='h5'>
           {(
-            priceChange / 100
+            (priceChange / 100) || 0
           ).toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
