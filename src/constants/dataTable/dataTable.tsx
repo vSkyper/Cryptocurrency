@@ -36,7 +36,7 @@ export const columns: GridColDef[] = [
     flex: 1,
     minWidth: 150,
     valueFormatter: (params: GridValueFormatterParams) =>
-      Number(params.value).toLocaleString('en-US', {
+      params.value.toLocaleString('en-US', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 8,
         style: 'currency',
@@ -110,7 +110,7 @@ export const columns: GridColDef[] = [
     flex: 1,
     minWidth: 180,
     valueFormatter: (params: GridValueFormatterParams) =>
-      Number(params.value).toLocaleString('en-US', {
+      params.value.toLocaleString('en-US', {
         maximumFractionDigits: 0,
         style: 'currency',
         currency: 'USD',
@@ -123,7 +123,7 @@ export const columns: GridColDef[] = [
     flex: 1,
     minWidth: 180,
     valueFormatter: (params: GridValueFormatterParams) =>
-      Number(params.value).toLocaleString('en-US', {
+      params.value.toLocaleString('en-US', {
         maximumFractionDigits: 0,
         style: 'currency',
         currency: 'USD',
