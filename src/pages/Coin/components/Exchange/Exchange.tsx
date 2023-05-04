@@ -33,12 +33,12 @@ export default function Exchange({ id, symbol }: Props) {
     switch (fromCryptoToCurrency) {
       case true:
         crypto = amount;
-        currency = Number(amount) * exchangeRate[id][currencyOption];
+        currency = Number(amount) * exchangeRate[id]?.[currencyOption];
         !isFinite(currency) && (currency = '');
         break;
       case false:
         currency = amount;
-        crypto = Number(amount) / exchangeRate[id][currencyOption];
+        crypto = Number(amount) / exchangeRate[id]?.[currencyOption];
         !isFinite(crypto) && (crypto = '');
         break;
     }
