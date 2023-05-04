@@ -14,13 +14,13 @@ export default function PriceChange({ marketData, days }: Props) {
     <Grid item xs={6} sm={4} lg={6}>
       <Card
         sx={
-          Number(priceChange) < 0
+          (priceChange) < 0
             ? { color: 'error.light' }
             : { color: 'success.light' }
         }
       >
         <Typography variant='h5'>
-          {Number(
+          {(
             priceChange / 100
           ).toLocaleString('en-US', {
             minimumFractionDigits: 2,

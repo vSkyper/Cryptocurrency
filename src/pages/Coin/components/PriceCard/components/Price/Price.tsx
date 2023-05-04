@@ -20,7 +20,7 @@ export default function Price({ marketData }: Props) {
         alignItems: 'center',
       }}
     >
-      {marketData.current_price.usd.toLocaleString(
+      {Number(marketData.current_price.usd).toLocaleString(
         'en-US',
         {
           minimumFractionDigits: 0,

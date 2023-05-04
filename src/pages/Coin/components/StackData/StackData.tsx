@@ -15,7 +15,7 @@ export default function StackData({ marketData }: Props) {
         <Grid container justifyContent='space-between'>
           <Typography>Market Capitalization</Typography>
           <Typography>
-            {marketData.market_cap.usd.toLocaleString('en-US', {
+            {Number(marketData.market_cap.usd).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 2,
               style: 'currency',
@@ -26,7 +26,7 @@ export default function StackData({ marketData }: Props) {
         <Grid container justifyContent='space-between'>
           <Typography>24h Trading Volume</Typography>
           <Typography>
-            {marketData.total_volume.usd.toLocaleString('en-US', {
+            {Number(marketData.total_volume.usd).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 2,
               style: 'currency',
@@ -49,14 +49,14 @@ export default function StackData({ marketData }: Props) {
         <Grid container justifyContent='space-between'>
           <Typography>24h Low / 24h High</Typography>
           <Typography>
-            {marketData.low_24h.usd.toLocaleString('en-US', {
+            {Number(marketData.low_24h.usd).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 8,
               style: 'currency',
               currency: 'USD',
             })}{' '}
             /{' '}
-            {marketData.high_24h.usd.toLocaleString('en-US', {
+            {Number(marketData.high_24h.usd).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 8,
               style: 'currency',
@@ -75,7 +75,7 @@ export default function StackData({ marketData }: Props) {
         <Grid container justifyContent='space-between'>
           <Typography>Circulating Supply</Typography>
           <Typography>
-            {marketData.circulating_supply.toLocaleString('en-US', {
+            {Number(marketData.circulating_supply).toLocaleString('en-US', {
               maximumFractionDigits: 0,
             })}
           </Typography>
@@ -97,7 +97,7 @@ export default function StackData({ marketData }: Props) {
           <Grid item>
             <Grid container direction='column'>
               <Typography align='right'>
-                {marketData.ath.usd.toLocaleString('en-US', {
+                {Number(marketData.ath.usd).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
@@ -134,7 +134,7 @@ export default function StackData({ marketData }: Props) {
           <Grid item>
             <Grid container direction='column'>
               <Typography align='right'>
-                {marketData.atl.usd.toLocaleString('en-US', {
+                {Number(marketData.atl.usd).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
