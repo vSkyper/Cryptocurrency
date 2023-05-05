@@ -20,7 +20,7 @@ export default function Price({ marketData }: Props) {
         alignItems: 'center',
       }}
     >
-      {(marketData.current_price.usd || 0).toLocaleString(
+      {(marketData.current_price?.usd || 0).toLocaleString(
         'en-US',
         {
           minimumFractionDigits: 0,
@@ -29,10 +29,10 @@ export default function Price({ marketData }: Props) {
           currency: 'USD',
         }
       )}
-      {marketData.price_change_percentage_24h < 0 ? (
+      {(marketData.price_change_percentage_24h || 0) < 0 ? (
         <Percentage sx={{ color: 'error.light' }}>
           {(
-            (marketData.price_change_percentage_24h / 100) || 0
+            (marketData.price_change_percentage_24h || 0) / 100
           ).toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -43,7 +43,7 @@ export default function Price({ marketData }: Props) {
       ) : (
         <Percentage sx={{ color: 'success.light' }}>
           {(
-            (marketData.price_change_percentage_24h / 100) || 0
+            (marketData.price_change_percentage_24h || 0) / 100
           ).toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,

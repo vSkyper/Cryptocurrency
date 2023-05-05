@@ -21,7 +21,7 @@ export default function Coin() {
     <main>
       <Name>
         <img
-          src={data.image.large}
+          src={data.image?.large}
           style={{ marginRight: 10 }}
           width='35vw'
           alt='logo'

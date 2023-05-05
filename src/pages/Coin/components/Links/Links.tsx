@@ -14,9 +14,9 @@ interface Props {
 export default function Links({ data }: Props) {
   return (
     <Grid container sx={{ ml: 2, mt: 2 }}>
-      {data.links.homepage[0] && (
+      {data.links?.homepage?.[0] && (
         <Chip
-          avatar={<Avatar alt='logo' src={data.image.large} />}
+          avatar={<Avatar alt='logo' src={data.image?.large} />}
           label='Homepage'
           component='a'
           href={data.links.homepage[0]}
@@ -24,7 +24,7 @@ export default function Links({ data }: Props) {
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />
       )}
-      {data.links.blockchain_site.map(
+      {data.links?.blockchain_site?.map(
         (blockchain) =>
           blockchain && (
             <Chip
@@ -37,7 +37,7 @@ export default function Links({ data }: Props) {
             />
           )
       )}
-      {data.links.official_forum_url[0] && (
+      {data.links?.official_forum_url?.[0] && (
         <Chip
           label='Forum'
           component='a'
@@ -46,7 +46,7 @@ export default function Links({ data }: Props) {
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />
       )}
-      {data.links.subreddit_url && (
+      {data.links?.subreddit_url && (
         <Chip
           avatar={<RedditIcon />}
           label='Reddit'
@@ -56,7 +56,7 @@ export default function Links({ data }: Props) {
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />
       )}
-      {data.links.twitter_screen_name && (
+      {data.links?.twitter_screen_name && (
         <Chip
           avatar={<TwitterIcon />}
           label='Twitter'
@@ -66,7 +66,7 @@ export default function Links({ data }: Props) {
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />
       )}
-      {data.links.facebook_username && (
+      {data.links?.facebook_username && (
         <Chip
           avatar={<FacebookIcon />}
           label='Facebook'
@@ -76,7 +76,7 @@ export default function Links({ data }: Props) {
           sx={{ mr: 2, mt: 1, mb: 1 }}
         />
       )}
-      {data.links.repos_url.github[0] && (
+      {data.links?.repos_url?.github?.[0] && (
         <Chip
           avatar={<GitHubIcon />}
           label='GitHub'
