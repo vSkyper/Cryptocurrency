@@ -4,10 +4,10 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { createFilterOptions } from '@mui/material';
-import useFetch from '../../../../hooks/useFetch';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
-import { ICoinsList } from '../../../../interfaces';
-import { ErrorModal } from '../../..';
+import { ICoinsList } from 'interfaces';
+import useFetch from 'hooks/useFetch';
+import { ErrorModal } from 'components';
 
 export default function SearchBar() {
   const [value, setValue] = useState<string>('');

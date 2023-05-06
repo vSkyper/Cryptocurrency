@@ -1,8 +1,8 @@
 import { Container } from '@mui/material';
-import useFetch from '../../hooks/useFetch';
 import { Global, Table } from './components';
-import { ICoins, IGlobalData } from '../../interfaces';
-import { ErrorModal, LoadingModal } from '../../components';
+import useFetch from 'hooks/useFetch';
+import { ICoins, IGlobalData } from 'interfaces';
+import { ErrorModal, LoadingModal } from 'components';
 
 export default function Home() {
   const { data: globalData, error: globalDataError } = useFetch<IGlobalData>(

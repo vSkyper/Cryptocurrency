@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Grid, Backdrop, CircularProgress } from '@mui/material';
 import { format } from 'date-fns';
-import { ISparkline } from '../../../../interfaces';
-import useFetch from '../../../../hooks/useFetch';
 import { Chart } from './styled';
 import { ButtonComponent, ChartComponent } from './components';
-import { buttons } from '../../../../constants';
-import { ErrorModal } from '../../../../components';
+import { ErrorModal } from 'components';
+import { ISparkline } from 'interfaces';
+import useFetch from 'hooks/useFetch';
+import { buttons } from 'constants/coin';
 
 interface Props {
   id: string;

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Typography, Grid, Divider, TextField } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
-import useFetch from '../../../../hooks/useFetch';
-import { IExchange } from '../../../../interfaces';
 import { InputBaseExchange, InputCard } from './styled';
-import { ErrorModal } from '../../../../components';
+import useFetch from 'hooks/useFetch';
+import { IExchange } from 'interfaces';
+import { ErrorModal } from 'components';
 
 interface Props {
   id: string;

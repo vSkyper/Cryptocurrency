@@ -5,7 +5,7 @@ import {
   Twitter as TwitterIcon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
-import { ICoin } from '../../../../interfaces';
+import { ICoin } from 'interfaces';
 
 interface Props {
   data: ICoin;

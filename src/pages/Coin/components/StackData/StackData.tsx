@@ -1,6 +1,6 @@
 import { Typography, Stack, Divider, Grid, Paper } from '@mui/material';
 import { format, formatDistance } from 'date-fns';
-import { IMarketData } from '../../../../interfaces';
+import { IMarketData } from 'interfaces';
 
 interface Props {
   marketData: IMarketData;

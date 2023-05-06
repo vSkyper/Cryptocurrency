@@ -1,10 +1,10 @@
 import { Container, Typography, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Name } from './styled';
-import useFetch from '../../hooks/useFetch';
-import { ICoin } from '../../interfaces';
 import { Exchange, Links, PriceCard, Sparkline, StackData } from './components';
-import { ErrorModal, LoadingModal } from '../../components';
+import { ErrorModal, LoadingModal } from 'components';
+import { ICoin } from 'interfaces';
+import useFetch from 'hooks/useFetch';
 
 export default function Coin() {
   const { id } = useParams();

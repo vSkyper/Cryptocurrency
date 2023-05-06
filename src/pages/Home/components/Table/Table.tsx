@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { columns } from '../../../../constants';
-import { ICoins } from '../../../../interfaces/coins';
 import { DataTable } from './styled';
+import { ICoins } from 'interfaces';
+import { columns } from 'constants/dataTable';
 
 interface Props {
   coins: ICoins[]

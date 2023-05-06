@@ -5,8 +5,8 @@ import {
   Typography,
   Collapse,
 } from '@mui/material';
-import { IGlobalData } from '../../../../interfaces';
 import { Cards, Description, Switch } from './components';
+import { IGlobalData } from 'interfaces';
 
 interface Props {
   globalData: IGlobalData;

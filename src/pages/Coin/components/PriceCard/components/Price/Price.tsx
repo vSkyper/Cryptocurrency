@@ -1,10 +1,10 @@
 import { Typography } from '@mui/material';
-import { Percentage } from '../../../../../../styled';
 import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
 } from '@mui/icons-material';
-import { IMarketData } from '../../../../../../interfaces';
+import { IMarketData } from 'interfaces';
+import { Percentage } from 'styled';
 
 interface Props {
   marketData: IMarketData;

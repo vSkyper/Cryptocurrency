@@ -1,9 +1,9 @@
 import { Typography, Grid, Box } from '@mui/material';
-import { ICoin } from '../../../../interfaces';
-import { Card } from '../../../../styled';
 import { StyledLinearProgress } from './styled';
 import { Price, PriceChange } from './components';
-import { priceChange } from '../../../../constants';
+import { ICoin } from 'interfaces';
+import { Card } from 'styled';
+import { priceChange } from 'constants/coin';
 
 interface Props {
   data: ICoin
