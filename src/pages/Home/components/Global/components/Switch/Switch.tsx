@@ -5,7 +5,7 @@ interface Props {
   toggle: boolean;
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   mobile: boolean;
-};
+}
 
 export default function Switch({ toggle, setToggle, mobile }: Props) {
   return (
@@ -18,7 +18,11 @@ export default function Switch({ toggle, setToggle, mobile }: Props) {
         />
       }
       label='Show Stats'
-      sx={mobile ? { ml: 1.3, display: { xs: 'none', sm: 'block' } } : { ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }}
+      sx={
+        mobile
+          ? { ml: 1.3, display: { xs: 'none', sm: 'block' } }
+          : { ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }
+      }
     />
-  )
+  );
 }

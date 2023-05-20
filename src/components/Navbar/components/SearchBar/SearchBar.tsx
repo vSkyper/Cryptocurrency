@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import {
-  Search as SearchIcon,
-} from '@mui/icons-material';
+import { useCallback, useState } from 'react';
+import { Search as SearchIcon } from '@mui/icons-material';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
-import { createFilterOptions } from '@mui/material';
+import {
+  AutocompleteRenderInputParams,
+  FilterOptionsState,
+  createFilterOptions,
+} from '@mui/material';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
 import { ICoinsList } from 'interfaces';
 import useFetch from 'hooks/useFetch';
@@ -18,14 +20,47 @@ export default function SearchBar() {
     'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
   );
 
-  const defaultFilterOptions = createFilterOptions({
+  const defaultFilterOptions = createFilterOptions<ICoinsList>({
     matchFrom: 'start',
   });
 
-  const filterOptions = (options: any, state: any) =>
-    defaultFilterOptions(options, state).slice(0, 10);
+  const filterOptions = useCallback(
+    (options: ICoinsList[], state: FilterOptionsState<ICoinsList>) =>
+      defaultFilterOptions(options, state).slice(0, 10),
+    [defaultFilterOptions]
+  );
 
-  if (error) return <ErrorModal />
+  const handleOptionLabel = useCallback(
+    (option: ICoinsList) => option.name,
+    []
+  );
+
+  const handleInputChange = useCallback((e: React.SyntheticEvent) => {
+    setValue((e.target as HTMLInputElement).value);
+  }, []);
+
+  const handleChange = useCallback(
+    (e: React.SyntheticEvent, value: ICoinsList | null) => {
+      if (!value) return;
+      setValue('');
+      navigate(`/coins/${value.id}`);
+    },
+    [navigate]
+  );
+
+  const handleRenderInput = useCallback(
+    (params: AutocompleteRenderInputParams) => (
+      <div ref={params.InputProps.ref}>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase inputProps={params.inputProps} placeholder='Search…' />
+      </div>
+    ),
+    []
+  );
+
+  if (error) return <ErrorModal />;
 
   return (
     <Search
@@ -35,31 +70,12 @@ export default function SearchBar() {
       loading={data ? false : true}
       options={data ?? []}
       filterOptions={filterOptions}
-      getOptionLabel={(option: any) => option.name}
+      getOptionLabel={handleOptionLabel}
       forcePopupIcon={false}
       autoComplete
-      onInputChange={(e: any) => {
-        if (e != null) {
-          setValue(e.target.value);
-        }
-      }}
-      onChange={(_, value: any) => {
-        if (value != null) {
-          setValue('');
-          navigate(`/coins/${value.id}`);
-        }
-      }}
-      renderInput={(params) => (
-        <div ref={params.InputProps.ref}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            inputProps={params.inputProps}
-            placeholder='Search…'
-          />
-        </div>
-      )}
+      onInputChange={handleInputChange}
+      onChange={handleChange}
+      renderInput={handleRenderInput}
     />
-  )
-};
+  );
+}

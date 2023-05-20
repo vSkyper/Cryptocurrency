@@ -13,9 +13,9 @@ export default function Coin() {
     `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
 
-  if (!id || error) return <ErrorModal />
+  if (!id || error) return <ErrorModal />;
 
-  if (!data) return <LoadingModal />
+  if (!data) return <LoadingModal />;
 
   return (
     <main>
@@ -64,5 +64,4 @@ export default function Coin() {
       </Container>
     </main>
   );
-
-};
+}

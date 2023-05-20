@@ -9,9 +9,9 @@ export const Card = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2, 0),
 })) as typeof Paper;
 
-export const Percentage = styled(Typography)(({ theme }) => ({
+export const Percentage = styled(Typography)({
   marginLeft: 5,
   display: 'flex',
   alignItems: 'center',
   fontWeight: 300,
-})) as typeof Typography;
+}) as typeof Typography;

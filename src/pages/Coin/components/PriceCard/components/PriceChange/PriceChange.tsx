@@ -8,7 +8,9 @@ interface Props {
 }
 
 export default function PriceChange({ marketData, days }: Props) {
-  const priceChange: number | undefined | null = (marketData as any)['price_change_percentage_' + days];
+  const priceChange: number | undefined | null = (marketData as any)[
+    `price_change_percentage_${days}`
+  ];
 
   return (
     <Grid item xs={6} sm={4} lg={6}>
@@ -20,9 +22,7 @@ export default function PriceChange({ marketData, days }: Props) {
         }
       >
         <Typography variant='h5'>
-          {(
-            (priceChange || 0) / 100
-          ).toLocaleString('en-US', {
+          {((priceChange || 0) / 100).toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             style: 'percent',

@@ -35,7 +35,9 @@ export default function StackData({ marketData }: Props) {
         <Grid container justifyContent='space-between'>
           <Typography>Volume / Market Cap</Typography>
           <Typography>
-            {((marketData.total_volume?.usd || 0) / (marketData.market_cap?.usd || 1)
+            {(
+              (marketData.total_volume?.usd || 0) /
+              (marketData.market_cap?.usd || 1)
             ).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 8,
@@ -79,11 +81,9 @@ export default function StackData({ marketData }: Props) {
         <Grid container justifyContent='space-between'>
           <Typography>Total Supply</Typography>
           <Typography sx={{ display: 'flex', alignItems: 'center' }}>
-            {(
-              (marketData.total_supply || 0).toLocaleString('en-US', {
-                maximumFractionDigits: 0,
-              })
-            )}
+            {(marketData.total_supply || 0).toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}
           </Typography>
         </Grid>
         <Grid container justifyContent='space-between'>
@@ -106,19 +106,22 @@ export default function StackData({ marketData }: Props) {
                       : { color: 'success.light' }
                   }
                 >
-                  {((marketData.ath_change_percentage?.usd || 0) / 100).toLocaleString(
-                    'en-US',
-                    {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                      style: 'percent',
-                    }
-                  )}
+                  {(
+                    (marketData.ath_change_percentage?.usd || 0) / 100
+                  ).toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    style: 'percent',
+                  })}
                 </Typography>
               </Typography>
               <Typography align='right' fontWeight='fontWeightLight'>
                 {format(new Date(marketData.ath_date?.usd || 0), 'MMM d, y')} (
-                {formatDistance(Date.now(), new Date(marketData.ath_date?.usd || 0))})
+                {formatDistance(
+                  Date.now(),
+                  new Date(marketData.ath_date?.usd || 0)
+                )}
+                )
               </Typography>
             </Grid>
           </Grid>
@@ -143,19 +146,22 @@ export default function StackData({ marketData }: Props) {
                       : { color: 'success.light' }
                   }
                 >
-                  {((marketData.atl_change_percentage?.usd || 0) / 100).toLocaleString(
-                    'en-US',
-                    {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                      style: 'percent',
-                    }
-                  )}
+                  {(
+                    (marketData.atl_change_percentage?.usd || 0) / 100
+                  ).toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    style: 'percent',
+                  })}
                 </Typography>
               </Typography>
               <Typography align='right' fontWeight='fontWeightLight'>
                 {format(new Date(marketData.atl_date?.usd || 0), 'MMM d, y')} (
-                {formatDistance(Date.now(), new Date(marketData.atl_date?.usd || 0))})
+                {formatDistance(
+                  Date.now(),
+                  new Date(marketData.atl_date?.usd || 0)
+                )}
+                )
               </Typography>
             </Grid>
           </Grid>
@@ -163,4 +169,4 @@ export default function StackData({ marketData }: Props) {
       </Stack>
     </Paper>
   );
-};
+}

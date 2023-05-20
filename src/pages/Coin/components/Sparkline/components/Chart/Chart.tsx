@@ -10,7 +10,10 @@ import {
 } from 'recharts';
 import { format } from 'date-fns';
 import { Paper, Typography } from '@mui/material';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import {
+  NameType,
+  ValueType,
+} from 'recharts/types/component/DefaultTooltipContent';
 import { useCallback } from 'react';
 
 interface Props {
@@ -22,32 +25,35 @@ interface Props {
 }
 
 export default function ChartComponent({ sparkline, days }: Props) {
-  const CustomTooltip = useCallback(({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
-    if (!active || !payload || !payload.length) return null;
-    return (
-      <Paper
-        sx={{
-          opacity: 0.75,
-          padding: 2,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography>{format(new Date(label), 'eeee, d MMM, yyyy')}</Typography>
-        <Typography fontWeight='fontWeightLight'>
-          {Number(payload[0].value).toLocaleString('en-US', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 8,
-            style: 'currency',
-            currency: 'USD',
-          })}
-        </Typography>
-      </Paper>
-    );
-
-  }, []);
-
+  const CustomTooltip = useCallback(
+    ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+      if (!active || !payload || !payload.length) return null;
+      return (
+        <Paper
+          sx={{
+            opacity: 0.75,
+            padding: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography>
+            {format(new Date(label), 'eeee, d MMM, yyyy')}
+          </Typography>
+          <Typography fontWeight='fontWeightLight'>
+            {Number(payload[0].value).toLocaleString('en-US', {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 8,
+              style: 'currency',
+              currency: 'USD',
+            })}
+          </Typography>
+        </Paper>
+      );
+    },
+    []
+  );
 
   return (
     <ResponsiveContainer width='99%' height='100%'>
@@ -86,5 +92,5 @@ export default function ChartComponent({ sparkline, days }: Props) {
         <CartesianGrid opacity={0.05} vertical={false} />
       </AreaChart>
     </ResponsiveContainer>
-  )
+  );
 }

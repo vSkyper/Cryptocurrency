@@ -4,23 +4,21 @@ import { ICoins } from 'interfaces';
 import { columns } from 'constants/dataTable';
 
 interface Props {
-  coins: ICoins[]
-};
+  coins: ICoins[];
+}
 
 export default function Table({ coins }: Props) {
   return (
-    <>
-      <DataTable>
-        <DataGrid
-          pagination
-          autoHeight
-          rows={coins}
-          columns={columns}
-          initialState={{
-            pagination: { paginationModel: { pageSize: 50 } },
-          }}
-        />
-      </DataTable>
-    </>
-  )
+    <DataTable>
+      <DataGrid
+        pagination
+        autoHeight
+        rows={coins}
+        columns={columns}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 50 } },
+        }}
+      />
+    </DataTable>
+  );
 }

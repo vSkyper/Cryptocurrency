@@ -1,6 +1,11 @@
 import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { GridCellParams, GridColDef, GridRenderCellParams, GridValueFormatterParams } from '@mui/x-data-grid';
+import {
+  GridCellParams,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueFormatterParams,
+} from '@mui/x-data-grid';
 import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
 
 export const columns: GridColDef[] = [
@@ -27,7 +32,8 @@ export const columns: GridColDef[] = [
     headerName: 'Symbol',
     flex: 0.9,
     minWidth: 135,
-    valueFormatter: (params: GridValueFormatterParams) => params.value.toUpperCase(),
+    valueFormatter: (params: GridValueFormatterParams) =>
+      params.value.toUpperCase(),
   },
   {
     type: 'number',

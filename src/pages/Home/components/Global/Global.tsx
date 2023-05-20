@@ -1,16 +1,11 @@
 import { useState } from 'react';
-import {
-  Grid,
-  Box,
-  Typography,
-  Collapse,
-} from '@mui/material';
+import { Grid, Box, Typography, Collapse } from '@mui/material';
 import { Cards, Description, Switch } from './components';
 import { IGlobalData } from 'interfaces';
 
 interface Props {
   globalData: IGlobalData;
-};
+}
 
 export default function Global({ globalData }: Props) {
   const [toggle, setToggle] = useState<boolean>(false);
@@ -22,7 +17,7 @@ export default function Global({ globalData }: Props) {
           <Typography variant='h5'>
             Cryptocurrency Prices by Market Cap
           </Typography>
-          <Switch toggle={toggle} setToggle={setToggle} mobile={true} />
+          <Switch toggle={toggle} setToggle={setToggle} mobile />
         </Grid>
         <Description globalData={globalData} />
       </Box>
@@ -32,4 +27,4 @@ export default function Global({ globalData }: Props) {
       </Collapse>
     </>
   );
-};
+}

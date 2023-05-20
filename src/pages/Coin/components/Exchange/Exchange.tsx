@@ -1,6 +1,14 @@
-import { useState } from 'react';
-import { Typography, Grid, Divider, TextField } from '@mui/material';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import { useCallback, useState } from 'react';
+import {
+  Typography,
+  Grid,
+  Divider,
+  TextField,
+  FilterOptionsState,
+  createFilterOptions,
+  AutocompleteRenderInputParams,
+  Autocomplete,
+} from '@mui/material';
 import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
 import { InputBaseExchange, InputCard } from './styled';
 import useFetch from 'hooks/useFetch';
@@ -15,7 +23,8 @@ interface Props {
 export default function Exchange({ id, symbol }: Props) {
   const [currencyOption, setCurrencyOption] = useState<string>('usd');
   const [amount, setAmount] = useState<string>('');
-  const [fromCryptoToCurrency, setFromCryptoToCurrency] = useState<boolean>(true);
+  const [fromCryptoToCurrency, setFromCryptoToCurrency] =
+    useState<boolean>(true);
 
   const { data: currencies, error: currenciesError } = useFetch<string[]>(
     'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'
@@ -25,7 +34,44 @@ export default function Exchange({ id, symbol }: Props) {
     `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`
   );
 
-  if (currenciesError || exchangeRateError) return <ErrorModal />
+  const defaultFilterOptions = createFilterOptions<string>({
+    matchFrom: 'start',
+  });
+
+  const filterOptions = useCallback(
+    (options: string[], state: FilterOptionsState<string>) =>
+      defaultFilterOptions(options, state).slice(0, 5),
+    [defaultFilterOptions]
+  );
+
+  const handleOptionLabel = useCallback(
+    (option: string) => option.toUpperCase(),
+    []
+  );
+
+  const handleChange = useCallback(
+    (e: React.SyntheticEvent, value: string | null) => {
+      if (!value) return;
+      setCurrencyOption(value);
+    },
+    []
+  );
+
+  const handleRenderInput = useCallback(
+    (params: AutocompleteRenderInputParams) => (
+      <TextField {...params} variant='standard' />
+    ),
+    []
+  );
+
+  const handleRenderOption = useCallback(
+    (props: React.HTMLAttributes<HTMLLIElement>, option: string) => (
+      <li {...props}>{option.toUpperCase()}</li>
+    ),
+    []
+  );
+
+  if (currenciesError || exchangeRateError) return <ErrorModal />;
 
   let currency: string | number = '';
   let crypto: string | number = '';
@@ -34,22 +80,16 @@ export default function Exchange({ id, symbol }: Props) {
       case true:
         crypto = amount;
         currency = Number(amount) * exchangeRate[id]?.[currencyOption];
-        !isFinite(currency) && (currency = '');
+        if (!isFinite(currency)) currency = '';
         break;
       case false:
         currency = amount;
         crypto = Number(amount) / exchangeRate[id]?.[currencyOption];
-        !isFinite(crypto) && (crypto = '');
+        if (!isFinite(crypto)) crypto = '';
         break;
+      // No Default
     }
   }
-
-  const defaultFilterOptions = createFilterOptions({
-    matchFrom: 'start',
-  });
-
-  const filterOptions = (options: any, state: any) =>
-    defaultFilterOptions(options, state).slice(0, 5);
 
   return (
     <Grid
@@ -81,16 +121,12 @@ export default function Exchange({ id, symbol }: Props) {
             value={currencyOption}
             options={currencies ?? []}
             filterOptions={filterOptions}
-            getOptionLabel={(option: any) => option.toUpperCase()}
+            getOptionLabel={handleOptionLabel}
             disableClearable
             autoComplete
-            onChange={(_, value: string) => setCurrencyOption(value)}
-            renderInput={(params) => (
-              <TextField {...params} variant='standard' />
-            )}
-            renderOption={(props, option: any) => (
-              <li {...props}>{option.toUpperCase()}</li>
-            )}
+            onChange={handleChange}
+            renderInput={handleRenderInput}
+            renderOption={handleRenderOption}
           />
           <Divider orientation='vertical' sx={{ mx: 2 }} />
           <InputBaseExchange
@@ -105,4 +141,4 @@ export default function Exchange({ id, symbol }: Props) {
       </Grid>
     </Grid>
   );
-};
+}

@@ -1,6 +1,4 @@
-import {
-  Button,
-} from '@mui/material';
+import { Button } from '@mui/material';
 
 interface Props {
   setDays: React.Dispatch<React.SetStateAction<string>>;
@@ -10,7 +8,13 @@ interface Props {
   mobileDisappear: boolean;
 }
 
-export default function ButtonComponent({ setDays, actualDays, days, daysFormatted, mobileDisappear }: Props) {
+export default function ButtonComponent({
+  setDays,
+  actualDays,
+  days,
+  daysFormatted,
+  mobileDisappear,
+}: Props) {
   return (
     <Button
       color={actualDays === days ? 'primary' : 'inherit'}
@@ -19,5 +23,5 @@ export default function ButtonComponent({ setDays, actualDays, days, daysFormatt
     >
       {daysFormatted}
     </Button>
-  )
+  );
 }

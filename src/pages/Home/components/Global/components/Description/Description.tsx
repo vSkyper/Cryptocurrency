@@ -3,13 +3,13 @@ import { IGlobalData } from 'interfaces';
 
 interface Props {
   globalData: IGlobalData;
-};
+}
 
 export default function Description({ globalData }: Props) {
   const marketCapText: string = Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    notation: 'compact'
+    notation: 'compact',
   }).format(globalData.data.total_market_cap.usd);
 
   const marketCapPercentage: string = (
@@ -23,7 +23,7 @@ export default function Description({ globalData }: Props) {
   const totalVolumeText: string = Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    notation: 'compact'
+    notation: 'compact',
   }).format(globalData.data.total_volume.usd);
 
   const marketCapPercentageBTC: string = (
@@ -42,9 +42,8 @@ export default function Description({ globalData }: Props) {
     style: 'percent',
   });
 
-  const cryptocurrencies: string = (
-    globalData.data.active_cryptocurrencies
-  ).toLocaleString('en-US');
+  const cryptocurrencies: string =
+    globalData.data.active_cryptocurrencies.toLocaleString('en-US');
 
   return (
     <Typography fontWeight='fontWeightLight'>
@@ -60,11 +59,11 @@ export default function Description({ globalData }: Props) {
       >
         {marketCapPercentage}
       </Typography>{' '}
-      change in the last 24 hours. Total cryptocurrency trading volume in
-      the last day is at {totalVolumeText}. Bitcoin dominance is at{' '}
+      change in the last 24 hours. Total cryptocurrency trading volume in the
+      last day is at {totalVolumeText}. Bitcoin dominance is at{' '}
       {marketCapPercentageBTC} and Ethereum dominance is at{' '}
-      {marketCapPercentageETH}. CoinGecko API is now tracking{' '}
-      {cryptocurrencies} cryptocurrencies.
+      {marketCapPercentageETH}. CoinGecko API is now tracking {cryptocurrencies}{' '}
+      cryptocurrencies.
     </Typography>
-  )
+  );
 }

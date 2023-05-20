@@ -88,4 +88,4 @@ export default function Links({ data }: Props) {
       )}
     </Grid>
   );
-};
+}

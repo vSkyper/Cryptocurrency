@@ -1,8 +1,4 @@
-import {
-  Grid,
-  Typography,
-  Grow,
-} from '@mui/material';
+import { Grid, Typography, Grow } from '@mui/material';
 import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
@@ -13,10 +9,10 @@ import { Card, Percentage } from 'styled';
 interface Props {
   toggle: boolean;
   globalData: IGlobalData;
-};
+}
 
 export default function Cards({ toggle, globalData }: Props) {
-  const marketCap: string = (globalData.data.total_market_cap.usd).toLocaleString(
+  const marketCap: string = globalData.data.total_market_cap.usd.toLocaleString(
     'en-US',
     {
       maximumFractionDigits: 0,
@@ -33,7 +29,7 @@ export default function Cards({ toggle, globalData }: Props) {
     style: 'percent',
   });
 
-  const totalVolume: string = (globalData.data.total_volume.usd).toLocaleString(
+  const totalVolume: string = globalData.data.total_volume.usd.toLocaleString(
     'en-US',
     {
       maximumFractionDigits: 0,
@@ -50,9 +46,8 @@ export default function Cards({ toggle, globalData }: Props) {
     style: 'percent',
   });
 
-  const cryptocurrencies: string = (
-    globalData.data.active_cryptocurrencies
-  ).toLocaleString('en-US');
+  const cryptocurrencies: string =
+    globalData.data.active_cryptocurrencies.toLocaleString('en-US');
 
   return (
     <Grid container justifyContent='center' spacing={2} sx={{ mt: 0.1 }}>
@@ -127,5 +122,5 @@ export default function Cards({ toggle, globalData }: Props) {
         </Grid>
       </Grow>
     </Grid>
-  )
+  );
 }

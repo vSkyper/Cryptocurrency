@@ -24,7 +24,7 @@ export default function Sparkline({ id }: Props) {
     value: data[1],
   }));
 
-  if (error) return <ErrorModal />
+  if (error) return <ErrorModal />;
 
   return (
     <>
@@ -36,14 +36,17 @@ export default function Sparkline({ id }: Props) {
       </Backdrop>
       <Grid container justifyContent='flex-end' sx={{ py: 1 }}>
         {buttons.map((button) => (
-          <ButtonComponent key={button.days} {...button} setDays={setDays} actualDays={days} />
+          <ButtonComponent
+            key={button.days}
+            {...button}
+            setDays={setDays}
+            actualDays={days}
+          />
         ))}
       </Grid>
       <Chart>
-        {sparkline && (
-          <ChartComponent sparkline={sparkline} days={days} />
-        )}
+        {sparkline && <ChartComponent sparkline={sparkline} days={days} />}
       </Chart>
     </>
   );
-};
+}

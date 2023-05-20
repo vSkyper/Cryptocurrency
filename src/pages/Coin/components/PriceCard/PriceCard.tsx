@@ -6,11 +6,10 @@ import { Card } from 'styled';
 import { priceChange } from 'constants/coin';
 
 interface Props {
-  data: ICoin
+  data: ICoin;
 }
 
 export default function PriceCard({ data }: Props) {
-
   const progressBarCurrent: number =
     (data.market_data.current_price?.usd || 0) -
     (data.market_data.low_24h?.usd || 0);
@@ -68,4 +67,4 @@ export default function PriceCard({ data }: Props) {
       </Grid>
     </Grid>
   );
-};
+}

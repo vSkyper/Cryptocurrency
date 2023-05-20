@@ -1,7 +1,7 @@
 import { InputBase, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const InputBaseExchange = styled(InputBase)(({ theme }) => ({
+export const InputBaseExchange = styled(InputBase)({
   paddingLeft: 1,
   flex: 1,
   '& input[type=number]': {
@@ -15,7 +15,7 @@ export const InputBaseExchange = styled(InputBase)(({ theme }) => ({
     WebkitAppearance: 'none',
     margin: 0,
   },
-})) as typeof InputBase;
+}) as typeof InputBase;
 
 export const InputCard = styled(Paper)(({ theme }) => ({
   paddingLeft: 15,
