@@ -11,7 +11,7 @@ interface Props {
 export default function Switch({ toggle, setToggle, mobile }: Props) {
   const handleChange = useCallback(() => {
     setToggle(!toggle);
-  }, [setToggle]);
+  }, [setToggle, toggle]);
 
   return (
     <FormControlLabel

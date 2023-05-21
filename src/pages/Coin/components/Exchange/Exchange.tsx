@@ -76,7 +76,7 @@ export default function Exchange({ id, symbol }: Props) {
       setAmount(e.target.value);
       setFromCryptoToCurrency(!fromCryptoToCurrency);
     },
-    []
+    [fromCryptoToCurrency]
   );
 
   if (currenciesError || exchangeRateError) return <ErrorModal />;
