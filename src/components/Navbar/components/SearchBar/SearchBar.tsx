@@ -35,9 +35,12 @@ export default function SearchBar() {
     []
   );
 
-  const handleInputChange = useCallback((e: React.SyntheticEvent) => {
-    setValue((e.target as HTMLInputElement).value);
-  }, []);
+  const handleInputChange = useCallback(
+    (e: React.SyntheticEvent, value: string) => {
+      setValue(value);
+    },
+    []
+  );
 
   const handleChange = useCallback(
     (e: React.SyntheticEvent, value: ICoinsList | null) => {

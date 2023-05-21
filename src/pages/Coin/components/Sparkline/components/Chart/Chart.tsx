@@ -55,6 +55,25 @@ export default function ChartComponent({ sparkline, days }: Props) {
     []
   );
 
+  const handleTickFormatterXAxis = useCallback(
+    (value: string) => {
+      switch (days) {
+        case '1':
+          return format(new Date(value), '| hh:mm a |');
+        case 'max':
+          return format(new Date(value), '| y MMM |');
+        default:
+          return format(new Date(value), '| MMM, d |');
+      }
+    },
+    [days]
+  );
+
+  const handleTickFormatterYAxis = useCallback(
+    (value: number) => `$${value}`,
+    []
+  );
+
   return (
     <ResponsiveContainer width='99%' height='100%'>
       <AreaChart data={sparkline}>
@@ -69,16 +88,7 @@ export default function ChartComponent({ sparkline, days }: Props) {
           dataKey='date'
           axisLine={false}
           tickLine={false}
-          tickFormatter={(value) => {
-            switch (days) {
-              case '1':
-                return format(new Date(value), '| hh:mm a |');
-              case 'max':
-                return format(new Date(value), '| y MMM |');
-              default:
-                return format(new Date(value), '| MMM, d |');
-            }
-          }}
+          tickFormatter={handleTickFormatterXAxis}
         />
         <YAxis
           dataKey='value'
@@ -86,7 +96,7 @@ export default function ChartComponent({ sparkline, days }: Props) {
           axisLine={false}
           tickLine={false}
           tickCount={8}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={handleTickFormatterYAxis}
         />
         <Tooltip content={<CustomTooltip />} />
         <CartesianGrid opacity={0.05} vertical={false} />

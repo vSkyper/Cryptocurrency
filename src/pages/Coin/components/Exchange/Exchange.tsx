@@ -49,7 +49,7 @@ export default function Exchange({ id, symbol }: Props) {
     []
   );
 
-  const handleChange = useCallback(
+  const handleChangeAutocomplete = useCallback(
     (e: React.SyntheticEvent, value: string | null) => {
       if (!value) return;
       setCurrencyOption(value);
@@ -68,6 +68,14 @@ export default function Exchange({ id, symbol }: Props) {
     (props: React.HTMLAttributes<HTMLLIElement>, option: string) => (
       <li {...props}>{option.toUpperCase()}</li>
     ),
+    []
+  );
+
+  const handleChangeInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setAmount(e.target.value);
+      setFromCryptoToCurrency(!fromCryptoToCurrency);
+    },
     []
   );
 
@@ -105,10 +113,7 @@ export default function Exchange({ id, symbol }: Props) {
           <InputBaseExchange
             type='number'
             value={crypto}
-            onChange={(e) => {
-              setAmount(e.target.value);
-              setFromCryptoToCurrency(true);
-            }}
+            onChange={handleChangeInput}
           />
         </InputCard>
       </Grid>
@@ -124,7 +129,7 @@ export default function Exchange({ id, symbol }: Props) {
             getOptionLabel={handleOptionLabel}
             disableClearable
             autoComplete
-            onChange={handleChange}
+            onChange={handleChangeAutocomplete}
             renderInput={handleRenderInput}
             renderOption={handleRenderOption}
           />
@@ -132,10 +137,7 @@ export default function Exchange({ id, symbol }: Props) {
           <InputBaseExchange
             type='number'
             value={currency}
-            onChange={(e) => {
-              setAmount(e.target.value);
-              setFromCryptoToCurrency(false);
-            }}
+            onChange={handleChangeInput}
           />
         </InputCard>
       </Grid>

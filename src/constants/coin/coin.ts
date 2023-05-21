@@ -1,5 +1,5 @@
 export const buttons = [
-  { days: '1D', daysFormatted: '1D', mobileDisappear: false },
+  { days: '1', daysFormatted: '1D', mobileDisappear: false },
   { days: '7', daysFormatted: '1W', mobileDisappear: false },
   { days: '30', daysFormatted: '1M', mobileDisappear: false },
   { days: '90', daysFormatted: '3M', mobileDisappear: true },

@@ -1,5 +1,6 @@
 import { FormControlLabel } from '@mui/material';
 import { IOSSwitch } from './styled';
+import { useCallback } from 'react';
 
 interface Props {
   toggle: boolean;
@@ -8,14 +9,17 @@ interface Props {
 }
 
 export default function Switch({ toggle, setToggle, mobile }: Props) {
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setToggle(!toggle);
+    },
+    [setToggle]
+  );
+
   return (
     <FormControlLabel
       control={
-        <IOSSwitch
-          checked={toggle}
-          sx={{ mr: 1 }}
-          onChange={() => setToggle(!toggle)}
-        />
+        <IOSSwitch checked={toggle} sx={{ mr: 1 }} onChange={handleChange} />
       }
       label='Show Stats'
       sx={

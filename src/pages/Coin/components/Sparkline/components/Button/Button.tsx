@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { useCallback } from 'react';
 
 interface Props {
   setDays: React.Dispatch<React.SetStateAction<string>>;
@@ -15,11 +16,15 @@ export default function ButtonComponent({
   daysFormatted,
   mobileDisappear,
 }: Props) {
+  const handleClicked = useCallback(() => {
+    setDays(days);
+  }, [days, setDays]);
+
   return (
     <Button
       color={actualDays === days ? 'primary' : 'inherit'}
       sx={{ display: { xs: mobileDisappear ? 'none' : 'block', sm: 'block' } }}
-      onClick={() => setDays(days)}
+      onClick={handleClicked}
     >
       {daysFormatted}
     </Button>
