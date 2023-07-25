@@ -50,7 +50,7 @@ export default function Exchange({ id, symbol }: Props) {
   );
 
   const handleChangeAutocomplete = useCallback(
-    (e: React.SyntheticEvent, value: string | null) => {
+    (_: React.SyntheticEvent, value: string | null) => {
       if (!value) return;
       setCurrencyOption(value);
     },

@@ -36,14 +36,14 @@ export default function SearchBar() {
   );
 
   const handleInputChange = useCallback(
-    (e: React.SyntheticEvent, value: string) => {
+    (_: React.SyntheticEvent, value: string) => {
       setValue(value);
     },
     []
   );
 
   const handleChange = useCallback(
-    (e: React.SyntheticEvent, value: ICoinsList | null) => {
+    (_: React.SyntheticEvent, value: ICoinsList | null) => {
       if (!value) return;
       setValue('');
       navigate(`/coins/${value.id}`);
