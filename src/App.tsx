@@ -6,11 +6,10 @@ import {
   responsiveFontSizes,
 } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Coin, Home } from './pages';
-import { Footer, Navbar } from './components';
+import { Coin, Home } from 'pages';
+import { Footer, Navbar } from 'components';
 
 export default function App() {
-
   let theme: Theme = createTheme({
     palette: {
       mode: 'dark',
@@ -22,7 +21,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router basename={import.meta.env.PUBLIC_URL}>
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
