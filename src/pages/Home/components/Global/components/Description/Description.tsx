@@ -1,11 +1,9 @@
 import { Typography } from '@mui/material';
-import { IGlobalData } from 'interfaces';
+import { DescriptionProps } from './interface';
 
-interface Props {
-  globalData: IGlobalData;
-}
+export default function Description(props: DescriptionProps) {
+  const { globalData } = props;
 
-export default function Description({ globalData }: Props) {
   const marketCapText: string = Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',

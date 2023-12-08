@@ -7,12 +7,11 @@ import { ErrorModal } from 'components';
 import { ISparkline } from 'interfaces';
 import useFetch from 'hooks/useFetch';
 import { buttons } from 'constants/coin';
+import { SparklineProps } from './interface';
 
-interface Props {
-  id: string;
-}
+export default function Sparkline(props: SparklineProps) {
+  const { id } = props;
 
-export default function Sparkline({ id }: Props) {
   const [days, setDays] = useState<string>('7');
 
   const { data, error } = useFetch<ISparkline>(

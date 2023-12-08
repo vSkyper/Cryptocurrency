@@ -8,7 +8,7 @@ export interface ICoin {
   hashing_algorithm?: string;
   categories?: string[];
   public_notice?: null;
-  additional_notices?: any[];
+  additional_notices?: unknown[];
   localization?: { [x: string]: string };
   description?: { [x: string]: string };
   links?: Links;
@@ -28,7 +28,7 @@ export interface ICoin {
   community_data?: CommunityData;
   developer_data?: DeveloperData;
   public_interest_stats?: PublicInterestStats;
-  status_updates?: any[];
+  status_updates?: unknown[];
   last_updated?: Date;
   tickers?: Ticker[];
 }
@@ -72,7 +72,7 @@ export interface IMarketData {
   atl_date?: { [key: string]: Date };
   market_cap?: { [key: string]: number };
   market_cap_rank?: number;
-  fully_diluted_valuation?: any;
+  fully_diluted_valuation?: unknown;
   total_volume?: { [key: string]: number };
   high_24h?: { [key: string]: number };
   low_24h?: { [key: string]: number };
@@ -133,7 +133,7 @@ interface CodeAdditionsDeletions4_Weeks {
 
 interface PublicInterestStats {
   alexa_rank?: number;
-  bing_matches?: any;
+  bing_matches?: unknown;
 }
 
 interface Ticker {

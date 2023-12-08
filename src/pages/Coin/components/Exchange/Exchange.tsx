@@ -14,13 +14,11 @@ import { InputBaseExchange, InputCard } from './styled';
 import useFetch from 'hooks/useFetch';
 import { IExchange } from 'interfaces';
 import { ErrorModal } from 'components';
+import { ExchangeProps } from './interface';
 
-interface Props {
-  id: string;
-  symbol: string;
-}
+export default function Exchange(props: ExchangeProps) {
+  const { id, symbol } = props;
 
-export default function Exchange({ id, symbol }: Props) {
   const [currencyOption, setCurrencyOption] = useState<string>('usd');
   const [amount, setAmount] = useState<string>('');
   const [fromCryptoToCurrency, setFromCryptoToCurrency] =

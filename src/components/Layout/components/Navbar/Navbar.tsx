@@ -1,8 +1,4 @@
-import {
-  Box,
-  AppBar,
-  Toolbar,
-} from '@mui/material';
+import { Box, AppBar, Toolbar } from '@mui/material';
 import { SearchBar, Title, Tooltips } from './components';
 
 export default function Navbar() {
@@ -18,4 +14,4 @@ export default function Navbar() {
       <Toolbar />
     </Box>
   );
-};
+}

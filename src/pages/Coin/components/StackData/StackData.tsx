@@ -1,12 +1,10 @@
 import { Typography, Stack, Divider, Grid, Paper } from '@mui/material';
 import { format, formatDistance } from 'date-fns';
-import { IMarketData } from 'interfaces';
+import { StackDataProps } from './interface';
 
-interface Props {
-  marketData: IMarketData;
-}
+export default function StackData(props: StackDataProps) {
+  const { marketData } = props;
 
-export default function StackData({ marketData }: Props) {
   return (
     <Paper sx={{ p: 2 }}>
       <Stack divider={<Divider orientation='horizontal' />} spacing={2}>

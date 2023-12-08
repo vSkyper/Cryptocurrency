@@ -1,15 +1,13 @@
 import { Typography, Grid, Box } from '@mui/material';
 import { StyledLinearProgress } from './styled';
 import { Price, PriceChange } from './components';
-import { ICoin } from 'interfaces';
 import { Card } from 'styled';
 import { priceChange } from 'constants/coin';
+import { PriceCardProps } from './interface';
 
-interface Props {
-  data: ICoin;
-}
+export default function PriceCard(props: PriceCardProps) {
+  const { data } = props;
 
-export default function PriceCard({ data }: Props) {
   const progressBarCurrent: number =
     (data.market_data.current_price?.usd || 0) -
     (data.market_data.low_24h?.usd || 0);

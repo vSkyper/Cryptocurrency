@@ -16,9 +16,9 @@
 ## Technologies Used
 
 - ReactJS - version 18.2.0
-- Vite - version 4.4.5
-- TypeScript - version 5.0.2
-- MUI - version 5.14.1
+- Vite - version 5.0.7
+- TypeScript - version 5.3.3
+- MUI - version 5.14.20
 
 ## Features
 

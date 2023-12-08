@@ -3,15 +3,12 @@ import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
 } from '@mui/icons-material';
-import { IGlobalData } from 'interfaces';
 import { Card, Percentage } from 'styled';
+import { CardsProps } from './interface';
 
-interface Props {
-  toggle: boolean;
-  globalData: IGlobalData;
-}
+export default function Cards(props: CardsProps) {
+  const { toggle, globalData } = props;
 
-export default function Cards({ toggle, globalData }: Props) {
   const marketCap: string = globalData.data.total_market_cap.usd.toLocaleString(
     'en-US',
     {

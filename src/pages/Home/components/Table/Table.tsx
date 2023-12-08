@@ -1,13 +1,11 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { DataTable } from './styled';
-import { ICoins } from 'interfaces';
 import { columns } from 'constants/dataTable';
+import { TableProps } from './interface';
 
-interface Props {
-  coins: ICoins[];
-}
+export default function Table(props: TableProps) {
+  const { coins } = props;
 
-export default function Table({ coins }: Props) {
   return (
     <DataTable>
       <DataGrid

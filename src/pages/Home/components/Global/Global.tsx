@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { Grid, Box, Typography, Collapse } from '@mui/material';
 import { Cards, Description, Switch } from './components';
-import { IGlobalData } from 'interfaces';
+import { GlobalProps } from './interface';
 
-interface Props {
-  globalData: IGlobalData;
-}
+export default function Global(props: GlobalProps) {
+  const { globalData } = props;
 
-export default function Global({ globalData }: Props) {
   const [toggle, setToggle] = useState<boolean>(false);
 
   return (

@@ -1,6 +1,5 @@
-import Navbar from './Navbar';
-import Footer from './Footer';
 import ErrorModal from './ErrorModal';
 import LoadingModal from './LoadingModal';
+import Layout from './Layout';
 
-export { Navbar, Footer, ErrorModal, LoadingModal };
+export { Layout, ErrorModal, LoadingModal };

@@ -5,13 +5,11 @@ import {
   Twitter as TwitterIcon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
-import { ICoin } from 'interfaces';
+import { LinksProps } from './interface';
 
-interface Props {
-  data: ICoin;
-}
+export default function Links(props: LinksProps) {
+  const { data } = props;
 
-export default function Links({ data }: Props) {
   return (
     <Grid container sx={{ ml: 2, mt: 2 }}>
       {data.links?.homepage?.[0] && (

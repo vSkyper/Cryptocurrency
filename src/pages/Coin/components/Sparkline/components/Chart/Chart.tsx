@@ -15,16 +15,11 @@ import {
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 import { useCallback } from 'react';
+import { ChartProps } from './interface';
 
-interface Props {
-  sparkline: {
-    date: string;
-    value: number;
-  }[];
-  days: string;
-}
+export default function ChartComponent(props: ChartProps) {
+  const { sparkline, days } = props;
 
-export default function ChartComponent({ sparkline, days }: Props) {
   const CustomTooltip = useCallback(
     ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
       if (!active || !payload || !payload.length) return null;

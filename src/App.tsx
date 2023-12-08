@@ -5,9 +5,9 @@ import {
   createTheme,
   responsiveFontSizes,
 } from '@mui/material/styles';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Coin, Home } from 'pages';
-import { Footer, Navbar } from 'components';
+import { Layout } from 'components';
 
 export default function App() {
   let theme: Theme = createTheme({
@@ -18,17 +18,26 @@ export default function App() {
 
   theme = responsiveFontSizes(theme);
 
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/coins/:id',
+          element: <Coin />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router basename={import.meta.env.PUBLIC_URL}>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/coins/:id' element={<Coin />} />
-        </Routes>
-        <Footer />
-      </Router>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }

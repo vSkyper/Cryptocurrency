@@ -1,14 +1,11 @@
 import { FormControlLabel } from '@mui/material';
 import { IOSSwitch } from './styled';
 import { useCallback } from 'react';
+import { SwitchProps } from './interface';
 
-interface Props {
-  toggle: boolean;
-  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  mobile: boolean;
-}
+export default function Switch(props: SwitchProps) {
+  const { toggle, setToggle, mobile } = props;
 
-export default function Switch({ toggle, setToggle, mobile }: Props) {
   const handleChange = useCallback(() => {
     setToggle(!toggle);
   }, [setToggle, toggle]);

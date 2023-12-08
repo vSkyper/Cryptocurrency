@@ -3,14 +3,12 @@ import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
 } from '@mui/icons-material';
-import { IMarketData } from 'interfaces';
 import { Percentage } from 'styled';
+import { PriceProps } from './interface';
 
-interface Props {
-  marketData: IMarketData;
-}
+export default function Price(props: PriceProps) {
+  const { marketData } = props;
 
-export default function Price({ marketData }: Props) {
   return (
     <Typography
       variant='h5'
