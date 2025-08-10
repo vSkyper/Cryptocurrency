@@ -21,7 +21,12 @@ export default function Title() {
         variant='h6'
         noWrap
         component='div'
-        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        sx={{
+          flexGrow: 1,
+          display: { xs: 'none', sm: 'block' },
+          fontWeight: 700,
+          letterSpacing: 0.2,
+        }}
       >
         <Link color='inherit' underline='none' component={RouterLink} to='/'>
           Cryptocurrency

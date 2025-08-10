@@ -6,7 +6,7 @@ import {
   AreaChart,
   ResponsiveContainer,
   Area,
-  TooltipProps,
+  TooltipContentProps,
 } from 'recharts';
 import { format } from 'date-fns';
 import { Paper, Typography } from '@mui/material';
@@ -21,20 +21,19 @@ export default function ChartComponent(props: ChartProps) {
   const { sparkline, days } = props;
 
   const CustomTooltip = useCallback(
-    ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+    ({ active, payload, label }: TooltipContentProps<ValueType, NameType>) => {
       if (!active || !payload || !payload.length) return null;
       return (
         <Paper
           sx={{
-            opacity: 0.75,
-            padding: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            opacity: 0.98,
+            p: 1.5,
+            bgcolor: 'background.paper',
+            border: (theme) => `1px solid ${theme.palette.divider}`,
           }}
         >
           <Typography>
-            {format(new Date(label), 'eeee, d MMM, yyyy')}
+            {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
           </Typography>
           <Typography fontWeight='fontWeightLight'>
             {Number(payload[0].value).toLocaleString('en-US', {
@@ -74,11 +73,25 @@ export default function ChartComponent(props: ChartProps) {
       <AreaChart data={sparkline}>
         <defs>
           <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#648dae' stopOpacity={0.4} />
-            <stop offset='75%' stopColor='#648dae' stopOpacity={0.05} />
+            <stop offset='5%' stopColor='#42a5f5' stopOpacity={0.45} />
+            <stop offset='75%' stopColor='#42a5f5' stopOpacity={0.06} />
           </linearGradient>
+          <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
+            <feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
+            <feMerge>
+              <feMergeNode in='coloredBlur' />
+              <feMergeNode in='SourceGraphic' />
+            </feMerge>
+          </filter>
         </defs>
-        <Area dataKey='value' stroke='#648dae' fill='url(#color)' />
+        <Area
+          dataKey='value'
+          stroke='#42a5f5'
+          strokeWidth={2}
+          fill='url(#color)'
+          filter='url(#glow)'
+          activeDot={{ r: 4, stroke: '#42a5f5', strokeWidth: 2, fill: '#fff' }}
+        />
         <XAxis
           dataKey='date'
           axisLine={false}
@@ -93,7 +106,7 @@ export default function ChartComponent(props: ChartProps) {
           tickCount={8}
           tickFormatter={handleTickFormatterYAxis}
         />
-        <Tooltip content={<CustomTooltip />} />
+        <Tooltip content={CustomTooltip} />
         <CartesianGrid opacity={0.05} vertical={false} />
       </AreaChart>
     </ResponsiveContainer>

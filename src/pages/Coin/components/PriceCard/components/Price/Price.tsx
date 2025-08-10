@@ -11,11 +11,17 @@ export default function Price(props: PriceProps) {
 
   return (
     <Typography
-      variant='h5'
+      variant='h4'
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        fontWeight: 700,
+        letterSpacing: 0.2,
+        background: 'linear-gradient(180deg, #e0e0e0, rgba(224,224,224,0.5))',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        color: 'transparent',
       }}
     >
       {(marketData.current_price?.usd || 0).toLocaleString('en-US', {
@@ -25,7 +31,13 @@ export default function Price(props: PriceProps) {
         currency: 'USD',
       })}
       {(marketData.price_change_percentage_24h || 0) < 0 ? (
-        <Percentage sx={{ color: 'error.light' }}>
+        <Percentage
+          sx={{
+            color: 'error.light',
+            transition: 'transform 200ms ease',
+            '&:hover svg': { transform: 'translateY(1px)' },
+          }}
+        >
           {((marketData.price_change_percentage_24h || 0) / 100).toLocaleString(
             'en-US',
             {
@@ -37,7 +49,13 @@ export default function Price(props: PriceProps) {
           <TrendingDownIcon />
         </Percentage>
       ) : (
-        <Percentage sx={{ color: 'success.light' }}>
+        <Percentage
+          sx={{
+            color: 'success.light',
+            transition: 'transform 200ms ease',
+            '&:hover svg': { transform: 'translateY(-1px)' },
+          }}
+        >
           {((marketData.price_change_percentage_24h || 0) / 100).toLocaleString(
             'en-US',
             {

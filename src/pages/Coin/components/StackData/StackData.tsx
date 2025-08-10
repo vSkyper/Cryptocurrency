@@ -6,10 +6,26 @@ export default function StackData(props: StackDataProps) {
   const { marketData } = props;
 
   return (
-    <Paper sx={{ p: 2 }}>
+    <Paper
+      sx={{
+        p: 2.5,
+        borderRadius: 3,
+        bgcolor: 'background.default',
+        border: (theme) => `1px solid ${theme.palette.divider}`,
+        boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+      }}
+    >
       <Stack divider={<Divider orientation='horizontal' />} spacing={2}>
-        <Grid container justifyContent='space-between'>
-          <Typography>Market Capitalization</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>Market Capitalization</Typography>
           <Typography>
             {(marketData.market_cap?.usd || 0).toLocaleString('en-US', {
               minimumFractionDigits: 0,
@@ -19,8 +35,16 @@ export default function StackData(props: StackDataProps) {
             })}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>24h Trading Volume</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>24h Trading Volume</Typography>
           <Typography>
             {(marketData.total_volume?.usd || 0).toLocaleString('en-US', {
               minimumFractionDigits: 0,
@@ -30,8 +54,16 @@ export default function StackData(props: StackDataProps) {
             })}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>Volume / Market Cap</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>Volume / Market Cap</Typography>
           <Typography>
             {(
               (marketData.total_volume?.usd || 0) /
@@ -42,8 +74,16 @@ export default function StackData(props: StackDataProps) {
             })}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>24h Low / 24h High</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>24h Low / 24h High</Typography>
           <Typography>
             {(marketData.low_24h?.usd || 0).toLocaleString('en-US', {
               minimumFractionDigits: 0,
@@ -60,33 +100,65 @@ export default function StackData(props: StackDataProps) {
             })}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>Market Cap Rank</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>Market Cap Rank</Typography>
           <Typography>
             {marketData.market_cap_rank
               ? `#${marketData.market_cap_rank}`
               : 'N/A'}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>Circulating Supply</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>Circulating Supply</Typography>
           <Typography>
             {(marketData.circulating_supply || 0).toLocaleString('en-US', {
               maximumFractionDigits: 0,
             })}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>Total Supply</Typography>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>Total Supply</Typography>
           <Typography sx={{ display: 'flex', alignItems: 'center' }}>
             {(marketData.total_supply || 0).toLocaleString('en-US', {
               maximumFractionDigits: 0,
             })}
           </Typography>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>All-Time High</Typography>
-          <Grid item>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>All-Time High</Typography>
+          <Grid>
             <Grid container direction='column'>
               <Typography align='right'>
                 {(marketData.ath?.usd || 0).toLocaleString('en-US', {
@@ -124,9 +196,17 @@ export default function StackData(props: StackDataProps) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container justifyContent='space-between'>
-          <Typography>All-Time Low</Typography>
-          <Grid item>
+        <Grid
+          container
+          justifyContent='space-between'
+          sx={{
+            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
+            p: 1,
+            transition: 'background-color 120ms ease',
+          }}
+        >
+          <Typography fontWeight={500}>All-Time Low</Typography>
+          <Grid>
             <Grid container direction='column'>
               <Typography align='right'>
                 {(marketData.atl?.usd || 0).toLocaleString('en-US', {

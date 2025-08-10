@@ -1,8 +1,7 @@
 import { CssBaseline } from '@mui/material';
 import {
-  Theme,
-  ThemeProvider,
-  createTheme,
+  CssVarsProvider,
+  extendTheme,
   responsiveFontSizes,
 } from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -10,9 +9,56 @@ import { Coin, Home } from 'pages';
 import { Layout } from 'components';
 
 export default function App() {
-  let theme: Theme = createTheme({
-    palette: {
-      mode: 'dark',
+  let theme = extendTheme({
+    cssVarPrefix: 'app',
+    colorSchemes: {
+      light: {
+        palette: {
+          primary: { main: '#6750A4' },
+          secondary: { main: '#625B71' },
+          background: { default: '#f7f7fb', paper: '#ffffff' },
+        },
+      },
+      dark: {
+        palette: {
+          primary: { main: '#D0BCFF' },
+          secondary: { main: '#CCC2DC' },
+          background: { default: '#0f1115', paper: '#161a22' },
+        },
+      },
+    },
+    shape: { borderRadius: 12 },
+    typography: {
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+      fontWeightBold: 700,
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: () => ({
+          'html, body': {
+            overscrollBehaviorY: 'none',
+          },
+        }),
+      },
+      MuiAppBar: {
+        defaultProps: { elevation: 0, color: 'default' },
+        styleOverrides: {
+          root: () => ({
+            backdropFilter: 'saturate(120%) blur(6px)',
+          }),
+        },
+      },
+      MuiPaper: {
+        defaultProps: { elevation: 1 },
+        styleOverrides: {
+          root: ({ theme }: any) => ({
+            backgroundImage: 'none',
+            border: `1px solid ${theme.palette.divider}`,
+          }),
+        },
+      },
     },
   });
 
@@ -35,9 +81,13 @@ export default function App() {
   ]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <CssVarsProvider
+      theme={theme}
+      defaultMode='system'
+      disableTransitionOnChange
+    >
       <CssBaseline />
       <RouterProvider router={router} />
-    </ThemeProvider>
+    </CssVarsProvider>
   );
 }

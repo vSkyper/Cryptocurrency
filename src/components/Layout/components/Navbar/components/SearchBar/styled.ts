@@ -1,12 +1,13 @@
 import { Autocomplete, InputBase } from '@mui/material';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 export const Search = styled(Autocomplete)(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: theme.palette.action.selected,
+  color: 'inherit',
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: theme.palette.action.hover,
   },
   marginLeft: 0,
   marginRight: 20,

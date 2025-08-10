@@ -28,10 +28,10 @@ export default function Sparkline(props: SparklineProps) {
   return (
     <>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={data ? false : true}
+        sx={{ color: 'inherit', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={!data}
       >
-        <CircularProgress color='inherit' />
+        <CircularProgress />
       </Backdrop>
       <Grid container justifyContent='flex-end' sx={{ py: 1 }}>
         {buttons.map((button) => (

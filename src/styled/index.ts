@@ -6,12 +6,14 @@ export const Card = styled(Paper)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: theme.spacing(2, 0),
+  padding: theme.spacing(2, 1),
+  borderRadius: Number(theme.shape.borderRadius) * 2,
+  boxShadow: theme.shadows[2],
 })) as typeof Paper;
 
-export const Percentage = styled(Typography)({
-  marginLeft: 5,
+export const Percentage = styled(Typography)(({ theme }) => ({
+  marginLeft: theme.spacing(1),
   display: 'flex',
   alignItems: 'center',
   fontWeight: 300,
-}) as typeof Typography;
+})) as typeof Typography;

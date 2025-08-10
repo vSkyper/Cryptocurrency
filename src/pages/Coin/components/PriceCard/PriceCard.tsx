@@ -26,14 +26,22 @@ export default function PriceCard(props: PriceCardProps) {
 
   return (
     <Grid container direction='column'>
-      <Grid item xs={12}>
-        <Card>
+      <Grid size={12}>
+        <Card
+          sx={{
+            p: 2,
+            width: '100%',
+            bgcolor: 'background.paper',
+            border: (theme) => `1px solid ${theme.palette.divider}`,
+          }}
+        >
           <Price marketData={data.market_data} />
+          <Box sx={{ height: 8 }} />
           <Typography fontWeight='fontWeightLight'>Price</Typography>
-          <Box sx={{ width: '90%' }}>
+          <Box sx={{ width: '90%', mt: 1 }}>
             <StyledLinearProgress variant='determinate' value={progressBar} />
             <Grid container justifyContent='space-between'>
-              <Grid item>
+              <Grid>
                 {(data.market_data.low_24h?.usd || 0).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
@@ -41,10 +49,8 @@ export default function PriceCard(props: PriceCardProps) {
                   currency: 'USD',
                 })}
               </Grid>
-              <Grid item fontWeight='fontWeightLight'>
-                24h Range
-              </Grid>
-              <Grid item>
+              <Typography fontWeight='fontWeightLight'>24h Range</Typography>
+              <Grid>
                 {(data.market_data.high_24h?.usd || 0).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
@@ -56,7 +62,7 @@ export default function PriceCard(props: PriceCardProps) {
           </Box>
         </Card>
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12} sx={{ mt: 2 }}>
         <Grid container justifyContent='center' spacing={2}>
           {priceChange.map((days) => (
             <PriceChange key={days} marketData={data.market_data} days={days} />

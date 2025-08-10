@@ -1,8 +1,8 @@
 import { InputBase, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const InputBaseExchange = styled(InputBase)({
-  paddingLeft: 1,
+export const InputBaseExchange = styled(InputBase)(({ theme }) => ({
+  paddingLeft: theme.spacing(1),
   flex: 1,
   '& input[type=number]': {
     MozAppearance: 'textfield',
@@ -15,15 +15,24 @@ export const InputBaseExchange = styled(InputBase)({
     WebkitAppearance: 'none',
     margin: 0,
   },
-}) as typeof InputBase;
+})) as typeof InputBase;
 
 export const InputCard = styled(Paper)(({ theme }) => ({
   paddingLeft: 15,
   paddingRight: 15,
   display: 'flex',
   alignItems: 'center',
-  width: 300,
+  width: 320,
   height: 60,
+  borderRadius: Number(theme.shape.borderRadius) * 2,
+  boxShadow: theme.shadows[3],
+  transition: theme.transitions.create(['box-shadow', 'transform'], {
+    duration: theme.transitions.duration.short,
+  }),
+  '&:focus-within': {
+    boxShadow: theme.shadows[6],
+    transform: 'translateY(-1px)',
+  },
   [theme.breakpoints.up('lg')]: {
     height: 70,
   },

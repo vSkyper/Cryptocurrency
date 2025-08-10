@@ -49,7 +49,7 @@ export default function Cards(props: CardsProps) {
   return (
     <Grid container justifyContent='center' spacing={2} sx={{ mt: 0.1 }}>
       <Grow in={toggle}>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <Card>
             <Typography
               variant='h5'
@@ -83,7 +83,7 @@ export default function Cards(props: CardsProps) {
         style={{ transformOrigin: '0 0 0' }}
         {...(toggle ? { timeout: 1000 } : {})}
       >
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <Card>
             <Typography variant='h5'>{totalVolume}</Typography>
             <Typography fontWeight='fontWeightLight'>
@@ -97,7 +97,7 @@ export default function Cards(props: CardsProps) {
         style={{ transformOrigin: '0 0 0' }}
         {...(toggle ? { timeout: 2000 } : {})}
       >
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <Card>
             <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
             <Typography fontWeight='fontWeightLight'>
@@ -111,7 +111,7 @@ export default function Cards(props: CardsProps) {
         style={{ transformOrigin: '0 0 0' }}
         {...(toggle ? { timeout: 2500 } : {})}
       >
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
           <Card>
             <Typography variant='h5'>{cryptocurrencies}</Typography>
             <Typography fontWeight='fontWeightLight'># of Coins</Typography>

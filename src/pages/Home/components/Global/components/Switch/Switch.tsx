@@ -16,11 +16,15 @@ export default function Switch(props: SwitchProps) {
         <IOSSwitch checked={toggle} sx={{ mr: 1 }} onChange={handleChange} />
       }
       label='Show Stats'
-      sx={
-        mobile
+      sx={{
+        m: 0,
+        '.MuiFormControlLabel-label': {
+          fontWeight: 500,
+        },
+        ...(mobile
           ? { ml: 1.3, display: { xs: 'none', sm: 'block' } }
-          : { ml: 0.1, mt: 2, display: { xs: 'block', sm: 'none' } }
-      }
+          : { ml: 0.4, mt: 1.5, display: { xs: 'block', sm: 'none' } }),
+      }}
     />
   );
 }

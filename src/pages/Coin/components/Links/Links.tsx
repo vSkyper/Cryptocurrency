@@ -11,15 +11,34 @@ export default function Links(props: LinksProps) {
   const { data } = props;
 
   return (
-    <Grid container sx={{ ml: 2, mt: 2 }}>
+    <Grid container sx={{ ml: 1, mt: 1 }}>
       {data.links?.homepage?.[0] && (
         <Chip
-          avatar={<Avatar alt='logo' src={data.image?.large} />}
+          avatar={
+            <Avatar
+              alt='logo'
+              src={data.image?.large}
+              sx={{ width: 24, height: 24 }}
+            />
+          }
           label='Homepage'
           component='a'
           href={data.links.homepage[0]}
+          variant='outlined'
           clickable
-          sx={{ mr: 2, mt: 1, mb: 1 }}
+          sx={{
+            mr: 1,
+            mt: 1,
+            mb: 1,
+            borderRadius: 999,
+            borderStyle: 'dashed',
+            transition: 'all 180ms ease',
+            bgcolor: 'background.paper',
+            '&:hover': {
+              boxShadow: 2,
+              transform: 'translateY(-1px)',
+            },
+          }}
         />
       )}
       {data.links?.blockchain_site?.map(
@@ -30,8 +49,20 @@ export default function Links(props: LinksProps) {
               label={new URL(blockchain).hostname}
               component='a'
               href={blockchain}
+              variant='outlined'
               clickable
-              sx={{ mr: 2, mt: 1, mb: 1 }}
+              sx={{
+                mr: 1,
+                mt: 1,
+                mb: 1,
+                borderRadius: 999,
+                transition: 'all 180ms ease',
+                bgcolor: 'background.paper',
+                '&:hover': {
+                  boxShadow: 2,
+                  transform: 'translateY(-1px)',
+                },
+              }}
             />
           )
       )}
@@ -40,8 +71,20 @@ export default function Links(props: LinksProps) {
           label='Forum'
           component='a'
           href={data.links.official_forum_url[0]}
+          variant='outlined'
           clickable
-          sx={{ mr: 2, mt: 1, mb: 1 }}
+          sx={{
+            mr: 1,
+            mt: 1,
+            mb: 1,
+            borderRadius: 999,
+            transition: 'all 180ms ease',
+            bgcolor: 'background.paper',
+            '&:hover': {
+              boxShadow: 2,
+              transform: 'translateY(-1px)',
+            },
+          }}
         />
       )}
       {data.links?.subreddit_url && (
@@ -50,8 +93,20 @@ export default function Links(props: LinksProps) {
           label='Reddit'
           component='a'
           href={data.links.subreddit_url}
+          variant='outlined'
           clickable
-          sx={{ mr: 2, mt: 1, mb: 1 }}
+          sx={{
+            mr: 1,
+            mt: 1,
+            mb: 1,
+            borderRadius: 999,
+            transition: 'all 180ms ease',
+            bgcolor: 'background.paper',
+            '&:hover': {
+              boxShadow: 2,
+              transform: 'translateY(-1px)',
+            },
+          }}
         />
       )}
       {data.links?.twitter_screen_name && (
@@ -60,8 +115,20 @@ export default function Links(props: LinksProps) {
           label='Twitter'
           component='a'
           href={`https://twitter.com/${data.links.twitter_screen_name}/`}
+          variant='outlined'
           clickable
-          sx={{ mr: 2, mt: 1, mb: 1 }}
+          sx={{
+            mr: 1,
+            mt: 1,
+            mb: 1,
+            borderRadius: 999,
+            transition: 'all 180ms ease',
+            bgcolor: 'background.paper',
+            '&:hover': {
+              boxShadow: 2,
+              transform: 'translateY(-1px)',
+            },
+          }}
         />
       )}
       {data.links?.facebook_username && (
@@ -70,8 +137,20 @@ export default function Links(props: LinksProps) {
           label='Facebook'
           component='a'
           href={`https://www.facebook.com/${data.links.facebook_username}/`}
+          variant='outlined'
           clickable
-          sx={{ mr: 2, mt: 1, mb: 1 }}
+          sx={{
+            mr: 1,
+            mt: 1,
+            mb: 1,
+            borderRadius: 999,
+            transition: 'all 180ms ease',
+            bgcolor: 'background.paper',
+            '&:hover': {
+              boxShadow: 2,
+              transform: 'translateY(-1px)',
+            },
+          }}
         />
       )}
       {data.links?.repos_url?.github?.[0] && (
@@ -80,8 +159,19 @@ export default function Links(props: LinksProps) {
           label='GitHub'
           component='a'
           href={data.links.repos_url.github[0]}
+          variant='outlined'
           clickable
-          sx={{ mr: 2, mt: 1, mb: 1 }}
+          sx={{
+            mr: 1,
+            mt: 1,
+            mb: 1,
+            borderRadius: 999,
+            transition: 'all 180ms ease',
+            '&:hover': {
+              boxShadow: 2,
+              transform: 'translateY(-1px)',
+            },
+          }}
         />
       )}
     </Grid>

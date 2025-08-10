@@ -104,7 +104,7 @@ export default function Exchange(props: ExchangeProps) {
       alignItems='center'
       direction='column'
     >
-      <Grid item>
+      <Grid>
         <InputCard>
           <Typography>{symbol.toUpperCase()}</Typography>
           <Divider orientation='vertical' sx={{ mx: 2 }} />
@@ -115,8 +115,16 @@ export default function Exchange(props: ExchangeProps) {
           />
         </InputCard>
       </Grid>
-      <SwapHorizIcon fontSize='large' sx={{ m: 1 }} />
-      <Grid item>
+      <SwapHorizIcon
+        fontSize='large'
+        sx={{
+          m: 1,
+          cursor: 'pointer',
+          opacity: 0.8,
+          '&:hover': { opacity: 1 },
+        }}
+      />
+      <Grid>
         <InputCard>
           <Autocomplete
             sx={{ width: 70 }}

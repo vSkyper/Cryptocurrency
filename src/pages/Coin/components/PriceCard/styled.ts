@@ -4,16 +4,16 @@ import LinearProgress, {
 import { styled } from '@mui/material/styles';
 
 export const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 10,
-  marginTop: 20,
-  marginBottom: 10,
-  borderRadius: 5,
+  height: 8,
+  marginTop: 16,
+  marginBottom: 8,
+  borderRadius: 99,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+    background:
+      'linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))',
   },
   [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    background: `linear-gradient(90deg, ${theme.palette.warning.light}, ${theme.palette.success.light})`,
+    borderRadius: 99,
+    background: `linear-gradient(90deg, ${theme.palette.warning.main}, ${theme.palette.success.main})`,
   },
 })) as typeof LinearProgress;
