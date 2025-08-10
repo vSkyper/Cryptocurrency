@@ -45,12 +45,12 @@ export default function Description(props: DescriptionProps) {
 
   return (
     <Typography
-      variant='body1'
+      variant='body2'
       sx={{
         fontWeight: 400,
-        lineHeight: 1.6,
-        color: 'rgba(255, 255, 255, 0.9)',
-        fontSize: { xs: '0.95rem', sm: '1rem' },
+        lineHeight: 1.5,
+        color: 'rgba(255, 255, 255, 0.8)',
+        fontSize: { xs: '0.85rem', sm: '0.9rem' },
       }}
     >
       The global cryptocurrency market cap today is{' '}

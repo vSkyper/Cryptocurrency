@@ -5,21 +5,20 @@ import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
 
 const HeroSection = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(6, 4),
-  borderRadius: theme.spacing(4),
+  padding: theme.spacing(3, 4),
+  borderRadius: theme.spacing(3),
   background: `linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.04) 100%
   )`,
-  backdropFilter: 'blur(20px)',
-  border: `1px solid rgba(255, 255, 255, 0.2)`,
+  border: `1px solid rgba(255, 255, 255, 0.15)`,
   boxShadow: `
-    0 20px 60px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.1)
+    0 8px 24px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.05)
   `,
   position: 'relative',
   overflow: 'hidden',
-  marginBottom: theme.spacing(4),
+  marginBottom: theme.spacing(3),
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -28,8 +27,8 @@ const HeroSection = styled(Paper)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: `linear-gradient(135deg, 
-      ${theme.palette.primary.main}05, 
-      ${theme.palette.secondary.main}03, 
+      ${theme.palette.primary.main}03, 
+      ${theme.palette.secondary.main}02, 
       transparent 60%
     )`,
     zIndex: 0,
@@ -39,7 +38,7 @@ const HeroSection = styled(Paper)(({ theme }) => ({
     zIndex: 1,
   },
   [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(4, 3),
+    padding: theme.spacing(2.5, 3),
   },
 }));
 
@@ -51,22 +50,22 @@ export default function Global(props: GlobalProps) {
   return (
     <>
       <HeroSection elevation={0}>
-        <Grid container alignItems='center' spacing={3}>
+        <Grid container alignItems='center' spacing={2}>
           <Grid size={{ xs: 12, md: 8 }}>
             <Typography
-              variant='h4'
+              variant='h5'
               sx={{
-                mb: 3,
-                fontWeight: 700,
-                background: 'linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)',
+                mb: 2,
+                fontWeight: 600,
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',
-                lineHeight: 1.2,
-                fontSize: { xs: '1.75rem', sm: '2rem', md: '2.25rem' },
+                lineHeight: 1.3,
+                fontSize: { xs: '1.25rem', sm: '1.4rem', md: '1.5rem' },
               }}
             >
-              Cryptocurrency Prices by Market Cap
+              Global Cryptocurrency Market
             </Typography>
             <Description globalData={globalData} />
           </Grid>
@@ -78,7 +77,7 @@ export default function Global(props: GlobalProps) {
           </Grid>
         </Grid>
 
-        <Box sx={{ mt: 4, display: { xs: 'block', md: 'none' } }}>
+        <Box sx={{ mt: 3, display: { xs: 'block', md: 'none' } }}>
           <Switch toggle={toggle} setToggle={setToggle} mobile />
         </Box>
       </HeroSection>
