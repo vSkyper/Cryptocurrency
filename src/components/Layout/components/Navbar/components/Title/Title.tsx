@@ -41,21 +41,20 @@ export default function Title() {
           display: { xs: 'none', sm: 'block' },
           fontWeight: 700,
           letterSpacing: 0.5,
-          background: (theme) => `linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.9), 
-            ${theme.palette.primary.main}aa
-          )`,
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          color: 'transparent',
         }}
       >
         <Link
-          color='inherit'
           underline='none'
           component={RouterLink}
           to='/'
           sx={{
+            background: (theme) => `linear-gradient(135deg, 
+              rgba(255, 255, 255, 0.9), 
+              ${theme.palette.primary.main}aa
+            )`,
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
             transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
             '&:hover': {
               opacity: 0.8,
