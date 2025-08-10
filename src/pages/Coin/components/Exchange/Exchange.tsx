@@ -8,9 +8,11 @@ import {
   createFilterOptions,
   AutocompleteRenderInputParams,
   Autocomplete,
+  IconButton,
+  Box,
 } from '@mui/material';
 import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
-import { InputBaseExchange, InputCard } from './styled';
+import { InputBaseExchange, InputCard, ModernExchangeCard } from './styled';
 import useFetch from 'hooks/useFetch';
 import { IExchange } from 'interfaces';
 import { ErrorModal } from 'components';
@@ -98,55 +100,126 @@ export default function Exchange(props: ExchangeProps) {
   }
 
   return (
-    <Grid
-      container
-      justifyContent='center'
-      alignItems='center'
-      direction='column'
-    >
-      <Grid>
-        <InputCard>
-          <Typography>{symbol.toUpperCase()}</Typography>
-          <Divider orientation='vertical' sx={{ mx: 2 }} />
-          <InputBaseExchange
-            type='number'
-            value={crypto}
-            onChange={handleChangeInput}
-          />
-        </InputCard>
+    <ModernExchangeCard>
+      <Box sx={{ mb: 2 }}>
+        <Typography
+          variant='h6'
+          sx={{
+            fontWeight: 700,
+            background: (theme) => `linear-gradient(135deg, 
+              ${theme.palette.text.primary}, 
+              ${theme.palette.primary.main}aa
+            )`,
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            mb: 2,
+          }}
+        >
+          Exchange Calculator
+        </Typography>
+      </Box>
+
+      <Grid
+        container
+        justifyContent='center'
+        alignItems='center'
+        direction='column'
+        spacing={2}
+      >
+        <Grid size={12}>
+          <InputCard>
+            <Typography
+              variant='subtitle2'
+              sx={{
+                fontWeight: 600,
+                color: 'text.primary',
+                minWidth: 50,
+              }}
+            >
+              {symbol.toUpperCase()}
+            </Typography>
+            <Divider orientation='vertical' sx={{ mx: 2, height: 30 }} />
+            <InputBaseExchange
+              type='number'
+              value={crypto}
+              onChange={handleChangeInput}
+              placeholder='Enter amount'
+              sx={{
+                '& input': {
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  color: 'text.primary',
+                },
+              }}
+            />
+          </InputCard>
+        </Grid>
+
+        <IconButton
+          sx={{
+            background: (theme) => `linear-gradient(135deg, 
+              ${theme.palette.primary.main}20, 
+              ${theme.palette.secondary.main}15
+            )`,
+            backdropFilter: 'blur(10px)',
+            border: (theme) => `1px solid ${theme.palette.divider}40`,
+            '&:hover': {
+              background: (theme) => `linear-gradient(135deg, 
+                ${theme.palette.primary.main}30, 
+                ${theme.palette.secondary.main}25
+              )`,
+              transform: 'rotate(180deg)',
+            },
+            transition: 'all 300ms ease',
+          }}
+        >
+          <SwapHorizIcon />
+        </IconButton>
+
+        <Grid size={12}>
+          <InputCard>
+            <Autocomplete
+              sx={{
+                width: 80,
+                '& .MuiInput-root': {
+                  border: 'none',
+                  '&:before': {
+                    display: 'none',
+                  },
+                  '&:after': {
+                    display: 'none',
+                  },
+                },
+              }}
+              id='currencies-select'
+              value={currencyOption}
+              options={currencies ?? []}
+              filterOptions={filterOptions}
+              getOptionLabel={handleOptionLabel}
+              disableClearable
+              autoComplete
+              onChange={handleChangeAutocomplete}
+              renderInput={handleRenderInput}
+              renderOption={handleRenderOption}
+            />
+            <Divider orientation='vertical' sx={{ mx: 2, height: 30 }} />
+            <InputBaseExchange
+              type='number'
+              value={currency}
+              onChange={handleChangeInput}
+              placeholder='Enter amount'
+              sx={{
+                '& input': {
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  color: 'text.primary',
+                },
+              }}
+            />
+          </InputCard>
+        </Grid>
       </Grid>
-      <SwapHorizIcon
-        fontSize='large'
-        sx={{
-          m: 1,
-          cursor: 'pointer',
-          opacity: 0.8,
-          '&:hover': { opacity: 1 },
-        }}
-      />
-      <Grid>
-        <InputCard>
-          <Autocomplete
-            sx={{ width: 70 }}
-            id='currencies-select'
-            value={currencyOption}
-            options={currencies ?? []}
-            filterOptions={filterOptions}
-            getOptionLabel={handleOptionLabel}
-            disableClearable
-            autoComplete
-            onChange={handleChangeAutocomplete}
-            renderInput={handleRenderInput}
-            renderOption={handleRenderOption}
-          />
-          <Divider orientation='vertical' sx={{ mx: 2 }} />
-          <InputBaseExchange
-            type='number'
-            value={currency}
-            onChange={handleChangeInput}
-          />
-        </InputCard>
-      </Grid>
-    </Grid>
+    </ModernExchangeCard>
   );
 }

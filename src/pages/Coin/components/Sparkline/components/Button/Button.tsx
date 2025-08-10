@@ -1,6 +1,40 @@
 import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useCallback } from 'react';
 import { ButtonProps } from './interface';
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  minWidth: 48,
+  borderRadius: theme.spacing(2),
+  textTransform: 'none',
+  padding: theme.spacing(0.75, 1.5),
+  fontSize: '0.875rem',
+  fontWeight: 600,
+  transition: 'all 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+  border: `1px solid ${theme.palette.divider}40`,
+  background: `linear-gradient(135deg, 
+    ${theme.palette.background.paper}cc, 
+    ${theme.palette.background.default}aa
+  )`,
+  backdropFilter: 'blur(10px)',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
+    border: `1px solid ${theme.palette.primary.main}60`,
+  },
+  '&.active': {
+    background: `linear-gradient(135deg, 
+      ${theme.palette.primary.main}, 
+      ${theme.palette.secondary.main}
+    )`,
+    color: theme.palette.primary.contrastText,
+    border: `1px solid ${theme.palette.primary.main}`,
+    boxShadow: `0 4px 15px ${theme.palette.primary.main}40`,
+    '&:hover': {
+      boxShadow: `0 6px 20px ${theme.palette.primary.main}50`,
+    },
+  },
+}));
 
 export default function ButtonComponent(props: ButtonProps) {
   const { days, daysFormatted, setDays, actualDays, mobileDisappear } = props;
@@ -9,32 +43,21 @@ export default function ButtonComponent(props: ButtonProps) {
     setDays(days);
   }, [days, setDays]);
 
+  const isActive = actualDays === days;
+
   return (
-    <Button
-      color={actualDays === days ? 'primary' : 'inherit'}
-      variant={actualDays === days ? 'contained' : 'text'}
+    <StyledButton
+      className={isActive ? 'active' : ''}
       size='small'
       sx={{
         display: {
           xs: mobileDisappear ? 'none' : 'inline-flex',
           sm: 'inline-flex',
         },
-        mr: 0.5,
-        minWidth: 48,
-        borderRadius: 999,
-        textTransform: 'none',
-        px: 1.25,
-        transition: 'all 160ms ease',
-        boxShadow: (theme) => (actualDays === days ? theme.shadows[2] : 'none'),
-        '&:hover': {
-          transform: 'translateY(-1px)',
-          boxShadow: (theme) =>
-            actualDays === days ? theme.shadows[4] : theme.shadows[1],
-        },
       }}
       onClick={handleClicked}
     >
       {daysFormatted}
-    </Button>
+    </StyledButton>
   );
 }

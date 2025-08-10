@@ -10,7 +10,22 @@ export default function Title() {
           color='inherit'
           size='large'
           edge='start'
-          sx={{ mr: 2 }}
+          sx={{
+            mr: 2,
+            background:
+              'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            color: 'rgba(255, 255, 255, 0.9)',
+            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)',
+              transform: 'translateY(-2px) scale(1.05)',
+              boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            },
+          }}
           component={RouterLink}
           to='/'
         >
@@ -25,10 +40,29 @@ export default function Title() {
           flexGrow: 1,
           display: { xs: 'none', sm: 'block' },
           fontWeight: 700,
-          letterSpacing: 0.2,
+          letterSpacing: 0.5,
+          background: (theme) => `linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.9), 
+            ${theme.palette.primary.main}aa
+          )`,
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
         }}
       >
-        <Link color='inherit' underline='none' component={RouterLink} to='/'>
+        <Link
+          color='inherit'
+          underline='none'
+          component={RouterLink}
+          to='/'
+          sx={{
+            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              opacity: 0.8,
+              transform: 'translateY(-1px)',
+            },
+          }}
+        >
           Cryptocurrency
         </Link>
       </Typography>

@@ -1,7 +1,6 @@
 import { Typography, Grid, Box } from '@mui/material';
-import { StyledLinearProgress } from './styled';
+import { StyledLinearProgress, ModernCard } from './styled';
 import { Price, PriceChange } from './components';
-import { Card } from 'styled';
 import { priceChange } from 'constants/coin';
 import { PriceCardProps } from './interface';
 
@@ -25,45 +24,64 @@ export default function PriceCard(props: PriceCardProps) {
   }
 
   return (
-    <Grid container direction='column'>
+    <Grid container direction='column' spacing={3}>
       <Grid size={12}>
-        <Card
-          sx={{
-            p: 2,
-            width: '100%',
-            bgcolor: 'background.paper',
-            border: (theme) => `1px solid ${theme.palette.divider}`,
-          }}
-        >
-          <Price marketData={data.market_data} />
-          <Box sx={{ height: 8 }} />
-          <Typography fontWeight='fontWeightLight'>Price</Typography>
-          <Box sx={{ width: '90%', mt: 1 }}>
-            <StyledLinearProgress variant='determinate' value={progressBar} />
-            <Grid container justifyContent='space-between'>
-              <Grid>
-                {(data.market_data.low_24h?.usd || 0).toLocaleString('en-US', {
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 8,
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Grid>
-              <Typography fontWeight='fontWeightLight'>24h Range</Typography>
-              <Grid>
-                {(data.market_data.high_24h?.usd || 0).toLocaleString('en-US', {
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 8,
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Grid>
-            </Grid>
+        <ModernCard>
+          <Box sx={{ textAlign: 'center', mb: 3 }}>
+            <Price marketData={data.market_data} />
           </Box>
-        </Card>
+
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              variant='subtitle2'
+              sx={{
+                fontWeight: 600,
+                color: 'text.secondary',
+                mb: 1,
+                textAlign: 'center',
+              }}
+            >
+              24h Price Range
+            </Typography>
+            <Box sx={{ px: 1 }}>
+              <StyledLinearProgress variant='determinate' value={progressBar} />
+              <Grid container justifyContent='space-between' sx={{ mt: 0.5 }}>
+                <Typography
+                  variant='caption'
+                  sx={{ color: 'text.secondary', fontWeight: 500 }}
+                >
+                  {(data.market_data.low_24h?.usd || 0).toLocaleString(
+                    'en-US',
+                    {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 8,
+                      style: 'currency',
+                      currency: 'USD',
+                    }
+                  )}
+                </Typography>
+                <Typography
+                  variant='caption'
+                  sx={{ color: 'text.secondary', fontWeight: 500 }}
+                >
+                  {(data.market_data.high_24h?.usd || 0).toLocaleString(
+                    'en-US',
+                    {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 8,
+                      style: 'currency',
+                      currency: 'USD',
+                    }
+                  )}
+                </Typography>
+              </Grid>
+            </Box>
+          </Box>
+        </ModernCard>
       </Grid>
-      <Grid size={12} sx={{ mt: 2 }}>
-        <Grid container justifyContent='center' spacing={2}>
+
+      <Grid size={12}>
+        <Grid container spacing={2}>
           {priceChange.map((days) => (
             <PriceChange key={days} marketData={data.market_data} days={days} />
           ))}

@@ -47,9 +47,9 @@ export default function Cards(props: CardsProps) {
     globalData.data.active_cryptocurrencies.toLocaleString('en-US');
 
   return (
-    <Grid container justifyContent='center' spacing={2} sx={{ mt: 0.1 }}>
-      <Grow in={toggle}>
-        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+    <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grow in={toggle} timeout={600}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
             <Typography
               variant='h5'
@@ -57,64 +57,120 @@ export default function Cards(props: CardsProps) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                fontWeight: 700,
+                color: '#ffffff',
+                mb: 1.5,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' },
               }}
             >
               {marketCap}
               {globalData.data.market_cap_change_percentage_24h_usd < 0 ? (
-                <Percentage sx={{ color: 'error.light' }}>
+                <Percentage sx={{ color: '#ff6b6b' }}>
                   {marketCapPercentage}
                   <TrendingDownIcon />
                 </Percentage>
               ) : (
-                <Percentage sx={{ color: 'success.light' }}>
+                <Percentage sx={{ color: '#51cf66' }}>
                   {marketCapPercentage}
                   <TrendingUpIcon />
                 </Percentage>
               )}
             </Typography>
-            <Typography fontWeight='fontWeightLight'>
+            <Typography
+              variant='body1'
+              sx={{
+                fontWeight: 500,
+                color: 'rgba(255, 255, 255, 0.8)',
+                textAlign: 'center',
+                fontSize: { xs: '0.875rem', sm: '1rem' },
+              }}
+            >
               Market Capitalization
             </Typography>
           </Card>
         </Grid>
       </Grow>
-      <Grow
-        in={toggle}
-        style={{ transformOrigin: '0 0 0' }}
-        {...(toggle ? { timeout: 1000 } : {})}
-      >
-        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+      <Grow in={toggle} timeout={800}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
-            <Typography variant='h5'>{totalVolume}</Typography>
-            <Typography fontWeight='fontWeightLight'>
+            <Typography
+              variant='h5'
+              sx={{
+                fontWeight: 700,
+                color: '#ffffff',
+                mb: 1.5,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' },
+              }}
+            >
+              {totalVolume}
+            </Typography>
+            <Typography
+              variant='body1'
+              sx={{
+                fontWeight: 500,
+                color: 'rgba(255, 255, 255, 0.8)',
+                textAlign: 'center',
+                fontSize: { xs: '0.875rem', sm: '1rem' },
+              }}
+            >
               24h Trading Volume
             </Typography>
           </Card>
         </Grid>
       </Grow>
-      <Grow
-        in={toggle}
-        style={{ transformOrigin: '0 0 0' }}
-        {...(toggle ? { timeout: 2000 } : {})}
-      >
-        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+      <Grow in={toggle} timeout={1000}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
-            <Typography variant='h5'>{marketCapPercentageBTC}</Typography>
-            <Typography fontWeight='fontWeightLight'>
+            <Typography
+              variant='h5'
+              sx={{
+                fontWeight: 700,
+                color: '#f7931a',
+                mb: 1.5,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' },
+              }}
+            >
+              {marketCapPercentageBTC}
+            </Typography>
+            <Typography
+              variant='body1'
+              sx={{
+                fontWeight: 500,
+                color: 'rgba(255, 255, 255, 0.8)',
+                textAlign: 'center',
+                fontSize: { xs: '0.875rem', sm: '1rem' },
+              }}
+            >
               Bitcoin Market Cap Dominance
             </Typography>
           </Card>
         </Grid>
       </Grow>
-      <Grow
-        in={toggle}
-        style={{ transformOrigin: '0 0 0' }}
-        {...(toggle ? { timeout: 2500 } : {})}
-      >
-        <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+      <Grow in={toggle} timeout={1200}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
-            <Typography variant='h5'>{cryptocurrencies}</Typography>
-            <Typography fontWeight='fontWeightLight'># of Coins</Typography>
+            <Typography
+              variant='h5'
+              sx={{
+                fontWeight: 700,
+                color: '#ffffff',
+                mb: 1.5,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' },
+              }}
+            >
+              {cryptocurrencies}
+            </Typography>
+            <Typography
+              variant='body1'
+              sx={{
+                fontWeight: 500,
+                color: 'rgba(255, 255, 255, 0.8)',
+                textAlign: 'center',
+                fontSize: { xs: '0.875rem', sm: '1rem' },
+              }}
+            >
+              Active Cryptocurrencies
+            </Typography>
           </Card>
         </Grid>
       </Grow>

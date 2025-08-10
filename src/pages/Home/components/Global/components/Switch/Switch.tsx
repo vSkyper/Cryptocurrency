@@ -19,11 +19,13 @@ export default function Switch(props: SwitchProps) {
       sx={{
         m: 0,
         '.MuiFormControlLabel-label': {
-          fontWeight: 500,
+          fontWeight: 600,
+          color: '#ffffff',
+          fontSize: '1.1rem',
         },
         ...(mobile
-          ? { ml: 1.3, display: { xs: 'none', sm: 'block' } }
-          : { ml: 0.4, mt: 1.5, display: { xs: 'block', sm: 'none' } }),
+          ? { ml: 1.3, display: { xs: 'block', md: 'none' } }
+          : { ml: 0, display: { xs: 'none', md: 'flex' } }),
       }}
     />
   );

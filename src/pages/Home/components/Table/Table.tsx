@@ -7,7 +7,7 @@ export default function Table(props: TableProps) {
   const { coins } = props;
 
   return (
-    <DataTable>
+    <DataTable elevation={0}>
       <DataGrid
         density='comfortable'
         pagination
@@ -21,20 +21,63 @@ export default function Table(props: TableProps) {
         }}
         sx={{
           borderRadius: 3,
-          border: (theme) => `1px solid ${theme.palette.divider}`,
+          border: 'none',
+          backgroundColor: 'transparent !important',
+          background: 'transparent !important',
+          '& .MuiDataGrid-main': {
+            backgroundColor: 'transparent !important',
+          },
+          '& .MuiDataGrid-container--top [role=row]': {
+            backgroundColor: 'transparent !important',
+            background: 'transparent !important',
+          },
           '& .MuiDataGrid-row': {
             alignItems: 'center',
+            backgroundColor: 'transparent',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            },
           },
           '& .MuiDataGrid-cell': {
             display: 'flex',
             alignItems: 'center',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+            color: 'rgba(255, 255, 255, 0.9)',
           },
           '& .MuiDataGrid-columnHeaders': {
-            backgroundColor: (theme) => theme.palette.action.selected,
-            borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+            backgroundColor: 'transparent !important',
+            background: 'transparent !important',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+            color: '#ffffff',
+            fontWeight: 600,
+            '& .MuiDataGrid-columnHeader': {
+              backgroundColor: 'transparent !important',
+              background: 'transparent !important',
+              '&:focus': {
+                outline: 'none',
+              },
+            },
+            '& .MuiDataGrid-columnHeaderTitle': {
+              color: '#ffffff',
+              fontWeight: 600,
+            },
           },
-          '& .MuiDataGrid-row:hover': {
-            backgroundColor: (theme) => theme.palette.action.hover,
+          '& .MuiDataGrid-footerContainer': {
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            color: 'rgba(255, 255, 255, 0.8)',
+          },
+          '& .MuiTablePagination-root': {
+            color: 'rgba(255, 255, 255, 0.8)',
+          },
+          '& .MuiIconButton-root': {
+            color: 'rgba(255, 255, 255, 0.8)',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            },
+          },
+          '& .MuiDataGrid-selectedRowCount': {
+            color: 'rgba(255, 255, 255, 0.8)',
           },
         }}
       />

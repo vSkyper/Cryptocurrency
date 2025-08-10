@@ -8,9 +8,9 @@ export const columns: GridColDef[] = [
     field: 'name',
     headerName: 'Name',
     flex: 1,
-    minWidth: 170,
-    align: 'center',
-    headerAlign: 'center',
+    minWidth: 250,
+    align: 'left',
+    headerAlign: 'left',
     renderCell: (params: GridRenderCellParams) => (
       <Link
         color='inherit'

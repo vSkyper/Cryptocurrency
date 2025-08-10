@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material';
 import {
-  CssVarsProvider,
+  ThemeProvider,
   extendTheme,
   responsiveFontSizes,
 } from '@mui/material/styles';
@@ -12,13 +12,6 @@ export default function App() {
   let theme = extendTheme({
     cssVarPrefix: 'app',
     colorSchemes: {
-      light: {
-        palette: {
-          primary: { main: '#6750A4' },
-          secondary: { main: '#625B71' },
-          background: { default: '#f7f7fb', paper: '#ffffff' },
-        },
-      },
       dark: {
         palette: {
           primary: { main: '#D0BCFF' },
@@ -81,13 +74,9 @@ export default function App() {
   ]);
 
   return (
-    <CssVarsProvider
-      theme={theme}
-      defaultMode='system'
-      disableTransitionOnChange
-    >
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <RouterProvider router={router} />
-    </CssVarsProvider>
+    </ThemeProvider>
   );
 }

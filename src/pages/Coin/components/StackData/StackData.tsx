@@ -1,32 +1,42 @@
-import { Typography, Stack, Divider, Grid, Paper } from '@mui/material';
+import { Typography, Stack, Box, Chip } from '@mui/material';
+import {
+  TrendingUp as TrendingUpIcon,
+  TrendingDown as TrendingDownIcon,
+} from '@mui/icons-material';
 import { format, formatDistance } from 'date-fns';
 import { StackDataProps } from './interface';
+import { DataRow, ModernDataCard, StyledDivider } from './styled';
 
 export default function StackData(props: StackDataProps) {
   const { marketData } = props;
 
   return (
-    <Paper
-      sx={{
-        p: 2.5,
-        borderRadius: 3,
-        bgcolor: 'background.default',
-        border: (theme) => `1px solid ${theme.palette.divider}`,
-        boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-      }}
-    >
-      <Stack divider={<Divider orientation='horizontal' />} spacing={2}>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>Market Capitalization</Typography>
-          <Typography>
+    <ModernDataCard>
+      <Typography
+        variant='h6'
+        sx={{
+          mb: 3,
+          fontWeight: 700,
+          background: (theme) => `linear-gradient(135deg, 
+              ${theme.palette.text.primary}, 
+              ${theme.palette.primary.main}aa
+            )`,
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
+          zIndex: 1,
+          position: 'relative',
+        }}
+      >
+        Market Statistics
+      </Typography>
+
+      <Stack divider={<StyledDivider />} spacing={0}>
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            Market Capitalization
+          </Typography>
+          <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
             {(marketData.market_cap?.usd || 0).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 2,
@@ -34,18 +44,13 @@ export default function StackData(props: StackDataProps) {
               currency: 'USD',
             })}
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>24h Trading Volume</Typography>
-          <Typography>
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            24h Trading Volume
+          </Typography>
+          <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
             {(marketData.total_volume?.usd || 0).toLocaleString('en-US', {
               minimumFractionDigits: 0,
               maximumFractionDigits: 2,
@@ -53,18 +58,13 @@ export default function StackData(props: StackDataProps) {
               currency: 'USD',
             })}
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>Volume / Market Cap</Typography>
-          <Typography>
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            Volume / Market Cap
+          </Typography>
+          <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
             {(
               (marketData.total_volume?.usd || 0) /
               (marketData.market_cap?.usd || 1)
@@ -73,178 +73,214 @@ export default function StackData(props: StackDataProps) {
               maximumFractionDigits: 8,
             })}
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>24h Low / 24h High</Typography>
-          <Typography>
-            {(marketData.low_24h?.usd || 0).toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 8,
-              style: 'currency',
-              currency: 'USD',
-            })}{' '}
-            /{' '}
-            {(marketData.high_24h?.usd || 0).toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 8,
-              style: 'currency',
-              currency: 'USD',
-            })}
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            24h Low / 24h High
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>Market Cap Rank</Typography>
-          <Typography>
-            {marketData.market_cap_rank
-              ? `#${marketData.market_cap_rank}`
-              : 'N/A'}
+          <Box sx={{ textAlign: 'right' }}>
+            <Typography fontWeight={500} sx={{ color: 'error.light' }}>
+              {(marketData.low_24h?.usd || 0).toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 8,
+                style: 'currency',
+                currency: 'USD',
+              })}
+            </Typography>
+            <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+              /
+            </Typography>
+            <Typography fontWeight={500} sx={{ color: 'success.light' }}>
+              {(marketData.high_24h?.usd || 0).toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 8,
+                style: 'currency',
+                currency: 'USD',
+              })}
+            </Typography>
+          </Box>
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            Market Cap Rank
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>Circulating Supply</Typography>
-          <Typography>
+          <Chip
+            label={
+              marketData.market_cap_rank
+                ? `#${marketData.market_cap_rank}`
+                : 'N/A'
+            }
+            size='small'
+            sx={{
+              background:
+                'linear-gradient(135deg, rgba(103, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%)',
+              color: '#667eea',
+              fontWeight: 700,
+              border: '1px solid rgba(103, 126, 234, 0.3)',
+            }}
+          />
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            Circulating Supply
+          </Typography>
+          <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
             {(marketData.circulating_supply || 0).toLocaleString('en-US', {
               maximumFractionDigits: 0,
             })}
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>Total Supply</Typography>
-          <Typography sx={{ display: 'flex', alignItems: 'center' }}>
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            Total Supply
+          </Typography>
+          <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
             {(marketData.total_supply || 0).toLocaleString('en-US', {
               maximumFractionDigits: 0,
             })}
           </Typography>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>All-Time High</Typography>
-          <Grid>
-            <Grid container direction='column'>
-              <Typography align='right'>
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            All-Time High
+          </Typography>
+          <Box sx={{ textAlign: 'right' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                justifyContent: 'flex-end',
+              }}
+            >
+              <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
                 {(marketData.ath?.usd || 0).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
                   currency: 'USD',
-                })}{' '}
-                <Typography
-                  fontWeight='fontWeightLight'
-                  component='span'
-                  sx={
+                })}
+              </Typography>
+              <Chip
+                icon={
+                  (marketData.ath_change_percentage?.usd || 0) < 0 ? (
+                    <TrendingDownIcon />
+                  ) : (
+                    <TrendingUpIcon />
+                  )
+                }
+                label={(
+                  (marketData.ath_change_percentage?.usd || 0) / 100
+                ).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  style: 'percent',
+                })}
+                size='small'
+                sx={{
+                  background:
                     (marketData.ath_change_percentage?.usd || 0) < 0
-                      ? { color: 'error.light' }
-                      : { color: 'success.light' }
-                  }
-                >
-                  {(
-                    (marketData.ath_change_percentage?.usd || 0) / 100
-                  ).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                    style: 'percent',
-                  })}
-                </Typography>
-              </Typography>
-              <Typography align='right' fontWeight='fontWeightLight'>
-                {format(new Date(marketData.ath_date?.usd || 0), 'MMM d, y')} (
-                {formatDistance(
-                  Date.now(),
-                  new Date(marketData.ath_date?.usd || 0)
-                )}
-                )
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          justifyContent='space-between'
-          sx={{
-            '&:hover': { backgroundColor: 'action.hover', borderRadius: 2 },
-            p: 1,
-            transition: 'background-color 120ms ease',
-          }}
-        >
-          <Typography fontWeight={500}>All-Time Low</Typography>
-          <Grid>
-            <Grid container direction='column'>
-              <Typography align='right'>
+                      ? 'linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(244, 67, 54, 0.1) 100%)'
+                      : 'linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%)',
+                  color:
+                    (marketData.ath_change_percentage?.usd || 0) < 0
+                      ? 'error.main'
+                      : 'success.main',
+                  fontWeight: 600,
+                  border:
+                    (marketData.ath_change_percentage?.usd || 0) < 0
+                      ? '1px solid rgba(244, 67, 54, 0.3)'
+                      : '1px solid rgba(76, 175, 80, 0.3)',
+                }}
+              />
+            </Box>
+            <Typography
+              variant='caption'
+              sx={{ color: 'text.disabled', mt: 0.5, display: 'block' }}
+            >
+              {format(new Date(marketData.ath_date?.usd || 0), 'MMM d, y')} (
+              {formatDistance(
+                Date.now(),
+                new Date(marketData.ath_date?.usd || 0)
+              )}{' '}
+              ago)
+            </Typography>
+          </Box>
+        </DataRow>
+
+        <DataRow>
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            All-Time Low
+          </Typography>
+          <Box sx={{ textAlign: 'right' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                justifyContent: 'flex-end',
+              }}
+            >
+              <Typography fontWeight={500} sx={{ color: 'text.secondary' }}>
                 {(marketData.atl?.usd || 0).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 8,
                   style: 'currency',
                   currency: 'USD',
-                })}{' '}
-                <Typography
-                  fontWeight='fontWeightLight'
-                  component='span'
-                  sx={
+                })}
+              </Typography>
+              <Chip
+                icon={
+                  (marketData.atl_change_percentage?.usd || 0) < 0 ? (
+                    <TrendingDownIcon />
+                  ) : (
+                    <TrendingUpIcon />
+                  )
+                }
+                label={(
+                  (marketData.atl_change_percentage?.usd || 0) / 100
+                ).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  style: 'percent',
+                })}
+                size='small'
+                sx={{
+                  background:
                     (marketData.atl_change_percentage?.usd || 0) < 0
-                      ? { color: 'error.light' }
-                      : { color: 'success.light' }
-                  }
-                >
-                  {(
-                    (marketData.atl_change_percentage?.usd || 0) / 100
-                  ).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                    style: 'percent',
-                  })}
-                </Typography>
-              </Typography>
-              <Typography align='right' fontWeight='fontWeightLight'>
-                {format(new Date(marketData.atl_date?.usd || 0), 'MMM d, y')} (
-                {formatDistance(
-                  Date.now(),
-                  new Date(marketData.atl_date?.usd || 0)
-                )}
-                )
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
+                      ? 'linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(244, 67, 54, 0.1) 100%)'
+                      : 'linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%)',
+                  color:
+                    (marketData.atl_change_percentage?.usd || 0) < 0
+                      ? 'error.main'
+                      : 'success.main',
+                  fontWeight: 600,
+                  border:
+                    (marketData.atl_change_percentage?.usd || 0) < 0
+                      ? '1px solid rgba(244, 67, 54, 0.3)'
+                      : '1px solid rgba(76, 175, 80, 0.3)',
+                }}
+              />
+            </Box>
+            <Typography
+              variant='caption'
+              sx={{ color: 'text.disabled', mt: 0.5, display: 'block' }}
+            >
+              {format(new Date(marketData.atl_date?.usd || 0), 'MMM d, y')} (
+              {formatDistance(
+                Date.now(),
+                new Date(marketData.atl_date?.usd || 0)
+              )}{' '}
+              ago)
+            </Typography>
+          </Box>
+        </DataRow>
       </Stack>
-    </Paper>
+    </ModernDataCard>
   );
 }

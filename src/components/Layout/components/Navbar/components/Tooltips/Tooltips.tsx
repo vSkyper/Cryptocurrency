@@ -8,6 +8,21 @@ export default function Tooltips() {
         color='inherit'
         size='large'
         href='https://github.com/vSkyper/cryptocurrency'
+        sx={{
+          background:
+            'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          color: 'rgba(255, 255, 255, 0.9)',
+          transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+          '&:hover': {
+            background:
+              'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)',
+            transform: 'translateY(-2px) scale(1.05)',
+            boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+          },
+        }}
       >
         <GitHubIcon />
       </IconButton>

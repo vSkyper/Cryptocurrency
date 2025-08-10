@@ -44,23 +44,79 @@ export default function Description(props: DescriptionProps) {
     globalData.data.active_cryptocurrencies.toLocaleString('en-US');
 
   return (
-    <Typography fontWeight='fontWeightLight'>
-      The global cryptocurrency market cap today is {marketCapText}, a{' '}
+    <Typography
+      variant='body1'
+      sx={{
+        fontWeight: 400,
+        lineHeight: 1.6,
+        color: 'rgba(255, 255, 255, 0.9)',
+        fontSize: { xs: '0.95rem', sm: '1rem' },
+      }}
+    >
+      The global cryptocurrency market cap today is{' '}
       <Typography
-        fontWeight='fontWeightLight'
         component='span'
-        sx={
-          globalData.data.market_cap_change_percentage_24h_usd < 0
-            ? { color: 'error.light' }
-            : { color: 'success.light' }
-        }
+        sx={{
+          fontWeight: 700,
+          color: '#ffffff',
+        }}
+      >
+        {marketCapText}
+      </Typography>
+      , a{' '}
+      <Typography
+        component='span'
+        sx={{
+          fontWeight: 700,
+          color:
+            globalData.data.market_cap_change_percentage_24h_usd < 0
+              ? '#ff6b6b'
+              : '#51cf66',
+        }}
       >
         {marketCapPercentage}
       </Typography>{' '}
       change in the last 24 hours. Total cryptocurrency trading volume in the
-      last day is at {totalVolumeText}. Bitcoin dominance is at{' '}
-      {marketCapPercentageBTC} and Ethereum dominance is at{' '}
-      {marketCapPercentageETH}. CoinGecko API is now tracking {cryptocurrencies}{' '}
+      last day is at{' '}
+      <Typography
+        component='span'
+        sx={{
+          fontWeight: 700,
+          color: '#ffffff',
+        }}
+      >
+        {totalVolumeText}
+      </Typography>
+      . Bitcoin dominance is at{' '}
+      <Typography
+        component='span'
+        sx={{
+          fontWeight: 700,
+          color: '#f7931a',
+        }}
+      >
+        {marketCapPercentageBTC}
+      </Typography>{' '}
+      and Ethereum dominance is at{' '}
+      <Typography
+        component='span'
+        sx={{
+          fontWeight: 700,
+          color: '#627eea',
+        }}
+      >
+        {marketCapPercentageETH}
+      </Typography>
+      . CoinGecko API is now tracking{' '}
+      <Typography
+        component='span'
+        sx={{
+          fontWeight: 700,
+          color: '#ffffff',
+        }}
+      >
+        {cryptocurrencies}
+      </Typography>{' '}
       cryptocurrencies.
     </Typography>
   );
