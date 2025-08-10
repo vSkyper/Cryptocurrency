@@ -19,9 +19,6 @@ export default function Navbar() {
           boxShadow:
             '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.1)',
           width: '100%',
-          maxWidth: '100vw',
-          minWidth: '100vw',
-          boxSizing: 'border-box',
           left: 0,
           right: 0,
           '&::before': {
@@ -42,15 +39,10 @@ export default function Navbar() {
             gap: { xs: 1, sm: 2 },
             px: { xs: 2, sm: 3 },
             minHeight: { xs: 56, sm: 64 },
-            maxWidth: '100vw',
             width: '100%',
-            position: 'relative',
-            zIndex: 1,
-            overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            boxSizing: 'border-box',
           }}
         >
           <Title />

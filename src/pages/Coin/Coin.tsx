@@ -28,13 +28,11 @@ export default function Coin() {
   if (!data) return <LoadingModal />;
 
   return (
-    <main
-      style={{
+    <Box
+      sx={{
         position: 'relative',
         width: '100%',
-        maxWidth: '100vw',
-        overflowX: 'hidden',
-        boxSizing: 'border-box',
+        minHeight: '100vh',
       }}
     >
       <GradientBackground />
@@ -43,10 +41,8 @@ export default function Coin() {
         sx={{
           position: 'relative',
           zIndex: 1,
-          width: '100%',
-          maxWidth: '100%',
+          py: 4,
           px: { xs: 2, sm: 3 },
-          boxSizing: 'border-box',
         }}
       >
         <Fade in timeout={600}>
@@ -221,6 +217,6 @@ export default function Coin() {
           </Grid>
         </Grid>
       </Container>
-    </main>
+    </Box>
   );
 }
