@@ -8,10 +8,13 @@ export const Foot = styled(Paper)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   padding: theme.spacing(3, 2),
-  backgroundColor:
-    theme.palette.mode === 'dark'
-      ? 'rgba(18, 18, 18, 0.8)'
-      : 'rgba(245, 245, 245, 0.8)',
-  borderTop: `1px solid ${theme.palette.divider}`,
+  backgroundColor: 'rgba(18, 18, 18, 0.8)',
   borderRadius: 0,
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: '100vw',
+  boxSizing: 'border-box',
+  position: 'relative',
+  left: 0,
+  right: 0,
 })) as typeof Paper;

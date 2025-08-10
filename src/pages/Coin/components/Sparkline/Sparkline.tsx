@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Backdrop, CircularProgress, Box } from '@mui/material';
+import { Grid, CircularProgress, Box } from '@mui/material';
 import { format } from 'date-fns';
 import { Chart } from './styled';
 import { ButtonComponent, ChartComponent } from './components';
@@ -27,13 +27,6 @@ export default function Sparkline(props: SparklineProps) {
 
   return (
     <>
-      <Backdrop
-        sx={{ color: 'inherit', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={!data}
-      >
-        <CircularProgress />
-      </Backdrop>
-
       <Box sx={{ mb: 2 }}>
         <Grid container justifyContent='flex-end' spacing={1}>
           {buttons.map((button) => (
@@ -49,6 +42,24 @@ export default function Sparkline(props: SparklineProps) {
       </Box>
 
       <Chart sx={{ position: 'relative', zIndex: 1 }}>
+        {!data && (
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              zIndex: 2,
+            }}
+          >
+            <CircularProgress size={40} />
+          </Box>
+        )}
         {sparkline && <ChartComponent sparkline={sparkline} days={days} />}
       </Chart>
     </>

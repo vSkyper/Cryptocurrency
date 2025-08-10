@@ -28,9 +28,27 @@ export default function Coin() {
   if (!data) return <LoadingModal />;
 
   return (
-    <main style={{ position: 'relative' }}>
+    <main
+      style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
+        boxSizing: 'border-box',
+      }}
+    >
       <GradientBackground />
-      <Container maxWidth='xl' sx={{ position: 'relative', zIndex: 1 }}>
+      <Container
+        maxWidth='xl'
+        sx={{
+          position: 'relative',
+          zIndex: 1,
+          width: '100%',
+          maxWidth: '100%',
+          px: { xs: 2, sm: 3 },
+          boxSizing: 'border-box',
+        }}
+      >
         <Fade in timeout={600}>
           <HeroSection sx={{ mt: 4 }}>
             <Stack

@@ -57,7 +57,8 @@ export default function Global(props: GlobalProps) {
               sx={{
                 mb: 2,
                 fontWeight: 600,
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
+                background:
+                  'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',

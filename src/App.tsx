@@ -32,6 +32,7 @@ export default function App() {
         styleOverrides: () => ({
           'html, body': {
             overscrollBehaviorY: 'none',
+            overscrollBehaviorX: 'none',
           },
         }),
       },

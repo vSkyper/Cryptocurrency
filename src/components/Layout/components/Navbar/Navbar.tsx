@@ -18,6 +18,12 @@ export default function Navbar() {
           borderRight: 'none',
           boxShadow:
             '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.1)',
+          width: '100%',
+          maxWidth: '100vw',
+          minWidth: '100vw',
+          boxSizing: 'border-box',
+          left: 0,
+          right: 0,
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -33,18 +39,41 @@ export default function Navbar() {
       >
         <Toolbar
           sx={{
-            gap: 2,
+            gap: { xs: 1, sm: 2 },
             px: { xs: 2, sm: 3 },
             minHeight: { xs: 56, sm: 64 },
+            maxWidth: '100vw',
+            width: '100%',
             position: 'relative',
             zIndex: 1,
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            boxSizing: 'border-box',
           }}
         >
           <Title />
-          <Box sx={{ flexGrow: 1, maxWidth: 560 }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              maxWidth: { xs: 'calc(100vw - 160px)', sm: 560 },
+              minWidth: { xs: 100, sm: 200 },
+              overflow: 'hidden',
+              mx: { xs: 1, sm: 2 },
+            }}
+          >
             <SearchBar />
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              flexShrink: 0,
+              minWidth: 'auto',
+            }}
+          >
             <Tooltips />
           </Box>
         </Toolbar>

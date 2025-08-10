@@ -27,6 +27,9 @@ export const HeroSection = styled(Box)(({ theme }) => ({
     inset 0 1px 0 rgba(255,255,255,0.05)
   `,
   overflow: 'hidden',
+  width: '100%',
+  maxWidth: '100%',
+  boxSizing: 'border-box',
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -48,7 +51,9 @@ export const GradientBackground = styled(Box)(() => ({
   top: 0,
   left: 0,
   width: '100%',
+  maxWidth: '100vw',
   height: '100%',
+  overflow: 'hidden',
   background: `
     radial-gradient(600px circle at 20% 30%, rgba(120, 119, 198, 0.3), transparent 40%),
     radial-gradient(800px circle at 80% 70%, rgba(255, 119, 198, 0.2), transparent 40%),
