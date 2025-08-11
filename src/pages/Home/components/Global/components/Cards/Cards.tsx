@@ -50,7 +50,7 @@ export default function Cards(props: CardsProps) {
     globalData.data.active_cryptocurrencies.toLocaleString('en-US');
 
   return (
-    <Grid container spacing={2} sx={{ mb: 3 }}>
+    <Grid container spacing={3} sx={{ mb: 3 }}>
       <Grow in={toggle} timeout={isMobile ? 0 : 600}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
@@ -60,10 +60,11 @@ export default function Cards(props: CardsProps) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                fontWeight: 600,
-                color: '#ffffff',
-                mb: 1,
-                fontSize: { xs: '1rem', sm: '1.15rem' },
+                fontWeight: 700,
+                color: '#D0BCFF',
+                mb: 1.5,
+                fontSize: { xs: '1.1rem', sm: '1.25rem' },
+                textShadow: '0 2px 4px rgba(208, 188, 255, 0.3)',
               }}
             >
               {marketCap}
@@ -83,9 +84,10 @@ export default function Cards(props: CardsProps) {
               variant='body2'
               sx={{
                 fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.75)',
+                color: 'rgba(255, 255, 255, 0.8)',
                 textAlign: 'center',
-                fontSize: { xs: '0.75rem', sm: '0.825rem' },
+                fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                letterSpacing: '0.3px',
               }}
             >
               Market Capitalization
@@ -99,10 +101,11 @@ export default function Cards(props: CardsProps) {
             <Typography
               variant='h6'
               sx={{
-                fontWeight: 600,
-                color: '#ffffff',
-                mb: 1,
-                fontSize: { xs: '1rem', sm: '1.15rem' },
+                fontWeight: 700,
+                color: '#CCC2DC',
+                mb: 1.5,
+                fontSize: { xs: '1.1rem', sm: '1.25rem' },
+                textShadow: '0 2px 4px rgba(204, 194, 220, 0.3)',
               }}
             >
               {totalVolume}
@@ -111,9 +114,10 @@ export default function Cards(props: CardsProps) {
               variant='body2'
               sx={{
                 fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.75)',
+                color: 'rgba(255, 255, 255, 0.8)',
                 textAlign: 'center',
-                fontSize: { xs: '0.75rem', sm: '0.825rem' },
+                fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                letterSpacing: '0.3px',
               }}
             >
               24h Trading Volume
@@ -127,10 +131,11 @@ export default function Cards(props: CardsProps) {
             <Typography
               variant='h6'
               sx={{
-                fontWeight: 600,
+                fontWeight: 700,
                 color: '#f7931a',
-                mb: 1,
-                fontSize: { xs: '1rem', sm: '1.15rem' },
+                mb: 1.5,
+                fontSize: { xs: '1.1rem', sm: '1.25rem' },
+                textShadow: '0 2px 4px rgba(247, 147, 26, 0.3)',
               }}
             >
               {marketCapPercentageBTC}
@@ -139,9 +144,10 @@ export default function Cards(props: CardsProps) {
               variant='body2'
               sx={{
                 fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.75)',
+                color: 'rgba(255, 255, 255, 0.8)',
                 textAlign: 'center',
-                fontSize: { xs: '0.75rem', sm: '0.825rem' },
+                fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                letterSpacing: '0.3px',
               }}
             >
               Bitcoin Market Cap Dominance
@@ -155,10 +161,11 @@ export default function Cards(props: CardsProps) {
             <Typography
               variant='h6'
               sx={{
-                fontWeight: 600,
+                fontWeight: 700,
                 color: '#ffffff',
-                mb: 1,
-                fontSize: { xs: '1rem', sm: '1.15rem' },
+                mb: 1.5,
+                fontSize: { xs: '1.1rem', sm: '1.25rem' },
+                textShadow: '0 2px 4px rgba(255, 255, 255, 0.2)',
               }}
             >
               {cryptocurrencies}
@@ -167,9 +174,10 @@ export default function Cards(props: CardsProps) {
               variant='body2'
               sx={{
                 fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.75)',
+                color: 'rgba(255, 255, 255, 0.8)',
                 textAlign: 'center',
-                fontSize: { xs: '0.75rem', sm: '0.825rem' },
+                fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                letterSpacing: '0.3px',
               }}
             >
               Active Cryptocurrencies

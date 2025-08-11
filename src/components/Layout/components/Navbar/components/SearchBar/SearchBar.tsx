@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
-import { Search as SearchIcon } from '@mui/icons-material';
+import { Search as SearchIcon, TrendingUp } from '@mui/icons-material';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import {
   AutocompleteRenderInputParams,
   FilterOptionsState,
   createFilterOptions,
+  CircularProgress,
+  Box,
 } from '@mui/material';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
 import { ICoinsList } from 'interfaces';
@@ -26,12 +28,12 @@ export default function SearchBar() {
 
   const filterOptions = useCallback(
     (options: ICoinsList[], state: FilterOptionsState<ICoinsList>) =>
-      defaultFilterOptions(options, state).slice(0, 10),
+      defaultFilterOptions(options, state).slice(0, 8),
     [defaultFilterOptions]
   );
 
   const handleOptionLabel = useCallback(
-    (option: ICoinsList) => option.name,
+    (option: ICoinsList) => `${option.name} (${option.symbol?.toUpperCase()})`,
     []
   );
 
@@ -53,14 +55,43 @@ export default function SearchBar() {
 
   const handleRenderInput = useCallback(
     (params: AutocompleteRenderInputParams) => (
-      <div ref={params.InputProps.ref}>
+      <Box
+        ref={params.InputProps.ref}
+        sx={{ position: 'relative', width: '100%' }}
+      >
         <SearchIconWrapper>
-          <SearchIcon />
+          {data ? (
+            <SearchIcon />
+          ) : (
+            <CircularProgress
+              size={18}
+              sx={{ color: 'rgba(208, 188, 255, 0.7)' }}
+            />
+          )}
         </SearchIconWrapper>
-        <StyledInputBase inputProps={params.inputProps} placeholder='Search…' />
-      </div>
+        <StyledInputBase
+          inputProps={params.inputProps}
+          placeholder={data ? 'Search cryptocurrencies...' : 'Loading coins...'}
+        />
+        {value && (
+          <Box
+            sx={{
+              position: 'absolute',
+              right: 12,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'rgba(208, 188, 255, 0.5)',
+              fontSize: '0.75rem',
+              fontWeight: 500,
+              pointerEvents: 'none',
+            }}
+          >
+            <TrendingUp sx={{ fontSize: '1rem' }} />
+          </Box>
+        )}
+      </Box>
     ),
-    []
+    [data, value]
   );
 
   if (error) return <ErrorModal />;
@@ -76,9 +107,15 @@ export default function SearchBar() {
       getOptionLabel={handleOptionLabel}
       forcePopupIcon={false}
       autoComplete
+      includeInputInList
+      selectOnFocus
+      clearOnBlur
+      handleHomeEndKeys
       onInputChange={handleInputChange}
       onChange={handleChange}
       renderInput={handleRenderInput}
+      noOptionsText='No cryptocurrencies found'
+      loadingText='Loading cryptocurrencies...'
     />
   );
 }

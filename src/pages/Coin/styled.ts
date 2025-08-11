@@ -15,32 +15,37 @@ export const Name = styled(Paper)(({ theme }) => ({
 export const HeroSection = styled(Box)(({ theme }) => ({
   position: 'relative',
   background: `linear-gradient(135deg, 
-    ${theme.palette.background.paper}dd 0%, 
-    ${theme.palette.background.default}bb 100%
+    rgba(16, 18, 27, 0.85) 0%, 
+    rgba(13, 14, 14, 0.9) 50%,
+    rgba(16, 18, 27, 0.85) 100%
   )`,
-  border: `1px solid ${theme.palette.divider}60`,
+  backdropFilter: 'blur(24px) saturate(180%)',
+  border: `1px solid rgba(208, 188, 255, 0.12)`,
   borderRadius: theme.spacing(2),
-  padding: theme.spacing(1.5, 1.2),
-  marginBottom: theme.spacing(2.5),
+  padding: theme.spacing(1.5, 1.5),
+  marginBottom: theme.spacing(2),
   boxShadow: `
-    0 4px 16px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.05)
+    0 8px 32px rgba(0,0,0,0.3),
+    0 2px 16px rgba(208, 188, 255, 0.05),
+    inset 0 1px 0 rgba(255,255,255,0.08)
   `,
   overflow: 'hidden',
   width: '100%',
   maxWidth: '100%',
   boxSizing: 'border-box',
-  transform: 'translateZ(0)', // Force hardware acceleration
-  willChange: 'auto', // Optimize for animations
-  contain: 'layout style', // CSS containment to prevent layout shifts
-  isolation: 'isolate', // Create new stacking context
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
+  isolation: 'isolate',
+  transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(3, 2.5),
-    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2.5, 2.5),
+    marginBottom: theme.spacing(2.5),
+    borderRadius: theme.spacing(2.5),
   },
   [theme.breakpoints.up('md')]: {
-    padding: theme.spacing(3, 2.5),
-    marginBottom: theme.spacing(3),
+    padding: theme.spacing(3, 3),
+    marginBottom: theme.spacing(2.5),
   },
   '&::before': {
     content: '""',
@@ -50,11 +55,12 @@ export const HeroSection = styled(Box)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: `linear-gradient(135deg, 
-      ${theme.palette.primary.main}08, 
-      ${theme.palette.secondary.main}05, 
+      rgba(208, 188, 255, 0.08) 0%, 
+      rgba(204, 194, 220, 0.05) 30%,
       transparent 70%
     )`,
     zIndex: -1,
+    opacity: 0.8,
   },
 })) as typeof Box;
 

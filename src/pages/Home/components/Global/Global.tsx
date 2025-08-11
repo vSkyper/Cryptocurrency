@@ -16,13 +16,16 @@ const HeroSection = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3, 4),
   borderRadius: theme.spacing(3),
   background: `linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.08) 0%, 
-    rgba(255, 255, 255, 0.04) 100%
+    rgba(16, 18, 27, 0.85) 0%, 
+    rgba(13, 14, 14, 0.9) 50%,
+    rgba(16, 18, 27, 0.85) 100%
   )`,
-  border: `1px solid rgba(255, 255, 255, 0.15)`,
+  backdropFilter: 'blur(24px) saturate(180%)',
+  border: `1px solid rgba(208, 188, 255, 0.12)`,
   boxShadow: `
-    0 8px 24px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.05)
+    0 8px 32px rgba(0,0,0,0.3),
+    0 2px 16px rgba(208, 188, 255, 0.05),
+    inset 0 1px 0 rgba(255,255,255,0.08)
   `,
   position: 'relative',
   overflow: 'hidden',
@@ -35,11 +38,12 @@ const HeroSection = styled(Paper)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: `linear-gradient(135deg, 
-      ${theme.palette.primary.main}03, 
-      ${theme.palette.secondary.main}02, 
-      transparent 60%
+      rgba(208, 188, 255, 0.08) 0%, 
+      rgba(204, 194, 220, 0.05) 30%,
+      transparent 70%
     )`,
     zIndex: 0,
+    opacity: 0.8,
   },
   '& > *': {
     position: 'relative',
@@ -66,14 +70,16 @@ export default function Global(props: GlobalProps) {
               variant='h5'
               sx={{
                 mb: 2,
-                fontWeight: 600,
+                fontWeight: 700,
                 background:
-                  'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
+                  'linear-gradient(135deg, #D0BCFF 0%, #CCC2DC 50%, #D0BCFF 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',
-                lineHeight: 1.3,
-                fontSize: { xs: '1.25rem', sm: '1.4rem', md: '1.5rem' },
+                lineHeight: 1.2,
+                fontSize: { xs: '1.4rem', sm: '1.6rem', md: '1.75rem' },
+                textShadow: '0 2px 4px rgba(208, 188, 255, 0.3)',
+                letterSpacing: '-0.01em',
               }}
             >
               Global Cryptocurrency Market
