@@ -44,7 +44,7 @@ export default function Home() {
     'https://api.coingecko.com/api/v3/global?x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee'
   );
   const { data: coins, error: coinsError } = useFetch<ICoins[]>(
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee'
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d'
   );
 
   if (globalDataError || coinsError) return <ErrorModal />;
