@@ -41,46 +41,45 @@ export default function Coin() {
         sx={{
           position: 'relative',
           zIndex: 1,
-          py: { xs: 3, sm: 6 },
-          px: { xs: 2, sm: 3 },
+          py: { xs: 2, sm: 4 },
+          px: { xs: 1, sm: 2 },
         }}
       >
         <Fade in timeout={600}>
           <HeroSection>
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'center', sm: 'flex-start' }}
-              spacing={{ xs: 2, sm: 3 }}
+              alignItems={{ xs: 'center', sm: 'center' }}
+              spacing={{ xs: 1, sm: 2 }}
             >
               <Avatar
                 src={data.image?.large}
                 alt={data.name}
                 sx={{
-                  width: { xs: 56, sm: 96 },
-                  height: { xs: 56, sm: 96 },
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
-                  border: (theme) =>
-                    `3px solid ${theme.palette.background.paper}`,
+                  width: { xs: 56, sm: 72 },
+                  height: { xs: 56, sm: 72 },
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+                  border: (theme) => `2px solid ${theme.palette.divider}60`,
                   bgcolor: 'transparent',
                   filter: 'brightness(1.1) contrast(1.1)',
                   transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     transform: 'scale(1.05) translateY(-2px)',
-                    boxShadow: '0 16px 50px rgba(0,0,0,0.5)',
+                    boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
                   },
                 }}
               />
 
               <Stack
-                spacing={{ xs: 1, sm: 2 }}
+                spacing={{ xs: 1, sm: 1 }}
                 alignItems={{ xs: 'center', sm: 'flex-start' }}
               >
                 <Typography
-                  variant='h3'
+                  variant='h5'
                   component='h1'
                   sx={{
-                    fontWeight: 800,
-                    fontSize: { xs: '1.3rem', sm: '2.5rem', md: '3rem' },
+                    fontWeight: 700,
+                    fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
                     background: (theme) => `linear-gradient(135deg, 
                   ${theme.palette.text.primary}, 
                   ${theme.palette.primary.main}aa
@@ -99,7 +98,7 @@ export default function Coin() {
                 <Stack
                   direction='row'
                   alignItems='center'
-                  spacing={{ xs: 1, sm: 2 }}
+                  spacing={{ xs: 1, sm: 1 }}
                   flexWrap='wrap'
                   justifyContent={{ xs: 'center', sm: 'flex-start' }}
                 >
@@ -107,24 +106,24 @@ export default function Coin() {
                     size='small'
                     label={data.symbol?.toUpperCase()}
                     sx={{
-                      fontWeight: 700,
-                      fontSize: { xs: '0.85rem', sm: '1rem' },
-                      borderRadius: '16px',
+                      fontWeight: 600,
+                      fontSize: { xs: '0.9rem', sm: '0.9rem' },
+                      borderRadius: '12px',
                       background: (theme) => `linear-gradient(135deg, 
                   ${theme.palette.background.paper}ee, 
                   ${theme.palette.background.default}cc
                   )`,
-                      backdropFilter: 'blur(10px)',
-                      border: (theme) => `1px solid ${theme.palette.divider}60`,
+                      backdropFilter: 'blur(8px)',
+                      border: (theme) => `1px solid ${theme.palette.divider}50`,
                       color: 'text.primary',
-                      letterSpacing: 0.5,
-                      height: { xs: 32, sm: 40 },
-                      px: { xs: 1.2, sm: 2 },
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                      transition: 'all 250ms ease',
+                      letterSpacing: 0.4,
+                      height: { xs: 32, sm: 36 },
+                      px: { xs: 1.5, sm: 1.5 },
+                      boxShadow: '0 3px 15px rgba(0,0,0,0.1)',
+                      transition: 'all 200ms ease',
                       '&:hover': {
                         transform: 'translateY(-1px)',
-                        boxShadow: '0 6px 25px rgba(0,0,0,0.2)',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
                       },
                     }}
                   />
@@ -134,30 +133,30 @@ export default function Coin() {
                       size='small'
                       label={`Rank #${data.market_cap_rank}`}
                       sx={{
-                        fontWeight: 700,
-                        fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                        borderRadius: '16px',
+                        fontWeight: 600,
+                        fontSize: { xs: '0.85rem', sm: '0.85rem' },
+                        borderRadius: '12px',
                         background: (theme) => `linear-gradient(135deg, 
-                    ${theme.palette.primary.main}25, 
-                    ${theme.palette.secondary.main}20
+                    ${theme.palette.primary.main}20, 
+                    ${theme.palette.secondary.main}15
                   )`,
-                        backdropFilter: 'blur(10px)',
+                        backdropFilter: 'blur(8px)',
                         border: (theme) =>
-                          `1px solid ${theme.palette.primary.main}40`,
+                          `1px solid ${theme.palette.primary.main}30`,
                         color: 'primary.main',
                         letterSpacing: 0.3,
-                        height: { xs: 32, sm: 40 },
-                        px: { xs: 1.2, sm: 2 },
+                        height: { xs: 32, sm: 36 },
+                        px: { xs: 1.5, sm: 1.5 },
                         boxShadow: (theme) =>
-                          `0 4px 20px ${theme.palette.primary.main}30`,
-                        transition: 'all 250ms ease',
+                          `0 3px 15px ${theme.palette.primary.main}20`,
+                        transition: 'all 200ms ease',
                         '&:hover': {
                           transform: 'translateY(-1px)',
                           boxShadow: (theme) =>
-                            `0 6px 25px ${theme.palette.primary.main}40`,
+                            `0 4px 20px ${theme.palette.primary.main}30`,
                           background: (theme) => `linear-gradient(135deg, 
-                    ${theme.palette.primary.main}35, 
-                    ${theme.palette.secondary.main}30
+                    ${theme.palette.primary.main}30, 
+                    ${theme.palette.secondary.main}25
                     )`,
                         },
                       }}
@@ -201,7 +200,7 @@ export default function Coin() {
 
           {/* Exchange and Links Section */}
           <Grid size={{ xs: 12, lg: 4 }}>
-            <Stack spacing={3}>
+            <Stack spacing={2}>
               <Slide direction='left' in timeout={1400}>
                 <Box>
                   <Exchange id={id} symbol={data.symbol} />

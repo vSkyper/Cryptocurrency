@@ -19,9 +19,9 @@ export const HeroSection = styled(Box)(({ theme }) => ({
     ${theme.palette.background.default}bb 100%
   )`,
   border: `1px solid ${theme.palette.divider}60`,
-  borderRadius: theme.spacing(3),
-  padding: theme.spacing(4, 3),
-  marginBottom: theme.spacing(4),
+  borderRadius: theme.spacing(2),
+  padding: theme.spacing(2, 1.5),
+  marginBottom: theme.spacing(3),
   boxShadow: `
     0 4px 16px rgba(0,0,0,0.2),
     inset 0 1px 0 rgba(255,255,255,0.05)
@@ -30,6 +30,10 @@ export const HeroSection = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: '100%',
   boxSizing: 'border-box',
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4, 3),
+    marginBottom: theme.spacing(4),
+  },
   '&::before': {
     content: '""',
     position: 'absolute',

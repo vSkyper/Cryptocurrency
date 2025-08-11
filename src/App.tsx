@@ -16,7 +16,7 @@ export default function App() {
         palette: {
           primary: { main: '#D0BCFF' },
           secondary: { main: '#CCC2DC' },
-          background: { default: '#0f1115', paper: '#161a22' },
+          background: { default: '#0d0e0eff', paper: '#151619ff' },
         },
       },
     },
