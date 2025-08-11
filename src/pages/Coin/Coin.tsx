@@ -111,7 +111,7 @@ export default function Coin() {
                     label={data.symbol?.toUpperCase()}
                     sx={{
                       fontWeight: 600,
-                      fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.8rem' },
+                      fontSize: { xs: '0.7rem', sm: '0.85rem', md: '0.8rem' },
                       borderRadius: '12px',
                       background: (theme) => `linear-gradient(135deg, 
                   ${theme.palette.background.paper}ee, 
@@ -121,8 +121,8 @@ export default function Coin() {
                       border: (theme) => `1px solid ${theme.palette.divider}50`,
                       color: 'text.primary',
                       letterSpacing: 0.4,
-                      height: { xs: 28, sm: 34, md: 32 },
-                      px: { xs: 1.2, sm: 1.3, md: 1.2 },
+                      height: { xs: 24, sm: 34, md: 32 },
+                      px: { xs: 1, sm: 1.3, md: 1.2 },
                       boxShadow: '0 3px 15px rgba(0,0,0,0.1)',
                       transition: 'all 200ms ease',
                       '&:hover': {
@@ -138,7 +138,7 @@ export default function Coin() {
                       label={`Rank #${data.market_cap_rank}`}
                       sx={{
                         fontWeight: 600,
-                        fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.75rem' },
+                        fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.75rem' },
                         borderRadius: '12px',
                         background: (theme) => `linear-gradient(135deg, 
                     ${theme.palette.primary.main}20, 
@@ -149,8 +149,8 @@ export default function Coin() {
                           `1px solid ${theme.palette.primary.main}30`,
                         color: 'primary.main',
                         letterSpacing: 0.3,
-                        height: { xs: 28, sm: 34, md: 32 },
-                        px: { xs: 1.2, sm: 1.3, md: 1.2 },
+                        height: { xs: 24, sm: 34, md: 32 },
+                        px: { xs: 1, sm: 1.3, md: 1.2 },
                         boxShadow: (theme) =>
                           `0 3px 15px ${theme.palette.primary.main}20`,
                         transition: 'all 200ms ease',
