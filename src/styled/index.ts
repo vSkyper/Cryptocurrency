@@ -31,6 +31,17 @@ export const Card = styled(Paper)(({ theme }) => ({
       0 20px 60px rgba(0,0,0,0.4),
       inset 0 1px 0 rgba(255,255,255,0.15)
     `,
+    [theme.breakpoints.down('md')]: {
+      transform: 'none',
+      background: `linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.08) 100%
+      )`,
+      boxShadow: `
+        0 12px 40px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.1)
+      `,
+    },
   },
   '&::before': {
     content: '""',
@@ -69,5 +80,13 @@ export const Percentage = styled(Typography)(({ theme }) => ({
   '& .MuiSvgIcon-root': {
     marginLeft: theme.spacing(0.5),
     fontSize: '1.1rem',
+  },
+  [theme.breakpoints.down('md')]: {
+    fontSize: '0.75rem',
+    padding: theme.spacing(0.3, 0.7),
+    marginLeft: theme.spacing(1),
+    '& .MuiSvgIcon-root': {
+      fontSize: '0.9rem',
+    },
   },
 })) as typeof Typography;
