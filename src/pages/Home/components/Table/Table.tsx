@@ -52,6 +52,9 @@ export default function Table(props: TableProps) {
             fontSize: '0.875rem',
             fontWeight: 500,
           },
+          '& .MuiDataGrid-cellEmpty': {
+            display: 'none !important',
+          },
           '& .MuiDataGrid-columnHeaders': {
             backgroundColor: 'rgba(208, 188, 255, 0.08) !important',
             background: 'rgba(208, 188, 255, 0.08) !important',
