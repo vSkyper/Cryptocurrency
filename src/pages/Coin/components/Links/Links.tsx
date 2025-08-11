@@ -105,32 +105,32 @@ export default function Links(props: LinksProps) {
               }}
             />
           )}
-        </Box>
 
-        {data.links?.official_forum_url?.[0] && (
-          <StyledChip
-            icon={<ForumIcon sx={{ fontSize: 18, color: '#D0BCFF' }} />}
-            label='Official Forum'
-            component='a'
-            href={data.links.official_forum_url[0]}
-            clickable
-            sx={{
-              background:
-                'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(204, 194, 220, 0.08) 100%)',
-              border: '1px solid rgba(208, 188, 255, 0.3)',
-              color: '#D0BCFF',
-              fontWeight: 500,
-              height: 36,
-              '&:hover': {
+          {data.links?.official_forum_url?.[0] && (
+            <StyledChip
+              icon={<ForumIcon sx={{ fontSize: 18, color: '#D0BCFF' }} />}
+              label='Official Forum'
+              component='a'
+              href={data.links.official_forum_url[0]}
+              clickable
+              sx={{
                 background:
-                  'linear-gradient(135deg, rgba(208, 188, 255, 0.25) 0%, rgba(204, 194, 220, 0.12) 100%)',
-                border: '1px solid rgba(208, 188, 255, 0.5)',
-                transform: 'translateY(-2px)',
-                boxShadow: '0 6px 20px rgba(208, 188, 255, 0.2)',
-              },
-            }}
-          />
-        )}
+                  'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(204, 194, 220, 0.08) 100%)',
+                border: '1px solid rgba(208, 188, 255, 0.3)',
+                color: '#D0BCFF',
+                fontWeight: 500,
+                height: 36,
+                '&:hover': {
+                  background:
+                    'linear-gradient(135deg, rgba(208, 188, 255, 0.25) 0%, rgba(204, 194, 220, 0.12) 100%)',
+                  border: '1px solid rgba(208, 188, 255, 0.5)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 6px 20px rgba(208, 188, 255, 0.2)',
+                },
+              }}
+            />
+          )}
+        </Box>
       </Box>
 
       {/* Blockchain Explorer Links */}
