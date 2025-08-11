@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 export const Foot = styled(Paper)(({ theme }) => ({
   boxShadow: 'none',
-  marginTop: theme.spacing(4),
+  marginTop: 0,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

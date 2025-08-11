@@ -20,7 +20,7 @@ export default function Coin() {
   const { id } = useParams();
 
   const { data, error } = useFetch<ICoin>(
-    `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
+    `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee`
   );
 
   if (!id || error) return <ErrorModal />;
@@ -41,23 +41,23 @@ export default function Coin() {
         sx={{
           position: 'relative',
           zIndex: 1,
-          py: 4,
+          py: { xs: 3, sm: 6 },
           px: { xs: 2, sm: 3 },
         }}
       >
         <Fade in timeout={600}>
-          <HeroSection sx={{ mt: 4 }}>
+          <HeroSection>
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
               alignItems={{ xs: 'center', sm: 'flex-start' }}
-              spacing={3}
+              spacing={{ xs: 2, sm: 3 }}
             >
               <Avatar
                 src={data.image?.large}
                 alt={data.name}
                 sx={{
-                  width: { xs: 80, sm: 96 },
-                  height: { xs: 80, sm: 96 },
+                  width: { xs: 56, sm: 96 },
+                  height: { xs: 56, sm: 96 },
                   boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
                   border: (theme) =>
                     `3px solid ${theme.palette.background.paper}`,
@@ -72,7 +72,7 @@ export default function Coin() {
               />
 
               <Stack
-                spacing={2}
+                spacing={{ xs: 1, sm: 2 }}
                 alignItems={{ xs: 'center', sm: 'flex-start' }}
               >
                 <Typography
@@ -80,11 +80,11 @@ export default function Coin() {
                   component='h1'
                   sx={{
                     fontWeight: 800,
-                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                    fontSize: { xs: '1.3rem', sm: '2.5rem', md: '3rem' },
                     background: (theme) => `linear-gradient(135deg, 
-                      ${theme.palette.text.primary}, 
-                      ${theme.palette.primary.main}aa
-                    )`,
+                  ${theme.palette.text.primary}, 
+                  ${theme.palette.primary.main}aa
+                )`,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
                     color: 'transparent',
@@ -99,27 +99,27 @@ export default function Coin() {
                 <Stack
                   direction='row'
                   alignItems='center'
-                  spacing={2}
+                  spacing={{ xs: 1, sm: 2 }}
                   flexWrap='wrap'
                   justifyContent={{ xs: 'center', sm: 'flex-start' }}
                 >
                   <Chip
-                    size='medium'
+                    size='small'
                     label={data.symbol?.toUpperCase()}
                     sx={{
                       fontWeight: 700,
-                      fontSize: '1rem',
+                      fontSize: { xs: '0.85rem', sm: '1rem' },
                       borderRadius: '16px',
                       background: (theme) => `linear-gradient(135deg, 
-                        ${theme.palette.background.paper}ee, 
-                        ${theme.palette.background.default}cc
-                      )`,
+                  ${theme.palette.background.paper}ee, 
+                  ${theme.palette.background.default}cc
+                  )`,
                       backdropFilter: 'blur(10px)',
                       border: (theme) => `1px solid ${theme.palette.divider}60`,
                       color: 'text.primary',
                       letterSpacing: 0.5,
-                      height: 40,
-                      px: 2,
+                      height: { xs: 32, sm: 40 },
+                      px: { xs: 1.2, sm: 2 },
                       boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
                       transition: 'all 250ms ease',
                       '&:hover': {
@@ -131,23 +131,23 @@ export default function Coin() {
 
                   {data.market_cap_rank && (
                     <Chip
-                      size='medium'
+                      size='small'
                       label={`Rank #${data.market_cap_rank}`}
                       sx={{
                         fontWeight: 700,
-                        fontSize: '0.9rem',
+                        fontSize: { xs: '0.8rem', sm: '0.9rem' },
                         borderRadius: '16px',
                         background: (theme) => `linear-gradient(135deg, 
-                          ${theme.palette.primary.main}25, 
-                          ${theme.palette.secondary.main}20
-                        )`,
+                    ${theme.palette.primary.main}25, 
+                    ${theme.palette.secondary.main}20
+                  )`,
                         backdropFilter: 'blur(10px)',
                         border: (theme) =>
                           `1px solid ${theme.palette.primary.main}40`,
                         color: 'primary.main',
                         letterSpacing: 0.3,
-                        height: 40,
-                        px: 2,
+                        height: { xs: 32, sm: 40 },
+                        px: { xs: 1.2, sm: 2 },
                         boxShadow: (theme) =>
                           `0 4px 20px ${theme.palette.primary.main}30`,
                         transition: 'all 250ms ease',
@@ -156,9 +156,9 @@ export default function Coin() {
                           boxShadow: (theme) =>
                             `0 6px 25px ${theme.palette.primary.main}40`,
                           background: (theme) => `linear-gradient(135deg, 
-                            ${theme.palette.primary.main}35, 
-                            ${theme.palette.secondary.main}30
-                          )`,
+                    ${theme.palette.primary.main}35, 
+                    ${theme.palette.secondary.main}30
+                    )`,
                         },
                       }}
                     />
