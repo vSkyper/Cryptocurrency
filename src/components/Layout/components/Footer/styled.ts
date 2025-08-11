@@ -10,6 +10,7 @@ export const Foot = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3, 2),
   backgroundColor: 'rgba(18, 18, 18, 0.8)',
   borderRadius: 0,
+  border: 'none',
   width: '100%',
   maxWidth: '100%',
   minWidth: '100vw',

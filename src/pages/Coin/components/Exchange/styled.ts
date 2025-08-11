@@ -25,6 +25,7 @@ export const InputCard = styled(Paper)(({ theme }) => ({
   width: '100%',
   maxWidth: 320,
   height: 60,
+  margin: '0 auto',
   borderRadius: theme.spacing(2.5),
   background: `linear-gradient(135deg, 
     ${theme.palette.background.paper}ee 0%, 

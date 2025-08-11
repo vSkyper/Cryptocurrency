@@ -41,7 +41,7 @@ export default function Navbar() {
           sx={{
             gap: { xs: 1, sm: 2 },
             px: { xs: 2, sm: 3 },
-            minHeight: { xs: 56, sm: 64 },
+            minHeight: { xs: 48, sm: 64 },
             maxWidth: '100vw',
             width: '100%',
             position: 'relative',
@@ -78,7 +78,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }} />
+      <Toolbar sx={{ minHeight: { xs: 48, sm: 64 } }} />
     </Box>
   );
 }

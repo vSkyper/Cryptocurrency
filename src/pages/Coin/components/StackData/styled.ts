@@ -42,6 +42,9 @@ export const DataRow = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 1,
   transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+  [theme.breakpoints.down('md')]: {
+    padding: `${theme.spacing(2)} ${theme.spacing(0.5)}`,
+  },
   '&:hover': {
     background: 'rgba(255, 255, 255, 0.08)',
     transform: 'translateX(4px)',

@@ -7,8 +7,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
   minWidth: 48,
   borderRadius: theme.spacing(2),
   textTransform: 'none',
-  padding: theme.spacing(0.75, 1.5),
-  fontSize: '0.875rem',
+  padding: theme.spacing(0.5, 1),
+  fontSize: '0.75rem',
   fontWeight: 600,
   transition: 'all 250ms cubic-bezier(0.4, 0, 0.2, 1)',
   border: `1px solid ${theme.palette.divider}40`,
@@ -17,6 +17,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
     ${theme.palette.background.default}aa
   )`,
   backdropFilter: 'blur(10px)',
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(0.75, 1.5),
+    fontSize: '0.875rem',
+  },
   '&:hover': {
     transform: 'translateY(-2px)',
     boxShadow: '0 6px 20px rgba(0,0,0,0.2)',

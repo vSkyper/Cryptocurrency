@@ -11,7 +11,7 @@ export default function Title() {
           size='medium'
           edge='start'
           sx={{
-            mr: { xs: 1, sm: 2 },
+            mr: { xs: 2, sm: 0 },
             ml: { xs: 1, sm: 0 },
             padding: { xs: 1, sm: 1.5 },
             background:
