@@ -1,4 +1,4 @@
-import { Grid, Typography, Grow } from '@mui/material';
+import { Grid, Typography, Grow, useMediaQuery, useTheme } from '@mui/material';
 import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
@@ -8,6 +8,9 @@ import { CardsProps } from './interface';
 
 export default function Cards(props: CardsProps) {
   const { toggle, globalData } = props;
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const marketCap: string = globalData.data.total_market_cap.usd.toLocaleString(
     'en-US',
@@ -48,7 +51,7 @@ export default function Cards(props: CardsProps) {
 
   return (
     <Grid container spacing={2} sx={{ mb: 3 }}>
-      <Grow in={toggle} timeout={600}>
+      <Grow in={toggle} timeout={isMobile ? 0 : 600}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
             <Typography
@@ -90,7 +93,7 @@ export default function Cards(props: CardsProps) {
           </Card>
         </Grid>
       </Grow>
-      <Grow in={toggle} timeout={800}>
+      <Grow in={toggle} timeout={isMobile ? 0 : 800}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
             <Typography
@@ -118,7 +121,7 @@ export default function Cards(props: CardsProps) {
           </Card>
         </Grid>
       </Grow>
-      <Grow in={toggle} timeout={1000}>
+      <Grow in={toggle} timeout={isMobile ? 0 : 1000}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
             <Typography
@@ -146,7 +149,7 @@ export default function Cards(props: CardsProps) {
           </Card>
         </Grid>
       </Grow>
-      <Grow in={toggle} timeout={1200}>
+      <Grow in={toggle} timeout={isMobile ? 0 : 1200}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card>
             <Typography

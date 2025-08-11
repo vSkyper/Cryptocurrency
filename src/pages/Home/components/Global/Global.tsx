@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { Grid, Box, Typography, Collapse, Paper } from '@mui/material';
+import {
+  Grid,
+  Box,
+  Typography,
+  Collapse,
+  Paper,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
@@ -46,6 +54,8 @@ export default function Global(props: GlobalProps) {
   const { globalData } = props;
 
   const [toggle, setToggle] = useState<boolean>(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
@@ -83,7 +93,7 @@ export default function Global(props: GlobalProps) {
         </Box>
       </HeroSection>
 
-      <Collapse in={toggle}>
+      <Collapse in={toggle} timeout={isMobile ? 0 : 'auto'}>
         <Cards toggle={toggle} globalData={globalData} />
       </Collapse>
     </>

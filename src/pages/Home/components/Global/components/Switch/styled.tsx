@@ -20,7 +20,6 @@ export const IOSSwitch = styled((props) => (
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           opacity: 1,
           border: 0,
-          boxShadow: '0 4px 20px rgba(102, 126, 234, 0.4)',
         },
         '&.Mui-disabled + .MuiSwitch-track': {
           opacity: 0.5,

@@ -13,7 +13,14 @@ export default function Switch(props: SwitchProps) {
   return (
     <FormControlLabel
       control={
-        <IOSSwitch checked={toggle} sx={{ mr: 1 }} onChange={handleChange} />
+        <IOSSwitch
+          checked={toggle}
+          sx={{
+            mr: mobile ? 0.5 : 1,
+            transform: mobile ? 'scale(0.85)' : 'scale(1)',
+          }}
+          onChange={handleChange}
+        />
       }
       label='Show Stats'
       sx={{
@@ -21,10 +28,10 @@ export default function Switch(props: SwitchProps) {
         '.MuiFormControlLabel-label': {
           fontWeight: 600,
           color: '#ffffff',
-          fontSize: '1.1rem',
+          fontSize: mobile ? '0.9rem' : '1.1rem',
         },
         ...(mobile
-          ? { ml: 1.3, display: { xs: 'block', md: 'none' } }
+          ? { ml: 0, display: { xs: 'block', md: 'none' } }
           : { ml: 0, display: { xs: 'none', md: 'flex' } }),
       }}
     />
