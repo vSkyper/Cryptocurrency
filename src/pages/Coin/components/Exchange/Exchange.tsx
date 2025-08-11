@@ -2,17 +2,28 @@ import { useCallback, useState, useEffect } from 'react';
 import {
   Typography,
   Grid,
-  Divider,
   TextField,
   FilterOptionsState,
   createFilterOptions,
   AutocompleteRenderInputParams,
   Autocomplete,
-  IconButton,
   Box,
+  Fade,
+  Avatar,
 } from '@mui/material';
-import { SwapHoriz as SwapHorizIcon } from '@mui/icons-material';
-import { InputBaseExchange, InputCard, ModernExchangeCard } from './styled';
+import {
+  SwapVert as SwapVertIcon,
+  Calculate as CalculateIcon,
+} from '@mui/icons-material';
+import {
+  InputBaseExchange,
+  InputCard,
+  ModernExchangeCard,
+  ExchangeHeader,
+  AnimatedSwapButton,
+  CurrencySection,
+  ExchangeRateDisplay,
+} from './styled';
 import useFetch from 'hooks/useFetch';
 import { IExchange } from 'interfaces';
 import { ErrorModal } from 'components';
@@ -97,14 +108,6 @@ export default function Exchange(props: ExchangeProps) {
     []
   );
 
-  const handleSwap = useCallback(() => {
-    const tempCrypto = cryptoAmount;
-    const tempCurrency = currencyAmount;
-    setCryptoAmount(tempCurrency);
-    setCurrencyAmount(tempCrypto);
-    setLastEditedField(lastEditedField === 'crypto' ? 'currency' : 'crypto');
-  }, [cryptoAmount, currencyAmount, lastEditedField]);
-
   const handleCryptoInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -142,128 +145,209 @@ export default function Exchange(props: ExchangeProps) {
 
   if (currenciesError || exchangeRateError) return <ErrorModal />;
 
+  const currentRate = exchangeRate?.[id]?.[currencyOption];
+  const formattedRate = currentRate
+    ? new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currencyOption.toUpperCase(),
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 8,
+      }).format(currentRate)
+    : '';
+
   return (
-    <ModernExchangeCard>
-      <Box sx={{ mb: 2 }}>
-        <Typography
-          variant='h6'
-          sx={{
-            fontWeight: 700,
-            background: (theme) => `linear-gradient(135deg, 
-              ${theme.palette.text.primary}, 
-              ${theme.palette.primary.main}aa
-            )`,
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-            mb: 2,
-          }}
-        >
-          Exchange Calculator
-        </Typography>
-      </Box>
-
-      <Grid
-        container
-        justifyContent='center'
-        alignItems='center'
-        direction='column'
-        spacing={2}
-      >
-        <Grid size={12}>
-          <InputCard>
-            <Typography
-              variant='subtitle2'
-              sx={{
-                fontWeight: 600,
-                color: 'text.primary',
-                minWidth: 50,
-              }}
-            >
-              {symbol.toUpperCase()}
-            </Typography>
-            <Divider orientation='vertical' sx={{ mx: 2, height: 30 }} />
-            <InputBaseExchange
-              type='number'
-              value={cryptoAmount}
-              onChange={handleCryptoInputChange}
-              placeholder='Enter amount'
-              sx={{
-                '& input': {
-                  fontSize: '1rem',
-                  fontWeight: 500,
-                  color: 'text.primary',
-                },
-              }}
-            />
-          </InputCard>
-        </Grid>
-
-        <IconButton
-          onClick={handleSwap}
-          sx={{
-            background: (theme) => `linear-gradient(135deg, 
-              ${theme.palette.primary.main}20, 
-              ${theme.palette.secondary.main}15
-            )`,
-            backdropFilter: 'blur(10px)',
-            border: (theme) => `1px solid ${theme.palette.divider}40`,
-            '&:hover': {
+    <Fade in timeout={800}>
+      <ModernExchangeCard>
+        <ExchangeHeader>
+          <CalculateIcon
+            sx={{
+              fontSize: { xs: '1.2rem', sm: '1.5rem' },
+              color: 'primary.main',
+              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+            }}
+          />
+          <Typography
+            variant='h6'
+            sx={{
+              fontWeight: 700,
+              fontSize: { xs: '1rem', sm: '1.25rem' },
               background: (theme) => `linear-gradient(135deg, 
-                ${theme.palette.primary.main}30, 
-                ${theme.palette.secondary.main}25
+                ${theme.palette.text.primary}, 
+                ${theme.palette.primary.main}aa
               )`,
-              transform: 'rotate(180deg)',
-            },
-            transition: 'all 300ms ease',
-          }}
-        >
-          <SwapHorizIcon />
-        </IconButton>
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Exchange Calculator
+          </Typography>
+        </ExchangeHeader>
 
-        <Grid size={12}>
-          <InputCard>
-            <Autocomplete
-              sx={{
-                width: 80,
-                '& .MuiInput-root': {
-                  border: 'none',
-                  '&:before': {
-                    display: 'none',
-                  },
-                  '&:after': {
-                    display: 'none',
-                  },
-                },
-              }}
-              id='currencies-select'
-              value={currencyOption}
-              options={currencies ?? []}
-              filterOptions={filterOptions}
-              getOptionLabel={handleOptionLabel}
-              disableClearable
-              autoComplete
-              onChange={handleChangeAutocomplete}
-              renderInput={handleRenderInput}
-              renderOption={handleRenderOption}
-            />
-            <Divider orientation='vertical' sx={{ mx: 2, height: 30 }} />
-            <InputBaseExchange
-              type='number'
-              value={currencyAmount}
-              onChange={handleCurrencyInputChange}
-              placeholder='Enter amount'
-              sx={{
-                '& input': {
-                  fontSize: '1rem',
-                  fontWeight: 500,
-                  color: 'text.primary',
-                },
-              }}
-            />
-          </InputCard>
+        <Grid
+          container
+          justifyContent='center'
+          alignItems='center'
+          direction='column'
+          spacing={0}
+        >
+          <Grid size={12}>
+            <CurrencySection>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: { xs: 0.5, sm: 1 },
+                  mb: { xs: 0.5, sm: 1 },
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: { xs: 20, sm: 24 },
+                    height: { xs: 20, sm: 24 },
+                    background: (theme) => `linear-gradient(135deg, 
+                      ${theme.palette.primary.main}, 
+                      ${theme.palette.secondary.main}
+                    )`,
+                    fontSize: { xs: '0.6rem', sm: '0.75rem' },
+                    fontWeight: 700,
+                  }}
+                >
+                  {symbol.charAt(0).toUpperCase()}
+                </Avatar>
+                <Typography
+                  variant='subtitle2'
+                  sx={{
+                    fontWeight: 600,
+                    color: 'text.primary',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                  }}
+                >
+                  {symbol.toUpperCase()}
+                </Typography>
+              </Box>
+              <InputCard>
+                <InputBaseExchange
+                  type='number'
+                  value={cryptoAmount}
+                  onChange={handleCryptoInputChange}
+                  placeholder='0.00'
+                  sx={{
+                    '& input': {
+                      fontSize: { xs: '1rem', sm: '1.1rem' },
+                      fontWeight: 500,
+                      color: 'text.primary',
+                      textAlign: 'right',
+                    },
+                  }}
+                />
+              </InputCard>
+            </CurrencySection>
+          </Grid>
+
+          <AnimatedSwapButton>
+            <SwapVertIcon />
+          </AnimatedSwapButton>
+
+          <Grid size={12}>
+            <CurrencySection>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: { xs: 0.5, sm: 1 },
+                  mb: { xs: 0, sm: 0.5 },
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: { xs: 20, sm: 24 },
+                    height: { xs: 20, sm: 24 },
+                    background: (theme) => `linear-gradient(135deg, 
+                      ${theme.palette.primary.main}, 
+                      ${theme.palette.secondary.main}
+                    )`,
+                    fontSize: { xs: '0.6rem', sm: '0.75rem' },
+                    fontWeight: 700,
+                  }}
+                >
+                  {currencyOption.charAt(0).toUpperCase()}
+                </Avatar>
+                <Autocomplete
+                  sx={{
+                    width: { xs: '60px', sm: '70px' },
+                    '& .MuiInput-root': {
+                      border: 'none',
+                      '&:before': { display: 'none' },
+                      '&:after': { display: 'none' },
+                    },
+                    '& .MuiInputBase-input': {
+                      fontWeight: 600,
+                      fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      paddingRight: '0px !important',
+                    },
+                    '& .MuiAutocomplete-endAdornment': {
+                      right: '4px',
+                    },
+                    '& .MuiAutocomplete-popupIndicator': {
+                      padding: '2px',
+                      marginRight: '0px',
+                    },
+                  }}
+                  id='currencies-select'
+                  value={currencyOption}
+                  options={currencies ?? []}
+                  filterOptions={filterOptions}
+                  getOptionLabel={handleOptionLabel}
+                  disableClearable
+                  autoComplete
+                  onChange={handleChangeAutocomplete}
+                  renderInput={handleRenderInput}
+                  renderOption={handleRenderOption}
+                />
+              </Box>
+              <InputCard>
+                <InputBaseExchange
+                  type='number'
+                  value={currencyAmount}
+                  onChange={handleCurrencyInputChange}
+                  placeholder='0.00'
+                  sx={{
+                    '& input': {
+                      fontSize: { xs: '1rem', sm: '1.1rem' },
+                      fontWeight: 500,
+                      color: 'text.primary',
+                      textAlign: 'right',
+                    },
+                  }}
+                />
+              </InputCard>
+            </CurrencySection>
+          </Grid>
         </Grid>
-      </Grid>
-    </ModernExchangeCard>
+
+        {currentRate && (
+          <Fade in timeout={1000}>
+            <ExchangeRateDisplay>
+              <Typography
+                variant='caption'
+                sx={{
+                  fontWeight: 600,
+                  color: 'text.secondary',
+                  fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                }}
+              >
+                1 {symbol.toUpperCase()} = {formattedRate}
+              </Typography>
+            </ExchangeRateDisplay>
+          </Fade>
+        )}
+      </ModernExchangeCard>
+    </Fade>
   );
 }
