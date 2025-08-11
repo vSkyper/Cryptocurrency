@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import {
   Typography,
   Grid,
@@ -22,9 +22,11 @@ export default function Exchange(props: ExchangeProps) {
   const { id, symbol } = props;
 
   const [currencyOption, setCurrencyOption] = useState<string>('usd');
-  const [amount, setAmount] = useState<string>('');
-  const [fromCryptoToCurrency, setFromCryptoToCurrency] =
-    useState<boolean>(true);
+  const [cryptoAmount, setCryptoAmount] = useState<string>('');
+  const [currencyAmount, setCurrencyAmount] = useState<string>('');
+  const [lastEditedField, setLastEditedField] = useState<'crypto' | 'currency'>(
+    'crypto'
+  );
 
   const { data: currencies, error: currenciesError } = useFetch<string[]>(
     'https://api.coingecko.com/api/v3/simple/supported_vs_currencies?x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee'
@@ -33,6 +35,30 @@ export default function Exchange(props: ExchangeProps) {
   const { data: exchangeRate, error: exchangeRateError } = useFetch<IExchange>(
     `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee`
   );
+
+  // Recalculate when exchange rate or currency option changes
+  useEffect(() => {
+    if (!exchangeRate || (!cryptoAmount && !currencyAmount)) return;
+
+    if (lastEditedField === 'crypto' && cryptoAmount) {
+      const currencyValue =
+        Number(cryptoAmount) * exchangeRate[id]?.[currencyOption];
+      setCurrencyAmount(
+        isFinite(currencyValue) ? currencyValue.toString() : ''
+      );
+    } else if (lastEditedField === 'currency' && currencyAmount) {
+      const cryptoValue =
+        Number(currencyAmount) / exchangeRate[id]?.[currencyOption];
+      setCryptoAmount(isFinite(cryptoValue) ? cryptoValue.toString() : '');
+    }
+  }, [
+    exchangeRate,
+    currencyOption,
+    id,
+    lastEditedField,
+    cryptoAmount,
+    currencyAmount,
+  ]);
 
   const defaultFilterOptions = createFilterOptions<string>({
     matchFrom: 'start',
@@ -71,33 +97,50 @@ export default function Exchange(props: ExchangeProps) {
     []
   );
 
-  const handleChangeInput = useCallback(
+  const handleSwap = useCallback(() => {
+    const tempCrypto = cryptoAmount;
+    const tempCurrency = currencyAmount;
+    setCryptoAmount(tempCurrency);
+    setCurrencyAmount(tempCrypto);
+    setLastEditedField(lastEditedField === 'crypto' ? 'currency' : 'crypto');
+  }, [cryptoAmount, currencyAmount, lastEditedField]);
+
+  const handleCryptoInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setAmount(e.target.value);
-      setFromCryptoToCurrency(!fromCryptoToCurrency);
+      const value = e.target.value;
+      setCryptoAmount(value);
+      setLastEditedField('crypto');
+
+      if (value && exchangeRate) {
+        const currencyValue =
+          Number(value) * exchangeRate[id]?.[currencyOption];
+        setCurrencyAmount(
+          isFinite(currencyValue) ? currencyValue.toString() : ''
+        );
+      } else {
+        setCurrencyAmount('');
+      }
     },
-    [fromCryptoToCurrency]
+    [exchangeRate, id, currencyOption]
+  );
+
+  const handleCurrencyInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setCurrencyAmount(value);
+      setLastEditedField('currency');
+
+      if (value && exchangeRate) {
+        const cryptoValue = Number(value) / exchangeRate[id]?.[currencyOption];
+        setCryptoAmount(isFinite(cryptoValue) ? cryptoValue.toString() : '');
+      } else {
+        setCryptoAmount('');
+      }
+    },
+    [exchangeRate, id, currencyOption]
   );
 
   if (currenciesError || exchangeRateError) return <ErrorModal />;
-
-  let currency: string | number = '';
-  let crypto: string | number = '';
-  if (currencies && exchangeRate) {
-    switch (fromCryptoToCurrency) {
-      case true:
-        crypto = amount;
-        currency = Number(amount) * exchangeRate[id]?.[currencyOption];
-        if (!isFinite(currency)) currency = '';
-        break;
-      case false:
-        currency = amount;
-        crypto = Number(amount) / exchangeRate[id]?.[currencyOption];
-        if (!isFinite(crypto)) crypto = '';
-        break;
-      // No Default
-    }
-  }
 
   return (
     <ModernExchangeCard>
@@ -142,8 +185,8 @@ export default function Exchange(props: ExchangeProps) {
             <Divider orientation='vertical' sx={{ mx: 2, height: 30 }} />
             <InputBaseExchange
               type='number'
-              value={crypto}
-              onChange={handleChangeInput}
+              value={cryptoAmount}
+              onChange={handleCryptoInputChange}
               placeholder='Enter amount'
               sx={{
                 '& input': {
@@ -157,6 +200,7 @@ export default function Exchange(props: ExchangeProps) {
         </Grid>
 
         <IconButton
+          onClick={handleSwap}
           sx={{
             background: (theme) => `linear-gradient(135deg, 
               ${theme.palette.primary.main}20, 
@@ -206,8 +250,8 @@ export default function Exchange(props: ExchangeProps) {
             <Divider orientation='vertical' sx={{ mx: 2, height: 30 }} />
             <InputBaseExchange
               type='number'
-              value={currency}
-              onChange={handleChangeInput}
+              value={currencyAmount}
+              onChange={handleCurrencyInputChange}
               placeholder='Enter amount'
               sx={{
                 '& input': {
