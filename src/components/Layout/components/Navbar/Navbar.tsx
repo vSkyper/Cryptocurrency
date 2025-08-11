@@ -24,17 +24,6 @@ export default function Navbar() {
           boxSizing: 'border-box',
           left: 0,
           right: 0,
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background:
-              'linear-gradient(135deg, rgba(120, 119, 198, 0.05), rgba(255, 119, 198, 0.03), transparent 60%)',
-            zIndex: -1,
-          },
         }}
       >
         <Toolbar
