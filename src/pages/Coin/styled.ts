@@ -20,8 +20,8 @@ export const HeroSection = styled(Box)(({ theme }) => ({
   )`,
   border: `1px solid ${theme.palette.divider}60`,
   borderRadius: theme.spacing(2),
-  padding: theme.spacing(2, 1.5),
-  marginBottom: theme.spacing(3),
+  padding: theme.spacing(1.5, 1.2),
+  marginBottom: theme.spacing(2.5),
   boxShadow: `
     0 4px 16px rgba(0,0,0,0.2),
     inset 0 1px 0 rgba(255,255,255,0.05)
@@ -30,9 +30,17 @@ export const HeroSection = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: '100%',
   boxSizing: 'border-box',
+  transform: 'translateZ(0)', // Force hardware acceleration
+  willChange: 'auto', // Optimize for animations
+  contain: 'layout style', // CSS containment to prevent layout shifts
+  isolation: 'isolate', // Create new stacking context
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4, 3),
-    marginBottom: theme.spacing(4),
+    padding: theme.spacing(3, 2.5),
+    marginBottom: theme.spacing(3),
+  },
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(3, 2.5),
+    marginBottom: theme.spacing(3),
   },
   '&::before': {
     content: '""',
