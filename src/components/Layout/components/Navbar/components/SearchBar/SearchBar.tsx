@@ -17,7 +17,7 @@ export default function SearchBar() {
   const navigate: NavigateFunction = useNavigate();
 
   const { data, error } = useFetch<ICoinsList[]>(
-    'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
+    'https://api.coingecko.com/api/v3/coins/list?include_platform=false&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee'
   );
 
   const defaultFilterOptions = createFilterOptions<ICoinsList>({

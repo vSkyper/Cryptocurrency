@@ -27,11 +27,11 @@ export default function Exchange(props: ExchangeProps) {
     useState<boolean>(true);
 
   const { data: currencies, error: currenciesError } = useFetch<string[]>(
-    'https://api.coingecko.com/api/v3/simple/supported_vs_currencies'
+    'https://api.coingecko.com/api/v3/simple/supported_vs_currencies?x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee'
   );
 
   const { data: exchangeRate, error: exchangeRateError } = useFetch<IExchange>(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}`
+    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee`
   );
 
   const defaultFilterOptions = createFilterOptions<string>({

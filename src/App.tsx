@@ -33,6 +33,14 @@ export default function App() {
           'html, body': {
             overscrollBehaviorY: 'none',
             overscrollBehaviorX: 'none',
+            overflowX: 'hidden',
+            width: '100%',
+            maxWidth: '100%',
+          },
+          '#root': {
+            overflowX: 'hidden',
+            width: '100%',
+            maxWidth: '100%',
           },
         }),
       },
