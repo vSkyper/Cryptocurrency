@@ -4,14 +4,16 @@ export const DataTable = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(2),
   borderRadius: theme.spacing(3),
   background: `linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(16, 18, 27, 0.85) 0%, 
+    rgba(13, 14, 14, 0.9) 50%,
+    rgba(16, 18, 27, 0.85) 100%
   )`,
-  backdropFilter: 'blur(20px)',
-  border: `1px solid rgba(255, 255, 255, 0.2)`,
+  backdropFilter: 'blur(24px) saturate(180%)',
+  border: `1px solid rgba(208, 188, 255, 0.12)`,
   boxShadow: `
-    0 12px 40px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.1)
+    0 8px 32px rgba(0,0,0,0.3),
+    0 2px 16px rgba(208, 188, 255, 0.05),
+    inset 0 1px 0 rgba(255,255,255,0.08)
   `,
   position: 'relative',
   overflow: 'hidden',
@@ -23,11 +25,12 @@ export const DataTable = styled(Paper)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: `linear-gradient(135deg, 
-      ${theme.palette.primary.main}03, 
-      ${theme.palette.secondary.main}02, 
-      transparent 60%
+      rgba(208, 188, 255, 0.08) 0%, 
+      rgba(204, 194, 220, 0.05) 30%,
+      transparent 70%
     )`,
     zIndex: 0,
+    opacity: 0.8,
   },
   '& .MuiDataGrid-root': {
     position: 'relative',

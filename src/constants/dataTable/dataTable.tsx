@@ -17,15 +17,40 @@ export const columns: GridColDef[] = [
         underline='hover'
         component={RouterLink}
         to={`/coins/${params.row.id}`}
-        sx={{ display: 'inline-flex' }}
+        sx={{
+          display: 'inline-flex',
+          transition: 'all 200ms ease',
+          '&:hover': {
+            transform: 'translateX(4px)',
+          },
+        }}
       >
-        <Stack direction='row' alignItems='center' spacing={1.5}>
+        <Stack direction='row' alignItems='center' spacing={2}>
           <Avatar
             src={params.row.image}
             alt={`${params.value} logo`}
-            sx={{ width: 28, height: 28 }}
+            sx={{
+              width: 36,
+              height: 36,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+              border: '2px solid rgba(208, 188, 255, 0.2)',
+              transition: 'all 200ms ease',
+              '&:hover': {
+                transform: 'scale(1.1)',
+                boxShadow: '0 6px 16px rgba(208, 188, 255, 0.3)',
+              },
+            }}
           />
-          <Typography variant='body2' fontWeight={600} noWrap>
+          <Typography
+            variant='body2'
+            fontWeight={700}
+            noWrap
+            sx={{
+              color: 'rgba(255, 255, 255, 0.95)',
+              fontSize: '0.9rem',
+              letterSpacing: '0.3px',
+            }}
+          >
             {params.value}
           </Typography>
         </Stack>
@@ -41,6 +66,34 @@ export const columns: GridColDef[] = [
     headerAlign: 'center',
     valueFormatter: (value) =>
       (typeof value === 'string' ? value : String(value ?? '')).toUpperCase(),
+    renderCell: (params: GridRenderCellParams) => (
+      <Chip
+        size='small'
+        label={(typeof params.value === 'string'
+          ? params.value
+          : String(params.value ?? '')
+        ).toUpperCase()}
+        sx={{
+          fontWeight: 700,
+          fontSize: '0.75rem',
+          borderRadius: '12px',
+          background:
+            'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(208, 188, 255, 0.08) 100%)',
+          border: '1px solid rgba(208, 188, 255, 0.2)',
+          color: '#D0BCFF',
+          backdropFilter: 'blur(8px)',
+          letterSpacing: '0.5px',
+          transition: 'all 200ms ease',
+          '&:hover': {
+            transform: 'translateY(-1px)',
+            background:
+              'linear-gradient(135deg, rgba(208, 188, 255, 0.2) 0%, rgba(208, 188, 255, 0.12) 100%)',
+            border: '1px solid rgba(208, 188, 255, 0.3)',
+            boxShadow: '0 4px 12px rgba(208, 188, 255, 0.2)',
+          },
+        }}
+      />
+    ),
   },
   {
     type: 'number',
@@ -80,8 +133,26 @@ export const columns: GridColDef[] = [
         <Chip
           size='small'
           label={label}
-          color={positive ? 'success' : 'error'}
-          variant='outlined'
+          sx={{
+            fontWeight: 600,
+            fontSize: '0.75rem',
+            borderRadius: '12px',
+            border: positive
+              ? '1px solid rgba(81, 207, 102, 0.3)'
+              : '1px solid rgba(255, 107, 107, 0.3)',
+            background: positive
+              ? 'linear-gradient(135deg, rgba(81, 207, 102, 0.15) 0%, rgba(81, 207, 102, 0.08) 100%)'
+              : 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.08) 100%)',
+            color: positive ? '#51cf66' : '#ff6b6b',
+            backdropFilter: 'blur(8px)',
+            transition: 'all 200ms ease',
+            '&:hover': {
+              transform: 'translateY(-1px)',
+              boxShadow: positive
+                ? '0 4px 12px rgba(81, 207, 102, 0.2)'
+                : '0 4px 12px rgba(255, 107, 107, 0.2)',
+            },
+          }}
         />
       );
     },
@@ -110,8 +181,26 @@ export const columns: GridColDef[] = [
         <Chip
           size='small'
           label={label}
-          color={positive ? 'success' : 'error'}
-          variant='outlined'
+          sx={{
+            fontWeight: 600,
+            fontSize: '0.75rem',
+            borderRadius: '12px',
+            border: positive
+              ? '1px solid rgba(81, 207, 102, 0.3)'
+              : '1px solid rgba(255, 107, 107, 0.3)',
+            background: positive
+              ? 'linear-gradient(135deg, rgba(81, 207, 102, 0.15) 0%, rgba(81, 207, 102, 0.08) 100%)'
+              : 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.08) 100%)',
+            color: positive ? '#51cf66' : '#ff6b6b',
+            backdropFilter: 'blur(8px)',
+            transition: 'all 200ms ease',
+            '&:hover': {
+              transform: 'translateY(-1px)',
+              boxShadow: positive
+                ? '0 4px 12px rgba(81, 207, 102, 0.2)'
+                : '0 4px 12px rgba(255, 107, 107, 0.2)',
+            },
+          }}
         />
       );
     },
@@ -140,8 +229,26 @@ export const columns: GridColDef[] = [
         <Chip
           size='small'
           label={label}
-          color={positive ? 'success' : 'error'}
-          variant='outlined'
+          sx={{
+            fontWeight: 600,
+            fontSize: '0.75rem',
+            borderRadius: '12px',
+            border: positive
+              ? '1px solid rgba(81, 207, 102, 0.3)'
+              : '1px solid rgba(255, 107, 107, 0.3)',
+            background: positive
+              ? 'linear-gradient(135deg, rgba(81, 207, 102, 0.15) 0%, rgba(81, 207, 102, 0.08) 100%)'
+              : 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.08) 100%)',
+            color: positive ? '#51cf66' : '#ff6b6b',
+            backdropFilter: 'blur(8px)',
+            transition: 'all 200ms ease',
+            '&:hover': {
+              transform: 'translateY(-1px)',
+              boxShadow: positive
+                ? '0 4px 12px rgba(81, 207, 102, 0.2)'
+                : '0 4px 12px rgba(255, 107, 107, 0.2)',
+            },
+          }}
         />
       );
     },
