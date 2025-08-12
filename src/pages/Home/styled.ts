@@ -26,7 +26,7 @@ export const GradientBackground = styled(Box)(() => ({
 
 export const ContentContainer = styled(Container)(({ theme }) => ({
   position: 'relative',
-  zIndex: -1,
+  zIndex: 1,
   paddingTop: theme.spacing(4),
   paddingBottom: theme.spacing(6),
   minHeight: '100vh',
