@@ -9,12 +9,17 @@ export default function Navbar() {
         color='transparent'
         elevation={0}
         sx={{
-          background:
-            'linear-gradient(135deg, rgba(16, 18, 27, 0.85) 0%, rgba(13, 14, 14, 0.9) 100%)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          borderBottom: '1px solid rgba(208, 188, 255, 0.12)',
-          boxShadow:
-            '0 8px 32px rgba(0,0,0,0.15), 0 2px 16px rgba(208, 188, 255, 0.05), inset 0 1px 0 rgba(255,255,255,0.08)',
+          background: `linear-gradient(135deg, 
+            rgba(208, 188, 255, 0.08) 0%, 
+            rgba(204, 194, 220, 0.04) 100%
+          )`,
+          backdropFilter: 'blur(24px)',
+          borderBottom: '1px solid rgba(208, 188, 255, 0.2)',
+          boxShadow: `
+            0 8px 32px rgba(0,0,0,0.3),
+            0 4px 16px rgba(208, 188, 255, 0.1),
+            inset 0 1px 0 rgba(255,255,255,0.08)
+          `,
           width: '100%',
           zIndex: 1100,
         }}

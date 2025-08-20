@@ -13,7 +13,6 @@ export default function Table(props: TableProps) {
         pagination
         disableRowSelectionOnClick
         autoHeight
-        disableVirtualization
         rows={coins}
         columns={columns}
         initialState={{
