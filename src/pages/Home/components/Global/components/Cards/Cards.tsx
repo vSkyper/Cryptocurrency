@@ -1,190 +1,76 @@
-import { Grid, Typography, Grow, useMediaQuery, useTheme } from '@mui/material';
-import {
-  TrendingUpRounded as TrendingUpIcon,
-  TrendingDownRounded as TrendingDownIcon,
-} from '@mui/icons-material';
-import { Card, Percentage } from 'styled';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
 
-export default function Cards(props: CardsProps) {
-  const { toggle, globalData } = props;
+// Helper functions for data formatting
+const formatCurrency = (value: number): string =>
+  value.toLocaleString('en-US', {
+    maximumFractionDigits: 0,
+    style: 'currency',
+    currency: 'USD',
+  });
 
+const formatPercentage = (value: number): string =>
+  (value / 100).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    style: 'percent',
+  });
+
+const formatNumber = (value: number): string => value.toLocaleString('en-US');
+
+export default function Cards({ toggle, globalData }: CardsProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const marketCap: string = globalData.data.total_market_cap.usd.toLocaleString(
-    'en-US',
+  // Prepare card configurations
+  const cardConfigs: CardConfig[] = [
     {
-      maximumFractionDigits: 0,
-      style: 'currency',
-      currency: 'USD',
-    }
-  );
-
-  const marketCapPercentage: string = (
-    globalData.data.market_cap_change_percentage_24h_usd / 100
-  ).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    style: 'percent',
-  });
-
-  const totalVolume: string = globalData.data.total_volume.usd.toLocaleString(
-    'en-US',
+      key: 'marketCap',
+      value: formatCurrency(globalData.data.total_market_cap.usd),
+      label: 'Market Capitalization',
+      color: '#D0BCFF',
+      percentage: {
+        value: formatPercentage(
+          globalData.data.market_cap_change_percentage_24h_usd
+        ),
+        change: globalData.data.market_cap_change_percentage_24h_usd,
+      },
+      timeout: 600,
+    },
     {
-      maximumFractionDigits: 0,
-      style: 'currency',
-      currency: 'USD',
-    }
-  );
-
-  const marketCapPercentageBTC: string = (
-    globalData.data.market_cap_percentage.btc / 100
-  ).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    style: 'percent',
-  });
-
-  const cryptocurrencies: string =
-    globalData.data.active_cryptocurrencies.toLocaleString('en-US');
+      key: 'totalVolume',
+      value: formatCurrency(globalData.data.total_volume.usd),
+      label: '24h Trading Volume',
+      color: '#CCC2DC',
+      timeout: 800,
+    },
+    {
+      key: 'btcDominance',
+      value: formatPercentage(globalData.data.market_cap_percentage.btc),
+      label: 'Bitcoin Market Cap Dominance',
+      color: '#f7931a',
+      timeout: 1000,
+    },
+    {
+      key: 'activeCryptos',
+      value: formatNumber(globalData.data.active_cryptocurrencies),
+      label: 'Active Cryptocurrencies',
+      color: '#ffffff',
+      timeout: 1200,
+    },
+  ];
 
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
-      <Grow in={toggle} timeout={isMobile ? 0 : 600}>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-          <Card>
-            <Typography
-              variant='h6'
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontWeight: 700,
-                color: '#D0BCFF',
-                mb: 1.5,
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                textShadow: '0 2px 4px rgba(208, 188, 255, 0.3)',
-              }}
-            >
-              {marketCap}
-              {globalData.data.market_cap_change_percentage_24h_usd < 0 ? (
-                <Percentage sx={{ color: '#ff6b6b' }}>
-                  {marketCapPercentage}
-                  <TrendingDownIcon />
-                </Percentage>
-              ) : (
-                <Percentage sx={{ color: '#51cf66' }}>
-                  {marketCapPercentage}
-                  <TrendingUpIcon />
-                </Percentage>
-              )}
-            </Typography>
-            <Typography
-              variant='body2'
-              sx={{
-                fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'center',
-                fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                letterSpacing: '0.3px',
-              }}
-            >
-              Market Capitalization
-            </Typography>
-          </Card>
-        </Grid>
-      </Grow>
-      <Grow in={toggle} timeout={isMobile ? 0 : 800}>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-          <Card>
-            <Typography
-              variant='h6'
-              sx={{
-                fontWeight: 700,
-                color: '#CCC2DC',
-                mb: 1.5,
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                textShadow: '0 2px 4px rgba(204, 194, 220, 0.3)',
-              }}
-            >
-              {totalVolume}
-            </Typography>
-            <Typography
-              variant='body2'
-              sx={{
-                fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'center',
-                fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                letterSpacing: '0.3px',
-              }}
-            >
-              24h Trading Volume
-            </Typography>
-          </Card>
-        </Grid>
-      </Grow>
-      <Grow in={toggle} timeout={isMobile ? 0 : 1000}>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-          <Card>
-            <Typography
-              variant='h6'
-              sx={{
-                fontWeight: 700,
-                color: '#f7931a',
-                mb: 1.5,
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                textShadow: '0 2px 4px rgba(247, 147, 26, 0.3)',
-              }}
-            >
-              {marketCapPercentageBTC}
-            </Typography>
-            <Typography
-              variant='body2'
-              sx={{
-                fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'center',
-                fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                letterSpacing: '0.3px',
-              }}
-            >
-              Bitcoin Market Cap Dominance
-            </Typography>
-          </Card>
-        </Grid>
-      </Grow>
-      <Grow in={toggle} timeout={isMobile ? 0 : 1200}>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-          <Card>
-            <Typography
-              variant='h6'
-              sx={{
-                fontWeight: 700,
-                color: '#ffffff',
-                mb: 1.5,
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                textShadow: '0 2px 4px rgba(255, 255, 255, 0.2)',
-              }}
-            >
-              {cryptocurrencies}
-            </Typography>
-            <Typography
-              variant='body2'
-              sx={{
-                fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'center',
-                fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                letterSpacing: '0.3px',
-              }}
-            >
-              Active Cryptocurrencies
-            </Typography>
-          </Card>
-        </Grid>
-      </Grow>
+      {cardConfigs.map((config) => (
+        <StatCard
+          key={config.key}
+          config={config}
+          toggle={toggle}
+          isMobile={isMobile}
+        />
+      ))}
     </Grid>
   );
 }
