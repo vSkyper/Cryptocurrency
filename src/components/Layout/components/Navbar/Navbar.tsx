@@ -19,8 +19,8 @@ export default function Navbar() {
         <Container maxWidth='xl' disableGutters>
           <Toolbar
             sx={{
-              gap: { xs: 1.5, sm: 3, md: 4 },
-              px: { xs: 2, sm: 3, md: 4 },
+              gap: { xs: 1, sm: 3, md: 4 },
+              px: { xs: 1.5, sm: 3, md: 4 },
               minHeight: { xs: 60, sm: 72 },
               position: 'relative',
               zIndex: 1,
@@ -28,14 +28,16 @@ export default function Navbar() {
               alignItems: 'center',
               justifyContent: 'space-between',
               borderRadius: 0,
+              flexWrap: { xs: 'nowrap', sm: 'nowrap' },
             }}
           >
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: { xs: 1, sm: 2 },
+                gap: { xs: 0.5, sm: 2 },
                 flexShrink: 0,
+                minWidth: 'auto',
               }}
             >
               <Title />
@@ -44,9 +46,9 @@ export default function Navbar() {
             <Box
               sx={{
                 flexGrow: 1,
-                maxWidth: { xs: 280, sm: 400, md: 500, lg: 600 },
-                minWidth: { xs: 180, sm: 200 },
-                mx: { xs: 1, sm: 2, md: 3 },
+                maxWidth: { xs: 'none', sm: 400, md: 500, lg: 600 },
+                minWidth: { xs: 0, sm: 200 },
+                mx: { xs: 0.5, sm: 2, md: 3 },
               }}
             >
               <SearchBar />
@@ -56,8 +58,9 @@ export default function Navbar() {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: { xs: 1, sm: 1.5 },
+                gap: { xs: 0.5, sm: 1.5 },
                 flexShrink: 0,
+                minWidth: 'auto',
               }}
             >
               <Tooltips />

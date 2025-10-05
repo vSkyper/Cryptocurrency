@@ -5,6 +5,11 @@ export const Chart = styled(Box)(({ theme }) => ({
   height: 320,
   padding: theme.spacing(2),
   borderRadius: 16,
+  [theme.breakpoints.down('sm')]: {
+    height: 280,
+    padding: theme.spacing(1.5),
+    borderRadius: 12,
+  },
   background: 'rgba(20, 30, 48, 0.4)',
   transform: 'translateZ(0)',
   willChange: 'auto',

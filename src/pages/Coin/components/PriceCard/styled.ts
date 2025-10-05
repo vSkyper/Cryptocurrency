@@ -24,6 +24,10 @@ export const ModernCard = styled(Box)(({ theme }) => ({
   background: 'rgba(20, 30, 48, 0.4)',
   padding: theme.spacing(3),
   borderRadius: 16,
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(2),
+    borderRadius: 12,
+  },
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',

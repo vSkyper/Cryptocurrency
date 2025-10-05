@@ -3,6 +3,10 @@ import { styled, Box } from '@mui/material';
 export const DataTable = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
   borderRadius: 16,
+  [theme.breakpoints.down('sm')]: {
+    marginTop: theme.spacing(1),
+    borderRadius: 12,
+  },
   background: 'rgba(20, 30, 48, 0.4)',
   position: 'relative',
   overflow: 'hidden',

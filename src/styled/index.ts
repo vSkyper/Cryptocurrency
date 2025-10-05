@@ -17,8 +17,8 @@ export const Card = styled(Box)(({ theme }) => ({
   willChange: 'auto',
   contain: 'layout style',
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3, 2.5),
-    minHeight: 90,
+    padding: theme.spacing(2, 1.5),
+    minHeight: 80,
   },
 }));
 
@@ -44,13 +44,13 @@ export const Percentage = styled(Typography)(({ theme }) => ({
     },
   },
   [theme.breakpoints.down('md')]: {
-    fontSize: '0.8rem',
-    padding: theme.spacing(0.4, 0.8),
-    marginLeft: theme.spacing(1),
+    fontSize: '0.7rem',
+    padding: theme.spacing(0.3, 0.6),
+    marginLeft: theme.spacing(0.8),
     background: 'rgba(64, 156, 255, 0.15)',
     transition: 'none',
     '& .MuiSvgIcon-root': {
-      fontSize: '0.9rem',
+      fontSize: '0.8rem',
     },
   },
 })) as typeof Typography;

@@ -9,7 +9,7 @@ import {
   TooltipContentProps,
 } from 'recharts';
 import { format } from 'date-fns';
-import { Paper, Typography } from '@mui/material';
+import { Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
 import {
   NameType,
   ValueType,
@@ -19,6 +19,8 @@ import { ChartProps } from './interface';
 
 export default function ChartComponent(props: ChartProps) {
   const { sparkline, days } = props;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const CustomTooltip = useCallback(
     ({ active, payload, label }: TooltipContentProps<ValueType, NameType>) => {
@@ -97,6 +99,7 @@ export default function ChartComponent(props: ChartProps) {
           axisLine={false}
           tickLine={false}
           tickFormatter={handleTickFormatterXAxis}
+          hide={isMobile}
         />
         <YAxis
           dataKey='value'
@@ -106,6 +109,7 @@ export default function ChartComponent(props: ChartProps) {
           tickCount={8}
           tickFormatter={handleTickFormatterYAxis}
           width={70}
+          hide={isMobile}
         />
         <Tooltip content={CustomTooltip} />
         <CartesianGrid opacity={0.05} vertical={false} strokeDasharray='3 3' />

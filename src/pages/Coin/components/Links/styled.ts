@@ -4,6 +4,10 @@ import { styled } from '@mui/material/styles';
 export const ModernLinksCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: 16,
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1.5),
+    borderRadius: 12,
+  },
   background: 'rgba(20, 30, 48, 0.4)',
   transform: 'translateZ(0)',
   willChange: 'auto',

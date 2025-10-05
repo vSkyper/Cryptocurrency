@@ -38,8 +38,8 @@ export default function Coin() {
         sx={{
           position: 'relative',
           zIndex: 1,
-          py: { xs: 2, sm: 4 },
-          px: { xs: 1, sm: 2 },
+          py: { xs: 3, sm: 4 },
+          px: { xs: 2, sm: 2 },
           transform: 'translateZ(0)',
           willChange: 'auto',
           contain: 'layout style',
@@ -53,7 +53,11 @@ export default function Coin() {
           marketCapRank={data.market_cap_rank}
         />
 
-        <Grid container spacing={4} sx={{ transform: 'translateZ(0)' }}>
+        <Grid
+          container
+          spacing={{ xs: 1, sm: 4 }}
+          sx={{ transform: 'translateZ(0)' }}
+        >
           <Grid size={{ xs: 12, lg: 8 }}>
             <Slide direction='up' in timeout={600}>
               <Box sx={{ transform: 'translateZ(0)' }}>
@@ -71,7 +75,11 @@ export default function Coin() {
           </Grid>
         </Grid>
 
-        <Grid container spacing={4} sx={{ mt: 2, transform: 'translateZ(0)' }}>
+        <Grid
+          container
+          spacing={{ xs: 1, sm: 4 }}
+          sx={{ mt: { xs: 1, sm: 2 }, transform: 'translateZ(0)' }}
+        >
           <Grid size={{ xs: 12, lg: 8 }}>
             <Slide direction='up' in timeout={800}>
               <Box sx={{ transform: 'translateZ(0)' }}>
@@ -81,7 +89,7 @@ export default function Coin() {
           </Grid>
 
           <Grid size={{ xs: 12, lg: 4 }}>
-            <Stack spacing={2}>
+            <Stack spacing={{ xs: 1, sm: 2 }}>
               <Slide direction='up' in timeout={900}>
                 <Box sx={{ transform: 'translateZ(0)' }}>
                   <Exchange id={id} symbol={data.symbol} />

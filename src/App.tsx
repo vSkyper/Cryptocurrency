@@ -22,10 +22,26 @@ export default function App() {
     },
     shape: { borderRadius: 12 },
     typography: {
+      fontSize: 14,
       fontWeightLight: 300,
       fontWeightRegular: 400,
       fontWeightMedium: 500,
       fontWeightBold: 700,
+      h6: {
+        '@media (max-width:600px)': {
+          fontSize: '1rem',
+        },
+      },
+      body1: {
+        '@media (max-width:600px)': {
+          fontSize: '0.85rem',
+        },
+      },
+      body2: {
+        '@media (max-width:600px)': {
+          fontSize: '0.8rem',
+        },
+      },
     },
     components: {
       MuiCssBaseline: {
