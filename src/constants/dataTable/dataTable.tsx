@@ -287,8 +287,8 @@ export const columns: GridColDef[] = [
     renderCell: (params: GridRenderCellParams) => {
       const color: string =
         params.row.price_change_percentage_7d_in_currency < 0
-          ? '#e57373'
-          : '#81c784';
+          ? '#ff6b6b'
+          : '#51cf66';
       return (
         <ResponsiveContainer>
           <AreaChart
@@ -303,7 +303,7 @@ export const columns: GridColDef[] = [
                 x2='0'
                 y2='1'
               >
-                <stop offset='5%' stopColor={color} stopOpacity={0.5} />
+                <stop offset='5%' stopColor={color} stopOpacity={0.4} />
                 <stop offset='75%' stopColor={color} stopOpacity={0.05} />
               </linearGradient>
             </defs>

@@ -1,17 +1,22 @@
-import { styled, Paper } from '@mui/material';
+import { styled, Box } from '@mui/material';
 
-export const DataTable = styled(Paper)(({ theme }) => ({
+export const DataTable = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
-  borderRadius: theme.spacing(3),
-  background: 'rgba(64, 156, 255, 0.03)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+  borderRadius: 16,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
   position: 'relative',
   overflow: 'hidden',
+  transform: 'translateZ(0)',
+  willChange: 'auto',
   contain: 'layout style',
-  [theme.breakpoints.down('md')]: {
-    background: 'rgba(64, 156, 255, 0.05)',
-  },
   '& .MuiDataGrid-root': {
     position: 'relative',
     zIndex: 1,

@@ -1,26 +1,22 @@
-import { Paper, Chip } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const ModernLinksCard = styled(Paper)(({ theme }) => ({
+export const ModernLinksCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderRadius: theme.spacing(2.5),
-  background: 'rgba(64, 156, 255, 0.06)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
-  position: 'relative',
-  overflow: 'hidden',
-  transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-  contain: 'layout style paint',
-  [theme.breakpoints.up('md')]: {
-    '&:hover': {
-      transform: 'translate3d(0, -2px, 0)',
-      boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-    },
-  },
-  [theme.breakpoints.down('md')]: {
-    transition: 'none',
-  },
-})) as typeof Paper;
+  borderRadius: 16,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
+}));
 
 export const StyledChip = styled(Chip)<{
   component?: React.ElementType;

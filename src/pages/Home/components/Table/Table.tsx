@@ -8,7 +8,7 @@ function Table(props: TableProps) {
   const { coins } = props;
 
   return (
-    <DataTable elevation={0}>
+    <DataTable>
       <DataGrid
         density='comfortable'
         pagination

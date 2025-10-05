@@ -14,14 +14,22 @@ import { GlobalProps } from './interface';
 
 const HeroSection = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3, 4),
-  borderRadius: theme.spacing(3),
-  background: 'rgba(64, 156, 255, 0.06)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+  borderRadius: 16,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
   position: 'relative',
   overflow: 'hidden',
   marginBottom: theme.spacing(3),
-  contain: 'layout style paint',
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
   [theme.breakpoints.down('md')]: {
     padding: theme.spacing(2.5, 3),
   },

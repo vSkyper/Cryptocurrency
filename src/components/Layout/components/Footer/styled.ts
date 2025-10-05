@@ -1,7 +1,7 @@
-import { Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const Foot = styled(Paper)(({ theme }) => ({
+export const Foot = styled(Box)(({ theme }) => ({
   boxShadow: 'none',
   marginTop: 0,
   display: 'flex',
@@ -9,9 +9,14 @@ export const Foot = styled(Paper)(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(2, 2),
   background:
-    'linear-gradient(135deg, rgba(8, 9, 12, 0.9) 0%, rgba(6, 7, 8, 0.95) 100%)',
-  backdropFilter: 'blur(20px)',
-  borderTop: '1px solid rgba(64, 156, 255, 0.2)',
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.8)'
+      : 'rgba(255, 255, 255, 0.8)',
+  borderTop: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
   borderRadius: 0,
   width: '100%',
   maxWidth: '100%',
@@ -20,15 +25,4 @@ export const Foot = styled(Paper)(({ theme }) => ({
   position: 'relative',
   left: 0,
   right: 0,
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '60%',
-    height: '1px',
-    background:
-      'linear-gradient(90deg, transparent 0%, rgba(64, 156, 255, 0.4) 50%, transparent 100%)',
-  },
-})) as typeof Paper;
+}));

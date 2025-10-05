@@ -1,4 +1,4 @@
-import { InputBase, Paper, Box } from '@mui/material';
+import { InputBase, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const InputBaseExchange = styled(InputBase)(({ theme }) => ({
@@ -17,7 +17,7 @@ export const InputBaseExchange = styled(InputBase)(({ theme }) => ({
   },
 })) as typeof InputBase;
 
-export const InputCard = styled(Paper)(({ theme }) => ({
+export const InputCard = styled(Box)(({ theme }) => ({
   paddingLeft: 15,
   paddingRight: 15,
   display: 'flex',
@@ -25,54 +25,56 @@ export const InputCard = styled(Paper)(({ theme }) => ({
   width: '100%',
   height: 70,
   margin: '0 auto',
-  borderRadius: theme.spacing(2.5),
-  background: 'rgba(64, 156, 255, 0.06)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-  transition:
-    'border 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-  position: 'relative',
-  overflow: 'hidden',
-  contain: 'layout style paint',
+  borderRadius: 16,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
+  transition: 'border 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
   '&:focus-within': {
-    boxShadow: '0 8px 30px rgba(0,0,0,0.2), 0 0 0 2px rgba(64, 156, 255, 0.4)',
-    border: '1px solid rgba(64, 156, 255, 0.5)',
+    border: `1px solid ${
+      theme.palette.mode === 'dark'
+        ? 'rgba(64, 156, 255, 0.4)'
+        : 'rgba(64, 156, 255, 0.5)'
+    }`,
   },
   [theme.breakpoints.down('sm')]: {
     height: 55,
     paddingLeft: 12,
     paddingRight: 12,
-    borderRadius: theme.spacing(2),
   },
   [theme.breakpoints.up('lg')]: {
     height: 75,
   },
-})) as typeof Paper;
+}));
 
-export const ModernExchangeCard = styled(Paper)(({ theme }) => ({
+export const ModernExchangeCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
-  borderRadius: theme.spacing(3),
-  background: 'rgba(64, 156, 255, 0.06)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
-  position: 'relative',
-  overflow: 'hidden',
-  transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-  contain: 'layout style paint',
-  [theme.breakpoints.up('md')]: {
-    '&:hover': {
-      transform: 'translate3d(0, -2px, 0)',
-      boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-    },
-  },
+  borderRadius: 16,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(2.5),
-    borderRadius: theme.spacing(2.5),
   },
-  [theme.breakpoints.down('md')]: {
-    transition: 'none',
-  },
-})) as typeof Paper;
+}));
 
 export const ExchangeHeader = styled(Box)(({ theme }) => ({
   display: 'flex',

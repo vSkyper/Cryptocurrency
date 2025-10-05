@@ -3,7 +3,7 @@ import { Foot } from './styled';
 
 const Footer = () => {
   return (
-    <Foot square>
+    <Foot>
       <Box
         sx={{
           display: 'flex',
@@ -29,7 +29,7 @@ const Footer = () => {
           <Typography
             variant='body2'
             sx={{
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: 'text.secondary',
               fontSize: '14px',
               fontWeight: 500,
             }}
@@ -45,25 +45,9 @@ const Footer = () => {
                 fontWeight: 600,
                 fontSize: '14px',
                 textDecoration: 'none',
-                transition: 'all 300ms ease-in-out',
-                position: 'relative',
+                transition: 'color 200ms ease',
                 '&:hover': {
-                  color: '#E6D7FF',
-                  textShadow: '0 0 8px rgba(64, 156, 255, 0.5)',
-                },
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: -2,
-                  left: 0,
-                  width: 0,
-                  height: '2px',
-                  background: 'linear-gradient(90deg, #409CFF, #3B82F6)',
-                  borderRadius: '1px',
-                  transition: 'width 300ms ease-in-out',
-                },
-                '&:hover::after': {
-                  width: '100%',
+                  color: '#3B82F6',
                 },
               }}
             >
@@ -74,7 +58,7 @@ const Footer = () => {
           <Typography
             variant='caption'
             sx={{
-              color: 'rgba(255, 255, 255, 0.5)',
+              color: 'text.disabled',
               fontSize: '12px',
               fontWeight: 400,
             }}
@@ -94,18 +78,29 @@ const Footer = () => {
             alignItems: 'center',
             padding: 1.5,
             borderRadius: 2,
-            background:
-              'linear-gradient(135deg, rgba(64, 156, 255, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(64, 156, 255, 0.2)',
-            transition: 'all 300ms ease-in-out',
+            background: (theme) =>
+              theme.palette.mode === 'dark'
+                ? 'rgba(64, 156, 255, 0.1)'
+                : 'rgba(64, 156, 255, 0.08)',
+            border: (theme) =>
+              `1px solid ${
+                theme.palette.mode === 'dark'
+                  ? 'rgba(64, 156, 255, 0.2)'
+                  : 'rgba(64, 156, 255, 0.25)'
+              }`,
+            transition: 'all 200ms ease',
             textDecoration: 'none',
             '&:hover': {
-              background:
-                'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)',
-              border: '1px solid rgba(64, 156, 255, 0.4)',
-              transform: 'translateY(-2px)',
-              boxShadow: '0 8px 25px rgba(64, 156, 255, 0.15)',
+              background: (theme) =>
+                theme.palette.mode === 'dark'
+                  ? 'rgba(64, 156, 255, 0.15)'
+                  : 'rgba(64, 156, 255, 0.12)',
+              border: (theme) =>
+                `1px solid ${
+                  theme.palette.mode === 'dark'
+                    ? 'rgba(64, 156, 255, 0.3)'
+                    : 'rgba(64, 156, 255, 0.35)'
+                }`,
             },
           }}
         >
@@ -117,11 +112,9 @@ const Footer = () => {
               height: { xs: 32, sm: 36 },
               width: 'auto',
               opacity: 0.9,
-              transition: 'all 300ms ease-in-out',
-              filter: 'brightness(1.1) contrast(1.1)',
+              transition: 'opacity 200ms ease',
               '&:hover': {
                 opacity: 1,
-                filter: 'brightness(1.2) contrast(1.2)',
               },
             }}
           />

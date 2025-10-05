@@ -115,10 +115,12 @@ export default function StackData(props: StackDataProps) {
             size='small'
             sx={{
               background:
-                'linear-gradient(135deg, rgba(103, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%)',
-              color: '#667eea',
+                'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)',
+              color: '#409CFF',
               fontWeight: 700,
-              border: '1px solid rgba(103, 126, 234, 0.3)',
+              border: '1px solid rgba(64, 156, 255, 0.4)',
+              fontSize: '0.85rem',
+              letterSpacing: '0.5px',
             }}
           />
         </DataRow>

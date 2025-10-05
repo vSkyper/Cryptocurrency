@@ -25,7 +25,7 @@ const CARD_STYLES = {
 function StatCard({ config, toggle, isMobile }: StatCardProps) {
   return (
     <Grow in={toggle} timeout={isMobile ? 0 : config.timeout}>
-      <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
         <Card>
           <Typography
             variant='h6'
@@ -43,6 +43,14 @@ function StatCard({ config, toggle, isMobile }: StatCardProps) {
               <Percentage
                 sx={{
                   color: config.percentage.change < 0 ? '#ff6b6b' : '#51cf66',
+                  borderColor:
+                    config.percentage.change < 0
+                      ? 'rgba(255, 107, 107, 0.3)'
+                      : 'rgba(81, 207, 102, 0.3)',
+                  background:
+                    config.percentage.change < 0
+                      ? 'rgba(255, 107, 107, 0.12)'
+                      : 'rgba(81, 207, 102, 0.12)',
                 }}
               >
                 {config.percentage.value}

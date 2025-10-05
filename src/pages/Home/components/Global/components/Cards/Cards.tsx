@@ -4,11 +4,12 @@ import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
 
 const formatCurrency = (value: number): string =>
-  value.toLocaleString('en-US', {
-    maximumFractionDigits: 0,
+  Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  });
+    notation: 'compact',
+    maximumFractionDigits: 2,
+  }).format(value);
 
 const formatPercentage = (value: number): string =>
   (value / 100).toLocaleString('en-US', {
@@ -51,6 +52,13 @@ function Cards({ toggle, globalData }: CardsProps) {
         label: 'Bitcoin Market Cap Dominance',
         color: '#f7931a',
         timeout: 1000,
+      },
+      {
+        key: 'ethDominance',
+        value: formatPercentage(globalData.data.market_cap_percentage.eth),
+        label: 'Ethereum Market Cap Dominance',
+        color: '#627eea',
+        timeout: 1100,
       },
       {
         key: 'activeCryptos',

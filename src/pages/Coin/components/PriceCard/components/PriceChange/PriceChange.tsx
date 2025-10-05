@@ -1,34 +1,29 @@
-import { Grid, Typography, Paper } from '@mui/material';
+import { Grid, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { IMarketData } from 'interfaces';
 import { PriceChangeProps } from './interface';
 
-const StyledPriceCard = styled(Paper)(({ theme }) => ({
+const StyledPriceCard = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   padding: theme.spacing(2),
-  borderRadius: theme.spacing(2),
-  background: 'rgba(64, 156, 255, 0.12)',
-  border: '1px solid rgba(64, 156, 255, 0.25)',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-  transition:
-    'transform 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+  borderRadius: 12,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
   position: 'relative',
   overflow: 'hidden',
-  contain: 'layout style paint',
-  [theme.breakpoints.up('md')]: {
-    '&:hover': {
-      transform: 'translate3d(0, -3px, 0) scale(1.02)',
-      background: 'rgba(64, 156, 255, 0.18)',
-      border: '1px solid rgba(64, 156, 255, 0.35)',
-      boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
-    },
-  },
-  [theme.breakpoints.down('md')]: {
-    transition: 'none',
-  },
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -55,7 +50,13 @@ export default function PriceChange(props: PriceChangeProps) {
     <Grid size={{ xs: 6, sm: 4, lg: 6 }}>
       <StyledPriceCard
         sx={{
-          color: isPositive ? 'success.main' : 'error.main',
+          color: isPositive ? '#51cf66' : '#ff6b6b',
+          borderColor: isPositive
+            ? 'rgba(81, 207, 102, 0.3)'
+            : 'rgba(255, 107, 107, 0.3)',
+          '&::before': {
+            background: isPositive ? '#51cf66' : '#ff6b6b',
+          },
         }}
       >
         <Typography

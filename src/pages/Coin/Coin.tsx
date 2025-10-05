@@ -54,7 +54,6 @@ export default function Coin() {
         />
 
         <Grid container spacing={4} sx={{ transform: 'translateZ(0)' }}>
-          {/* Main Chart Section */}
           <Grid size={{ xs: 12, lg: 8 }}>
             <Slide direction='up' in timeout={600}>
               <Box sx={{ transform: 'translateZ(0)' }}>
@@ -63,7 +62,6 @@ export default function Coin() {
             </Slide>
           </Grid>
 
-          {/* Price Card Section */}
           <Grid size={{ xs: 12, lg: 4 }}>
             <Slide direction='up' in timeout={700}>
               <Box sx={{ transform: 'translateZ(0)' }}>
@@ -74,7 +72,6 @@ export default function Coin() {
         </Grid>
 
         <Grid container spacing={4} sx={{ mt: 2, transform: 'translateZ(0)' }}>
-          {/* Market Data Section */}
           <Grid size={{ xs: 12, lg: 8 }}>
             <Slide direction='up' in timeout={800}>
               <Box sx={{ transform: 'translateZ(0)' }}>
@@ -83,7 +80,6 @@ export default function Coin() {
             </Slide>
           </Grid>
 
-          {/* Exchange and Links Section */}
           <Grid size={{ xs: 12, lg: 4 }}>
             <Stack spacing={2}>
               <Slide direction='up' in timeout={900}>

@@ -105,9 +105,10 @@ export default function ChartComponent(props: ChartProps) {
           tickLine={false}
           tickCount={8}
           tickFormatter={handleTickFormatterYAxis}
+          width={70}
         />
         <Tooltip content={CustomTooltip} />
-        <CartesianGrid opacity={0.05} vertical={false} />
+        <CartesianGrid opacity={0.05} vertical={false} strokeDasharray='3 3' />
       </AreaChart>
     </ResponsiveContainer>
   );

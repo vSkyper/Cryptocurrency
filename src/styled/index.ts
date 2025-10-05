@@ -1,38 +1,34 @@
-import { Paper, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const Card = styled(Paper)(({ theme }) => ({
+export const Card = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   padding: theme.spacing(3.5, 3),
-  borderRadius: theme.spacing(2.5),
-  background: 'rgba(64, 156, 255, 0.06)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+  borderRadius: 16,
+  background:
+    theme.palette.mode === 'dark'
+      ? 'rgba(20, 30, 48, 0.4)'
+      : 'rgba(255, 255, 255, 0.5)',
+  border: `1px solid ${
+    theme.palette.mode === 'dark'
+      ? 'rgba(64, 156, 255, 0.1)'
+      : 'rgba(64, 156, 255, 0.15)'
+  }`,
   position: 'relative',
   overflow: 'hidden',
-  transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   height: 'auto',
   minHeight: 120,
-  willChange: 'transform',
-  contain: 'layout style paint',
-  [theme.breakpoints.up('md')]: {
-    '&:hover': {
-      transform: 'translate3d(0, -4px, 0)',
-      boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-    },
-  },
-  [theme.breakpoints.down('md')]: {
-    transition: 'none',
-    background: 'rgba(64, 156, 255, 0.08)',
-  },
+  transform: 'translateZ(0)',
+  willChange: 'auto',
+  contain: 'layout style',
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(3, 2.5),
     minHeight: 90,
   },
-})) as typeof Paper;
+}));
 
 export const Percentage = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1.5),
