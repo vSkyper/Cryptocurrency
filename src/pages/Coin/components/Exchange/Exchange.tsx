@@ -1,33 +1,46 @@
 import { useCallback, useState, useEffect } from 'react';
 import {
-  Typography,
   Grid,
   TextField,
   FilterOptionsState,
   createFilterOptions,
   AutocompleteRenderInputParams,
-  Autocomplete,
-  Box,
   Fade,
-  Avatar,
 } from '@mui/material';
 import {
   SwapVert as SwapVertIcon,
   Calculate as CalculateIcon,
 } from '@mui/icons-material';
 import {
-  InputBaseExchange,
   InputCard,
   ModernExchangeCard,
   ExchangeHeader,
   AnimatedSwapButton,
   CurrencySection,
   ExchangeRateDisplay,
+  HeaderTitle,
+  CurrencyAvatar,
+  CurrencyLabelTypography,
+  CurrencyLabelBox,
+  StyledAutocomplete,
+  StyledInputBase,
+  RateText,
 } from './styled';
 import useFetch from 'hooks/useFetch';
 import { IExchange } from 'interfaces';
 import { ErrorModal } from 'components';
 import { ExchangeProps } from './interface';
+
+const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
+
+const formatCurrencyRate = (rate: number, currency: string): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency.toUpperCase(),
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 8,
+  }).format(rate);
+};
 
 export default function Exchange(props: ExchangeProps) {
   const { id, symbol } = props;
@@ -40,11 +53,11 @@ export default function Exchange(props: ExchangeProps) {
   );
 
   const { data: currencies, error: currenciesError } = useFetch<string[]>(
-    'https://api.coingecko.com/api/v3/simple/supported_vs_currencies?x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee'
+    `https://api.coingecko.com/api/v3/simple/supported_vs_currencies?x_cg_demo_api_key=${API_KEY}`
   );
 
   const { data: exchangeRate, error: exchangeRateError } = useFetch<IExchange>(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee`
+    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=${API_KEY}`
   );
 
   useEffect(() => {
@@ -146,12 +159,7 @@ export default function Exchange(props: ExchangeProps) {
 
   const currentRate = exchangeRate?.[id]?.[currencyOption];
   const formattedRate = currentRate
-    ? new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: currencyOption.toUpperCase(),
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 8,
-      }).format(currentRate)
+    ? formatCurrencyRate(currentRate, currencyOption)
     : '';
 
   return (
@@ -165,23 +173,7 @@ export default function Exchange(props: ExchangeProps) {
               filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
             }}
           />
-          <Typography
-            variant='h6'
-            sx={{
-              fontWeight: 700,
-              fontSize: { xs: '1rem', sm: '1.25rem' },
-              background: (theme) => `linear-gradient(135deg, 
-                ${theme.palette.text.primary}, 
-                ${theme.palette.primary.main}aa
-              )`,
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            Exchange Calculator
-          </Typography>
+          <HeaderTitle variant='h6'>Exchange Calculator</HeaderTitle>
         </ExchangeHeader>
 
         <Grid
@@ -193,55 +185,20 @@ export default function Exchange(props: ExchangeProps) {
         >
           <Grid size={12}>
             <CurrencySection>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: { xs: 0.5, sm: 1 },
-                  mb: { xs: 0.5, sm: 1 },
-                }}
-              >
-                <Avatar
-                  sx={{
-                    width: { xs: 20, sm: 24 },
-                    height: { xs: 20, sm: 24 },
-                    background: (theme) => `linear-gradient(135deg, 
-                      ${theme.palette.primary.main}, 
-                      ${theme.palette.secondary.main}
-                    )`,
-                    fontSize: { xs: '0.6rem', sm: '0.75rem' },
-                    fontWeight: 700,
-                  }}
-                >
+              <CurrencyLabelBox>
+                <CurrencyAvatar>
                   {symbol.charAt(0).toUpperCase()}
-                </Avatar>
-                <Typography
-                  variant='subtitle2'
-                  sx={{
-                    fontWeight: 600,
-                    color: 'text.primary',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
-                  }}
-                >
+                </CurrencyAvatar>
+                <CurrencyLabelTypography variant='subtitle2'>
                   {symbol.toUpperCase()}
-                </Typography>
-              </Box>
+                </CurrencyLabelTypography>
+              </CurrencyLabelBox>
               <InputCard>
-                <InputBaseExchange
+                <StyledInputBase
                   type='number'
                   value={cryptoAmount}
                   onChange={handleCryptoInputChange}
                   placeholder='0.00'
-                  sx={{
-                    '& input': {
-                      fontSize: { xs: '1rem', sm: '1.1rem' },
-                      fontWeight: 500,
-                      color: 'text.primary',
-                      textAlign: 'right',
-                    },
-                  }}
                 />
               </InputCard>
             </CurrencySection>
@@ -253,51 +210,11 @@ export default function Exchange(props: ExchangeProps) {
 
           <Grid size={12}>
             <CurrencySection>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: { xs: 0.5, sm: 1 },
-                  mb: { xs: 0, sm: 0.5 },
-                }}
-              >
-                <Avatar
-                  sx={{
-                    width: { xs: 20, sm: 24 },
-                    height: { xs: 20, sm: 24 },
-                    background: (theme) => `linear-gradient(135deg, 
-                      ${theme.palette.primary.main}, 
-                      ${theme.palette.secondary.main}
-                    )`,
-                    fontSize: { xs: '0.6rem', sm: '0.75rem' },
-                    fontWeight: 700,
-                  }}
-                >
+              <CurrencyLabelBox sx={{ mb: { xs: 0, sm: 0.5 } }}>
+                <CurrencyAvatar>
                   {currencyOption.charAt(0).toUpperCase()}
-                </Avatar>
-                <Autocomplete
-                  sx={{
-                    width: { xs: '60px', sm: '70px' },
-                    '& .MuiInput-root': {
-                      border: 'none',
-                      '&:before': { display: 'none' },
-                      '&:after': { display: 'none' },
-                    },
-                    '& .MuiInputBase-input': {
-                      fontWeight: 600,
-                      fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      paddingRight: '0px !important',
-                    },
-                    '& .MuiAutocomplete-endAdornment': {
-                      right: '4px',
-                    },
-                    '& .MuiAutocomplete-popupIndicator': {
-                      padding: '2px',
-                      marginRight: '0px',
-                    },
-                  }}
+                </CurrencyAvatar>
+                <StyledAutocomplete
                   id='currencies-select'
                   value={currencyOption}
                   options={currencies ?? []}
@@ -309,21 +226,13 @@ export default function Exchange(props: ExchangeProps) {
                   renderInput={handleRenderInput}
                   renderOption={handleRenderOption}
                 />
-              </Box>
+              </CurrencyLabelBox>
               <InputCard>
-                <InputBaseExchange
+                <StyledInputBase
                   type='number'
                   value={currencyAmount}
                   onChange={handleCurrencyInputChange}
                   placeholder='0.00'
-                  sx={{
-                    '& input': {
-                      fontSize: { xs: '1rem', sm: '1.1rem' },
-                      fontWeight: 500,
-                      color: 'text.primary',
-                      textAlign: 'right',
-                    },
-                  }}
                 />
               </InputCard>
             </CurrencySection>
@@ -333,16 +242,9 @@ export default function Exchange(props: ExchangeProps) {
         {currentRate && (
           <Fade in timeout={1000}>
             <ExchangeRateDisplay>
-              <Typography
-                variant='caption'
-                sx={{
-                  fontWeight: 600,
-                  color: 'text.secondary',
-                  fontSize: { xs: '0.7rem', sm: '0.8rem' },
-                }}
-              >
+              <RateText variant='caption'>
                 1 {symbol.toUpperCase()} = {formattedRate}
-              </Typography>
+              </RateText>
             </ExchangeRateDisplay>
           </Fade>
         )}

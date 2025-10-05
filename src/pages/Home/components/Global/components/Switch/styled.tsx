@@ -1,4 +1,4 @@
-import { Switch } from '@mui/material';
+import { Switch, FormControlLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const IOSSwitch = styled((props) => (
@@ -17,7 +17,8 @@ export const IOSSwitch = styled((props) => (
         transform: `translateX(${checkedTranslateX}px)`,
         color: '#fff',
         '& + .MuiSwitch-track': {
-          background: 'linear-gradient(135deg, #409CFF 0%, #3B82F6 100%)',
+          background:
+            'linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-light) 100%)',
           opacity: 1,
           border: 0,
         },
@@ -54,3 +55,27 @@ export const IOSSwitch = styled((props) => (
     },
   };
 }) as typeof Switch;
+
+export const StyledFormControlLabel = styled(FormControlLabel)<{
+  mobile?: boolean;
+}>(({ mobile }) => ({
+  margin: 0,
+  marginLeft: 0,
+  display: mobile ? 'block' : 'flex',
+  '.MuiFormControlLabel-label': {
+    fontWeight: 600,
+    color: '#ffffff',
+    fontSize: mobile ? '0.9rem' : '1.1rem',
+  },
+  ...(mobile
+    ? {
+        '@media (min-width: 900px)': {
+          display: 'none',
+        },
+      }
+    : {
+        '@media (max-width: 899px)': {
+          display: 'none',
+        },
+      }),
+}));

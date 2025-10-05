@@ -1,6 +1,12 @@
-import { Typography } from '@mui/material';
 import { memo, useMemo } from 'react';
 import { DescriptionProps } from './interface';
+import {
+  DescriptionText,
+  BoldText,
+  ChangeText,
+  BTCText,
+  ETHText,
+} from './styled';
 
 function Description(props: DescriptionProps) {
   const { globalData } = props;
@@ -46,87 +52,33 @@ function Description(props: DescriptionProps) {
       cryptocurrencies:
         globalData.data.active_cryptocurrencies.toLocaleString('en-US'),
 
-      changeColor:
-        globalData.data.market_cap_change_percentage_24h_usd < 0
-          ? '#ff6b6b'
-          : '#51cf66',
+      isNegative: globalData.data.market_cap_change_percentage_24h_usd < 0,
     }),
     [globalData]
   );
 
   return (
-    <Typography
-      variant='body2'
-      sx={{
-        fontWeight: 400,
-        lineHeight: 1.5,
-        color: 'text.secondary',
-        fontSize: { xs: '0.85rem', sm: '0.9rem' },
-      }}
-    >
+    <DescriptionText variant='body2'>
       The global cryptocurrency market cap today is{' '}
-      <Typography
-        component='span'
-        sx={{
-          fontWeight: 700,
-          color: 'text.primary',
-        }}
-      >
-        {formattedValues.marketCapText}
-      </Typography>
-      , a{' '}
-      <Typography
-        component='span'
-        sx={{
-          fontWeight: 700,
-          color: formattedValues.changeColor,
-        }}
-      >
+      <BoldText component='span'>{formattedValues.marketCapText}</BoldText>, a{' '}
+      <ChangeText component='span' isNegative={formattedValues.isNegative}>
         {formattedValues.marketCapPercentage}
-      </Typography>{' '}
+      </ChangeText>{' '}
       change in the last 24 hours. Total cryptocurrency trading volume in the
       last day is at{' '}
-      <Typography
-        component='span'
-        sx={{
-          fontWeight: 700,
-          color: 'text.primary',
-        }}
-      >
-        {formattedValues.totalVolumeText}
-      </Typography>
-      . Bitcoin dominance is at{' '}
-      <Typography
-        component='span'
-        sx={{
-          fontWeight: 700,
-          color: '#f7931a',
-        }}
-      >
+      <BoldText component='span'>{formattedValues.totalVolumeText}</BoldText>.
+      Bitcoin dominance is at{' '}
+      <BTCText component='span'>
         {formattedValues.marketCapPercentageBTC}
-      </Typography>{' '}
+      </BTCText>{' '}
       and Ethereum dominance is at{' '}
-      <Typography
-        component='span'
-        sx={{
-          fontWeight: 700,
-          color: '#627eea',
-        }}
-      >
+      <ETHText component='span'>
         {formattedValues.marketCapPercentageETH}
-      </Typography>
+      </ETHText>
       . CoinGecko API is now tracking{' '}
-      <Typography
-        component='span'
-        sx={{
-          fontWeight: 700,
-          color: 'text.primary',
-        }}
-      >
-        {formattedValues.cryptocurrencies}
-      </Typography>{' '}
+      <BoldText component='span'>{formattedValues.cryptocurrencies}</BoldText>{' '}
       cryptocurrencies.
-    </Typography>
+    </DescriptionText>
   );
 }
 

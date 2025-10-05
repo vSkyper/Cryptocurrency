@@ -1,14 +1,8 @@
 import { useState, memo } from 'react';
-import {
-  Grid,
-  Box,
-  Typography,
-  Collapse,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Grid, Collapse, useMediaQuery, useTheme } from '@mui/material';
 import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
+import { GlobalContainer, PageTitle, MobileSwitchContainer } from './styled';
 
 function Global(props: GlobalProps) {
   const { globalData } = props;
@@ -19,22 +13,10 @@ function Global(props: GlobalProps) {
 
   return (
     <>
-      <Box sx={{ mb: 3 }}>
+      <GlobalContainer>
         <Grid container alignItems='center' spacing={2}>
           <Grid size={{ xs: 12, md: 8 }}>
-            <Typography
-              variant='h5'
-              sx={{
-                mb: 2,
-                fontWeight: 700,
-                color: 'text.primary',
-                lineHeight: 1.2,
-                fontSize: { xs: '1.4rem', sm: '1.6rem', md: '1.75rem' },
-                letterSpacing: '-0.01em',
-              }}
-            >
-              Global Cryptocurrency Market
-            </Typography>
+            <PageTitle variant='h5'>Global Cryptocurrency Market</PageTitle>
             <Description globalData={globalData} />
           </Grid>
           <Grid
@@ -45,10 +27,10 @@ function Global(props: GlobalProps) {
           </Grid>
         </Grid>
 
-        <Box sx={{ mt: 3, display: { xs: 'block', md: 'none' } }}>
+        <MobileSwitchContainer>
           <Switch toggle={toggle} setToggle={setToggle} mobile />
-        </Box>
-      </Box>
+        </MobileSwitchContainer>
+      </GlobalContainer>
 
       <Collapse in={toggle} timeout={isMobile ? 0 : 'auto'}>
         <Cards toggle={toggle} globalData={globalData} />

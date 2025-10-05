@@ -1,4 +1,10 @@
-import { InputBase, Box } from '@mui/material';
+import {
+  InputBase,
+  Box,
+  Typography,
+  Avatar,
+  Autocomplete,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const InputBaseExchange = styled(InputBase)(({ theme }) => ({
@@ -26,13 +32,14 @@ export const InputCard = styled(Box)(({ theme }) => ({
   height: 70,
   margin: '0 auto',
   borderRadius: 16,
-  background: 'rgba(20, 30, 48, 0.4)',
+  background: 'var(--bg-tertiary)',
   transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',
   '&:focus-within': {
-    background: 'rgba(25, 35, 55, 0.5)',
+    background:
+      'color-mix(in srgb, var(--bg-tertiary) 80%, var(--brand-blue) 20%)',
   },
   [theme.breakpoints.down('sm')]: {
     height: 55,
@@ -47,7 +54,7 @@ export const InputCard = styled(Box)(({ theme }) => ({
 export const ModernExchangeCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: 16,
-  background: 'rgba(20, 30, 48, 0.4)',
+  background: 'var(--bg-tertiary)',
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',
@@ -72,7 +79,7 @@ export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  background: 'rgba(64, 156, 255, 0.2)',
+  background: 'color-mix(in srgb, var(--brand-blue) 20%, transparent)',
   width: 48,
   height: 48,
   margin: theme.spacing(1.5, 'auto'),
@@ -84,8 +91,9 @@ export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     '&:hover': {
       transform: 'scale(1.05)',
-      background: 'rgba(64, 156, 255, 0.3)',
-      boxShadow: '0 4px 16px rgba(64, 156, 255, 0.2)',
+      background: 'color-mix(in srgb, var(--brand-blue) 30%, transparent)',
+      boxShadow:
+        '0 4px 16px color-mix(in srgb, var(--brand-blue) 20%, transparent)',
     },
   },
   [theme.breakpoints.down('md')]: {
@@ -95,7 +103,7 @@ export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
     position: 'relative',
     zIndex: 1,
     fontSize: '1.3rem',
-    color: '#409CFF',
+    color: 'var(--brand-blue)',
   },
   [theme.breakpoints.down('sm')]: {
     width: 42,
@@ -125,16 +133,120 @@ export const CurrencyLabel = styled(Box)(({ theme }) => ({
   padding: theme.spacing(0.5, 1),
   borderRadius: theme.spacing(1.5),
   background: `linear-gradient(135deg, 
-    rgba(64, 156, 255, 0.12), 
-    rgba(59, 130, 246, 0.08)
+    color-mix(in srgb, var(--brand-blue) 12%, transparent), 
+    color-mix(in srgb, var(--brand-blue-light) 8%, transparent)
   )`,
   width: 'fit-content',
   transition: 'all 200ms ease',
   '&:hover': {
     background: `linear-gradient(135deg, 
-      rgba(64, 156, 255, 0.18), 
-      rgba(59, 130, 246, 0.12)
+      color-mix(in srgb, var(--brand-blue) 18%, transparent), 
+      color-mix(in srgb, var(--brand-blue-light) 12%, transparent)
     )`,
+  },
+}));
+
+export const HeaderTitle = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  fontSize: '1.25rem',
+  background: `linear-gradient(135deg, 
+    ${theme.palette.text.primary}, 
+    ${theme.palette.primary.main}aa
+  )`,
+  WebkitBackgroundClip: 'text',
+  backgroundClip: 'text',
+  color: 'transparent',
+  letterSpacing: '-0.01em',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1rem',
+  },
+}));
+
+export const CurrencyAvatar = styled(Avatar)(({ theme }) => ({
+  width: 24,
+  height: 24,
+  background: `linear-gradient(135deg, 
+    ${theme.palette.primary.main}, 
+    ${theme.palette.secondary.main}
+  )`,
+  fontSize: '0.75rem',
+  fontWeight: 700,
+  [theme.breakpoints.down('sm')]: {
+    width: 20,
+    height: 20,
+    fontSize: '0.6rem',
+  },
+}));
+
+export const CurrencyLabelTypography = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+  color: theme.palette.text.primary,
+  textTransform: 'uppercase',
+  letterSpacing: '0.05em',
+  fontSize: '0.875rem',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.75rem',
+  },
+}));
+
+export const CurrencyLabelBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  marginBottom: theme.spacing(1),
+  [theme.breakpoints.down('sm')]: {
+    gap: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
+  },
+}));
+
+export const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
+  width: '70px',
+  '& .MuiInput-root': {
+    border: 'none',
+    '&:before': { display: 'none' },
+    '&:after': { display: 'none' },
+  },
+  '& .MuiInputBase-input': {
+    fontWeight: 600,
+    fontSize: '0.9rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    paddingRight: '0px !important',
+  },
+  '& .MuiAutocomplete-endAdornment': {
+    right: '4px',
+  },
+  '& .MuiAutocomplete-popupIndicator': {
+    padding: '2px',
+    marginRight: '0px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '60px',
+    '& .MuiInputBase-input': {
+      fontSize: '0.8rem',
+    },
+  },
+})) as typeof Autocomplete;
+
+export const StyledInputBase = styled(InputBaseExchange)(({ theme }) => ({
+  '& input': {
+    fontSize: '1.1rem',
+    fontWeight: 500,
+    color: theme.palette.text.primary,
+    textAlign: 'right',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+    },
+  },
+}));
+
+export const RateText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+  color: theme.palette.text.secondary,
+  fontSize: '0.8rem',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.7rem',
   },
 }));
 
@@ -146,12 +258,13 @@ export const ExchangeRateDisplay = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1.5, 2),
   marginTop: theme.spacing(2),
   borderRadius: theme.spacing(2),
-  background: 'rgba(20, 30, 48, 0.4)',
+  background: 'var(--bg-tertiary)',
   transition: 'all 250ms ease',
   '&:hover': {
-    background: 'rgba(25, 35, 55, 0.5)',
+    background: 'color-mix(in srgb, var(--bg-tertiary) 80%, var(--brand-blue))',
     transform: 'translateY(-1px)',
-    boxShadow: '0 4px 16px rgba(64, 156, 255, 0.1)',
+    boxShadow:
+      '0 4px 16px color-mix(in srgb, var(--brand-blue) 10%, transparent)',
   },
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(1, 1.5),

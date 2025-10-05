@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Grid, Backdrop, CircularProgress, Box } from '@mui/material';
+import { Grid, CircularProgress } from '@mui/material';
 import { format } from 'date-fns';
-import { Chart } from './styled';
+import { Chart, ButtonContainer, StyledBackdrop } from './styled';
 import { ButtonComponent, ChartComponent } from './components';
 import { ErrorModal } from 'components';
 import { ISparkline } from 'interfaces';
@@ -9,36 +9,29 @@ import useFetch from 'hooks/useFetch';
 import { buttons } from 'constants/coin';
 import { SparklineProps } from './interface';
 
-export default function Sparkline(props: SparklineProps) {
-  const { id } = props;
+const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
+const DEFAULT_DAYS = '7';
 
-  const [days, setDays] = useState<string>('7');
-
-  const { data, error } = useFetch<ISparkline>(
-    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee`
-  );
-
-  const sparkline = data?.prices.map((data) => ({
-    date: format(new Date(data[0]), 'MMM d y, hh:mm:ss a'),
-    value: data[1],
+const formatSparklineData = (prices: number[][]) => {
+  return prices.map((priceData) => ({
+    date: format(new Date(priceData[0]), 'MMM d y, hh:mm:ss a'),
+    value: priceData[1],
   }));
+};
+
+export default function Sparkline({ id }: SparklineProps) {
+  const [days, setDays] = useState<string>(DEFAULT_DAYS);
+
+  const apiUrl = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=${API_KEY}`;
+  const { data, error } = useFetch<ISparkline>(apiUrl);
+
+  const sparkline = data?.prices ? formatSparklineData(data.prices) : undefined;
 
   if (error) return <ErrorModal />;
 
   return (
     <>
-      <Backdrop
-        sx={{
-          color: 'inherit',
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          backgroundColor: 'transparent',
-        }}
-        open={!data}
-      >
-        <CircularProgress />
-      </Backdrop>
-
-      <Box sx={{ mb: 2 }}>
+      <ButtonContainer>
         <Grid container justifyContent='flex-end' spacing={1}>
           {buttons.map((button) => (
             <Grid key={button.days}>
@@ -50,9 +43,12 @@ export default function Sparkline(props: SparklineProps) {
             </Grid>
           ))}
         </Grid>
-      </Box>
+      </ButtonContainer>
 
-      <Chart sx={{ position: 'relative', zIndex: 1 }}>
+      <Chart>
+        <StyledBackdrop open={!data}>
+          <CircularProgress />
+        </StyledBackdrop>
         {sparkline && <ChartComponent sparkline={sparkline} days={days} />}
       </Chart>
     </>

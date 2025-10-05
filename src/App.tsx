@@ -14,13 +14,18 @@ export default function App() {
     colorSchemes: {
       dark: {
         palette: {
-          primary: { main: '#409CFF' },
-          secondary: { main: '#3B82F6' },
-          background: { default: '#0d0e0eff', paper: '#151619ff' },
+          primary: { main: '#409cff' },
+          secondary: { main: '#3b82f6' },
+          background: {
+            default: '#0d0e0e',
+            paper: 'var(--bg-tertiary)',
+          },
         },
       },
     },
-    shape: { borderRadius: 12 },
+    shape: {
+      borderRadius: 12,
+    },
     typography: {
       fontSize: 14,
       fontWeightLight: 300,
@@ -45,31 +50,59 @@ export default function App() {
     },
     components: {
       MuiCssBaseline: {
-        styleOverrides: () => ({
+        styleOverrides: {
+          ':root': {
+            // Custom brand color variables - change these to update colors across the entire app
+            '--brand-blue': '#409CFF',
+            '--brand-blue-light': '#3B82F6',
+            '--brand-positive': '#51cf66',
+            '--brand-negative': '#ff6b6b',
+            '--brand-bitcoin': '#f7931a',
+            '--brand-ethereum': '#627eea',
+
+            // Background color variables - change these to update the app background
+            '--bg-primary': '#0f172a',
+            '--bg-secondary': '#111827',
+            '--bg-tertiary': '#141e30',
+            '--bg-gradient-1':
+              'color-mix(in srgb, var(--brand-blue) 8%, transparent)',
+            '--bg-gradient-2':
+              'color-mix(in srgb, var(--brand-blue-light) 6%, transparent)',
+          },
           'html, body': {
             overscrollBehaviorY: 'none',
             overscrollBehaviorX: 'none',
             overflowX: 'hidden',
-            width: '100%',
-            maxWidth: '100%',
+            minWidth: '100%',
+            backgroundColor: 'var(--bg-primary)',
+            background: `
+              radial-gradient(ellipse 1000px 1000px at 10% 20%, var(--bg-gradient-1), transparent 70%),
+              radial-gradient(ellipse 1200px 1200px at 90% 80%, var(--bg-gradient-2), transparent 70%),
+              linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%)
+            `,
           },
           '#root': {
             overflowX: 'hidden',
             width: '100%',
             maxWidth: '100%',
           },
-        }),
+        },
       },
       MuiAppBar: {
-        defaultProps: { elevation: 0, color: 'default' },
+        defaultProps: {
+          elevation: 0,
+          color: 'default',
+        },
         styleOverrides: {
-          root: () => ({
+          root: {
             backdropFilter: 'saturate(120%) blur(6px)',
-          }),
+          },
         },
       },
       MuiPaper: {
-        defaultProps: { elevation: 1 },
+        defaultProps: {
+          elevation: 1,
+        },
         styleOverrides: {
           root: ({ theme }: any) => ({
             backgroundImage: 'none',

@@ -1,7 +1,8 @@
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { memo, useMemo } from 'react';
 import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
+import { CardsContainer } from './styled';
 
 const formatCurrency = (value: number): string =>
   Intl.NumberFormat('en-US', {
@@ -30,7 +31,7 @@ function Cards({ toggle, globalData }: CardsProps) {
         key: 'marketCap',
         value: formatCurrency(globalData.data.total_market_cap.usd),
         label: 'Market Capitalization',
-        color: '#409CFF',
+        color: 'var(--brand-blue)',
         percentage: {
           value: formatPercentage(
             globalData.data.market_cap_change_percentage_24h_usd
@@ -43,21 +44,21 @@ function Cards({ toggle, globalData }: CardsProps) {
         key: 'totalVolume',
         value: formatCurrency(globalData.data.total_volume.usd),
         label: '24h Trading Volume',
-        color: '#3B82F6',
+        color: 'var(--brand-blue-light)',
         timeout: 800,
       },
       {
         key: 'btcDominance',
         value: formatPercentage(globalData.data.market_cap_percentage.btc),
         label: 'Bitcoin Market Cap Dominance',
-        color: '#f7931a',
+        color: 'var(--brand-bitcoin)',
         timeout: 1000,
       },
       {
         key: 'ethDominance',
         value: formatPercentage(globalData.data.market_cap_percentage.eth),
         label: 'Ethereum Market Cap Dominance',
-        color: '#627eea',
+        color: 'var(--brand-ethereum)',
         timeout: 1100,
       },
       {
@@ -72,7 +73,7 @@ function Cards({ toggle, globalData }: CardsProps) {
   );
 
   return (
-    <Grid container spacing={3} sx={{ mb: 3 }}>
+    <CardsContainer container spacing={3}>
       {cardConfigs.map((config) => (
         <StatCard
           key={config.key}
@@ -81,7 +82,7 @@ function Cards({ toggle, globalData }: CardsProps) {
           isMobile={isMobile}
         />
       ))}
-    </Grid>
+    </CardsContainer>
   );
 }
 

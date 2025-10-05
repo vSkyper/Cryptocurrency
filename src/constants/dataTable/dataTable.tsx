@@ -33,11 +33,13 @@ export const columns: GridColDef[] = [
               width: 36,
               height: 36,
               boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-              border: '2px solid rgba(64, 156, 255, 0.2)',
+              border:
+                '2px solid color-mix(in srgb, var(--brand-blue) 20%, transparent)',
               transition: 'all 200ms ease',
               '&:hover': {
                 transform: 'scale(1.1)',
-                boxShadow: '0 6px 16px rgba(64, 156, 255, 0.3)',
+                boxShadow:
+                  '0 6px 16px color-mix(in srgb, var(--brand-blue) 30%, transparent)',
               },
             }}
           />
@@ -78,18 +80,21 @@ export const columns: GridColDef[] = [
           fontSize: '0.75rem',
           borderRadius: '12px',
           background:
-            'linear-gradient(135deg, rgba(64, 156, 255, 0.15) 0%, rgba(64, 156, 255, 0.08) 100%)',
-          border: '1px solid rgba(64, 156, 255, 0.2)',
-          color: '#409CFF',
+            'linear-gradient(135deg, color-mix(in srgb, var(--brand-blue) 15%, transparent) 0%, color-mix(in srgb, var(--brand-blue) 8%, transparent) 100%)',
+          border:
+            '1px solid color-mix(in srgb, var(--brand-blue) 20%, transparent)',
+          color: 'var(--brand-blue)',
           backdropFilter: 'blur(8px)',
           letterSpacing: '0.5px',
           transition: 'all 200ms ease',
           '&:hover': {
             transform: 'translateY(-1px)',
             background:
-              'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(64, 156, 255, 0.12) 100%)',
-            border: '1px solid rgba(64, 156, 255, 0.3)',
-            boxShadow: '0 4px 12px rgba(64, 156, 255, 0.2)',
+              'linear-gradient(135deg, color-mix(in srgb, var(--brand-blue) 20%, transparent) 0%, color-mix(in srgb, var(--brand-blue) 12%, transparent) 100%)',
+            border:
+              '1px solid color-mix(in srgb, var(--brand-blue) 30%, transparent)',
+            boxShadow:
+              '0 4px 12px color-mix(in srgb, var(--brand-blue) 20%, transparent)',
           },
         }}
       />
@@ -138,19 +143,19 @@ export const columns: GridColDef[] = [
             fontSize: '0.75rem',
             borderRadius: '12px',
             border: positive
-              ? '1px solid rgba(81, 207, 102, 0.3)'
-              : '1px solid rgba(255, 107, 107, 0.3)',
+              ? '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)'
+              : '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)',
             background: positive
-              ? 'linear-gradient(135deg, rgba(81, 207, 102, 0.15) 0%, rgba(81, 207, 102, 0.08) 100%)'
-              : 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.08) 100%)',
-            color: positive ? '#51cf66' : '#ff6b6b',
+              ? 'linear-gradient(135deg, color-mix(in srgb, var(--brand-positive) 15%, transparent) 0%, color-mix(in srgb, var(--brand-positive) 8%, transparent) 100%)'
+              : 'linear-gradient(135deg, color-mix(in srgb, var(--brand-negative) 15%, transparent) 0%, color-mix(in srgb, var(--brand-negative) 8%, transparent) 100%)',
+            color: positive ? 'var(--brand-positive)' : 'var(--brand-negative)',
             backdropFilter: 'blur(8px)',
             transition: 'all 200ms ease',
             '&:hover': {
               transform: 'translateY(-1px)',
               boxShadow: positive
-                ? '0 4px 12px rgba(81, 207, 102, 0.2)'
-                : '0 4px 12px rgba(255, 107, 107, 0.2)',
+                ? '0 4px 12px color-mix(in srgb, var(--brand-positive) 20%, transparent)'
+                : '0 4px 12px color-mix(in srgb, var(--brand-negative) 20%, transparent)',
             },
           }}
         />
@@ -186,19 +191,19 @@ export const columns: GridColDef[] = [
             fontSize: '0.75rem',
             borderRadius: '12px',
             border: positive
-              ? '1px solid rgba(81, 207, 102, 0.3)'
-              : '1px solid rgba(255, 107, 107, 0.3)',
+              ? '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)'
+              : '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)',
             background: positive
-              ? 'linear-gradient(135deg, rgba(81, 207, 102, 0.15) 0%, rgba(81, 207, 102, 0.08) 100%)'
-              : 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.08) 100%)',
-            color: positive ? '#51cf66' : '#ff6b6b',
+              ? 'linear-gradient(135deg, color-mix(in srgb, var(--brand-positive) 15%, transparent) 0%, color-mix(in srgb, var(--brand-positive) 8%, transparent) 100%)'
+              : 'linear-gradient(135deg, color-mix(in srgb, var(--brand-negative) 15%, transparent) 0%, color-mix(in srgb, var(--brand-negative) 8%, transparent) 100%)',
+            color: positive ? 'var(--brand-positive)' : 'var(--brand-negative)',
             backdropFilter: 'blur(8px)',
             transition: 'all 200ms ease',
             '&:hover': {
               transform: 'translateY(-1px)',
               boxShadow: positive
-                ? '0 4px 12px rgba(81, 207, 102, 0.2)'
-                : '0 4px 12px rgba(255, 107, 107, 0.2)',
+                ? '0 4px 12px color-mix(in srgb, var(--brand-positive) 20%, transparent)'
+                : '0 4px 12px color-mix(in srgb, var(--brand-negative) 20%, transparent)',
             },
           }}
         />
@@ -234,19 +239,19 @@ export const columns: GridColDef[] = [
             fontSize: '0.75rem',
             borderRadius: '12px',
             border: positive
-              ? '1px solid rgba(81, 207, 102, 0.3)'
-              : '1px solid rgba(255, 107, 107, 0.3)',
+              ? '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)'
+              : '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)',
             background: positive
-              ? 'linear-gradient(135deg, rgba(81, 207, 102, 0.15) 0%, rgba(81, 207, 102, 0.08) 100%)'
-              : 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0.08) 100%)',
-            color: positive ? '#51cf66' : '#ff6b6b',
+              ? 'linear-gradient(135deg, color-mix(in srgb, var(--brand-positive) 15%, transparent) 0%, color-mix(in srgb, var(--brand-positive) 8%, transparent) 100%)'
+              : 'linear-gradient(135deg, color-mix(in srgb, var(--brand-negative) 15%, transparent) 0%, color-mix(in srgb, var(--brand-negative) 8%, transparent) 100%)',
+            color: positive ? 'var(--brand-positive)' : 'var(--brand-negative)',
             backdropFilter: 'blur(8px)',
             transition: 'all 200ms ease',
             '&:hover': {
               transform: 'translateY(-1px)',
               boxShadow: positive
-                ? '0 4px 12px rgba(81, 207, 102, 0.2)'
-                : '0 4px 12px rgba(255, 107, 107, 0.2)',
+                ? '0 4px 12px color-mix(in srgb, var(--brand-positive) 20%, transparent)'
+                : '0 4px 12px color-mix(in srgb, var(--brand-negative) 20%, transparent)',
             },
           }}
         />
@@ -287,8 +292,8 @@ export const columns: GridColDef[] = [
     renderCell: (params: GridRenderCellParams) => {
       const color: string =
         params.row.price_change_percentage_7d_in_currency < 0
-          ? '#ff6b6b'
-          : '#51cf66';
+          ? 'var(--brand-negative)'
+          : 'var(--brand-positive)';
       return (
         <ResponsiveContainer>
           <AreaChart

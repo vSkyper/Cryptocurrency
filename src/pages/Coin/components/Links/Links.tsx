@@ -1,4 +1,4 @@
-import { Avatar, Typography, Box } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
 import {
   Reddit as RedditIcon,
   Facebook as FacebookIcon,
@@ -8,359 +8,143 @@ import {
   Forum as ForumIcon,
 } from '@mui/icons-material';
 import { LinksProps } from './interface';
-import { ModernLinksCard, StyledChip } from './styled';
+import {
+  ModernLinksCard,
+  HeaderBox,
+  TitleTypography,
+  SectionTitle,
+  LinksContainer,
+  PrimaryLinkChip,
+  ForumChip,
+  ExplorerChip,
+  RedditChip,
+  TwitterChip,
+  FacebookChip,
+  GitHubChip,
+} from './styled';
 
-export default function Links(props: LinksProps) {
-  const { data } = props;
+export default function Links({ data }: LinksProps) {
+  const hasBlockchainSites =
+    data.links?.blockchain_site &&
+    data.links.blockchain_site.filter(Boolean).length > 0;
 
   return (
     <ModernLinksCard>
-      <Box
-        sx={{
-          mb: 3,
-          pb: 2,
-          borderBottom: '1px solid rgba(64, 156, 255, 0.2)',
-          position: 'relative',
-        }}
-      >
-        <Typography
-          variant='h6'
-          sx={{
-            fontWeight: 700,
-            fontSize: '1.2rem',
-            background: 'linear-gradient(135deg, #409CFF 0%, #3B82F6 70%)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            color: 'transparent',
-            textAlign: 'center',
-            letterSpacing: '-0.01em',
-            position: 'relative',
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: -8,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '60px',
-              height: '2px',
-              background: 'linear-gradient(90deg, #409CFF, #3B82F6)',
-              borderRadius: '1px',
-            },
-          }}
-        >
+      <HeaderBox>
+        <TitleTypography variant='h6'>
           Official Links & Community
-        </Typography>
-      </Box>
+        </TitleTypography>
+      </HeaderBox>
 
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          zIndex: 1,
-          position: 'relative',
-        }}
-      >
-        {/* Primary Links Section */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 1.5,
-            justifyContent: 'center',
-          }}
-        >
-          {data.links?.homepage?.[0] && (
-            <StyledChip
-              avatar={
-                <Avatar
-                  alt='logo'
-                  src={data.image?.large}
-                  sx={{
-                    width: 22,
-                    height: 22,
-                    border: '1px solid rgba(64, 156, 255, 0.3)',
-                  }}
-                />
-              }
-              label='Official Website'
-              component='a'
-              href={data.links.homepage[0]}
-              clickable
-              sx={{
-                background:
-                  'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)',
-                border: '1px solid rgba(64, 156, 255, 0.4)',
-                color: '#409CFF',
-                fontWeight: 600,
-                height: 36,
-                px: 2,
-                '&:hover': {
-                  background:
-                    'linear-gradient(135deg, rgba(64, 156, 255, 0.3) 0%, rgba(59, 130, 246, 0.15) 100%)',
-                  border: '1px solid rgba(64, 156, 255, 0.6)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(64, 156, 255, 0.3)',
-                },
-              }}
-            />
-          )}
+      {/* Primary Links Section */}
+      <LinksContainer sx={{ gap: 1.5 }}>
+        {data.links?.homepage?.[0] && (
+          <PrimaryLinkChip
+            avatar={
+              <Avatar
+                alt='logo'
+                src={data.image?.large}
+                sx={{
+                  width: 22,
+                  height: 22,
+                  border:
+                    '1px solid color-mix(in srgb, var(--brand-blue) 30%, transparent)',
+                }}
+              />
+            }
+            label='Official Website'
+            component='a'
+            href={data.links.homepage[0]}
+            clickable
+          />
+        )}
 
-          {data.links?.official_forum_url?.[0] && (
-            <StyledChip
-              icon={<ForumIcon sx={{ fontSize: 18, color: '#409CFF' }} />}
-              label='Official Forum'
-              component='a'
-              href={data.links.official_forum_url[0]}
-              clickable
-              sx={{
-                background:
-                  'linear-gradient(135deg, rgba(64, 156, 255, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%)',
-                border: '1px solid rgba(64, 156, 255, 0.3)',
-                color: '#409CFF',
-                fontWeight: 500,
-                height: 36,
-                '&:hover': {
-                  background:
-                    'linear-gradient(135deg, rgba(64, 156, 255, 0.25) 0%, rgba(59, 130, 246, 0.12) 100%)',
-                  border: '1px solid rgba(64, 156, 255, 0.5)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(64, 156, 255, 0.2)',
-                },
-              }}
-            />
-          )}
-        </Box>
-      </Box>
+        {data.links?.official_forum_url?.[0] && (
+          <ForumChip
+            icon={
+              <ForumIcon sx={{ fontSize: 18, color: 'var(--brand-blue)' }} />
+            }
+            label='Official Forum'
+            component='a'
+            href={data.links.official_forum_url[0]}
+            clickable
+          />
+        )}
+      </LinksContainer>
 
       {/* Blockchain Explorer Links */}
-      {data.links?.blockchain_site &&
-        data.links.blockchain_site.filter(Boolean).length > 0 && (
-          <Box sx={{ mt: 3 }}>
-            <Typography
-              variant='subtitle2'
-              sx={{
-                color: 'rgba(64, 156, 255, 0.8)',
-                fontWeight: 600,
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px',
-                mb: 2,
-                textAlign: 'center',
-              }}
-            >
-              Blockchain Explorers
-            </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 1,
-                justifyContent: 'center',
-              }}
-            >
-              {data.links?.blockchain_site?.slice(0, 3).map(
-                (blockchain) =>
-                  blockchain && (
-                    <StyledChip
-                      key={blockchain}
-                      icon={
-                        <WebsiteIcon sx={{ fontSize: 16, color: '#3B82F6' }} />
-                      }
-                      label={new URL(blockchain).hostname.replace('www.', '')}
-                      component='a'
-                      href={blockchain}
-                      clickable
-                      sx={{
-                        background:
-                          'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(64, 156, 255, 0.06) 100%)',
-                        border: '1px solid rgba(59, 130, 246, 0.25)',
-                        color: '#3B82F6',
-                        fontSize: '0.75rem',
-                        height: 32,
-                        '&:hover': {
-                          background:
-                            'linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(64, 156, 255, 0.1) 100%)',
-                          border: '1px solid rgba(59, 130, 246, 0.4)',
-                          transform: 'translateY(-1px)',
-                          boxShadow: '0 4px 16px rgba(59, 130, 246, 0.2)',
-                        },
-                      }}
-                    />
-                  )
-              )}
-            </Box>
-          </Box>
-        )}
+      {hasBlockchainSites && (
+        <Box sx={{ mt: 3 }}>
+          <SectionTitle variant='subtitle2'>Blockchain Explorers</SectionTitle>
+          <LinksContainer>
+            {data.links?.blockchain_site?.slice(0, 3).map(
+              (blockchain) =>
+                blockchain && (
+                  <ExplorerChip
+                    key={blockchain}
+                    icon={
+                      <WebsiteIcon
+                        sx={{
+                          fontSize: 16,
+                          color: 'var(--brand-blue-light)',
+                        }}
+                      />
+                    }
+                    label={new URL(blockchain).hostname.replace('www.', '')}
+                    component='a'
+                    href={blockchain}
+                    clickable
+                  />
+                )
+            )}
+          </LinksContainer>
+        </Box>
+      )}
 
       {/* Social Media Links */}
       <Box sx={{ mt: 3 }}>
-        <Typography
-          variant='subtitle2'
-          sx={{
-            color: 'rgba(64, 156, 255, 0.8)',
-            fontWeight: 600,
-            fontSize: '0.8rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-            mb: 2,
-            textAlign: 'center',
-          }}
-        >
-          Social Media
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 1,
-            justifyContent: 'center',
-          }}
-        >
+        <SectionTitle variant='subtitle2'>Social Media</SectionTitle>
+        <LinksContainer>
           {data.links?.subreddit_url && (
-            <StyledChip
-              icon={
-                <RedditIcon
-                  sx={{ fontSize: 16, color: '#FF4500 !important' }}
-                />
-              }
+            <RedditChip
+              icon={<RedditIcon sx={{ fontSize: 16 }} />}
               label='Reddit'
               component='a'
               href={data.links.subreddit_url}
               clickable
-              sx={{
-                background:
-                  'linear-gradient(135deg, rgba(113, 34, 5, 0.2) 0%, rgba(83, 24, 3, 0.1) 100%)',
-                border: '1px solid rgba(255, 69, 0, 0.3)',
-                color: '#CC3700',
-                fontWeight: 600,
-                height: 34,
-                px: 1.5,
-                '& .MuiChip-icon': {
-                  color: '#FF4500 !important',
-                },
-                '& .MuiChip-label': {
-                  color: '#CC3700',
-                },
-                '&:hover': {
-                  background:
-                    'linear-gradient(135deg, rgba(255, 69, 0, 0.3) 0%, rgba(255, 69, 0, 0.15) 100%)',
-                  border: '1px solid rgba(255, 69, 0, 0.5)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(255, 69, 0, 0.3)',
-                },
-              }}
             />
           )}
 
           {data.links?.twitter_screen_name && (
-            <StyledChip
-              icon={
-                <TwitterIcon
-                  sx={{ fontSize: 16, color: '#1DA1F2 !important' }}
-                />
-              }
+            <TwitterChip
+              icon={<TwitterIcon sx={{ fontSize: 16 }} />}
               label='Twitter'
               component='a'
               href={`https://twitter.com/${data.links.twitter_screen_name}/`}
               clickable
-              sx={{
-                background:
-                  'linear-gradient(135deg, rgba(14, 63, 94, 0.2) 0%, rgba(14, 63, 93, 0.1) 100%)',
-                border: '1px solid rgba(29, 161, 242, 0.3)',
-                color: '#1B8CD3',
-                fontWeight: 600,
-                height: 34,
-                px: 1.5,
-                '& .MuiChip-icon': {
-                  color: '#1DA1F2 !important',
-                },
-                '& .MuiChip-label': {
-                  color: '#1B8CD3',
-                },
-                '&:hover': {
-                  background:
-                    'linear-gradient(135deg, rgba(29, 161, 242, 0.3) 0%, rgba(29, 161, 242, 0.15) 100%)',
-                  border: '1px solid rgba(29, 161, 242, 0.5)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(29, 161, 242, 0.3)',
-                },
-              }}
             />
           )}
 
           {data.links?.facebook_username && (
-            <StyledChip
-              icon={
-                <FacebookIcon
-                  sx={{ fontSize: 16, color: '#1877F2 !important' }}
-                />
-              }
+            <FacebookChip
+              icon={<FacebookIcon sx={{ fontSize: 16 }} />}
               label='Facebook'
               component='a'
               href={`https://www.facebook.com/${data.links.facebook_username}/`}
               clickable
-              sx={{
-                background:
-                  'linear-gradient(135deg, rgba(13, 52, 103, 0.2) 0%, rgba(12, 49, 99, 0.1) 100%)',
-                border: '1px solid rgba(24, 119, 242, 0.3)',
-                color: '#1565C0',
-                fontWeight: 600,
-                height: 34,
-                px: 1.5,
-                '& .MuiChip-icon': {
-                  color: '#1877F2 !important',
-                },
-                '& .MuiChip-label': {
-                  color: '#1565C0',
-                },
-                '&:hover': {
-                  background:
-                    'linear-gradient(135deg, rgba(24, 119, 242, 0.3) 0%, rgba(24, 119, 242, 0.15) 100%)',
-                  border: '1px solid rgba(24, 119, 242, 0.5)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(24, 119, 242, 0.3)',
-                },
-              }}
             />
           )}
 
           {data.links?.repos_url?.github?.[0] && (
-            <StyledChip
-              icon={
-                <GitHubIcon
-                  sx={{ fontSize: 16, color: '#8B949E !important' }}
-                />
-              }
+            <GitHubChip
+              icon={<GitHubIcon sx={{ fontSize: 16 }} />}
               label='GitHub'
               component='a'
               href={data.links.repos_url.github[0]}
               clickable
-              sx={{
-                background:
-                  'linear-gradient(135deg, rgba(151, 157, 164, 0.2) 0%, rgba(33, 40, 47, 0.1) 100%)',
-                border: '1px solid rgba(139, 148, 158, 0.3)',
-                color: '#7D8590',
-                fontWeight: 600,
-                height: 34,
-                px: 1.5,
-                '& .MuiChip-icon': {
-                  color: '#8B949E !important',
-                },
-                '& .MuiChip-label': {
-                  color: '#7D8590',
-                },
-                '&:hover': {
-                  background:
-                    'linear-gradient(135deg, rgba(139, 148, 158, 0.3) 0%, rgba(139, 148, 158, 0.15) 100%)',
-                  border: '1px solid rgba(139, 148, 158, 0.5)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(139, 148, 158, 0.3)',
-                },
-              }}
             />
           )}
-        </Box>
+        </LinksContainer>
       </Box>
     </ModernLinksCard>
   );

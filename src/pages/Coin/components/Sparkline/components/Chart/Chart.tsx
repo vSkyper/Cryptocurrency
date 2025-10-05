@@ -9,13 +9,34 @@ import {
   TooltipContentProps,
 } from 'recharts';
 import { format } from 'date-fns';
-import { Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 import { useCallback } from 'react';
 import { ChartProps } from './interface';
+import { TooltipPaper, TooltipDate, TooltipValue } from './styled';
+
+const formatCurrency = (value: number): string => {
+  return value.toLocaleString('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 8,
+    style: 'currency',
+    currency: 'USD',
+  });
+};
+
+const getTickFormat = (days: string, value: string): string => {
+  switch (days) {
+    case '1':
+      return format(new Date(value), '| hh:mm a |');
+    case 'max':
+      return format(new Date(value), '| y MMM |');
+    default:
+      return format(new Date(value), '| MMM, d |');
+  }
+};
 
 export default function ChartComponent(props: ChartProps) {
   const { sparkline, days } = props;
@@ -26,42 +47,21 @@ export default function ChartComponent(props: ChartProps) {
     ({ active, payload, label }: TooltipContentProps<ValueType, NameType>) => {
       if (!active || !payload || !payload.length) return null;
       return (
-        <Paper
-          sx={{
-            opacity: 0.98,
-            p: 1.5,
-            bgcolor: 'background.paper',
-            border: (theme) => `1px solid ${theme.palette.divider}`,
-          }}
-        >
-          <Typography>
+        <TooltipPaper>
+          <TooltipDate>
             {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
-          </Typography>
-          <Typography fontWeight='fontWeightLight'>
-            {Number(payload[0].value).toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 8,
-              style: 'currency',
-              currency: 'USD',
-            })}
-          </Typography>
-        </Paper>
+          </TooltipDate>
+          <TooltipValue>
+            {formatCurrency(Number(payload[0].value))}
+          </TooltipValue>
+        </TooltipPaper>
       );
     },
     []
   );
 
   const handleTickFormatterXAxis = useCallback(
-    (value: string) => {
-      switch (days) {
-        case '1':
-          return format(new Date(value), '| hh:mm a |');
-        case 'max':
-          return format(new Date(value), '| y MMM |');
-        default:
-          return format(new Date(value), '| MMM, d |');
-      }
-    },
+    (value: string) => getTickFormat(days, value),
     [days]
   );
 
@@ -75,8 +75,16 @@ export default function ChartComponent(props: ChartProps) {
       <AreaChart data={sparkline}>
         <defs>
           <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#409CFF' stopOpacity={0.45} />
-            <stop offset='75%' stopColor='#409CFF' stopOpacity={0.06} />
+            <stop
+              offset='5%'
+              stopColor='var(--brand-blue)'
+              stopOpacity={0.45}
+            />
+            <stop
+              offset='75%'
+              stopColor='var(--brand-blue)'
+              stopOpacity={0.06}
+            />
           </linearGradient>
           <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
             <feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
@@ -88,11 +96,16 @@ export default function ChartComponent(props: ChartProps) {
         </defs>
         <Area
           dataKey='value'
-          stroke='#409CFF'
+          stroke='var(--brand-blue)'
           strokeWidth={2}
           fill='url(#color)'
           filter='url(#glow)'
-          activeDot={{ r: 4, stroke: '#409CFF', strokeWidth: 2, fill: '#fff' }}
+          activeDot={{
+            r: 4,
+            stroke: 'var(--brand-blue)',
+            strokeWidth: 2,
+            fill: '#fff',
+          }}
         />
         <XAxis
           dataKey='date'

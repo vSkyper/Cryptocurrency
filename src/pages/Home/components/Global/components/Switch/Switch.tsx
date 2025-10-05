@@ -1,6 +1,5 @@
-import { FormControlLabel } from '@mui/material';
-import { IOSSwitch } from './styled';
 import { memo, useCallback } from 'react';
+import { IOSSwitch, StyledFormControlLabel } from './styled';
 import { SwitchProps } from './interface';
 
 function Switch(props: SwitchProps) {
@@ -11,7 +10,8 @@ function Switch(props: SwitchProps) {
   }, [setToggle]);
 
   return (
-    <FormControlLabel
+    <StyledFormControlLabel
+      mobile={mobile}
       control={
         <IOSSwitch
           checked={toggle}
@@ -23,17 +23,6 @@ function Switch(props: SwitchProps) {
         />
       }
       label='Show Stats'
-      sx={{
-        m: 0,
-        '.MuiFormControlLabel-label': {
-          fontWeight: 600,
-          color: '#ffffff',
-          fontSize: mobile ? '0.9rem' : '1.1rem',
-        },
-        ...(mobile
-          ? { ml: 0, display: { xs: 'block', md: 'none' } }
-          : { ml: 0, display: { xs: 'none', md: 'flex' } }),
-      }}
     />
   );
 }
