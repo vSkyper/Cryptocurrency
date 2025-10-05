@@ -11,7 +11,7 @@
 
 ## Demo
 
-> Working live demo is [_here_](https://vcryptocurrencyjs.netlify.app/).
+> Working live demo is [_here_](https://vcryptocurrency.netlify.app/).
 
 ## Technologies Used
 
