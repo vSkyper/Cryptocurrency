@@ -18,7 +18,7 @@ export default function App() {
           secondary: { main: '#3b82f6' },
           background: {
             default: '#0d0e0e',
-            paper: 'var(--bg-tertiary)',
+            paper: 'rgba(20, 30, 48, 0.9)',
           },
         },
       },
@@ -64,6 +64,7 @@ export default function App() {
             '--bg-primary': '#0f172a',
             '--bg-secondary': '#111827',
             '--bg-tertiary': 'rgba(20, 30, 48, 0.3)',
+            '--bg-tertiary-dark': 'rgba(20, 30, 48, 0.8)',
             '--bg-gradient-1':
               'color-mix(in srgb, var(--brand-blue) 8%, transparent)',
             '--bg-gradient-2':

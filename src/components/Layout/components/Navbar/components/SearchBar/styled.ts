@@ -4,16 +4,18 @@ import { styled } from '@mui/material/styles';
 export const Search = styled(Autocomplete)(({ theme }) => ({
   position: 'relative',
   borderRadius: '12px',
-  background: 'color-mix(in srgb, var(--bg-primary) 60%, transparent)',
+  background: 'var(--bg-tertiary-dark)',
   color: theme.palette.text.primary,
   transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   width: '100%',
   overflow: 'hidden',
   '&:hover': {
-    background: 'color-mix(in srgb, var(--bg-primary) 70%, transparent)',
+    background:
+      'color-mix(in srgb, var(--bg-tertiary-dark) 90%, var(--brand-blue) 10%)',
   },
   '&.Mui-focused': {
-    background: 'color-mix(in srgb, var(--bg-primary) 80%, transparent)',
+    background:
+      'color-mix(in srgb, var(--bg-tertiary-dark) 85%, var(--brand-blue) 15%)',
   },
   '& .MuiAutocomplete-popupIndicator': {
     display: 'none',

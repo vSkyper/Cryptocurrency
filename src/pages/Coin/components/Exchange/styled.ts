@@ -32,14 +32,14 @@ export const InputCard = styled(Box)(({ theme }) => ({
   height: 70,
   margin: '0 auto',
   borderRadius: 16,
-  background: 'var(--bg-tertiary)',
+  background: 'var(--bg-tertiary-dark)',
   transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',
   '&:focus-within': {
     background:
-      'color-mix(in srgb, var(--bg-tertiary) 80%, var(--brand-blue) 20%)',
+      'color-mix(in srgb, var(--bg-tertiary-dark) 90%, var(--brand-blue) 10%)',
   },
   [theme.breakpoints.down('sm')]: {
     height: 55,
@@ -258,10 +258,11 @@ export const ExchangeRateDisplay = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1.5, 2),
   marginTop: theme.spacing(2),
   borderRadius: theme.spacing(2),
-  background: 'var(--bg-tertiary)',
+  background: 'var(--bg-tertiary-dark)',
   transition: 'all 250ms ease',
   '&:hover': {
-    background: 'color-mix(in srgb, var(--bg-tertiary) 80%, var(--brand-blue))',
+    background:
+      'color-mix(in srgb, var(--bg-tertiary-dark) 90%, var(--brand-blue) 10%)',
     transform: 'translateY(-1px)',
     boxShadow:
       '0 4px 16px color-mix(in srgb, var(--brand-blue) 10%, transparent)',
