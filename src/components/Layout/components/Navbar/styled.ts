@@ -9,7 +9,7 @@ export const StyledAppBar = styled(AppBar)(() => ({
   backgroundColor: 'color-mix(in srgb, var(--bg-primary) 30%, transparent)',
   backdropFilter: 'blur(10px)',
   boxShadow: 'none',
-  borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+  borderBottom: 'none',
 }));
 
 export const StyledToolbar = styled(Toolbar)(({ theme }) => ({

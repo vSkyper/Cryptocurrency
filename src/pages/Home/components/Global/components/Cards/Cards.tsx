@@ -30,7 +30,7 @@ function Cards({ toggle, globalData }: CardsProps) {
       {
         key: 'marketCap',
         value: formatCurrency(globalData.data.total_market_cap.usd),
-        label: 'Market Capitalization',
+        label: 'Market Cap',
         color: 'var(--brand-blue)',
         percentage: {
           value: formatPercentage(
@@ -43,28 +43,28 @@ function Cards({ toggle, globalData }: CardsProps) {
       {
         key: 'totalVolume',
         value: formatCurrency(globalData.data.total_volume.usd),
-        label: '24h Trading Volume',
+        label: '24h Volume',
         color: 'var(--brand-blue-light)',
         timeout: 800,
       },
       {
         key: 'btcDominance',
         value: formatPercentage(globalData.data.market_cap_percentage.btc),
-        label: 'Bitcoin Market Cap Dominance',
+        label: 'BTC Dominance',
         color: 'var(--brand-bitcoin)',
         timeout: 1000,
       },
       {
         key: 'ethDominance',
         value: formatPercentage(globalData.data.market_cap_percentage.eth),
-        label: 'Ethereum Market Cap Dominance',
+        label: 'ETH Dominance',
         color: 'var(--brand-ethereum)',
         timeout: 1100,
       },
       {
         key: 'activeCryptos',
         value: formatNumber(globalData.data.active_cryptocurrencies),
-        label: 'Active Cryptocurrencies',
+        label: 'Active Cryptos',
         color: '#ffffff',
         timeout: 1200,
       },
@@ -73,7 +73,7 @@ function Cards({ toggle, globalData }: CardsProps) {
   );
 
   return (
-    <CardsContainer container spacing={3}>
+    <CardsContainer container spacing={{ xs: 1.5, sm: 2, md: 3 }}>
       {cardConfigs.map((config) => (
         <StatCard
           key={config.key}

@@ -10,7 +10,7 @@ import { CardTitle, PercentageChip, CardSubtitle, Card } from './styled';
 function StatCard({ config, toggle, isMobile }: StatCardProps) {
   return (
     <Grow in={toggle} timeout={isMobile ? 0 : config.timeout}>
-      <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+      <Grid size={{ xs: 6, sm: 6, md: 4, lg: 2.4 }}>
         <Card>
           <CardTitle variant='h6' hasPercentage={!!config.percentage}>
             {config.value}

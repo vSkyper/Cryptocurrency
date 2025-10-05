@@ -11,7 +11,8 @@ export const CardTitle = styled(Typography)<{ hasPercentage?: boolean }>(
     justifyContent: hasPercentage ? 'center' : 'normal',
     alignItems: hasPercentage ? 'center' : 'normal',
     [theme.breakpoints.down('sm')]: {
-      fontSize: '1.1rem',
+      fontSize: '0.95rem',
+      marginBottom: theme.spacing(1),
     },
   })
 );
@@ -29,8 +30,9 @@ export const Card = styled(Box)(({ theme }) => ({
   height: 'auto',
   minHeight: 120,
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(2, 1.5),
-    minHeight: 80,
+    padding: theme.spacing(1.5, 1),
+    minHeight: 70,
+    borderRadius: 12,
   },
 }));
 
@@ -41,19 +43,19 @@ export const CardSubtitle = styled(Typography)(({ theme }) => ({
   fontSize: '0.875rem',
   letterSpacing: '0.3px',
   [theme.breakpoints.down('sm')]: {
-    fontSize: '0.8rem',
+    fontSize: '0.75rem',
   },
 }));
 
 export const PercentageChip = styled('div')<{ isNegative: boolean }>(
   ({ isNegative, theme }) => ({
-    marginLeft: theme.spacing(1.5),
+    marginLeft: theme.spacing(1),
     display: 'flex',
     alignItems: 'center',
     fontWeight: 600,
-    fontSize: '0.9rem',
-    padding: theme.spacing(0.6, 1.2),
-    borderRadius: theme.spacing(2),
+    fontSize: '0.8rem',
+    padding: theme.spacing(0.5, 1),
+    borderRadius: theme.spacing(1.5),
     background: isNegative
       ? 'color-mix(in srgb, var(--brand-negative) 12%, transparent)'
       : 'color-mix(in srgb, var(--brand-positive) 12%, transparent)',
@@ -66,8 +68,18 @@ export const PercentageChip = styled('div')<{ isNegative: boolean }>(
       ? '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)'
       : '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)',
     '& .MuiSvgIcon-root': {
-      marginLeft: theme.spacing(0.5),
-      fontSize: '1rem',
+      marginLeft: theme.spacing(0.4),
+      fontSize: '0.85rem',
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: theme.spacing(0.75),
+      padding: theme.spacing(0.2, 1),
+      fontSize: '0.7rem',
+      borderRadius: theme.spacing(1.5),
+      '& .MuiSvgIcon-root': {
+        fontSize: '0.75rem',
+        marginLeft: theme.spacing(0.3),
+      },
     },
     [theme.breakpoints.up('md')]: {
       '&:hover': {
