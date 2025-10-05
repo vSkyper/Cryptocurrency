@@ -28,7 +28,11 @@ export default function Sparkline(props: SparklineProps) {
   return (
     <>
       <Backdrop
-        sx={{ color: 'inherit', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          color: 'inherit',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: 'transparent',
+        }}
         open={!data}
       >
         <CircularProgress />
