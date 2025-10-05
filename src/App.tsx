@@ -63,7 +63,7 @@ export default function App() {
             // Background color variables - change these to update the app background
             '--bg-primary': '#0f172a',
             '--bg-secondary': '#111827',
-            '--bg-tertiary': '#141e30',
+            '--bg-tertiary': 'rgba(20, 30, 48, 0.3)',
             '--bg-gradient-1':
               'color-mix(in srgb, var(--brand-blue) 8%, transparent)',
             '--bg-gradient-2':
