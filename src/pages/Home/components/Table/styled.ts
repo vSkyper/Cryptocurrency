@@ -47,6 +47,19 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     backgroundColor: 'transparent',
     contain: 'layout style',
     pointerEvents: 'auto',
+    '&:focus, &:focus-within': {
+      backgroundColor:
+        'color-mix(in srgb, var(--brand-blue) 10%, transparent) !important',
+      outline: 'none',
+    },
+    '&.Mui-selected': {
+      backgroundColor:
+        'color-mix(in srgb, var(--brand-blue) 12%, transparent) !important',
+      '&:hover': {
+        backgroundColor:
+          'color-mix(in srgb, var(--brand-blue) 15%, transparent) !important',
+      },
+    },
     [theme.breakpoints.up('md')]: {
       transition: 'background-color 150ms ease',
       '&:hover': {
@@ -54,8 +67,19 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
           'color-mix(in srgb, var(--brand-blue) 8%, transparent)',
       },
     },
+    [theme.breakpoints.down('md')]: {
+      '&:focus, &:focus-within, &:active': {
+        backgroundColor:
+          'color-mix(in srgb, var(--brand-blue) 10%, transparent) !important',
+        outline: 'none',
+      },
+    },
     '&:nth-of-type(even)': {
       backgroundColor: 'rgba(255, 255, 255, 0.02)',
+      '&:focus, &:focus-within': {
+        backgroundColor:
+          'color-mix(in srgb, var(--brand-blue) 10%, transparent) !important',
+      },
     },
   },
   '& .MuiDataGrid-cell': {
@@ -67,6 +91,13 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     padding: '12px 16px',
     fontSize: '0.875rem',
     fontWeight: 500,
+    '&:focus, &:focus-within': {
+      backgroundColor: 'transparent !important',
+      outline: 'none',
+    },
+    '&.Mui-selected': {
+      backgroundColor: 'transparent !important',
+    },
   },
   '& .MuiDataGrid-cellEmpty': {
     display: 'none !important',
