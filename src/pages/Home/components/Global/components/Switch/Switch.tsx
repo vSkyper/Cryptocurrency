@@ -1,14 +1,14 @@
 import { FormControlLabel } from '@mui/material';
 import { IOSSwitch } from './styled';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { SwitchProps } from './interface';
 
-export default function Switch(props: SwitchProps) {
+function Switch(props: SwitchProps) {
   const { toggle, setToggle, mobile } = props;
 
   const handleChange = useCallback(() => {
-    setToggle(!toggle);
-  }, [setToggle, toggle]);
+    setToggle((prev) => !prev);
+  }, [setToggle]);
 
   return (
     <FormControlLabel
@@ -37,3 +37,5 @@ export default function Switch(props: SwitchProps) {
     />
   );
 }
+
+export default memo(Switch);

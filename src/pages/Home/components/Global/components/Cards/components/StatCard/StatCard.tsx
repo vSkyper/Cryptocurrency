@@ -1,4 +1,5 @@
 import { Grid, Typography, Grow } from '@mui/material';
+import { memo } from 'react';
 import {
   TrendingUpRounded as TrendingUpIcon,
   TrendingDownRounded as TrendingDownIcon,
@@ -6,7 +7,6 @@ import {
 import { Card, Percentage } from 'styled';
 import { StatCardProps } from './interface';
 
-// Styling constants
 const CARD_STYLES = {
   title: {
     fontWeight: 700,
@@ -22,7 +22,7 @@ const CARD_STYLES = {
   },
 } as const;
 
-export default function StatCard({ config, toggle, isMobile }: StatCardProps) {
+function StatCard({ config, toggle, isMobile }: StatCardProps) {
   return (
     <Grow in={toggle} timeout={isMobile ? 0 : config.timeout}>
       <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
@@ -62,3 +62,5 @@ export default function StatCard({ config, toggle, isMobile }: StatCardProps) {
     </Grow>
   );
 }
+
+export default memo(StatCard);

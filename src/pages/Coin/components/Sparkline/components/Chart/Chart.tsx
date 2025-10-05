@@ -73,8 +73,8 @@ export default function ChartComponent(props: ChartProps) {
       <AreaChart data={sparkline}>
         <defs>
           <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#D0BCFF' stopOpacity={0.45} />
-            <stop offset='75%' stopColor='#D0BCFF' stopOpacity={0.06} />
+            <stop offset='5%' stopColor='#409CFF' stopOpacity={0.45} />
+            <stop offset='75%' stopColor='#409CFF' stopOpacity={0.06} />
           </linearGradient>
           <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
             <feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
@@ -86,11 +86,11 @@ export default function ChartComponent(props: ChartProps) {
         </defs>
         <Area
           dataKey='value'
-          stroke='#D0BCFF'
+          stroke='#409CFF'
           strokeWidth={2}
           fill='url(#color)'
           filter='url(#glow)'
-          activeDot={{ r: 4, stroke: '#D0BCFF', strokeWidth: 2, fill: '#fff' }}
+          activeDot={{ r: 4, stroke: '#409CFF', strokeWidth: 2, fill: '#fff' }}
         />
         <XAxis
           dataKey='date'

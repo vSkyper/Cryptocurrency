@@ -10,25 +10,24 @@ const StyledPriceCard = styled(Paper)(({ theme }) => ({
   justifyContent: 'center',
   padding: theme.spacing(2),
   borderRadius: theme.spacing(2),
-  background: `linear-gradient(135deg, 
-    rgba(208, 188, 255, 0.12) 0%, 
-    rgba(204, 194, 220, 0.06) 100%
-  )`,
-  backdropFilter: 'blur(20px)',
-  border: '1px solid rgba(208, 188, 255, 0.25)',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.15), 0 2px 8px rgba(208, 188, 255, 0.1)',
-  transition: 'all 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+  background: 'rgba(64, 156, 255, 0.12)',
+  border: '1px solid rgba(64, 156, 255, 0.25)',
+  boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+  transition:
+    'transform 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   position: 'relative',
   overflow: 'hidden',
-  '&:hover': {
-    transform: 'translateY(-3px) scale(1.02)',
-    background: `linear-gradient(135deg, 
-      rgba(208, 188, 255, 0.18) 0%, 
-      rgba(204, 194, 220, 0.10) 100%
-    )`,
-    border: '1px solid rgba(208, 188, 255, 0.35)',
-    boxShadow:
-      '0 8px 30px rgba(0,0,0,0.25), 0 4px 16px rgba(208, 188, 255, 0.2)',
+  contain: 'layout style paint',
+  [theme.breakpoints.up('md')]: {
+    '&:hover': {
+      transform: 'translate3d(0, -3px, 0) scale(1.02)',
+      background: 'rgba(64, 156, 255, 0.18)',
+      border: '1px solid rgba(64, 156, 255, 0.35)',
+      boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
+    },
+  },
+  [theme.breakpoints.down('md')]: {
+    transition: 'none',
   },
   '&::before': {
     content: '""',

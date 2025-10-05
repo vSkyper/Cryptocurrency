@@ -94,9 +94,9 @@ export default function SearchBar() {
                 height: 20,
                 fontSize: '0.7rem',
                 fontWeight: 600,
-                background: 'rgba(208, 188, 255, 0.15)',
-                color: 'rgba(208, 188, 255, 0.9)',
-                border: '1px solid rgba(208, 188, 255, 0.2)',
+                background: 'rgba(64, 156, 255, 0.15)',
+                color: 'rgba(64, 156, 255, 0.9)',
+                border: '1px solid rgba(64, 156, 255, 0.2)',
                 '& .MuiChip-label': {
                   px: 1,
                 },
@@ -121,12 +121,12 @@ export default function SearchBar() {
         <ArrowForwardIos
           sx={{
             fontSize: '0.8rem',
-            color: 'rgba(208, 188, 255, 0.4)',
+            color: 'rgba(64, 156, 255, 0.4)',
             ml: 2,
             transition: 'all 200ms ease',
             transform: 'translateX(0)',
             '.MuiAutocomplete-option:hover &': {
-              color: 'rgba(208, 188, 255, 0.8)',
+              color: 'rgba(64, 156, 255, 0.8)',
               transform: 'translateX(4px)',
             },
           }}
@@ -148,7 +148,7 @@ export default function SearchBar() {
           ) : (
             <CircularProgress
               size={18}
-              sx={{ color: 'rgba(208, 188, 255, 0.7)' }}
+              sx={{ color: 'rgba(64, 156, 255, 0.7)' }}
             />
           )}
         </SearchIconWrapper>
@@ -163,7 +163,7 @@ export default function SearchBar() {
               right: 12,
               top: '50%',
               transform: 'translateY(-50%)',
-              color: 'rgba(208, 188, 255, 0.5)',
+              color: 'rgba(64, 156, 255, 0.5)',
               fontSize: '0.75rem',
               fontWeight: 500,
               pointerEvents: 'none',

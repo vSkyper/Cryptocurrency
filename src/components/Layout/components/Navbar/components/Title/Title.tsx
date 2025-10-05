@@ -18,11 +18,11 @@ export default function Title() {
           edge='start'
           sx={{
             background:
-              'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(208, 188, 255, 0.08) 100%)',
+              'linear-gradient(135deg, rgba(64, 156, 255, 0.15) 0%, rgba(64, 156, 255, 0.08) 100%)',
             backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(208, 188, 255, 0.2)',
+            border: '1px solid rgba(64, 156, 255, 0.2)',
             borderRadius: { xs: '8px', sm: '12px' },
-            color: '#D0BCFF',
+            color: '#409CFF',
             transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
             padding: { xs: 1, sm: 2 },
             ml: { xs: 1, sm: 0 },
@@ -30,7 +30,7 @@ export default function Title() {
             overflow: 'hidden',
             '& .MuiSvgIcon-root': {
               fontSize: { xs: '1.1rem', sm: '1rem' },
-              filter: 'drop-shadow(0 2px 4px rgba(208, 188, 255, 0.3))',
+              filter: 'drop-shadow(0 2px 4px rgba(64, 156, 255, 0.3))',
             },
             '&::before': {
               content: '""',
@@ -40,16 +40,16 @@ export default function Title() {
               width: '100%',
               height: '100%',
               background:
-                'linear-gradient(90deg, transparent, rgba(208, 188, 255, 0.2), transparent)',
+                'linear-gradient(90deg, transparent, rgba(64, 156, 255, 0.2), transparent)',
               transition: 'left 600ms cubic-bezier(0.4, 0, 0.2, 1)',
             },
             '&:hover': {
               background:
-                'linear-gradient(135deg, rgba(208, 188, 255, 0.25) 0%, rgba(208, 188, 255, 0.15) 100%)',
+                'linear-gradient(135deg, rgba(64, 156, 255, 0.25) 0%, rgba(64, 156, 255, 0.15) 100%)',
               transform: 'translateY(-2px) scale(1.05)',
               boxShadow:
-                '0 8px 25px rgba(208, 188, 255, 0.25), 0 4px 12px rgba(0,0,0,0.15)',
-              border: '1px solid rgba(208, 188, 255, 0.4)',
+                '0 8px 25px rgba(64, 156, 255, 0.25), 0 4px 12px rgba(0,0,0,0.15)',
+              border: '1px solid rgba(64, 156, 255, 0.4)',
               '&::before': {
                 left: '100%',
               },
@@ -82,13 +82,13 @@ export default function Title() {
           to='/'
           sx={{
             background:
-              'linear-gradient(135deg, #D0BCFF 0%, #CCC2DC 50%, #D0BCFF 100%)',
+              'linear-gradient(135deg, #409CFF 0%, #3B82F6 50%, #409CFF 100%)',
             backgroundSize: '200% 100%',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             color: 'transparent',
             transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
-            textShadow: '0 2px 4px rgba(208, 188, 255, 0.3)',
+            textShadow: '0 2px 4px rgba(64, 156, 255, 0.3)',
             position: 'relative',
             '&::after': {
               content: '""',
@@ -97,14 +97,14 @@ export default function Title() {
               left: 0,
               width: 0,
               height: '2px',
-              background: 'linear-gradient(90deg, #D0BCFF, #CCC2DC)',
+              background: 'linear-gradient(90deg, #409CFF, #3B82F6)',
               borderRadius: '1px',
               transition: 'width 300ms cubic-bezier(0.4, 0, 0.2, 1)',
             },
             '&:hover': {
               backgroundPosition: '100% 0',
               transform: 'translateY(-1px)',
-              filter: 'drop-shadow(0 4px 8px rgba(208, 188, 255, 0.4))',
+              filter: 'drop-shadow(0 4px 8px rgba(64, 156, 255, 0.4))',
               '&::after': {
                 width: '100%',
               },
@@ -132,13 +132,13 @@ export default function Title() {
           component={RouterLink}
           to='/'
           sx={{
-            background: 'linear-gradient(135deg, #D0BCFF 0%, #CCC2DC 100%)',
+            background: 'linear-gradient(135deg, #409CFF 0%, #3B82F6 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             color: 'transparent',
             transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
             '&:hover': {
-              filter: 'drop-shadow(0 2px 4px rgba(208, 188, 255, 0.4))',
+              filter: 'drop-shadow(0 2px 4px rgba(64, 156, 255, 0.4))',
             },
           }}
         >

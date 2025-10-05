@@ -10,21 +10,23 @@ const StyledButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(0.5, 1),
   fontSize: '0.75rem',
   fontWeight: 600,
-  transition: 'all 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+  transition:
+    'transform 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   border: `1px solid ${theme.palette.divider}40`,
-  background: `linear-gradient(135deg, 
-    ${theme.palette.background.paper}cc, 
-    ${theme.palette.background.default}aa
-  )`,
-  backdropFilter: 'blur(10px)',
+  background: `${theme.palette.background.paper}cc`,
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(0.75, 1.5),
     fontSize: '0.875rem',
   },
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
-    border: `1px solid ${theme.palette.primary.main}60`,
+  [theme.breakpoints.up('md')]: {
+    '&:hover': {
+      transform: 'translate3d(0, -2px, 0)',
+      boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
+      border: `1px solid ${theme.palette.primary.main}60`,
+    },
+  },
+  [theme.breakpoints.down('md')]: {
+    transition: 'none',
   },
   '&.active': {
     background: `linear-gradient(135deg, 

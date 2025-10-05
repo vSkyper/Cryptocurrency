@@ -32,8 +32,8 @@ export default function CoinHeader({
                 width: { xs: 64, sm: 80, md: 88 },
                 height: { xs: 64, sm: 80, md: 88 },
                 boxShadow:
-                  '0 12px 40px rgba(0,0,0,0.4), 0 4px 16px rgba(208, 188, 255, 0.2)',
-                border: '2px solid rgba(208, 188, 255, 0.3)',
+                  '0 12px 40px rgba(0,0,0,0.4), 0 4px 16px rgba(64, 156, 255, 0.2)',
+                border: '2px solid rgba(64, 156, 255, 0.3)',
                 bgcolor: 'rgba(255, 255, 255, 0.05)',
                 filter: 'brightness(1.1) contrast(1.1)',
                 transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
@@ -46,7 +46,7 @@ export default function CoinHeader({
                   right: -4,
                   bottom: -4,
                   background:
-                    'linear-gradient(45deg, rgba(208, 188, 255, 0.3), rgba(204, 194, 220, 0.2))',
+                    'linear-gradient(45deg, rgba(64, 156, 255, 0.3), rgba(59, 130, 246, 0.2))',
                   borderRadius: '50%',
                   zIndex: -1,
                   opacity: 0,
@@ -55,8 +55,8 @@ export default function CoinHeader({
                 '&:hover': {
                   transform: 'scale(1.08) translateY(-4px) rotateY(5deg)',
                   boxShadow:
-                    '0 20px 60px rgba(0,0,0,0.5), 0 8px 24px rgba(208, 188, 255, 0.3)',
-                  border: '2px solid rgba(208, 188, 255, 0.5)',
+                    '0 20px 60px rgba(0,0,0,0.5), 0 8px 24px rgba(64, 156, 255, 0.3)',
+                  border: '2px solid rgba(64, 156, 255, 0.5)',
                   '&::before': {
                     opacity: 1,
                   },
@@ -77,7 +77,7 @@ export default function CoinHeader({
                 fontWeight: 800,
                 fontSize: { xs: '1.6rem', sm: '2.2rem', md: '2.5rem' },
                 background:
-                  'linear-gradient(135deg, #D0BCFF 0%, #CCC2DC 40%, #D0BCFF 80%)',
+                  'linear-gradient(135deg, #409CFF 0%, #3B82F6 40%, #409CFF 80%)',
                 backgroundSize: '200% 100%',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
@@ -85,7 +85,7 @@ export default function CoinHeader({
                 textAlign: { xs: 'center', sm: 'left' },
                 letterSpacing: '-0.02em',
                 lineHeight: 1.1,
-                textShadow: '0 4px 8px rgba(208, 188, 255, 0.3)',
+                textShadow: '0 4px 8px rgba(64, 156, 255, 0.3)',
                 transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 '&::after': {
@@ -95,14 +95,14 @@ export default function CoinHeader({
                   left: 0,
                   width: 0,
                   height: '3px',
-                  background: 'linear-gradient(90deg, #D0BCFF, #CCC2DC)',
+                  background: 'linear-gradient(90deg, #409CFF, #3B82F6)',
                   borderRadius: '2px',
                   transition: 'width 500ms cubic-bezier(0.4, 0, 0.2, 1)',
                 },
                 '&:hover': {
                   backgroundPosition: '100% 0',
                   transform: 'translateY(-2px)',
-                  filter: 'drop-shadow(0 6px 12px rgba(208, 188, 255, 0.4))',
+                  filter: 'drop-shadow(0 6px 12px rgba(64, 156, 255, 0.4))',
                   '&::after': {
                     width: { xs: '100%', sm: '60%' },
                   },
@@ -127,17 +127,14 @@ export default function CoinHeader({
                   fontWeight: 700,
                   fontSize: { xs: '0.8rem', sm: '0.9rem', md: '0.85rem' },
                   borderRadius: '16px',
-                  background:
-                    'linear-gradient(135deg, rgba(208, 188, 255, 0.2) 0%, rgba(204, 194, 220, 0.15) 100%)',
-                  backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(208, 188, 255, 0.3)',
-                  color: '#D0BCFF',
+                  background: 'rgba(64, 156, 255, 0.2)',
+                  border: '1px solid rgba(64, 156, 255, 0.3)',
+                  color: '#409CFF',
                   letterSpacing: '0.5px',
                   height: { xs: 32, sm: 40, md: 36 },
                   px: { xs: 1.5, sm: 2, md: 1.8 },
-                  boxShadow:
-                    '0 4px 20px rgba(208, 188, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)',
-                  transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 20px rgba(64, 156, 255, 0.2)',
+                  transition: 'box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                   position: 'relative',
                   overflow: 'hidden',
                   '&::before': {
@@ -148,16 +145,16 @@ export default function CoinHeader({
                     width: '100%',
                     height: '100%',
                     background:
-                      'linear-gradient(90deg, transparent, rgba(208, 188, 255, 0.3), transparent)',
+                      'linear-gradient(90deg, transparent, rgba(64, 156, 255, 0.3), transparent)',
                     transition: 'left 500ms ease',
                   },
                   '&:hover': {
                     transform: 'translateY(-2px) scale(1.05)',
                     boxShadow:
-                      '0 8px 30px rgba(208, 188, 255, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
+                      '0 8px 30px rgba(64, 156, 255, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
                     background:
-                      'linear-gradient(135deg, rgba(208, 188, 255, 0.3) 0%, rgba(204, 194, 220, 0.2) 100%)',
-                    border: '1px solid rgba(208, 188, 255, 0.5)',
+                      'linear-gradient(135deg, rgba(64, 156, 255, 0.3) 0%, rgba(59, 130, 246, 0.2) 100%)',
+                    border: '1px solid rgba(64, 156, 255, 0.5)',
                     '&::before': {
                       left: '100%',
                     },
@@ -177,16 +174,14 @@ export default function CoinHeader({
                       md: '0.75rem',
                     },
                     borderRadius: '16px',
-                    background:
-                      'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)',
-                    backdropFilter: 'blur(8px)',
+                    background: 'rgba(255, 255, 255, 0.08)',
                     border: '1px solid rgba(255, 255, 255, 0.15)',
                     color: 'rgba(255, 255, 255, 0.9)',
                     letterSpacing: '0.3px',
                     height: { xs: 28, sm: 32, md: 30 },
                     px: { xs: 1.2, sm: 1.5, md: 1.3 },
                     boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
-                    transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
                       transform: 'translateY(-1px)',
                       boxShadow: '0 4px 16px rgba(0,0,0,0.3)',

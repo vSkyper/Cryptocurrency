@@ -1,4 +1,4 @@
-import { Box, Fade } from '@mui/material';
+import { Box } from '@mui/material';
 import { Global, Table } from './components';
 import useFetch from 'hooks/useFetch';
 import { ICoins, IGlobalData } from 'interfaces';
@@ -21,16 +21,12 @@ export default function Home() {
     <main>
       <ContentContainer maxWidth='xl'>
         <GradientBackground />
-        <Fade in timeout={800}>
-          <Box>
-            <Global globalData={globalData} />
-          </Box>
-        </Fade>
-        <Fade in timeout={1200}>
-          <Box>
-            <Table coins={coins} />
-          </Box>
-        </Fade>
+        <Box>
+          <Global globalData={globalData} />
+        </Box>
+        <Box>
+          <Table coins={coins} />
+        </Box>
       </ContentContainer>
     </main>
   );

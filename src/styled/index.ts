@@ -8,55 +8,25 @@ export const Card = styled(Paper)(({ theme }) => ({
   justifyContent: 'center',
   padding: theme.spacing(3.5, 3),
   borderRadius: theme.spacing(2.5),
-  background: `linear-gradient(135deg, 
-    rgba(208, 188, 255, 0.08) 0%, 
-    rgba(204, 194, 220, 0.04) 100%
-  )`,
-  backdropFilter: 'blur(24px)',
-  border: '1px solid rgba(208, 188, 255, 0.2)',
-  boxShadow: `
-    0 8px 32px rgba(0,0,0,0.3),
-    0 4px 16px rgba(208, 188, 255, 0.1),
-    inset 0 1px 0 rgba(255,255,255,0.08)
-  `,
+  background: 'rgba(64, 156, 255, 0.06)',
+  border: '1px solid rgba(64, 156, 255, 0.2)',
+  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
   position: 'relative',
   overflow: 'hidden',
-  transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+  transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   height: 'auto',
   minHeight: 120,
-  '&:hover': {
-    transform: 'translateY(-4px)',
-    background: `linear-gradient(135deg, 
-      rgba(208, 188, 255, 0.12) 0%, 
-      rgba(204, 194, 220, 0.06) 100%
-    )`,
-    border: '1px solid rgba(208, 188, 255, 0.3)',
-    boxShadow: `
-      0 12px 40px rgba(0,0,0,0.4),
-      0 6px 20px rgba(208, 188, 255, 0.15),
-      inset 0 1px 0 rgba(255,255,255,0.1)
-    `,
-    [theme.breakpoints.down('md')]: {
-      transform: 'translateY(-2px)',
+  willChange: 'transform',
+  contain: 'layout style paint',
+  [theme.breakpoints.up('md')]: {
+    '&:hover': {
+      transform: 'translate3d(0, -4px, 0)',
+      boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
     },
   },
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: `linear-gradient(135deg, 
-      rgba(208, 188, 255, 0.05), 
-      rgba(204, 194, 220, 0.03), 
-      transparent 50%
-    )`,
-    zIndex: 0,
-  },
-  '& > *': {
-    position: 'relative',
-    zIndex: 1,
+  [theme.breakpoints.down('md')]: {
+    transition: 'none',
+    background: 'rgba(64, 156, 255, 0.08)',
   },
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(3, 2.5),
@@ -72,30 +42,26 @@ export const Percentage = styled(Typography)(({ theme }) => ({
   fontSize: '0.9rem',
   padding: theme.spacing(0.6, 1.2),
   borderRadius: theme.spacing(2),
-  background:
-    'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(208, 188, 255, 0.08) 100%)',
-  backdropFilter: 'blur(12px)',
-  border: '1px solid rgba(208, 188, 255, 0.2)',
-  boxShadow:
-    '0 2px 8px rgba(208, 188, 255, 0.1), inset 0 1px 0 rgba(255,255,255,0.1)',
-  transition: 'all 200ms ease',
+  background: 'rgba(64, 156, 255, 0.12)',
+  border: '1px solid rgba(64, 156, 255, 0.2)',
+  boxShadow: '0 2px 8px rgba(64, 156, 255, 0.1)',
+  transition: 'transform 150ms ease',
+  willChange: 'transform',
   '& .MuiSvgIcon-root': {
     marginLeft: theme.spacing(0.5),
     fontSize: '1rem',
-    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.2))',
   },
-  '&:hover': {
-    transform: 'translateY(-1px)',
-    background:
-      'linear-gradient(135deg, rgba(208, 188, 255, 0.2) 0%, rgba(208, 188, 255, 0.12) 100%)',
-    boxShadow:
-      '0 4px 12px rgba(208, 188, 255, 0.15), inset 0 1px 0 rgba(255,255,255,0.15)',
-    border: '1px solid rgba(208, 188, 255, 0.3)',
+  [theme.breakpoints.up('md')]: {
+    '&:hover': {
+      transform: 'translate3d(0, -1px, 0)',
+    },
   },
   [theme.breakpoints.down('md')]: {
     fontSize: '0.8rem',
     padding: theme.spacing(0.4, 0.8),
     marginLeft: theme.spacing(1),
+    background: 'rgba(64, 156, 255, 0.15)',
+    transition: 'none',
     '& .MuiSvgIcon-root': {
       fontSize: '0.9rem',
     },

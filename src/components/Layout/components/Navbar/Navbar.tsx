@@ -10,14 +10,14 @@ export default function Navbar() {
         elevation={0}
         sx={{
           background: `linear-gradient(135deg, 
-            rgba(208, 188, 255, 0.08) 0%, 
-            rgba(204, 194, 220, 0.04) 100%
+            rgba(64, 156, 255, 0.08) 0%, 
+            rgba(59, 130, 246, 0.04) 100%
           )`,
           backdropFilter: 'blur(24px)',
-          borderBottom: '1px solid rgba(208, 188, 255, 0.2)',
+          borderBottom: '1px solid rgba(64, 156, 255, 0.2)',
           boxShadow: `
             0 8px 32px rgba(0,0,0,0.3),
-            0 4px 16px rgba(208, 188, 255, 0.1),
+            0 4px 16px rgba(64, 156, 255, 0.1),
             inset 0 1px 0 rgba(255,255,255,0.08)
           `,
           width: '100%',

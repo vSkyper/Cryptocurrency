@@ -33,11 +33,11 @@ export const columns: GridColDef[] = [
               width: 36,
               height: 36,
               boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-              border: '2px solid rgba(208, 188, 255, 0.2)',
+              border: '2px solid rgba(64, 156, 255, 0.2)',
               transition: 'all 200ms ease',
               '&:hover': {
                 transform: 'scale(1.1)',
-                boxShadow: '0 6px 16px rgba(208, 188, 255, 0.3)',
+                boxShadow: '0 6px 16px rgba(64, 156, 255, 0.3)',
               },
             }}
           />
@@ -78,18 +78,18 @@ export const columns: GridColDef[] = [
           fontSize: '0.75rem',
           borderRadius: '12px',
           background:
-            'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(208, 188, 255, 0.08) 100%)',
-          border: '1px solid rgba(208, 188, 255, 0.2)',
-          color: '#D0BCFF',
+            'linear-gradient(135deg, rgba(64, 156, 255, 0.15) 0%, rgba(64, 156, 255, 0.08) 100%)',
+          border: '1px solid rgba(64, 156, 255, 0.2)',
+          color: '#409CFF',
           backdropFilter: 'blur(8px)',
           letterSpacing: '0.5px',
           transition: 'all 200ms ease',
           '&:hover': {
             transform: 'translateY(-1px)',
             background:
-              'linear-gradient(135deg, rgba(208, 188, 255, 0.2) 0%, rgba(208, 188, 255, 0.12) 100%)',
-            border: '1px solid rgba(208, 188, 255, 0.3)',
-            boxShadow: '0 4px 12px rgba(208, 188, 255, 0.2)',
+              'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(64, 156, 255, 0.12) 100%)',
+            border: '1px solid rgba(64, 156, 255, 0.3)',
+            boxShadow: '0 4px 12px rgba(64, 156, 255, 0.2)',
           },
         }}
       />

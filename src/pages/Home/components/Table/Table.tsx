@@ -1,9 +1,10 @@
 import { DataGrid } from '@mui/x-data-grid';
+import { memo } from 'react';
 import { DataTable } from './styled';
 import { columns } from 'constants/dataTable';
 import { TableProps } from './interface';
 
-export default function Table(props: TableProps) {
+function Table(props: TableProps) {
   const { coins } = props;
 
   return (
@@ -18,7 +19,7 @@ export default function Table(props: TableProps) {
         initialState={{
           pagination: { paginationModel: { pageSize: 50 } },
         }}
-        sx={{
+        sx={(theme) => ({
           borderRadius: 3,
           border: 'none',
           backgroundColor: 'transparent !important',
@@ -33,10 +34,13 @@ export default function Table(props: TableProps) {
           '& .MuiDataGrid-row': {
             alignItems: 'center',
             backgroundColor: 'transparent',
-            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-            '&:hover': {
-              backgroundColor: 'rgba(208, 188, 255, 0.08)',
-              transform: 'translateX(4px)',
+            contain: 'layout style',
+            pointerEvents: 'auto',
+            [theme.breakpoints.up('md')]: {
+              transition: 'background-color 150ms ease',
+              '&:hover': {
+                backgroundColor: 'rgba(64, 156, 255, 0.08)',
+              },
             },
             '&:nth-of-type(even)': {
               backgroundColor: 'rgba(255, 255, 255, 0.02)',
@@ -45,7 +49,7 @@ export default function Table(props: TableProps) {
           '& .MuiDataGrid-cell': {
             display: 'flex',
             alignItems: 'center',
-            borderBottom: '1px solid rgba(208, 188, 255, 0.08)',
+            borderBottom: '1px solid rgba(64, 156, 255, 0.08)',
             color: 'rgba(255, 255, 255, 0.9)',
             padding: '12px 16px',
             fontSize: '0.875rem',
@@ -55,12 +59,12 @@ export default function Table(props: TableProps) {
             display: 'none !important',
           },
           '& .MuiDataGrid-columnHeaders': {
-            backgroundColor: 'rgba(208, 188, 255, 0.08) !important',
-            background: 'rgba(208, 188, 255, 0.08) !important',
-            borderBottom: '2px solid rgba(208, 188, 255, 0.2)',
+            backgroundColor: 'rgba(64, 156, 255, 0.08) !important',
+            background: 'rgba(64, 156, 255, 0.08) !important',
+            borderBottom: '2px solid rgba(64, 156, 255, 0.2)',
             borderTopLeftRadius: 24,
             borderTopRightRadius: 24,
-            color: '#D0BCFF',
+            color: '#409CFF',
             fontWeight: 700,
             minHeight: '56px !important',
             '& .MuiDataGrid-columnHeader': {
@@ -72,7 +76,7 @@ export default function Table(props: TableProps) {
               },
             },
             '& .MuiDataGrid-columnHeaderTitle': {
-              color: '#D0BCFF',
+              color: '#409CFF',
               fontWeight: 700,
               fontSize: '0.9rem',
               letterSpacing: '0.5px',
@@ -80,8 +84,8 @@ export default function Table(props: TableProps) {
             },
           },
           '& .MuiDataGrid-footerContainer': {
-            backgroundColor: 'rgba(208, 188, 255, 0.05)',
-            borderTop: '1px solid rgba(208, 188, 255, 0.15)',
+            backgroundColor: 'rgba(64, 156, 255, 0.05)',
+            borderTop: '1px solid rgba(64, 156, 255, 0.15)',
             color: 'rgba(255, 255, 255, 0.8)',
             borderBottomLeftRadius: 24,
             borderBottomRightRadius: 24,
@@ -90,11 +94,13 @@ export default function Table(props: TableProps) {
             color: 'rgba(255, 255, 255, 0.8)',
           },
           '& .MuiIconButton-root': {
-            color: 'rgba(208, 188, 255, 0.8)',
-            transition: 'all 200ms ease',
-            '&:hover': {
-              backgroundColor: 'rgba(208, 188, 255, 0.15)',
-              color: '#D0BCFF',
+            color: 'rgba(64, 156, 255, 0.8)',
+            transition: 'background-color 150ms ease, color 150ms ease',
+            [theme.breakpoints.up('md')]: {
+              '&:hover': {
+                backgroundColor: 'rgba(64, 156, 255, 0.15)',
+                color: '#409CFF',
+              },
             },
           },
           '& .MuiDataGrid-selectedRowCount': {
@@ -110,15 +116,17 @@ export default function Table(props: TableProps) {
               borderRadius: '4px',
             },
             '&::-webkit-scrollbar-thumb': {
-              backgroundColor: 'rgba(208, 188, 255, 0.3)',
+              backgroundColor: 'rgba(64, 156, 255, 0.3)',
               borderRadius: '4px',
               '&:hover': {
-                backgroundColor: 'rgba(208, 188, 255, 0.5)',
+                backgroundColor: 'rgba(64, 156, 255, 0.5)',
               },
             },
           },
-        }}
+        })}
       />
     </DataTable>
   );
 }
+
+export default memo(Table);

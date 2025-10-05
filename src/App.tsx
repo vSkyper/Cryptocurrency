@@ -14,8 +14,8 @@ export default function App() {
     colorSchemes: {
       dark: {
         palette: {
-          primary: { main: '#D0BCFF' },
-          secondary: { main: '#CCC2DC' },
+          primary: { main: '#409CFF' },
+          secondary: { main: '#3B82F6' },
           background: { default: '#0d0e0eff', paper: '#151619ff' },
         },
       },

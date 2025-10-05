@@ -1,47 +1,58 @@
 import { Typography } from '@mui/material';
+import { memo, useMemo } from 'react';
 import { DescriptionProps } from './interface';
 
-export default function Description(props: DescriptionProps) {
+function Description(props: DescriptionProps) {
   const { globalData } = props;
 
-  const marketCapText: string = Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    notation: 'compact',
-  }).format(globalData.data.total_market_cap.usd);
+  const formattedValues = useMemo(
+    () => ({
+      marketCapText: Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        notation: 'compact',
+      }).format(globalData.data.total_market_cap.usd),
 
-  const marketCapPercentage: string = (
-    globalData.data.market_cap_change_percentage_24h_usd / 100
-  ).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    style: 'percent',
-  });
+      marketCapPercentage: (
+        globalData.data.market_cap_change_percentage_24h_usd / 100
+      ).toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        style: 'percent',
+      }),
 
-  const totalVolumeText: string = Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    notation: 'compact',
-  }).format(globalData.data.total_volume.usd);
+      totalVolumeText: Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        notation: 'compact',
+      }).format(globalData.data.total_volume.usd),
 
-  const marketCapPercentageBTC: string = (
-    globalData.data.market_cap_percentage.btc / 100
-  ).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    style: 'percent',
-  });
+      marketCapPercentageBTC: (
+        globalData.data.market_cap_percentage.btc / 100
+      ).toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        style: 'percent',
+      }),
 
-  const marketCapPercentageETH: string = (
-    globalData.data.market_cap_percentage.eth / 100
-  ).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    style: 'percent',
-  });
+      marketCapPercentageETH: (
+        globalData.data.market_cap_percentage.eth / 100
+      ).toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        style: 'percent',
+      }),
 
-  const cryptocurrencies: string =
-    globalData.data.active_cryptocurrencies.toLocaleString('en-US');
+      cryptocurrencies:
+        globalData.data.active_cryptocurrencies.toLocaleString('en-US'),
+
+      changeColor:
+        globalData.data.market_cap_change_percentage_24h_usd < 0
+          ? '#ff6b6b'
+          : '#51cf66',
+    }),
+    [globalData]
+  );
 
   return (
     <Typography
@@ -61,20 +72,17 @@ export default function Description(props: DescriptionProps) {
           color: '#ffffff',
         }}
       >
-        {marketCapText}
+        {formattedValues.marketCapText}
       </Typography>
       , a{' '}
       <Typography
         component='span'
         sx={{
           fontWeight: 700,
-          color:
-            globalData.data.market_cap_change_percentage_24h_usd < 0
-              ? '#ff6b6b'
-              : '#51cf66',
+          color: formattedValues.changeColor,
         }}
       >
-        {marketCapPercentage}
+        {formattedValues.marketCapPercentage}
       </Typography>{' '}
       change in the last 24 hours. Total cryptocurrency trading volume in the
       last day is at{' '}
@@ -85,7 +93,7 @@ export default function Description(props: DescriptionProps) {
           color: '#ffffff',
         }}
       >
-        {totalVolumeText}
+        {formattedValues.totalVolumeText}
       </Typography>
       . Bitcoin dominance is at{' '}
       <Typography
@@ -95,7 +103,7 @@ export default function Description(props: DescriptionProps) {
           color: '#f7931a',
         }}
       >
-        {marketCapPercentageBTC}
+        {formattedValues.marketCapPercentageBTC}
       </Typography>{' '}
       and Ethereum dominance is at{' '}
       <Typography
@@ -105,7 +113,7 @@ export default function Description(props: DescriptionProps) {
           color: '#627eea',
         }}
       >
-        {marketCapPercentageETH}
+        {formattedValues.marketCapPercentageETH}
       </Typography>
       . CoinGecko API is now tracking{' '}
       <Typography
@@ -115,9 +123,11 @@ export default function Description(props: DescriptionProps) {
           color: '#ffffff',
         }}
       >
-        {cryptocurrencies}
+        {formattedValues.cryptocurrencies}
       </Typography>{' '}
       cryptocurrencies.
     </Typography>
   );
 }
+
+export default memo(Description);

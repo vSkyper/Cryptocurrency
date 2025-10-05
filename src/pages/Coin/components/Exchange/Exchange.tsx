@@ -47,7 +47,6 @@ export default function Exchange(props: ExchangeProps) {
     `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=CG-Gq8TjhLV8eipyhqmcRtXoZee`
   );
 
-  // Recalculate when exchange rate or currency option changes
   useEffect(() => {
     if (!exchangeRate || (!cryptoAmount && !currencyAmount)) return;
 

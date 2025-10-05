@@ -41,7 +41,7 @@ const Footer = () => {
               target='_blank'
               rel='noopener noreferrer'
               sx={{
-                color: '#D0BCFF',
+                color: '#409CFF',
                 fontWeight: 600,
                 fontSize: '14px',
                 textDecoration: 'none',
@@ -49,7 +49,7 @@ const Footer = () => {
                 position: 'relative',
                 '&:hover': {
                   color: '#E6D7FF',
-                  textShadow: '0 0 8px rgba(208, 188, 255, 0.5)',
+                  textShadow: '0 0 8px rgba(64, 156, 255, 0.5)',
                 },
                 '&::after': {
                   content: '""',
@@ -58,7 +58,7 @@ const Footer = () => {
                   left: 0,
                   width: 0,
                   height: '2px',
-                  background: 'linear-gradient(90deg, #D0BCFF, #CCC2DC)',
+                  background: 'linear-gradient(90deg, #409CFF, #3B82F6)',
                   borderRadius: '1px',
                   transition: 'width 300ms ease-in-out',
                 },
@@ -95,17 +95,17 @@ const Footer = () => {
             padding: 1.5,
             borderRadius: 2,
             background:
-              'linear-gradient(135deg, rgba(208, 188, 255, 0.1) 0%, rgba(204, 194, 220, 0.05) 100%)',
+              'linear-gradient(135deg, rgba(64, 156, 255, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%)',
             backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(208, 188, 255, 0.2)',
+            border: '1px solid rgba(64, 156, 255, 0.2)',
             transition: 'all 300ms ease-in-out',
             textDecoration: 'none',
             '&:hover': {
               background:
-                'linear-gradient(135deg, rgba(208, 188, 255, 0.2) 0%, rgba(204, 194, 220, 0.1) 100%)',
-              border: '1px solid rgba(208, 188, 255, 0.4)',
+                'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)',
+              border: '1px solid rgba(64, 156, 255, 0.4)',
               transform: 'translateY(-2px)',
-              boxShadow: '0 8px 25px rgba(208, 188, 255, 0.15)',
+              boxShadow: '0 8px 25px rgba(64, 156, 255, 0.15)',
             },
           }}
         >

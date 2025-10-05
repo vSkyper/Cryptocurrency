@@ -40,10 +40,10 @@ export default function Coin() {
           zIndex: 1,
           py: { xs: 2, sm: 4 },
           px: { xs: 1, sm: 2 },
-          transform: 'translateZ(0)', // Force hardware acceleration
-          willChange: 'auto', // Optimize for animations
-          contain: 'layout style', // CSS containment
-          isolation: 'isolate', // Create new stacking context
+          transform: 'translateZ(0)',
+          willChange: 'auto',
+          contain: 'layout style',
+          isolation: 'isolate',
         }}
       >
         <CoinHeader
@@ -56,7 +56,7 @@ export default function Coin() {
         <Grid container spacing={4} sx={{ transform: 'translateZ(0)' }}>
           {/* Main Chart Section */}
           <Grid size={{ xs: 12, lg: 8 }}>
-            <Slide direction='up' in timeout={800}>
+            <Slide direction='up' in timeout={600}>
               <Box sx={{ transform: 'translateZ(0)' }}>
                 <Sparkline id={id} />
               </Box>
@@ -65,7 +65,7 @@ export default function Coin() {
 
           {/* Price Card Section */}
           <Grid size={{ xs: 12, lg: 4 }}>
-            <Slide direction='up' in timeout={1000}>
+            <Slide direction='up' in timeout={700}>
               <Box sx={{ transform: 'translateZ(0)' }}>
                 <PriceCard data={data} />
               </Box>
@@ -76,7 +76,7 @@ export default function Coin() {
         <Grid container spacing={4} sx={{ mt: 2, transform: 'translateZ(0)' }}>
           {/* Market Data Section */}
           <Grid size={{ xs: 12, lg: 8 }}>
-            <Slide direction='up' in timeout={1200}>
+            <Slide direction='up' in timeout={800}>
               <Box sx={{ transform: 'translateZ(0)' }}>
                 <StackData marketData={data.market_data} />
               </Box>
@@ -86,13 +86,13 @@ export default function Coin() {
           {/* Exchange and Links Section */}
           <Grid size={{ xs: 12, lg: 4 }}>
             <Stack spacing={2}>
-              <Slide direction='up' in timeout={1400}>
+              <Slide direction='up' in timeout={900}>
                 <Box sx={{ transform: 'translateZ(0)' }}>
                   <Exchange id={id} symbol={data.symbol} />
                 </Box>
               </Slide>
 
-              <Slide direction='up' in timeout={1600}>
+              <Slide direction='up' in timeout={1000}>
                 <Box sx={{ transform: 'translateZ(0)' }}>
                   <Links data={data} />
                 </Box>

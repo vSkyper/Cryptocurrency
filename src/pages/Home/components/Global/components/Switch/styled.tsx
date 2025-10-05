@@ -17,7 +17,7 @@ export const IOSSwitch = styled((props) => (
         transform: `translateX(${checkedTranslateX}px)`,
         color: '#fff',
         '& + .MuiSwitch-track': {
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          background: 'linear-gradient(135deg, #409CFF 0%, #3B82F6 100%)',
           opacity: 1,
           border: 0,
         },
@@ -39,9 +39,7 @@ export const IOSSwitch = styled((props) => (
       boxSizing: 'border-box',
       width: 28,
       height: 28,
-      background:
-        'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%)',
-      backdropFilter: 'blur(10px)',
+      background: 'rgba(255, 255, 255, 0.9)',
       border: '1px solid rgba(255, 255, 255, 0.3)',
       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
     },

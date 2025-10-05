@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import {
   Grid,
   Box,
@@ -15,45 +15,19 @@ import { GlobalProps } from './interface';
 const HeroSection = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3, 4),
   borderRadius: theme.spacing(3),
-  background: `linear-gradient(135deg, 
-    rgba(208, 188, 255, 0.08) 0%, 
-    rgba(204, 194, 220, 0.04) 100%
-  )`,
-  backdropFilter: 'blur(24px)',
-  border: '1px solid rgba(208, 188, 255, 0.2)',
-  boxShadow: `
-    0 8px 32px rgba(0,0,0,0.3),
-    0 4px 16px rgba(208, 188, 255, 0.1),
-    inset 0 1px 0 rgba(255,255,255,0.08)
-  `,
+  background: 'rgba(64, 156, 255, 0.06)',
+  border: '1px solid rgba(64, 156, 255, 0.2)',
+  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
   position: 'relative',
   overflow: 'hidden',
   marginBottom: theme.spacing(3),
-  transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: `linear-gradient(135deg, 
-      rgba(208, 188, 255, 0.05), 
-      rgba(204, 194, 220, 0.03), 
-      transparent 50%
-    )`,
-    zIndex: 0,
-  },
-  '& > *': {
-    position: 'relative',
-    zIndex: 1,
-  },
+  contain: 'layout style paint',
   [theme.breakpoints.down('md')]: {
     padding: theme.spacing(2.5, 3),
   },
 }));
 
-export default function Global(props: GlobalProps) {
+function Global(props: GlobalProps) {
   const { globalData } = props;
 
   const [toggle, setToggle] = useState<boolean>(false);
@@ -71,13 +45,13 @@ export default function Global(props: GlobalProps) {
                 mb: 2,
                 fontWeight: 700,
                 background:
-                  'linear-gradient(135deg, #D0BCFF 0%, #CCC2DC 50%, #D0BCFF 100%)',
+                  'linear-gradient(135deg, #409CFF 0%, #3B82F6 50%, #409CFF 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',
                 lineHeight: 1.2,
                 fontSize: { xs: '1.4rem', sm: '1.6rem', md: '1.75rem' },
-                textShadow: '0 2px 4px rgba(208, 188, 255, 0.3)',
+                textShadow: '0 2px 4px rgba(64, 156, 255, 0.3)',
                 letterSpacing: '-0.01em',
               }}
             >
@@ -104,3 +78,5 @@ export default function Global(props: GlobalProps) {
     </>
   );
 }
+
+export default memo(Global);

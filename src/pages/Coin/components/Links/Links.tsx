@@ -19,7 +19,7 @@ export default function Links(props: LinksProps) {
         sx={{
           mb: 3,
           pb: 2,
-          borderBottom: '1px solid rgba(208, 188, 255, 0.2)',
+          borderBottom: '1px solid rgba(64, 156, 255, 0.2)',
           position: 'relative',
         }}
       >
@@ -28,7 +28,7 @@ export default function Links(props: LinksProps) {
           sx={{
             fontWeight: 700,
             fontSize: '1.2rem',
-            background: 'linear-gradient(135deg, #D0BCFF 0%, #CCC2DC 70%)',
+            background: 'linear-gradient(135deg, #409CFF 0%, #3B82F6 70%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             color: 'transparent',
@@ -43,7 +43,7 @@ export default function Links(props: LinksProps) {
               transform: 'translateX(-50%)',
               width: '60px',
               height: '2px',
-              background: 'linear-gradient(90deg, #D0BCFF, #CCC2DC)',
+              background: 'linear-gradient(90deg, #409CFF, #3B82F6)',
               borderRadius: '1px',
             },
           }}
@@ -79,7 +79,7 @@ export default function Links(props: LinksProps) {
                   sx={{
                     width: 22,
                     height: 22,
-                    border: '1px solid rgba(208, 188, 255, 0.3)',
+                    border: '1px solid rgba(64, 156, 255, 0.3)',
                   }}
                 />
               }
@@ -89,18 +89,18 @@ export default function Links(props: LinksProps) {
               clickable
               sx={{
                 background:
-                  'linear-gradient(135deg, rgba(208, 188, 255, 0.2) 0%, rgba(204, 194, 220, 0.1) 100%)',
-                border: '1px solid rgba(208, 188, 255, 0.4)',
-                color: '#D0BCFF',
+                  'linear-gradient(135deg, rgba(64, 156, 255, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)',
+                border: '1px solid rgba(64, 156, 255, 0.4)',
+                color: '#409CFF',
                 fontWeight: 600,
                 height: 36,
                 px: 2,
                 '&:hover': {
                   background:
-                    'linear-gradient(135deg, rgba(208, 188, 255, 0.3) 0%, rgba(204, 194, 220, 0.15) 100%)',
-                  border: '1px solid rgba(208, 188, 255, 0.6)',
+                    'linear-gradient(135deg, rgba(64, 156, 255, 0.3) 0%, rgba(59, 130, 246, 0.15) 100%)',
+                  border: '1px solid rgba(64, 156, 255, 0.6)',
                   transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(208, 188, 255, 0.3)',
+                  boxShadow: '0 6px 20px rgba(64, 156, 255, 0.3)',
                 },
               }}
             />
@@ -108,24 +108,24 @@ export default function Links(props: LinksProps) {
 
           {data.links?.official_forum_url?.[0] && (
             <StyledChip
-              icon={<ForumIcon sx={{ fontSize: 18, color: '#D0BCFF' }} />}
+              icon={<ForumIcon sx={{ fontSize: 18, color: '#409CFF' }} />}
               label='Official Forum'
               component='a'
               href={data.links.official_forum_url[0]}
               clickable
               sx={{
                 background:
-                  'linear-gradient(135deg, rgba(208, 188, 255, 0.15) 0%, rgba(204, 194, 220, 0.08) 100%)',
-                border: '1px solid rgba(208, 188, 255, 0.3)',
-                color: '#D0BCFF',
+                  'linear-gradient(135deg, rgba(64, 156, 255, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%)',
+                border: '1px solid rgba(64, 156, 255, 0.3)',
+                color: '#409CFF',
                 fontWeight: 500,
                 height: 36,
                 '&:hover': {
                   background:
-                    'linear-gradient(135deg, rgba(208, 188, 255, 0.25) 0%, rgba(204, 194, 220, 0.12) 100%)',
-                  border: '1px solid rgba(208, 188, 255, 0.5)',
+                    'linear-gradient(135deg, rgba(64, 156, 255, 0.25) 0%, rgba(59, 130, 246, 0.12) 100%)',
+                  border: '1px solid rgba(64, 156, 255, 0.5)',
                   transform: 'translateY(-2px)',
-                  boxShadow: '0 6px 20px rgba(208, 188, 255, 0.2)',
+                  boxShadow: '0 6px 20px rgba(64, 156, 255, 0.2)',
                 },
               }}
             />
@@ -140,7 +140,7 @@ export default function Links(props: LinksProps) {
             <Typography
               variant='subtitle2'
               sx={{
-                color: 'rgba(208, 188, 255, 0.8)',
+                color: 'rgba(64, 156, 255, 0.8)',
                 fontWeight: 600,
                 fontSize: '0.8rem',
                 textTransform: 'uppercase',
@@ -165,7 +165,7 @@ export default function Links(props: LinksProps) {
                     <StyledChip
                       key={blockchain}
                       icon={
-                        <WebsiteIcon sx={{ fontSize: 16, color: '#CCC2DC' }} />
+                        <WebsiteIcon sx={{ fontSize: 16, color: '#3B82F6' }} />
                       }
                       label={new URL(blockchain).hostname.replace('www.', '')}
                       component='a'
@@ -173,17 +173,17 @@ export default function Links(props: LinksProps) {
                       clickable
                       sx={{
                         background:
-                          'linear-gradient(135deg, rgba(204, 194, 220, 0.12) 0%, rgba(208, 188, 255, 0.06) 100%)',
-                        border: '1px solid rgba(204, 194, 220, 0.25)',
-                        color: '#CCC2DC',
+                          'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(64, 156, 255, 0.06) 100%)',
+                        border: '1px solid rgba(59, 130, 246, 0.25)',
+                        color: '#3B82F6',
                         fontSize: '0.75rem',
                         height: 32,
                         '&:hover': {
                           background:
-                            'linear-gradient(135deg, rgba(204, 194, 220, 0.2) 0%, rgba(208, 188, 255, 0.1) 100%)',
-                          border: '1px solid rgba(204, 194, 220, 0.4)',
+                            'linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(64, 156, 255, 0.1) 100%)',
+                          border: '1px solid rgba(59, 130, 246, 0.4)',
                           transform: 'translateY(-1px)',
-                          boxShadow: '0 4px 16px rgba(204, 194, 220, 0.2)',
+                          boxShadow: '0 4px 16px rgba(59, 130, 246, 0.2)',
                         },
                       }}
                     />
@@ -198,7 +198,7 @@ export default function Links(props: LinksProps) {
         <Typography
           variant='subtitle2'
           sx={{
-            color: 'rgba(208, 188, 255, 0.8)',
+            color: 'rgba(64, 156, 255, 0.8)',
             fontWeight: 600,
             fontSize: '0.8rem',
             textTransform: 'uppercase',
@@ -230,7 +230,7 @@ export default function Links(props: LinksProps) {
               clickable
               sx={{
                 background:
-                  'linear-gradient(135deg, rgba(255, 69, 0, 0.2) 0%, rgba(255, 69, 0, 0.1) 100%)',
+                  'linear-gradient(135deg, rgba(113, 34, 5, 0.2) 0%, rgba(83, 24, 3, 0.1) 100%)',
                 border: '1px solid rgba(255, 69, 0, 0.3)',
                 color: '#CC3700',
                 fontWeight: 600,
@@ -266,7 +266,7 @@ export default function Links(props: LinksProps) {
               clickable
               sx={{
                 background:
-                  'linear-gradient(135deg, rgba(29, 161, 242, 0.2) 0%, rgba(29, 161, 242, 0.1) 100%)',
+                  'linear-gradient(135deg, rgba(14, 63, 94, 0.2) 0%, rgba(14, 63, 93, 0.1) 100%)',
                 border: '1px solid rgba(29, 161, 242, 0.3)',
                 color: '#1B8CD3',
                 fontWeight: 600,
@@ -302,7 +302,7 @@ export default function Links(props: LinksProps) {
               clickable
               sx={{
                 background:
-                  'linear-gradient(135deg, rgba(24, 119, 242, 0.2) 0%, rgba(24, 119, 242, 0.1) 100%)',
+                  'linear-gradient(135deg, rgba(13, 52, 103, 0.2) 0%, rgba(12, 49, 99, 0.1) 100%)',
                 border: '1px solid rgba(24, 119, 242, 0.3)',
                 color: '#1565C0',
                 fontWeight: 600,
@@ -338,7 +338,7 @@ export default function Links(props: LinksProps) {
               clickable
               sx={{
                 background:
-                  'linear-gradient(135deg, rgba(139, 148, 158, 0.2) 0%, rgba(139, 148, 158, 0.1) 100%)',
+                  'linear-gradient(135deg, rgba(151, 157, 164, 0.2) 0%, rgba(33, 40, 47, 0.1) 100%)',
                 border: '1px solid rgba(139, 148, 158, 0.3)',
                 color: '#7D8590',
                 fontWeight: 600,

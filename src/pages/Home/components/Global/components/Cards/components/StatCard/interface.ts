@@ -1,4 +1,3 @@
-// Type for card configuration
 export interface CardConfig {
   key: string;
   value: string;

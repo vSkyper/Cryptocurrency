@@ -7,11 +7,11 @@ export const Search = styled(Autocomplete)(() => ({
   background:
     'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)',
   backdropFilter: 'blur(16px) saturate(180%)',
-  border: '1px solid rgba(208, 188, 255, 0.15)',
+  border: '1px solid rgba(64, 156, 255, 0.15)',
   color: 'rgba(255, 255, 255, 0.9)',
   transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
   boxShadow:
-    '0 4px 20px rgba(0,0,0,0.1), 0 1px 4px rgba(208, 188, 255, 0.1), inset 0 1px 0 rgba(255,255,255,0.05)',
+    '0 4px 20px rgba(0,0,0,0.1), 0 1px 4px rgba(64, 156, 255, 0.1), inset 0 1px 0 rgba(255,255,255,0.05)',
   width: '100%',
   overflow: 'hidden',
   '&::before': {
@@ -22,16 +22,16 @@ export const Search = styled(Autocomplete)(() => ({
     right: 0,
     bottom: 0,
     background:
-      'linear-gradient(90deg, transparent 0%, rgba(208, 188, 255, 0.05) 50%, transparent 100%)',
+      'linear-gradient(90deg, transparent 0%, rgba(64, 156, 255, 0.05) 50%, transparent 100%)',
     opacity: 0,
     transition: 'opacity 300ms ease-in-out',
   },
   '&:hover': {
     background:
       'linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%)',
-    border: '1px solid rgba(208, 188, 255, 0.25)',
+    border: '1px solid rgba(64, 156, 255, 0.25)',
     boxShadow:
-      '0 6px 25px rgba(0,0,0,0.15), 0 2px 8px rgba(208, 188, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.08)',
+      '0 6px 25px rgba(0,0,0,0.15), 0 2px 8px rgba(64, 156, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.08)',
     transform: 'translateY(-1px)',
     '&::before': {
       opacity: 1,
@@ -40,9 +40,9 @@ export const Search = styled(Autocomplete)(() => ({
   '&.Mui-focused': {
     background:
       'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)',
-    border: '1px solid rgba(208, 188, 255, 0.4)',
+    border: '1px solid rgba(64, 156, 255, 0.4)',
     boxShadow:
-      '0 8px 30px rgba(0,0,0,0.2), 0 0 0 4px rgba(208, 188, 255, 0.1), inset 0 1px 0 rgba(255,255,255,0.1)',
+      '0 8px 30px rgba(0,0,0,0.2), 0 0 0 4px rgba(64, 156, 255, 0.1), inset 0 1px 0 rgba(255,255,255,0.1)',
     transform: 'translateY(-2px)',
   },
   '& .MuiAutocomplete-popupIndicator': {
@@ -53,15 +53,15 @@ export const Search = styled(Autocomplete)(() => ({
   },
   '& .MuiAutocomplete-paper': {
     background: `linear-gradient(135deg, 
-      rgba(208, 188, 255, 0.08) 0%, 
-      rgba(204, 194, 220, 0.04) 100%
+      rgba(64, 156, 255, 0.08) 0%, 
+      rgba(59, 130, 246, 0.04) 100%
     )`,
     backdropFilter: 'blur(24px)',
-    border: '1px solid rgba(208, 188, 255, 0.2)',
+    border: '1px solid rgba(64, 156, 255, 0.2)',
     borderRadius: '16px',
     boxShadow: `
       0 12px 40px rgba(0,0,0,0.3),
-      0 4px 16px rgba(208, 188, 255, 0.1),
+      0 4px 16px rgba(64, 156, 255, 0.1),
       inset 0 1px 0 rgba(255,255,255,0.08)
     `,
     marginTop: '8px',
@@ -75,8 +75,8 @@ export const Search = styled(Autocomplete)(() => ({
       right: 0,
       bottom: 0,
       background: `linear-gradient(135deg, 
-        rgba(208, 188, 255, 0.05), 
-        rgba(204, 194, 220, 0.03), 
+        rgba(64, 156, 255, 0.05), 
+        rgba(59, 130, 246, 0.03), 
         transparent 50%
       )`,
       zIndex: 0,
@@ -107,42 +107,43 @@ export const Search = styled(Autocomplete)(() => ({
         left: '-100%',
         width: '100%',
         height: '100%',
-        background: 'linear-gradient(90deg, transparent, rgba(208, 188, 255, 0.15), transparent)',
+        background:
+          'linear-gradient(90deg, transparent, rgba(64, 156, 255, 0.15), transparent)',
         transition: 'left 400ms ease',
         zIndex: -1,
       },
       '&:hover, &.Mui-focused': {
         background: `linear-gradient(135deg, 
-          rgba(208, 188, 255, 0.12) 0%, 
-          rgba(204, 194, 220, 0.06) 100%
+          rgba(64, 156, 255, 0.12) 0%, 
+          rgba(59, 130, 246, 0.06) 100%
         )`,
-        color: '#D0BCFF',
+        color: '#409CFF',
         transform: 'translateX(4px)',
         boxShadow: `
-          0 4px 16px rgba(208, 188, 255, 0.15),
+          0 4px 16px rgba(64, 156, 255, 0.15),
           inset 0 1px 0 rgba(255,255,255,0.1)
         `,
-        border: '1px solid rgba(208, 188, 255, 0.2)',
+        border: '1px solid rgba(64, 156, 255, 0.2)',
         '&::before': {
           left: '100%',
         },
       },
       '&[aria-selected="true"]': {
         background: `linear-gradient(135deg, 
-          rgba(208, 188, 255, 0.2) 0%, 
-          rgba(204, 194, 220, 0.1) 100%
+          rgba(64, 156, 255, 0.2) 0%, 
+          rgba(59, 130, 246, 0.1) 100%
         )`,
-        color: '#D0BCFF',
+        color: '#409CFF',
         fontWeight: 600,
         transform: 'translateX(6px)',
         boxShadow: `
-          0 6px 20px rgba(208, 188, 255, 0.2),
+          0 6px 20px rgba(64, 156, 255, 0.2),
           inset 0 1px 0 rgba(255,255,255,0.15)
         `,
-        border: '1px solid rgba(208, 188, 255, 0.3)',
+        border: '1px solid rgba(64, 156, 255, 0.3)',
         '&::after': {
           content: '"→"',
-          color: 'rgba(208, 188, 255, 0.8)',
+          color: 'rgba(64, 156, 255, 0.8)',
           fontSize: '1.2rem',
           fontWeight: 'bold',
         },
@@ -161,7 +162,7 @@ export const Search = styled(Autocomplete)(() => ({
   '& .MuiAutocomplete-loading': {
     padding: '20px',
     textAlign: 'center',
-    color: 'rgba(208, 188, 255, 0.8)',
+    color: 'rgba(64, 156, 255, 0.8)',
     fontSize: '0.9rem',
     fontWeight: 500,
     position: 'relative',
@@ -181,12 +182,12 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'rgba(208, 188, 255, 0.7)',
+  color: 'rgba(64, 156, 255, 0.7)',
   zIndex: 1,
   transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1)',
   '& .MuiSvgIcon-root': {
     fontSize: '1.2rem',
-    filter: 'drop-shadow(0 1px 2px rgba(208, 188, 255, 0.3))',
+    filter: 'drop-shadow(0 1px 2px rgba(64, 156, 255, 0.3))',
   },
   [theme.breakpoints.up('sm')]: {
     '& .MuiSvgIcon-root': {
@@ -211,12 +212,12 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
       fontSize: '1rem',
     },
     '&::placeholder': {
-      color: 'rgba(208, 188, 255, 0.6)',
+      color: 'rgba(64, 156, 255, 0.6)',
       opacity: 1,
       fontWeight: 400,
     },
     '&:focus::placeholder': {
-      color: 'rgba(208, 188, 255, 0.8)',
+      color: 'rgba(64, 156, 255, 0.8)',
     },
   },
 })) as typeof InputBase;

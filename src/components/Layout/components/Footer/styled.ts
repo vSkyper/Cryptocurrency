@@ -11,7 +11,7 @@ export const Foot = styled(Paper)(({ theme }) => ({
   background:
     'linear-gradient(135deg, rgba(8, 9, 12, 0.9) 0%, rgba(6, 7, 8, 0.95) 100%)',
   backdropFilter: 'blur(20px)',
-  borderTop: '1px solid rgba(208, 188, 255, 0.2)',
+  borderTop: '1px solid rgba(64, 156, 255, 0.2)',
   borderRadius: 0,
   width: '100%',
   maxWidth: '100%',
@@ -29,6 +29,6 @@ export const Foot = styled(Paper)(({ theme }) => ({
     width: '60%',
     height: '1px',
     background:
-      'linear-gradient(90deg, transparent 0%, rgba(208, 188, 255, 0.4) 50%, transparent 100%)',
+      'linear-gradient(90deg, transparent 0%, rgba(64, 156, 255, 0.4) 50%, transparent 100%)',
   },
 })) as typeof Paper;
