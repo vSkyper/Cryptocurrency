@@ -9,16 +9,9 @@ export default function Navbar() {
         color='transparent'
         elevation={0}
         sx={{
-          background: (theme) =>
-            theme.palette.mode === 'dark'
-              ? 'rgba(20, 30, 48, 0.8)'
-              : 'rgba(255, 255, 255, 0.8)',
-          borderBottom: (theme) =>
-            `1px solid ${
-              theme.palette.mode === 'dark'
-                ? 'rgba(64, 156, 255, 0.1)'
-                : 'rgba(64, 156, 255, 0.15)'
-            }`,
+          background: 'rgba(15, 20, 35, 0.9)',
+          backdropFilter: 'blur(10px)',
+          borderBottom: 'none',
           width: '100%',
           zIndex: 1100,
         }}

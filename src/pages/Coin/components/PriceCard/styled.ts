@@ -12,7 +12,6 @@ export const StyledLinearProgress = styled(LinearProgress)(() => ({
   [`&.${linearProgressClasses.colorPrimary}`]: {
     background:
       'linear-gradient(90deg, rgba(64, 156, 255, 0.1), rgba(59, 130, 246, 0.05))',
-    border: '1px solid rgba(64, 156, 255, 0.15)',
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 99,
@@ -22,17 +21,9 @@ export const StyledLinearProgress = styled(LinearProgress)(() => ({
 })) as typeof LinearProgress;
 
 export const ModernCard = styled(Box)(({ theme }) => ({
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.4)'
-      : 'rgba(255, 255, 255, 0.5)',
+  background: 'rgba(20, 30, 48, 0.4)',
   padding: theme.spacing(3),
   borderRadius: 16,
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.1)'
-      : 'rgba(64, 156, 255, 0.15)'
-  }`,
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',

@@ -4,32 +4,16 @@ import { styled } from '@mui/material/styles';
 export const Search = styled(Autocomplete)(({ theme }) => ({
   position: 'relative',
   borderRadius: '12px',
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.6)'
-      : 'rgba(255, 255, 255, 0.6)',
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.15)'
-      : 'rgba(64, 156, 255, 0.2)'
-  }`,
+  background: 'rgba(20, 30, 48, 0.6)',
   color: theme.palette.text.primary,
   transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   width: '100%',
   overflow: 'hidden',
   '&:hover': {
-    border: `1px solid ${
-      theme.palette.mode === 'dark'
-        ? 'rgba(64, 156, 255, 0.3)'
-        : 'rgba(64, 156, 255, 0.35)'
-    }`,
+    background: 'rgba(25, 35, 55, 0.7)',
   },
   '&.Mui-focused': {
-    border: `1px solid ${
-      theme.palette.mode === 'dark'
-        ? 'rgba(64, 156, 255, 0.4)'
-        : 'rgba(64, 156, 255, 0.5)'
-    }`,
+    background: 'rgba(30, 40, 60, 0.8)',
   },
   '& .MuiAutocomplete-popupIndicator': {
     display: 'none',
@@ -38,16 +22,7 @@ export const Search = styled(Autocomplete)(({ theme }) => ({
     display: 'none',
   },
   '& .MuiAutocomplete-paper': {
-    background: (theme: any) =>
-      theme.palette.mode === 'dark'
-        ? 'rgba(20, 30, 48, 0.95)'
-        : 'rgba(255, 255, 255, 0.95)',
-    border: (theme: any) =>
-      `1px solid ${
-        theme.palette.mode === 'dark'
-          ? 'rgba(64, 156, 255, 0.2)'
-          : 'rgba(64, 156, 255, 0.25)'
-      }`,
+    background: 'rgba(20, 30, 48, 0.95)',
     borderRadius: '12px',
     marginTop: '8px',
     overflow: 'hidden',

@@ -60,7 +60,7 @@ function Description(props: DescriptionProps) {
       sx={{
         fontWeight: 400,
         lineHeight: 1.5,
-        color: 'rgba(255, 255, 255, 0.8)',
+        color: 'text.secondary',
         fontSize: { xs: '0.85rem', sm: '0.9rem' },
       }}
     >
@@ -69,7 +69,7 @@ function Description(props: DescriptionProps) {
         component='span'
         sx={{
           fontWeight: 700,
-          color: '#ffffff',
+          color: 'text.primary',
         }}
       >
         {formattedValues.marketCapText}
@@ -90,7 +90,7 @@ function Description(props: DescriptionProps) {
         component='span'
         sx={{
           fontWeight: 700,
-          color: '#ffffff',
+          color: 'text.primary',
         }}
       >
         {formattedValues.totalVolumeText}
@@ -120,7 +120,7 @@ function Description(props: DescriptionProps) {
         component='span'
         sx={{
           fontWeight: 700,
-          color: '#ffffff',
+          color: 'text.primary',
         }}
       >
         {formattedValues.cryptocurrencies}

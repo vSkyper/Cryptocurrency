@@ -4,15 +4,7 @@ import { styled } from '@mui/material/styles';
 export const ModernLinksCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: 16,
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.4)'
-      : 'rgba(255, 255, 255, 0.5)',
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.1)'
-      : 'rgba(64, 156, 255, 0.15)'
-  }`,
+  background: 'rgba(20, 30, 48, 0.4)',
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',
@@ -25,7 +17,6 @@ export const StyledChip = styled(Chip)<{
 }>(({ theme }) => ({
   borderRadius: theme.spacing(2),
   background: 'rgba(64, 156, 255, 0.12)',
-  border: '1px solid rgba(64, 156, 255, 0.25)',
   color: '#409CFF',
   fontWeight: 600,
   fontSize: '0.8rem',
@@ -55,8 +46,7 @@ export const StyledChip = styled(Chip)<{
       rgba(64, 156, 255, 0.25) 0%, 
       rgba(59, 130, 246, 0.15) 100%
     )`,
-    border: '1px solid rgba(64, 156, 255, 0.4)',
-    transform: 'translateY(-1px)',
+    transform: 'translateY(-2px)',
     boxShadow: '0 4px 20px rgba(64, 156, 255, 0.2)',
   },
   '&:active': {

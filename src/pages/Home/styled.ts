@@ -2,13 +2,19 @@ import { Container, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const GradientBackground = styled(Box)(() => ({
-  position: 'absolute',
-  inset: 0,
-  background: `
-    radial-gradient(600px circle at 20% 30%, rgba(59, 130, 246, 0.25), transparent 40%),
-    radial-gradient(800px circle at 80% 70%, rgba(96, 165, 250, 0.15), transparent 40%)
-  `,
-  zIndex: -2,
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  width: '100vw',
+  height: '100vh',
+  background: `linear-gradient(135deg, 
+      rgb(15, 23, 42) 0%, 
+      rgb(17, 24, 39) 50%, 
+      rgb(15, 23, 42) 100%
+    )`,
+  zIndex: -1,
   pointerEvents: 'none',
 }));
 

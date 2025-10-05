@@ -19,8 +19,8 @@ export default function Home() {
 
   return (
     <main>
+      <GradientBackground />
       <ContentContainer maxWidth='xl'>
-        <GradientBackground />
         <Box>
           <Global globalData={globalData} />
         </Box>

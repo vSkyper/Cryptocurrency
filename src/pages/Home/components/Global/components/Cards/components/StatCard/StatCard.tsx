@@ -15,7 +15,7 @@ const CARD_STYLES = {
   },
   subtitle: {
     fontWeight: 500,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'text.secondary',
     textAlign: 'center',
     fontSize: { xs: '0.8rem', sm: '0.875rem' },
     letterSpacing: '0.3px',
@@ -31,8 +31,7 @@ function StatCard({ config, toggle, isMobile }: StatCardProps) {
             variant='h6'
             sx={{
               ...CARD_STYLES.title,
-              color: config.color,
-              textShadow: `0 2px 4px ${config.color}30`,
+              color: 'text.primary',
               display: config.percentage ? 'flex' : 'block',
               justifyContent: config.percentage ? 'center' : 'normal',
               alignItems: config.percentage ? 'center' : 'normal',

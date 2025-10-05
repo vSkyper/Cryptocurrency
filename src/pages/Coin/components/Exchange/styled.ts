@@ -26,25 +26,13 @@ export const InputCard = styled(Box)(({ theme }) => ({
   height: 70,
   margin: '0 auto',
   borderRadius: 16,
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.4)'
-      : 'rgba(255, 255, 255, 0.5)',
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.1)'
-      : 'rgba(64, 156, 255, 0.15)'
-  }`,
-  transition: 'border 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+  background: 'rgba(20, 30, 48, 0.4)',
+  transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',
   '&:focus-within': {
-    border: `1px solid ${
-      theme.palette.mode === 'dark'
-        ? 'rgba(64, 156, 255, 0.4)'
-        : 'rgba(64, 156, 255, 0.5)'
-    }`,
+    background: 'rgba(25, 35, 55, 0.5)',
   },
   [theme.breakpoints.down('sm')]: {
     height: 55,
@@ -59,15 +47,7 @@ export const InputCard = styled(Box)(({ theme }) => ({
 export const ModernExchangeCard = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: 16,
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.4)'
-      : 'rgba(255, 255, 255, 0.5)',
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.1)'
-      : 'rgba(64, 156, 255, 0.15)'
-  }`,
+  background: 'rgba(20, 30, 48, 0.4)',
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',
@@ -93,7 +73,6 @@ export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   background: 'rgba(64, 156, 255, 0.2)',
-  border: '1px solid rgba(64, 156, 255, 0.3)',
   width: 48,
   height: 48,
   margin: theme.spacing(1.5, 'auto'),
@@ -106,7 +85,6 @@ export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
     '&:hover': {
       transform: 'scale(1.05)',
       background: 'rgba(64, 156, 255, 0.3)',
-      border: '1px solid rgba(64, 156, 255, 0.4)',
       boxShadow: '0 4px 16px rgba(64, 156, 255, 0.2)',
     },
   },
@@ -150,7 +128,6 @@ export const CurrencyLabel = styled(Box)(({ theme }) => ({
     rgba(64, 156, 255, 0.12), 
     rgba(59, 130, 246, 0.08)
   )`,
-  border: '1px solid rgba(64, 156, 255, 0.2)',
   width: 'fit-content',
   transition: 'all 200ms ease',
   '&:hover': {
@@ -158,7 +135,6 @@ export const CurrencyLabel = styled(Box)(({ theme }) => ({
       rgba(64, 156, 255, 0.18), 
       rgba(59, 130, 246, 0.12)
     )`,
-    border: '1px solid rgba(64, 156, 255, 0.3)',
   },
 }));
 
@@ -170,18 +146,10 @@ export const ExchangeRateDisplay = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1.5, 2),
   marginTop: theme.spacing(2),
   borderRadius: theme.spacing(2),
-  background: `linear-gradient(135deg, 
-    rgba(64, 156, 255, 0.12),
-    rgba(59, 130, 246, 0.08)
-  )`,
-  border: '1px solid rgba(64, 156, 255, 0.25)',
+  background: 'rgba(20, 30, 48, 0.4)',
   transition: 'all 250ms ease',
   '&:hover': {
-    background: `linear-gradient(135deg, 
-      rgba(64, 156, 255, 0.18),
-      rgba(59, 130, 246, 0.12)
-    )`,
-    border: '1px solid rgba(64, 156, 255, 0.35)',
+    background: 'rgba(25, 35, 55, 0.5)',
     transform: 'translateY(-1px)',
     boxShadow: '0 4px 16px rgba(64, 156, 255, 0.1)',
   },

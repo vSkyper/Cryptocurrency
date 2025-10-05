@@ -2,17 +2,9 @@ import { Box, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const ModernDataCard = styled(Box)(({ theme }) => ({
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.4)'
-      : 'rgba(255, 255, 255, 0.5)',
+  background: 'rgba(20, 30, 48, 0.4)',
   padding: theme.spacing(3),
   borderRadius: 16,
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.1)'
-      : 'rgba(64, 156, 255, 0.15)'
-  }`,
   transform: 'translateZ(0)',
   willChange: 'auto',
   contain: 'layout style',

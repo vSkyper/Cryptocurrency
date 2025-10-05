@@ -8,15 +8,7 @@ export const Card = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   padding: theme.spacing(3.5, 3),
   borderRadius: 16,
-  background:
-    theme.palette.mode === 'dark'
-      ? 'rgba(20, 30, 48, 0.4)'
-      : 'rgba(255, 255, 255, 0.5)',
-  border: `1px solid ${
-    theme.palette.mode === 'dark'
-      ? 'rgba(64, 156, 255, 0.1)'
-      : 'rgba(64, 156, 255, 0.15)'
-  }`,
+  background: 'rgba(20, 30, 48, 0.4)',
   position: 'relative',
   overflow: 'hidden',
   height: 'auto',
@@ -39,7 +31,6 @@ export const Percentage = styled(Typography)(({ theme }) => ({
   padding: theme.spacing(0.6, 1.2),
   borderRadius: theme.spacing(2),
   background: 'rgba(64, 156, 255, 0.12)',
-  border: '1px solid rgba(64, 156, 255, 0.2)',
   boxShadow: '0 2px 8px rgba(64, 156, 255, 0.1)',
   transition: 'transform 150ms ease',
   willChange: 'transform',

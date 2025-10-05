@@ -78,29 +78,11 @@ const Footer = () => {
             alignItems: 'center',
             padding: 1.5,
             borderRadius: 2,
-            background: (theme) =>
-              theme.palette.mode === 'dark'
-                ? 'rgba(64, 156, 255, 0.1)'
-                : 'rgba(64, 156, 255, 0.08)',
-            border: (theme) =>
-              `1px solid ${
-                theme.palette.mode === 'dark'
-                  ? 'rgba(64, 156, 255, 0.2)'
-                  : 'rgba(64, 156, 255, 0.25)'
-              }`,
+            background: 'rgba(64, 156, 255, 0.1)',
             transition: 'all 200ms ease',
             textDecoration: 'none',
             '&:hover': {
-              background: (theme) =>
-                theme.palette.mode === 'dark'
-                  ? 'rgba(64, 156, 255, 0.15)'
-                  : 'rgba(64, 156, 255, 0.12)',
-              border: (theme) =>
-                `1px solid ${
-                  theme.palette.mode === 'dark'
-                    ? 'rgba(64, 156, 255, 0.3)'
-                    : 'rgba(64, 156, 255, 0.35)'
-                }`,
+              background: 'rgba(64, 156, 255, 0.15)',
             },
           }}
         >
