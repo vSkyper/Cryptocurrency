@@ -12,10 +12,6 @@ function Table(props: TableProps) {
         density='comfortable'
         pagination
         disableRowSelectionOnClick
-        disableColumnMenu
-        disableColumnFilter
-        disableColumnSelector
-        disableDensitySelector
         rows={coins}
         columns={columns}
         initialState={{
