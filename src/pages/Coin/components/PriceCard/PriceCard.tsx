@@ -1,13 +1,3 @@
-import { Grid } from '@mui/material';
-import {
-  StyledLinearProgress,
-  ModernCard,
-  PriceContainer,
-  RangeSection,
-  RangeTitle,
-  ProgressContainer,
-  RangeValue,
-} from './styled';
 import { Price, PriceChange } from './components';
 import { priceChange } from 'constants/coin';
 import { PriceCardProps } from './interface';
@@ -40,37 +30,37 @@ export default function PriceCard({ data }: PriceCardProps) {
   );
 
   return (
-    <Grid container direction='column' spacing={3}>
-      <Grid size={12}>
-        <ModernCard>
-          <PriceContainer>
-            <Price marketData={market_data} />
-          </PriceContainer>
+    <div className='flex flex-col gap-4'>
+      <div className='bg-[var(--bg-tertiary)] p-4 sm:p-6 rounded-xl'>
+        <div className='text-center mb-6'>
+          <Price marketData={market_data} />
+        </div>
 
-          <RangeSection>
-            <RangeTitle variant='subtitle2'>24h Price Range</RangeTitle>
-            <ProgressContainer>
-              <StyledLinearProgress variant='determinate' value={progressBar} />
-              <Grid container justifyContent='space-between' sx={{ mt: 0.5 }}>
-                <RangeValue variant='caption'>
-                  {formatCurrency(market_data.low_24h?.usd || 0)}
-                </RangeValue>
-                <RangeValue variant='caption'>
-                  {formatCurrency(market_data.high_24h?.usd || 0)}
-                </RangeValue>
-              </Grid>
-            </ProgressContainer>
-          </RangeSection>
-        </ModernCard>
-      </Grid>
+        <div className='mb-3'>
+          <div className='text-center text-sm font-semibold text-white/70 mb-2'>
+            24h Price Range
+          </div>
+          <div className='px-1'>
+            <div className='w-full bg-[linear-gradient(90deg,color-mix(in_srgb,var(--brand-blue)_8%,transparent),color-mix(in_srgb,var(--brand-blue-light)_5%,transparent))] h-2.5 rounded-full overflow-hidden'>
+              <div
+                className='h-2.5 rounded-full bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] shadow-[0_2px_8px_color-mix(in_srgb,var(--brand-blue)_30%,transparent)] transition-all duration-300'
+                style={{ width: `${progressBar}%` }}
+              />
+            </div>
 
-      <Grid size={12}>
-        <Grid container spacing={2}>
-          {priceChange.map((days) => (
-            <PriceChange key={days} marketData={market_data} days={days} />
-          ))}
-        </Grid>
-      </Grid>
-    </Grid>
+            <div className='flex justify-between text-xs text-white/60 mt-2 px-1'>
+              <div>{formatCurrency(market_data.low_24h?.usd || 0)}</div>
+              <div>{formatCurrency(market_data.high_24h?.usd || 0)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3'>
+        {priceChange.map((days) => (
+          <PriceChange key={days} marketData={market_data} days={days} />
+        ))}
+      </div>
+    </div>
   );
 }

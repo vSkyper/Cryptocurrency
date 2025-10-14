@@ -1,4 +1,3 @@
-import { Avatar, Chip, Link, Stack, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
@@ -12,51 +11,24 @@ export const columns: GridColDef[] = [
     align: 'left',
     headerAlign: 'left',
     renderCell: (params: GridRenderCellParams) => (
-      <Link
-        color='inherit'
-        underline='hover'
-        component={RouterLink}
+      <RouterLink
         to={`/coins/${params.row.id}`}
-        sx={{
-          display: 'inline-flex',
-          transition: 'all 200ms ease',
-          '&:hover': {
-            transform: 'translateX(4px)',
-          },
-        }}
+        className='inline-flex items-center gap-2 transition-colors duration-200 hover:underline'
       >
-        <Stack direction='row' alignItems='center' spacing={2}>
-          <Avatar
+        <div className='w-9 h-9 rounded-full shadow-md overflow-hidden flex-shrink-0 transition-transform duration-200 hover:scale-110 border border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)]'>
+          <img
             src={params.row.image}
             alt={`${params.value} logo`}
-            sx={{
-              width: 36,
-              height: 36,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-              border:
-                '2px solid color-mix(in srgb, var(--brand-blue) 20%, transparent)',
-              transition: 'all 200ms ease',
-              '&:hover': {
-                transform: 'scale(1.1)',
-                boxShadow:
-                  '0 6px 16px color-mix(in srgb, var(--brand-blue) 30%, transparent)',
-              },
-            }}
+            className='w-full h-full object-cover'
           />
-          <Typography
-            variant='body2'
-            fontWeight={700}
-            noWrap
-            sx={{
-              color: 'rgba(255, 255, 255, 0.95)',
-              fontSize: '0.9rem',
-              letterSpacing: '0.3px',
-            }}
-          >
-            {params.value}
-          </Typography>
-        </Stack>
-      </Link>
+        </div>
+        <span
+          className='text-white/95 text-sm font-bold truncate'
+          title={String(params.value)}
+        >
+          {params.value}
+        </span>
+      </RouterLink>
     ),
   },
   {
@@ -68,37 +40,18 @@ export const columns: GridColDef[] = [
     headerAlign: 'center',
     valueFormatter: (value) =>
       (typeof value === 'string' ? value : String(value ?? '')).toUpperCase(),
-    renderCell: (params: GridRenderCellParams) => (
-      <Chip
-        size='small'
-        label={(typeof params.value === 'string'
+    renderCell: (params: GridRenderCellParams) => {
+      const label = (
+        typeof params.value === 'string'
           ? params.value
           : String(params.value ?? '')
-        ).toUpperCase()}
-        sx={{
-          fontWeight: 700,
-          fontSize: '0.75rem',
-          borderRadius: '12px',
-          background:
-            'linear-gradient(135deg, color-mix(in srgb, var(--brand-blue) 15%, transparent) 0%, color-mix(in srgb, var(--brand-blue) 8%, transparent) 100%)',
-          border:
-            '1px solid color-mix(in srgb, var(--brand-blue) 20%, transparent)',
-          color: 'var(--brand-blue)',
-          backdropFilter: 'blur(8px)',
-          letterSpacing: '0.5px',
-          transition: 'all 200ms ease',
-          '&:hover': {
-            transform: 'translateY(-1px)',
-            background:
-              'linear-gradient(135deg, color-mix(in srgb, var(--brand-blue) 20%, transparent) 0%, color-mix(in srgb, var(--brand-blue) 12%, transparent) 100%)',
-            border:
-              '1px solid color-mix(in srgb, var(--brand-blue) 30%, transparent)',
-            boxShadow:
-              '0 4px 12px color-mix(in srgb, var(--brand-blue) 20%, transparent)',
-          },
-        }}
-      />
-    ),
+      ).toUpperCase();
+      return (
+        <span className='text-xs font-bold rounded-full px-2 py-1 backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-blue)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-blue)_8%,transparent)_100%)] border border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] text-[var(--brand-blue)] tracking-wide'>
+          {label}
+        </span>
+      );
+    },
   },
   {
     type: 'number',
@@ -134,31 +87,20 @@ export const columns: GridColDef[] = [
         style: 'percent',
       });
       const positive = v >= 0;
+      const colorVar = positive
+        ? 'var(--brand-positive)'
+        : 'var(--brand-negative)';
       return (
-        <Chip
-          size='small'
-          label={label}
-          sx={{
-            fontWeight: 600,
-            fontSize: '0.75rem',
-            borderRadius: '12px',
-            border: positive
-              ? '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)'
-              : '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)',
-            background: positive
-              ? 'linear-gradient(135deg, color-mix(in srgb, var(--brand-positive) 15%, transparent) 0%, color-mix(in srgb, var(--brand-positive) 8%, transparent) 100%)'
-              : 'linear-gradient(135deg, color-mix(in srgb, var(--brand-negative) 15%, transparent) 0%, color-mix(in srgb, var(--brand-negative) 8%, transparent) 100%)',
-            color: positive ? 'var(--brand-positive)' : 'var(--brand-negative)',
-            backdropFilter: 'blur(8px)',
-            transition: 'all 200ms ease',
-            '&:hover': {
-              transform: 'translateY(-1px)',
-              boxShadow: positive
-                ? '0 4px 12px color-mix(in srgb, var(--brand-positive) 20%, transparent)'
-                : '0 4px 12px color-mix(in srgb, var(--brand-negative) 20%, transparent)',
-            },
-          }}
-        />
+        <span
+          className={`text-xs font-semibold rounded-full px-2 py-1 backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 text-[${colorVar}] border ${
+            positive
+              ? 'border-[color-mix(in_srgb,var(--brand-positive)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-positive)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-positive)_8%,transparent)_100%)]'
+              : 'border-[color-mix(in_srgb,var(--brand-negative)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-negative)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-negative)_8%,transparent)_100%)]'
+          }`}
+          title={label}
+        >
+          {label}
+        </span>
       );
     },
   },
@@ -182,31 +124,20 @@ export const columns: GridColDef[] = [
         style: 'percent',
       });
       const positive = v >= 0;
+      const colorVar = positive
+        ? 'var(--brand-positive)'
+        : 'var(--brand-negative)';
       return (
-        <Chip
-          size='small'
-          label={label}
-          sx={{
-            fontWeight: 600,
-            fontSize: '0.75rem',
-            borderRadius: '12px',
-            border: positive
-              ? '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)'
-              : '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)',
-            background: positive
-              ? 'linear-gradient(135deg, color-mix(in srgb, var(--brand-positive) 15%, transparent) 0%, color-mix(in srgb, var(--brand-positive) 8%, transparent) 100%)'
-              : 'linear-gradient(135deg, color-mix(in srgb, var(--brand-negative) 15%, transparent) 0%, color-mix(in srgb, var(--brand-negative) 8%, transparent) 100%)',
-            color: positive ? 'var(--brand-positive)' : 'var(--brand-negative)',
-            backdropFilter: 'blur(8px)',
-            transition: 'all 200ms ease',
-            '&:hover': {
-              transform: 'translateY(-1px)',
-              boxShadow: positive
-                ? '0 4px 12px color-mix(in srgb, var(--brand-positive) 20%, transparent)'
-                : '0 4px 12px color-mix(in srgb, var(--brand-negative) 20%, transparent)',
-            },
-          }}
-        />
+        <span
+          className={`text-xs font-semibold rounded-full px-2 py-1 backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 text-[${colorVar}] border ${
+            positive
+              ? 'border-[color-mix(in_srgb,var(--brand-positive)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-positive)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-positive)_8%,transparent)_100%)]'
+              : 'border-[color-mix(in_srgb,var(--brand-negative)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-negative)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-negative)_8%,transparent)_100%)]'
+          }`}
+          title={label}
+        >
+          {label}
+        </span>
       );
     },
   },
@@ -230,31 +161,20 @@ export const columns: GridColDef[] = [
         style: 'percent',
       });
       const positive = v >= 0;
+      const colorVar = positive
+        ? 'var(--brand-positive)'
+        : 'var(--brand-negative)';
       return (
-        <Chip
-          size='small'
-          label={label}
-          sx={{
-            fontWeight: 600,
-            fontSize: '0.75rem',
-            borderRadius: '12px',
-            border: positive
-              ? '1px solid color-mix(in srgb, var(--brand-positive) 30%, transparent)'
-              : '1px solid color-mix(in srgb, var(--brand-negative) 30%, transparent)',
-            background: positive
-              ? 'linear-gradient(135deg, color-mix(in srgb, var(--brand-positive) 15%, transparent) 0%, color-mix(in srgb, var(--brand-positive) 8%, transparent) 100%)'
-              : 'linear-gradient(135deg, color-mix(in srgb, var(--brand-negative) 15%, transparent) 0%, color-mix(in srgb, var(--brand-negative) 8%, transparent) 100%)',
-            color: positive ? 'var(--brand-positive)' : 'var(--brand-negative)',
-            backdropFilter: 'blur(8px)',
-            transition: 'all 200ms ease',
-            '&:hover': {
-              transform: 'translateY(-1px)',
-              boxShadow: positive
-                ? '0 4px 12px color-mix(in srgb, var(--brand-positive) 20%, transparent)'
-                : '0 4px 12px color-mix(in srgb, var(--brand-negative) 20%, transparent)',
-            },
-          }}
-        />
+        <span
+          className={`text-xs font-semibold rounded-full px-2 py-1 backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 text-[${colorVar}] border ${
+            positive
+              ? 'border-[color-mix(in_srgb,var(--brand-positive)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-positive)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-positive)_8%,transparent)_100%)]'
+              : 'border-[color-mix(in_srgb,var(--brand-negative)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-negative)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-negative)_8%,transparent)_100%)]'
+          }`}
+          title={label}
+        >
+          {label}
+        </span>
       );
     },
   },

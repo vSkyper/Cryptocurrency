@@ -1,4 +1,3 @@
-import { Avatar, Box } from '@mui/material';
 import {
   Reddit as RedditIcon,
   Facebook as FacebookIcon,
@@ -8,20 +7,7 @@ import {
   Forum as ForumIcon,
 } from '@mui/icons-material';
 import { LinksProps } from './interface';
-import {
-  ModernLinksCard,
-  HeaderBox,
-  TitleTypography,
-  SectionTitle,
-  LinksContainer,
-  PrimaryLinkChip,
-  ForumChip,
-  ExplorerChip,
-  RedditChip,
-  TwitterChip,
-  FacebookChip,
-  GitHubChip,
-} from './styled';
+import { ChipLink } from './components';
 
 export default function Links({ data }: LinksProps) {
   const hasBlockchainSites =
@@ -29,123 +15,125 @@ export default function Links({ data }: LinksProps) {
     data.links.blockchain_site.filter(Boolean).length > 0;
 
   return (
-    <ModernLinksCard>
-      <HeaderBox>
-        <TitleTypography variant='h6'>
+    <div className='p-4 rounded-lg bg-[var(--bg-tertiary)]'>
+      <div className='mb-4 pb-4 border-b border-[color-mix(in_srgb,var(--brand-blue)20%,transparent)]'>
+        <div className='text-center font-bold text-lg sm:text-xl bg-clip-text text-transparent bg-[linear-gradient(135deg,var(--brand-blue)_0%,var(--brand-blue-light)_70%)]'>
           Official Links & Community
-        </TitleTypography>
-      </HeaderBox>
+        </div>
+        {/* small centered underline bar (replaces MUI ::after) */}
+        <div className='mx-auto mt-2 h-1 w-14 rounded-sm bg-[linear-gradient(90deg,var(--brand-blue),var(--brand-blue-light))]' />
+      </div>
 
       {/* Primary Links Section */}
-      <LinksContainer sx={{ gap: 1.5 }}>
+      <div className='flex flex-wrap gap-2 justify-center'>
         {data.links?.homepage?.[0] && (
-          <PrimaryLinkChip
-            avatar={
-              <Avatar
-                alt='logo'
+          <ChipLink
+            href={data.links.homepage[0]}
+            left={
+              <img
                 src={data.image?.large}
-                sx={{
-                  width: 22,
-                  height: 22,
-                  border:
-                    '1px solid color-mix(in srgb, var(--brand-blue) 30%, transparent)',
-                }}
+                alt='logo'
+                className='w-5 h-5 rounded-full object-cover border'
               />
             }
-            label='Official Website'
-            component='a'
-            href={data.links.homepage[0]}
-            clickable
-          />
+            className='bg-[var(--chip-bg)] border border-[var(--chip-border)] text-[var(--brand-blue)]'
+          >
+            Official Website
+          </ChipLink>
         )}
 
         {data.links?.official_forum_url?.[0] && (
-          <ForumChip
-            icon={
-              <ForumIcon sx={{ fontSize: 18, color: 'var(--brand-blue)' }} />
-            }
-            label='Official Forum'
-            component='a'
+          <ChipLink
             href={data.links.official_forum_url[0]}
-            clickable
-          />
+            left={
+              <ForumIcon
+                sx={{ fontSize: 16 }}
+                className='text-[var(--brand-blue)]'
+              />
+            }
+            className='bg-[var(--chip-bg)] border border-[var(--chip-border)] text-[var(--brand-blue)]'
+          >
+            Official Forum
+          </ChipLink>
         )}
-      </LinksContainer>
+      </div>
 
       {/* Blockchain Explorer Links */}
       {hasBlockchainSites && (
-        <Box sx={{ mt: 3 }}>
-          <SectionTitle variant='subtitle2'>Blockchain Explorers</SectionTitle>
-          <LinksContainer>
+        <div className='mt-3'>
+          <div className='text-center text-[0.75rem] uppercase tracking-wide font-semibold text-[color-mix(in_srgb,var(--brand-blue)_80%,transparent)] mb-3'>
+            Blockchain Explorers
+          </div>
+          <div className='flex flex-wrap gap-2 justify-center'>
             {data.links?.blockchain_site?.slice(0, 3).map(
               (blockchain) =>
                 blockchain && (
-                  <ExplorerChip
+                  <ChipLink
                     key={blockchain}
-                    icon={
+                    href={blockchain}
+                    left={
                       <WebsiteIcon
-                        sx={{
-                          fontSize: 16,
-                          color: 'var(--brand-blue-light)',
-                        }}
+                        sx={{ fontSize: 16 }}
+                        className='text-[var(--brand-blue-light)]'
                       />
                     }
-                    label={new URL(blockchain).hostname.replace('www.', '')}
-                    component='a'
-                    href={blockchain}
-                    clickable
-                  />
+                    className='bg-[var(--chip-bg)] border border-[var(--chip-border)] text-[var(--brand-blue-light)] text-xs'
+                  >
+                    {new URL(blockchain).hostname.replace('www.', '')}
+                  </ChipLink>
                 )
             )}
-          </LinksContainer>
-        </Box>
+          </div>
+        </div>
       )}
 
       {/* Social Media Links */}
-      <Box sx={{ mt: 3 }}>
-        <SectionTitle variant='subtitle2'>Social Media</SectionTitle>
-        <LinksContainer>
+      <div className='mt-3'>
+        <div className='text-center text-[0.75rem] uppercase tracking-wide font-semibold text-[color-mix(in_srgb,var(--brand-blue)_80%,transparent)] mb-3'>
+          Social Media
+        </div>
+        <div className='flex flex-wrap gap-2 justify-center'>
           {data.links?.subreddit_url && (
-            <RedditChip
-              icon={<RedditIcon sx={{ fontSize: 16 }} />}
-              label='Reddit'
-              component='a'
+            <ChipLink
               href={data.links.subreddit_url}
-              clickable
-            />
+              left={<RedditIcon sx={{ fontSize: 16 }} />}
+              className='text-sm bg-[linear-gradient(135deg,rgba(255,69,0,0.2),rgba(255,69,0,0.1))] border border-[rgba(255,69,0,0.5)] text-[#CC3700]'
+            >
+              Reddit
+            </ChipLink>
           )}
 
           {data.links?.twitter_screen_name && (
-            <TwitterChip
-              icon={<TwitterIcon sx={{ fontSize: 16 }} />}
-              label='Twitter'
-              component='a'
+            <ChipLink
               href={`https://twitter.com/${data.links.twitter_screen_name}/`}
-              clickable
-            />
+              left={<TwitterIcon sx={{ fontSize: 16 }} />}
+              className='text-sm bg-[linear-gradient(135deg,rgba(29,161,242,0.2),rgba(29,161,242,0.1))] border border-[rgba(29,161,242,0.5)] text-[#1B8CD3]'
+            >
+              Twitter
+            </ChipLink>
           )}
 
           {data.links?.facebook_username && (
-            <FacebookChip
-              icon={<FacebookIcon sx={{ fontSize: 16 }} />}
-              label='Facebook'
-              component='a'
+            <ChipLink
               href={`https://www.facebook.com/${data.links.facebook_username}/`}
-              clickable
-            />
+              left={<FacebookIcon sx={{ fontSize: 16 }} />}
+              className='text-sm bg-[linear-gradient(135deg,rgba(24,119,242,0.2),rgba(24,119,242,0.1))] border border-[rgba(24,119,242,0.5)] text-[#1565C0]'
+            >
+              Facebook
+            </ChipLink>
           )}
 
           {data.links?.repos_url?.github?.[0] && (
-            <GitHubChip
-              icon={<GitHubIcon sx={{ fontSize: 16 }} />}
-              label='GitHub'
-              component='a'
+            <ChipLink
               href={data.links.repos_url.github[0]}
-              clickable
-            />
+              left={<GitHubIcon sx={{ fontSize: 16 }} />}
+              className='text-sm bg-[linear-gradient(135deg,rgba(139,148,158,0.2),rgba(139,148,158,0.1))] border border-[rgba(139,148,158,0.5)] text-[#7D8590]'
+            >
+              GitHub
+            </ChipLink>
           )}
-        </LinksContainer>
-      </Box>
-    </ModernLinksCard>
+        </div>
+      </div>
+    </div>
   );
 }

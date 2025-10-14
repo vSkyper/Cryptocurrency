@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <main className='relative w-full min-h-screen'>
-      <div className='relative z-[1] container mx-auto py-6 sm:py-8 px-2 sm:px-2'>
+      <div className='relative z-[1] container mx-auto py-6 sm:py-8 px-4 sm:px-2'>
         <Global globalData={globalData} />
         <Table coins={coins} />
       </div>

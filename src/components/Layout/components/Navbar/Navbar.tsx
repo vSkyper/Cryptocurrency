@@ -3,8 +3,8 @@ import { SearchBar, Title, Tooltips } from './components';
 export default function Navbar() {
   return (
     <div className='flex-grow'>
-      <nav className='fixed top-0 left-0 right-0 z-50 bg-[color-mix(in_srgb,var(--bg-primary)_30%,transparent)] backdrop-blur-[10px] border-b-0'>
-        <div className='container mx-auto px-2 sm:px-2'>
+      <nav className='fixed top-0 left-0 right-0 z-50 bg-[color-mix(in_srgb,var(--bg-primary)_30%,transparent)] backdrop-blur-md border-b-0'>
+        <div className='container mx-auto px-4 sm:px-2'>
           <div className='flex items-center justify-between gap-2 sm:gap-6 md:gap-8 py-3 sm:py-4 min-h-[60px] sm:min-h-[72px] relative z-10'>
             {/* Left Section */}
             <div className='flex items-center gap-2 sm:gap-4 flex-shrink-0 min-w-auto'>

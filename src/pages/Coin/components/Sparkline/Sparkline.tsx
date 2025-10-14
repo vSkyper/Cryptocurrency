@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { Grid, CircularProgress } from '@mui/material';
 import { format } from 'date-fns';
-import { Chart, ButtonContainer, StyledBackdrop } from './styled';
 import { ButtonComponent, ChartComponent } from './components';
 import { ErrorModal } from 'components';
 import { ISparkline } from 'interfaces';
 import useFetch from 'hooks/useFetch';
 import { buttons } from 'constants/coin';
 import { SparklineProps } from './interface';
+import { CircularProgress } from '@mui/material';
 
 const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
 const DEFAULT_DAYS = '7';
@@ -31,26 +30,32 @@ export default function Sparkline({ id }: SparklineProps) {
 
   return (
     <>
-      <ButtonContainer>
-        <Grid container justifyContent='flex-end' spacing={1}>
+      {/* Buttons */}
+      <div className='mb-4'>
+        <div className='flex justify-end gap-2 flex-wrap'>
           {buttons.map((button) => (
-            <Grid key={button.days}>
+            <div key={button.days}>
               <ButtonComponent
                 {...button}
                 setDays={setDays}
                 actualDays={days}
               />
-            </Grid>
+            </div>
           ))}
-        </Grid>
-      </ButtonContainer>
+        </div>
+      </div>
 
-      <Chart>
-        <StyledBackdrop open={!data}>
-          <CircularProgress />
-        </StyledBackdrop>
+      {/* Chart container */}
+      <div className='relative w-full bg-[var(--bg-tertiary)] rounded-xl overflow-hidden p-2 sm:p-3 h-[280px] sm:h-[320px] md:h-[480px]'>
+        {/* Loading backdrop */}
+        {!data && (
+          <div className='absolute inset-0 z-20 flex items-center justify-center bg-transparent'>
+            <CircularProgress />
+          </div>
+        )}
+
         {sparkline && <ChartComponent sparkline={sparkline} days={days} />}
-      </Chart>
+      </div>
     </>
   );
 }

@@ -19,10 +19,7 @@ function Switch(props: SwitchProps) {
         className={`
           inline-flex items-center justify-center gap-2
           ${mobile ? 'px-5 py-3 text-sm' : 'px-5 py-2.5 text-base'}
-          font-semibold rounded-full
-          backdrop-blur-[12px] border
-          transition-all duration-300 ease-out
-          relative overflow-hidden group
+          font-semibold rounded-full backdrop-blur-md border transition-all duration-300 ease-out relative overflow-hidden group
           ${
             toggle
               ? 'bg-[var(--brand-blue)] border-[var(--brand-blue)] text-white shadow-[0_4px_12px_color-mix(in_srgb,var(--brand-blue)_30%,transparent)]'
@@ -40,7 +37,7 @@ function Switch(props: SwitchProps) {
         `}
       >
         {/* Shine effect */}
-        <span className='absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] to-transparent transition-all duration-500 group-hover:left-[100%]' />
+        <span className='absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] to-transparent transition-all duration-500 group-hover:left-full' />
 
         <span className='relative z-10 flex items-center gap-2 transition-all duration-200'>
           {toggle ? (

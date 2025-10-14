@@ -9,14 +9,12 @@ import {
   TooltipContentProps,
 } from 'recharts';
 import { format } from 'date-fns';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
 import {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
-import { useCallback } from 'react';
 import { ChartProps } from './interface';
-import { TooltipPaper, TooltipDate, TooltipValue } from './styled';
 
 const formatCurrency = (value: number): string => {
   return value.toLocaleString('en-US', {
@@ -40,21 +38,42 @@ const getTickFormat = (days: string, value: string): string => {
 
 export default function ChartComponent(props: ChartProps) {
   const { sparkline, days } = props;
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    const handler = (e: MediaQueryListEvent | MediaQueryList) =>
+      setIsMobile(e.matches);
+    handler(mq);
+    if ('addEventListener' in mq) {
+      mq.addEventListener('change', handler as any);
+    } else {
+      // Safari
+      // @ts-ignore
+      mq.addListener(handler as any);
+    }
+    return () => {
+      if ('removeEventListener' in mq) {
+        mq.removeEventListener('change', handler as any);
+      } else {
+        // @ts-ignore
+        mq.removeListener(handler as any);
+      }
+    };
+  }, []);
 
   const CustomTooltip = useCallback(
     ({ active, payload, label }: TooltipContentProps<ValueType, NameType>) => {
       if (!active || !payload || !payload.length) return null;
       return (
-        <TooltipPaper>
-          <TooltipDate>
+        <div className='bg-[var(--bg-tertiary-dark)] border border-white/12 rounded-lg px-3 py-2 shadow-lg text-sm backdrop-blur-sm'>
+          <div className='text-sm text-white/70 mb-1'>
             {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
-          </TooltipDate>
-          <TooltipValue>
+          </div>
+          <div className='font-medium text-white'>
             {formatCurrency(Number(payload[0].value))}
-          </TooltipValue>
-        </TooltipPaper>
+          </div>
+        </div>
       );
     },
     []

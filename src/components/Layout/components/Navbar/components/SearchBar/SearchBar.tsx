@@ -97,7 +97,7 @@ export default function SearchBar() {
           >
             <ComboboxOptions
               modal={false}
-              className='absolute mt-0.5 w-full overflow-hidden rounded-2xl bg-[var(--bg-dropdown)] backdrop-blur-[40px] backdrop-saturate-[200%] shadow-[var(--shadow-dropdown)] z-50'
+              className='absolute mt-0.5 w-full overflow-hidden rounded-2xl bg-[var(--bg-dropdown)] backdrop-blur-3xl backdrop-saturate-200 shadow-[var(--shadow-dropdown)] z-50'
             >
               {filteredCoins.length === 0 ? (
                 <div className='relative cursor-default select-none py-4 px-4 text-center text-[0.9rem] font-medium text-white/70'>

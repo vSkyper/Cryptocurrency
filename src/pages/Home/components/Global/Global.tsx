@@ -28,15 +28,11 @@ function Global(props: GlobalProps) {
       </div>
 
       <div
-        className={`transition-all duration-150 ease-out ${
+        className={`transition-all duration-150 ease-out translate-z-0 will-change-[max-height,opacity] ${
           toggle
             ? 'max-h-[1000px] opacity-100'
             : 'max-h-0 opacity-0 overflow-hidden'
         }`}
-        style={{
-          transform: 'translateZ(0)',
-          willChange: 'max-height, opacity',
-        }}
       >
         <Cards toggle={toggle} globalData={globalData} />
       </div>

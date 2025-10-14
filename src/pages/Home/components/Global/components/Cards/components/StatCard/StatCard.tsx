@@ -29,7 +29,7 @@ function StatCard({ config, toggle }: Omit<StatCardProps, 'isMobile'>) {
         }
       `}
     >
-      <div className='flex flex-col justify-center items-center relative overflow-hidden rounded-xl bg-[color-mix(in_srgb,var(--bg-tertiary)_40%,transparent))] backdrop-blur-[12px] p-4 sm:p-5 transition-all duration-300'>
+      <div className='flex flex-col justify-center items-center relative overflow-hidden rounded-xl bg-[color-mix(in_srgb,var(--bg-tertiary)_40%,transparent))] backdrop-blur-md p-4 sm:p-5 transition-all duration-300'>
         {/* Title with optional percentage */}
         <div className='flex flex-col gap-2'>
           <div className='flex items-center gap-2'>
