@@ -75,7 +75,7 @@ export const ExchangeHeader = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
+export const SwapButton = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -87,15 +87,8 @@ export const AnimatedSwapButton = styled(Box)(({ theme }) => ({
   position: 'relative',
   overflow: 'hidden',
   cursor: 'default',
+  pointerEvents: 'none',
   transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-  [theme.breakpoints.up('md')]: {
-    '&:hover': {
-      transform: 'scale(1.05)',
-      background: 'color-mix(in srgb, var(--brand-blue) 30%, transparent)',
-      boxShadow:
-        '0 4px 16px color-mix(in srgb, var(--brand-blue) 20%, transparent)',
-    },
-  },
   [theme.breakpoints.down('md')]: {
     transition: 'none',
   },
@@ -259,17 +252,13 @@ export const ExchangeRateDisplay = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
   borderRadius: theme.spacing(2),
   background: 'var(--bg-tertiary-dark)',
-  transition: 'all 250ms ease',
-  '&:hover': {
-    background:
-      'color-mix(in srgb, var(--bg-tertiary-dark) 90%, var(--brand-blue) 10%)',
-    transform: 'translateY(-1px)',
-    boxShadow:
-      '0 4px 16px color-mix(in srgb, var(--brand-blue) 10%, transparent)',
-  },
+  minHeight: 48,
+  height: 48,
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(1, 1.5),
     marginTop: theme.spacing(1.5),
     gap: theme.spacing(0.5),
+    minHeight: 40,
+    height: 40,
   },
 }));

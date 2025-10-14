@@ -8,12 +8,12 @@ export const DataTable = styled(Box)(({ theme }) => ({
     marginTop: theme.spacing(1),
     borderRadius: 12,
   },
-  background: 'color-mix(in srgb, var(--bg-primary) 40%, transparent)',
+  background: 'transparent',
   position: 'relative',
   overflow: 'hidden',
   transform: 'translateZ(0)',
-  willChange: 'auto',
-  contain: 'layout style',
+  willChange: 'transform',
+  contain: 'layout style paint',
   '& .MuiDataGrid-root': {
     position: 'relative',
     zIndex: 1,
@@ -38,15 +38,27 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   '& .MuiDataGrid-main': {
     backgroundColor: 'transparent !important',
   },
+  '& .MuiDataGrid-withBorderColor': {
+    borderColor: 'transparent !important',
+  },
+  '& .MuiDataGrid-cell, & .MuiDataGrid-row, & .MuiDataGrid-columnHeader': {
+    borderBottom: 'none !important',
+    borderTop: 'none !important',
+  },
   '& .MuiDataGrid-container--top [role=row]': {
     backgroundColor: 'transparent !important',
     background: 'transparent !important',
   },
+  '& .MuiDataGrid-virtualScroller': {
+    transform: 'translateZ(0)',
+    willChange: 'transform',
+  },
   '& .MuiDataGrid-row': {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    contain: 'layout style',
+    contain: 'layout style paint',
     pointerEvents: 'auto',
+    willChange: 'background-color',
     '&:focus, &:focus-within': {
       backgroundColor:
         'color-mix(in srgb, var(--brand-blue) 10%, transparent) !important',
@@ -60,11 +72,16 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
           'color-mix(in srgb, var(--brand-blue) 15%, transparent) !important',
       },
     },
+    // Alternating row pattern - even rows get subtle background
+    '&:nth-of-type(even)': {
+      backgroundColor: 'rgba(20, 30, 48, 0.4)',
+    },
+    // Hover effect for all rows
     [theme.breakpoints.up('md')]: {
-      transition: 'background-color 150ms ease',
+      transition: 'background-color 100ms ease',
       '&:hover': {
         backgroundColor:
-          'color-mix(in srgb, var(--brand-blue) 8%, transparent)',
+          'color-mix(in srgb, var(--brand-blue) 8%, transparent) !important',
       },
     },
     [theme.breakpoints.down('md')]: {
@@ -74,19 +91,10 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
         outline: 'none',
       },
     },
-    '&:nth-of-type(even)': {
-      backgroundColor: 'rgba(255, 255, 255, 0.02)',
-      '&:focus, &:focus-within': {
-        backgroundColor:
-          'color-mix(in srgb, var(--brand-blue) 10%, transparent) !important',
-      },
-    },
   },
   '& .MuiDataGrid-cell': {
     display: 'flex',
     alignItems: 'center',
-    borderBottom:
-      '1px solid color-mix(in srgb, var(--brand-blue) 8%, transparent)',
     color: 'rgba(255, 255, 255, 0.9)',
     padding: '12px 16px',
     fontSize: '0.875rem',
@@ -103,17 +111,15 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     display: 'none !important',
   },
   '& .MuiDataGrid-columnHeaders': {
-    backgroundColor:
-      'color-mix(in srgb, var(--brand-blue) 8%, transparent) !important',
-    background:
-      'color-mix(in srgb, var(--brand-blue) 8%, transparent) !important',
-    borderBottom:
-      '2px solid color-mix(in srgb, var(--brand-blue) 20%, transparent)',
+    backgroundColor: 'var(--bg-tertiary-dark) !important',
+    background: 'var(--bg-tertiary-dark) !important',
+    borderBottom: 'none',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     color: 'var(--brand-blue)',
     fontWeight: 700,
     minHeight: '56px !important',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
     '& .MuiDataGrid-columnHeader': {
       backgroundColor: 'transparent !important',
       background: 'transparent !important',
@@ -123,10 +129,10 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
       },
     },
     '& .MuiDataGrid-columnHeaderTitle': {
-      color: 'var(--brand-blue)',
-      fontWeight: 700,
-      fontSize: '0.9rem',
-      letterSpacing: '0.5px',
+      color: 'rgba(255, 255, 255, 0.95)',
+      fontWeight: 600,
+      fontSize: '0.85rem',
+      letterSpacing: '0.8px',
       textTransform: 'uppercase',
     },
   },

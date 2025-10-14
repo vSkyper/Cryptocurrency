@@ -1,6 +1,10 @@
 import { memo, useCallback } from 'react';
-import { IOSSwitch, StyledFormControlLabel } from './styled';
+import { ToggleButton, ToggleButtonContainer } from './styled';
 import { SwitchProps } from './interface';
+import {
+  BarChart as BarChartIcon,
+  BarChartOutlined as BarChartOutlinedIcon,
+} from '@mui/icons-material';
 
 function Switch(props: SwitchProps) {
   const { toggle, setToggle, mobile } = props;
@@ -10,20 +14,26 @@ function Switch(props: SwitchProps) {
   }, [setToggle]);
 
   return (
-    <StyledFormControlLabel
-      mobile={mobile}
-      control={
-        <IOSSwitch
-          checked={toggle}
-          sx={{
-            mr: mobile ? 0.5 : 1,
-            transform: mobile ? 'scale(0.85)' : 'scale(1)',
-          }}
-          onChange={handleChange}
-        />
-      }
-      label='Show Stats'
-    />
+    <ToggleButtonContainer mobile={mobile}>
+      <ToggleButton onClick={handleChange} active={toggle} mobile={mobile}>
+        {toggle ? (
+          <BarChartIcon
+            sx={{
+              fontSize: mobile ? '1rem' : '1.2rem',
+              transition: 'all 200ms ease',
+            }}
+          />
+        ) : (
+          <BarChartOutlinedIcon
+            sx={{
+              fontSize: mobile ? '1rem' : '1.2rem',
+              transition: 'all 200ms ease',
+            }}
+          />
+        )}
+        <span>Show Stats</span>
+      </ToggleButton>
+    </ToggleButtonContainer>
   );
 }
 

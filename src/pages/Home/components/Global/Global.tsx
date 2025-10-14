@@ -1,5 +1,5 @@
 import { useState, memo } from 'react';
-import { Grid, Collapse, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
 import { GlobalContainer, PageTitle, MobileSwitchContainer } from './styled';
@@ -8,8 +8,6 @@ function Global(props: GlobalProps) {
   const { globalData } = props;
 
   const [toggle, setToggle] = useState<boolean>(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
@@ -32,9 +30,18 @@ function Global(props: GlobalProps) {
         </MobileSwitchContainer>
       </GlobalContainer>
 
-      <Collapse in={toggle} timeout={isMobile ? 0 : 'auto'}>
+      <Box
+        sx={{
+          maxHeight: toggle ? '1000px' : '0px',
+          overflow: 'hidden',
+          transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: 'translateZ(0)',
+          willChange: 'max-height, opacity',
+          opacity: toggle ? 1 : 0,
+        }}
+      >
         <Cards toggle={toggle} globalData={globalData} />
-      </Collapse>
+      </Box>
     </>
   );
 }

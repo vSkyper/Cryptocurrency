@@ -12,11 +12,22 @@ function Table(props: TableProps) {
         density='comfortable'
         pagination
         disableRowSelectionOnClick
-        autoHeight
+        disableColumnMenu
+        disableColumnFilter
+        disableColumnSelector
+        disableDensitySelector
         rows={coins}
         columns={columns}
         initialState={{
           pagination: { paginationModel: { pageSize: 50 } },
+        }}
+        pageSizeOptions={[50, 100]}
+        sx={{
+          height: 'auto',
+          minHeight: 400,
+          '& .MuiDataGrid-virtualScroller': {
+            minHeight: 400,
+          },
         }}
       />
     </DataTable>

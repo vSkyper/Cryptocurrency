@@ -6,6 +6,7 @@ import {
   createFilterOptions,
   AutocompleteRenderInputParams,
   Fade,
+  CircularProgress,
 } from '@mui/material';
 import {
   SwapVert as SwapVertIcon,
@@ -15,7 +16,7 @@ import {
   InputCard,
   ModernExchangeCard,
   ExchangeHeader,
-  AnimatedSwapButton,
+  SwapButton,
   CurrencySection,
   ExchangeRateDisplay,
   HeaderTitle,
@@ -42,6 +43,10 @@ const formatCurrencyRate = (rate: number, currency: string): string => {
   }).format(rate);
 };
 
+const defaultFilterOptions = createFilterOptions<string>({
+  matchFrom: 'start',
+});
+
 export default function Exchange(props: ExchangeProps) {
   const { id, symbol } = props;
 
@@ -51,6 +56,7 @@ export default function Exchange(props: ExchangeProps) {
   const [lastEditedField, setLastEditedField] = useState<'crypto' | 'currency'>(
     'crypto'
   );
+  const [isLoadingRate, setIsLoadingRate] = useState<boolean>(false);
 
   const { data: currencies, error: currenciesError } = useFetch<string[]>(
     `https://api.coingecko.com/api/v3/simple/supported_vs_currencies?x_cg_demo_api_key=${API_KEY}`
@@ -59,6 +65,21 @@ export default function Exchange(props: ExchangeProps) {
   const { data: exchangeRate, error: exchangeRateError } = useFetch<IExchange>(
     `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=${API_KEY}`
   );
+
+  const currentRate = exchangeRate?.[id]?.[currencyOption];
+  const formattedRate = currentRate
+    ? formatCurrencyRate(currentRate, currencyOption)
+    : '';
+
+  useEffect(() => {
+    setIsLoadingRate(true);
+  }, [currencyOption]);
+
+  useEffect(() => {
+    if (exchangeRate && exchangeRate[id]?.[currencyOption]) {
+      setIsLoadingRate(false);
+    }
+  }, [exchangeRate, id, currencyOption]);
 
   useEffect(() => {
     if (!exchangeRate || (!cryptoAmount && !currencyAmount)) return;
@@ -83,14 +104,10 @@ export default function Exchange(props: ExchangeProps) {
     currencyAmount,
   ]);
 
-  const defaultFilterOptions = createFilterOptions<string>({
-    matchFrom: 'start',
-  });
-
   const filterOptions = useCallback(
     (options: string[], state: FilterOptionsState<string>) =>
       defaultFilterOptions(options, state).slice(0, 5),
-    [defaultFilterOptions]
+    []
   );
 
   const handleOptionLabel = useCallback(
@@ -100,8 +117,7 @@ export default function Exchange(props: ExchangeProps) {
 
   const handleChangeAutocomplete = useCallback(
     (_: React.SyntheticEvent, value: string | null) => {
-      if (!value) return;
-      setCurrencyOption(value);
+      if (value) setCurrencyOption(value);
     },
     []
   );
@@ -157,14 +173,10 @@ export default function Exchange(props: ExchangeProps) {
 
   if (currenciesError || exchangeRateError) return <ErrorModal />;
 
-  const currentRate = exchangeRate?.[id]?.[currencyOption];
-  const formattedRate = currentRate
-    ? formatCurrencyRate(currentRate, currencyOption)
-    : '';
-
   return (
     <Fade in timeout={800}>
       <ModernExchangeCard>
+        {/* Header */}
         <ExchangeHeader>
           <CalculateIcon
             sx={{
@@ -176,6 +188,7 @@ export default function Exchange(props: ExchangeProps) {
           <HeaderTitle variant='h6'>Exchange Calculator</HeaderTitle>
         </ExchangeHeader>
 
+        {/* Currency Input Grid */}
         <Grid
           container
           justifyContent='center'
@@ -183,6 +196,7 @@ export default function Exchange(props: ExchangeProps) {
           direction='column'
           spacing={0}
         >
+          {/* Crypto Input */}
           <Grid size={12}>
             <CurrencySection>
               <CurrencyLabelBox>
@@ -204,10 +218,12 @@ export default function Exchange(props: ExchangeProps) {
             </CurrencySection>
           </Grid>
 
-          <AnimatedSwapButton>
+          {/* Swap Icon */}
+          <SwapButton>
             <SwapVertIcon />
-          </AnimatedSwapButton>
+          </SwapButton>
 
+          {/* Fiat Currency Input */}
           <Grid size={12}>
             <CurrencySection>
               <CurrencyLabelBox sx={{ mb: { xs: 0, sm: 0.5 } }}>
@@ -239,15 +255,18 @@ export default function Exchange(props: ExchangeProps) {
           </Grid>
         </Grid>
 
-        {currentRate && (
-          <Fade in timeout={1000}>
-            <ExchangeRateDisplay>
+        {/* Exchange Rate Display */}
+        <ExchangeRateDisplay>
+          {isLoadingRate ? (
+            <CircularProgress size={16} sx={{ color: 'var(--brand-blue)' }} />
+          ) : (
+            currentRate && (
               <RateText variant='caption'>
                 1 {symbol.toUpperCase()} = {formattedRate}
               </RateText>
-            </ExchangeRateDisplay>
-          </Fade>
-        )}
+            )
+          )}
+        </ExchangeRateDisplay>
       </ModernExchangeCard>
     </Fade>
   );

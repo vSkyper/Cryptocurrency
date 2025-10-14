@@ -13,8 +13,6 @@ export const CoinImage = styled(Box)<{
   width: 56,
   height: 56,
   borderRadius: '50%',
-  boxShadow:
-    '0 4px 12px color-mix(in srgb, var(--brand-blue) 20%, transparent)',
   border: '2px solid color-mix(in srgb, var(--brand-blue) 20%, transparent)',
   [theme.breakpoints.down('sm')]: {
     width: 48,
