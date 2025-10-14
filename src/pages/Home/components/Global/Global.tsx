@@ -1,8 +1,6 @@
 import { useState, memo } from 'react';
-import { Grid, Box } from '@mui/material';
 import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
-import { GlobalContainer, PageTitle, MobileSwitchContainer } from './styled';
 
 function Global(props: GlobalProps) {
   const { globalData } = props;
@@ -11,37 +9,37 @@ function Global(props: GlobalProps) {
 
   return (
     <>
-      <GlobalContainer>
-        <Grid container alignItems='center' spacing={2}>
-          <Grid size={{ xs: 12, md: 8 }}>
-            <PageTitle variant='h5'>Global Cryptocurrency Market</PageTitle>
+      <div className='mb-6 sm:mb-8'>
+        <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
+          <div className='flex-1'>
+            <h1 className='text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-white'>
+              Global Cryptocurrency Market
+            </h1>
             <Description globalData={globalData} />
-          </Grid>
-          <Grid
-            size={{ xs: 12, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'flex-end' }}
-          >
+          </div>
+          <div className='hidden md:flex md:justify-end'>
             <Switch toggle={toggle} setToggle={setToggle} mobile={false} />
-          </Grid>
-        </Grid>
+          </div>
+        </div>
 
-        <MobileSwitchContainer>
+        <div className='md:hidden pt-8'>
           <Switch toggle={toggle} setToggle={setToggle} mobile />
-        </MobileSwitchContainer>
-      </GlobalContainer>
+        </div>
+      </div>
 
-      <Box
-        sx={{
-          maxHeight: toggle ? '1000px' : '0px',
-          overflow: 'hidden',
-          transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+      <div
+        className={`transition-all duration-150 ease-out ${
+          toggle
+            ? 'max-h-[1000px] opacity-100'
+            : 'max-h-0 opacity-0 overflow-hidden'
+        }`}
+        style={{
           transform: 'translateZ(0)',
           willChange: 'max-height, opacity',
-          opacity: toggle ? 1 : 0,
         }}
       >
         <Cards toggle={toggle} globalData={globalData} />
-      </Box>
+      </div>
     </>
   );
 }

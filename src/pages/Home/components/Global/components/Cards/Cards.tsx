@@ -1,8 +1,6 @@
-import { useMediaQuery, useTheme } from '@mui/material';
 import { memo, useMemo } from 'react';
 import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
-import { CardsContainer } from './styled';
 
 const formatCurrency = (value: number): string =>
   Intl.NumberFormat('en-US', {
@@ -22,9 +20,6 @@ const formatPercentage = (value: number): string =>
 const formatNumber = (value: number): string => value.toLocaleString('en-US');
 
 function Cards({ toggle, globalData }: CardsProps) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   const cardConfigs: CardConfig[] = useMemo(
     () => [
       {
@@ -38,51 +33,46 @@ function Cards({ toggle, globalData }: CardsProps) {
           ),
           change: globalData.data.market_cap_change_percentage_24h_usd,
         },
-        timeout: 600,
+        timeout: 0,
       },
       {
         key: 'totalVolume',
         value: formatCurrency(globalData.data.total_volume.usd),
         label: '24h Volume',
         color: 'var(--brand-blue-light)',
-        timeout: 800,
+        timeout: 100,
       },
       {
         key: 'btcDominance',
         value: formatPercentage(globalData.data.market_cap_percentage.btc),
         label: 'BTC Dominance',
         color: 'var(--brand-bitcoin)',
-        timeout: 1000,
+        timeout: 200,
       },
       {
         key: 'ethDominance',
         value: formatPercentage(globalData.data.market_cap_percentage.eth),
         label: 'ETH Dominance',
         color: 'var(--brand-ethereum)',
-        timeout: 1100,
+        timeout: 300,
       },
       {
         key: 'activeCryptos',
         value: formatNumber(globalData.data.active_cryptocurrencies),
         label: 'Active Cryptos',
         color: '#ffffff',
-        timeout: 1200,
+        timeout: 400,
       },
     ],
     [globalData]
   );
 
   return (
-    <CardsContainer container spacing={{ xs: 1.5, sm: 2, md: 3 }}>
+    <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 mb-6'>
       {cardConfigs.map((config) => (
-        <StatCard
-          key={config.key}
-          config={config}
-          toggle={toggle}
-          isMobile={isMobile}
-        />
+        <StatCard key={config.key} config={config} toggle={toggle} />
       ))}
-    </CardsContainer>
+    </div>
   );
 }
 

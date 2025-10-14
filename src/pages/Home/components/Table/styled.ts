@@ -1,34 +1,5 @@
-import { styled, Box } from '@mui/material';
+import { styled } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-
-export const DataTable = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(2),
-  borderRadius: 16,
-  [theme.breakpoints.down('sm')]: {
-    marginTop: theme.spacing(1),
-    borderRadius: 12,
-  },
-  background: 'transparent',
-  position: 'relative',
-  overflow: 'hidden',
-  transform: 'translateZ(0)',
-  willChange: 'transform',
-  contain: 'layout style paint',
-  '& .MuiDataGrid-root': {
-    position: 'relative',
-    zIndex: 1,
-    backgroundColor: 'transparent',
-    border: 'none',
-  },
-  '& .negative': {
-    color: 'var(--brand-negative)',
-    fontWeight: 600,
-  },
-  '& .positive': {
-    color: 'var(--brand-positive)',
-    fontWeight: 600,
-  },
-}));
 
 export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   borderRadius: 24,

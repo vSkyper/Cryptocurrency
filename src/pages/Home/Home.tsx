@@ -1,4 +1,3 @@
-import { Box, Container } from '@mui/material';
 import { Global, Table } from './components';
 import useFetch from 'hooks/useFetch';
 import { ICoins, IGlobalData } from 'interfaces';
@@ -17,26 +16,11 @@ export default function Home() {
   if (!globalData || !coins) return <LoadingModal />;
 
   return (
-    <Box
-      component='main'
-      sx={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '100vh',
-      }}
-    >
-      <Container
-        maxWidth='xl'
-        sx={{
-          position: 'relative',
-          zIndex: 1,
-          py: { xs: 3, sm: 4 },
-          px: { xs: 2, sm: 2 },
-        }}
-      >
+    <main className='relative w-full min-h-screen'>
+      <div className='relative z-[1] container mx-auto py-6 sm:py-8 px-2 sm:px-2'>
         <Global globalData={globalData} />
         <Table coins={coins} />
-      </Container>
-    </Box>
+      </div>
+    </main>
   );
 }

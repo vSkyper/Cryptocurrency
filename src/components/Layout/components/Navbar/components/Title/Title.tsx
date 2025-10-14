@@ -1,31 +1,42 @@
-import { Tooltip } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { TrendingUp as TrendingUpIcon } from '@mui/icons-material';
-import {
-  TitleContainer,
-  LogoButton,
-  DesktopTitle,
-  StyledLink,
-  MobileTitle,
-  MobileLink,
-} from './styled';
 
 export default function Title() {
   return (
-    <TitleContainer>
-      <Tooltip title='Go to Homepage' arrow placement='bottom'>
-        <LogoButton to='/'>
-          <TrendingUpIcon />
-        </LogoButton>
-      </Tooltip>
+    <div className='flex items-center gap-2 sm:gap-3'>
+      {/* Logo Button */}
+      <Link
+        to='/'
+        title='Go to Homepage'
+        className='inline-flex items-center justify-center bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] to-[color-mix(in_srgb,var(--brand-blue)_8%,transparent)] backdrop-blur-[12px] border border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] rounded-lg text-[var(--brand-blue)] transition-all duration-300 ease-out p-1.5 sm:p-2 relative overflow-hidden group hover:bg-gradient-to-br hover:from-[color-mix(in_srgb,var(--brand-blue)_25%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] hover:-translate-y-0.5 hover:scale-105 hover:shadow-[0_8px_25px_color-mix(in_srgb,var(--brand-blue)_25%,transparent),0_4px_12px_rgba(0,0,0,0.15)] hover:border-[color-mix(in_srgb,var(--brand-blue)_40%,transparent)] active:-translate-y-px active:scale-[1.02]'
+      >
+        {/* Shine effect */}
+        <span className='absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] to-transparent transition-all duration-500 group-hover:left-[100%]' />
+        <TrendingUpIcon
+          sx={{ fontSize: '1.4rem' }}
+          className='[filter:drop-shadow(var(--shadow-dropdown))]'
+        />
+      </Link>
 
-      <DesktopTitle variant='h6' noWrap>
-        <StyledLink to='/'>Cryptocurrency</StyledLink>
-      </DesktopTitle>
+      {/* Desktop Title */}
+      <h1 className='hidden sm:block font-bold text-lg md:text-xl tracking-wide'>
+        <Link
+          to='/'
+          className="relative bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-light)] to-[var(--brand-blue)] bg-[length:200%_100%] bg-clip-text text-transparent transition-all duration-[400ms] ease-out no-underline hover:bg-[position:100%_0] hover:-translate-y-px hover:[filter:drop-shadow(0_4px_8px_color-mix(in_srgb,var(--brand-blue)_40%,transparent))] after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-[var(--brand-blue)] after:to-[var(--brand-blue-light)] after:rounded-[1px] after:transition-[width] after:duration-300 after:ease-out hover:after:w-full"
+        >
+          Cryptocurrency
+        </Link>
+      </h1>
 
-      {/* Mobile title */}
-      <MobileTitle variant='h6' noWrap>
-        <MobileLink to='/'>Crypto</MobileLink>
-      </MobileTitle>
-    </TitleContainer>
+      {/* Mobile Title */}
+      <h1 className='block sm:hidden font-bold text-base tracking-wide'>
+        <Link
+          to='/'
+          className='bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] bg-clip-text text-transparent transition-all duration-300 ease-out no-underline hover:[filter:drop-shadow(0_2px_4px_color-mix(in_srgb,var(--brand-blue)_40%,transparent))]'
+        >
+          Crypto
+        </Link>
+      </h1>
+    </div>
   );
 }

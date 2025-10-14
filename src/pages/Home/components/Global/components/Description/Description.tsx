@@ -1,12 +1,5 @@
 import { memo, useMemo } from 'react';
 import { DescriptionProps } from './interface';
-import {
-  DescriptionText,
-  BoldText,
-  ChangeText,
-  BTCText,
-  ETHText,
-} from './styled';
 
 function Description(props: DescriptionProps) {
   const { globalData } = props;
@@ -58,27 +51,40 @@ function Description(props: DescriptionProps) {
   );
 
   return (
-    <DescriptionText variant='body2'>
+    <p className='text-sm sm:text-base text-white/70 leading-relaxed max-w-5xl'>
       The global cryptocurrency market cap today is{' '}
-      <BoldText component='span'>{formattedValues.marketCapText}</BoldText>, a{' '}
-      <ChangeText component='span' isNegative={formattedValues.isNegative}>
+      <span className='font-semibold text-white'>
+        {formattedValues.marketCapText}
+      </span>
+      , a{' '}
+      <span
+        className={`font-semibold ${
+          formattedValues.isNegative
+            ? 'text-[var(--brand-negative)]'
+            : 'text-[var(--brand-positive)]'
+        }`}
+      >
         {formattedValues.marketCapPercentage}
-      </ChangeText>{' '}
+      </span>{' '}
       change in the last 24 hours. Total cryptocurrency trading volume in the
       last day is at{' '}
-      <BoldText component='span'>{formattedValues.totalVolumeText}</BoldText>.
-      Bitcoin dominance is at{' '}
-      <BTCText component='span'>
+      <span className='font-semibold text-white'>
+        {formattedValues.totalVolumeText}
+      </span>
+      . Bitcoin dominance is at{' '}
+      <span className='font-semibold text-[var(--brand-bitcoin)]'>
         {formattedValues.marketCapPercentageBTC}
-      </BTCText>{' '}
+      </span>{' '}
       and Ethereum dominance is at{' '}
-      <ETHText component='span'>
+      <span className='font-semibold text-[var(--brand-ethereum)]'>
         {formattedValues.marketCapPercentageETH}
-      </ETHText>
+      </span>
       . CoinGecko API is now tracking{' '}
-      <BoldText component='span'>{formattedValues.cryptocurrencies}</BoldText>{' '}
+      <span className='font-semibold text-white'>
+        {formattedValues.cryptocurrencies}
+      </span>{' '}
       cryptocurrencies.
-    </DescriptionText>
+    </p>
   );
 }
 
