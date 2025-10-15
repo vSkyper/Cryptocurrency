@@ -18,6 +18,13 @@ const formatSparklineData = (prices: number[][]) => {
   }));
 };
 
+const CHART_CONTAINER_CLASSES =
+  'relative w-full bg-[var(--bg-tertiary)] rounded-xl overflow-hidden ' +
+  'p-2 sm:p-3 h-[280px] sm:h-[320px] md:h-[480px]';
+
+const LOADING_OVERLAY_CLASSES =
+  'absolute inset-0 z-20 flex items-center justify-center bg-transparent';
+
 export default function Sparkline({ id }: SparklineProps) {
   const [days, setDays] = useState<string>(DEFAULT_DAYS);
 
@@ -30,26 +37,25 @@ export default function Sparkline({ id }: SparklineProps) {
 
   return (
     <>
-      {/* Buttons */}
+      {/* Time Period Buttons */}
       <div className='mb-4'>
         <div className='flex justify-end gap-2 flex-wrap'>
           {buttons.map((button) => (
-            <div key={button.days}>
-              <ButtonComponent
-                {...button}
-                setDays={setDays}
-                actualDays={days}
-              />
-            </div>
+            <ButtonComponent
+              key={button.days}
+              {...button}
+              setDays={setDays}
+              actualDays={days}
+            />
           ))}
         </div>
       </div>
 
-      {/* Chart container */}
-      <div className='relative w-full bg-[var(--bg-tertiary)] rounded-xl overflow-hidden p-2 sm:p-3 h-[280px] sm:h-[320px] md:h-[480px]'>
-        {/* Loading backdrop */}
+      {/* Chart Container */}
+      <div className={CHART_CONTAINER_CLASSES}>
+        {/* Loading State */}
         {!data && (
-          <div className='absolute inset-0 z-20 flex items-center justify-center bg-transparent'>
+          <div className={LOADING_OVERLAY_CLASSES}>
             <CircularProgress />
           </div>
         )}

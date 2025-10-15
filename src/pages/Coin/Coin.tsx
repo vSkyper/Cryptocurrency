@@ -6,6 +6,7 @@ import {
   Sparkline,
   StackData,
   CoinHeader,
+  AnimatedSection,
 } from './components';
 import { ErrorModal, LoadingModal } from 'components';
 import { ICoin } from 'interfaces';
@@ -14,27 +15,56 @@ import { useEffect, useState } from 'react';
 
 const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
 
+const ANIMATION_DELAYS = {
+  chart: 100,
+  priceCard: 200,
+  stackData: 300,
+  exchange: 400,
+  links: 500,
+};
+
 export default function Coin() {
   const { id } = useParams();
 
   const apiUrl = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false&x_cg_demo_api_key=${API_KEY}`;
+
   const { data, error } = useFetch<ICoin>(apiUrl);
 
-  // Animation state
-  const [showChart, setShowChart] = useState(false);
-  const [showPriceCard, setShowPriceCard] = useState(false);
-  const [showStackData, setShowStackData] = useState(false);
-  const [showExchange, setShowExchange] = useState(false);
-  const [showLinks, setShowLinks] = useState(false);
+  const [animations, setAnimations] = useState({
+    chart: false,
+    priceCard: false,
+    stackData: false,
+    exchange: false,
+    links: false,
+  });
 
   useEffect(() => {
-    if (data) {
-      setTimeout(() => setShowChart(true), 100);
-      setTimeout(() => setShowPriceCard(true), 200);
-      setTimeout(() => setShowStackData(true), 300);
-      setTimeout(() => setShowExchange(true), 400);
-      setTimeout(() => setShowLinks(true), 500);
-    }
+    if (!data) return;
+
+    const timers = [
+      setTimeout(
+        () => setAnimations((prev) => ({ ...prev, chart: true })),
+        ANIMATION_DELAYS.chart
+      ),
+      setTimeout(
+        () => setAnimations((prev) => ({ ...prev, priceCard: true })),
+        ANIMATION_DELAYS.priceCard
+      ),
+      setTimeout(
+        () => setAnimations((prev) => ({ ...prev, stackData: true })),
+        ANIMATION_DELAYS.stackData
+      ),
+      setTimeout(
+        () => setAnimations((prev) => ({ ...prev, exchange: true })),
+        ANIMATION_DELAYS.exchange
+      ),
+      setTimeout(
+        () => setAnimations((prev) => ({ ...prev, links: true })),
+        ANIMATION_DELAYS.links
+      ),
+    ];
+
+    return () => timers.forEach((timer) => clearTimeout(timer));
   }, [data]);
 
   if (!id || error) return <ErrorModal />;
@@ -50,64 +80,37 @@ export default function Coin() {
           marketCapRank={data.market_cap_rank}
         />
 
-        {/* Chart & Price Card */}
+        {/* Chart & Price Card Row */}
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 mt-4'>
           <div className='lg:col-span-8'>
-            <div
-              className={`transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                showChart
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-              }`}
-            >
+            <AnimatedSection show={animations.chart}>
               <Sparkline id={id} />
-            </div>
+            </AnimatedSection>
           </div>
+
           <div className='lg:col-span-4'>
-            <div
-              className={`transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                showPriceCard
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-              }`}
-            >
+            <AnimatedSection show={animations.priceCard}>
               <PriceCard data={data} />
-            </div>
+            </AnimatedSection>
           </div>
         </div>
 
-        {/* StackData, Exchange, Links */}
+        {/* Stats, Exchange & Links Row */}
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 mt-2 sm:mt-4'>
           <div className='lg:col-span-8'>
-            <div
-              className={`transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                showStackData
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-              }`}
-            >
+            <AnimatedSection show={animations.stackData}>
               <StackData marketData={data.market_data} />
-            </div>
+            </AnimatedSection>
           </div>
+
           <div className='lg:col-span-4 flex flex-col gap-2 sm:gap-4'>
-            <div
-              className={`transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                showExchange
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-              }`}
-            >
+            <AnimatedSection show={animations.exchange}>
               <Exchange id={id} symbol={data.symbol} />
-            </div>
-            <div
-              className={`transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                showLinks
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-              }`}
-            >
+            </AnimatedSection>
+
+            <AnimatedSection show={animations.links}>
               <Links data={data} />
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </div>

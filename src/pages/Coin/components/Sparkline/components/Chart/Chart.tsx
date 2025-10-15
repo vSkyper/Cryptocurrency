@@ -16,14 +16,15 @@ import {
 } from 'recharts/types/component/DefaultTooltipContent';
 import { ChartProps } from './interface';
 
-const formatCurrency = (value: number): string => {
-  return value.toLocaleString('en-US', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 8,
-    style: 'currency',
-    currency: 'USD',
-  });
-};
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 8,
+  style: 'currency',
+  currency: 'USD',
+});
+
+const formatCurrency = (value: number): string =>
+  currencyFormatter.format(value);
 
 const getTickFormat = (days: string, value: string): string => {
   switch (days) {
@@ -36,28 +37,47 @@ const getTickFormat = (days: string, value: string): string => {
   }
 };
 
-export default function ChartComponent(props: ChartProps) {
-  const { sparkline, days } = props;
+const TOOLTIP_CLASSES =
+  'bg-[var(--bg-tertiary-dark)] border border-white/12 rounded-lg px-3 py-2 ' +
+  'shadow-lg text-sm backdrop-blur-sm';
+
+const ACTIVE_DOT_CONFIG = {
+  r: 4,
+  stroke: 'var(--brand-blue)',
+  strokeWidth: 2,
+  fill: '#fff',
+};
+
+const Y_AXIS_CONFIG = {
+  domain: ['auto', 'auto'] as [string, string],
+  width: 70,
+  tickCount: 8,
+};
+
+export default function ChartComponent({ sparkline, days }: ChartProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 640px)');
+
     const handler = (e: MediaQueryListEvent | MediaQueryList) =>
       setIsMobile(e.matches);
+
     handler(mq);
+
     if ('addEventListener' in mq) {
-      mq.addEventListener('change', handler as any);
+      mq.addEventListener('change', handler);
     } else {
-      // Safari
       // @ts-ignore
-      mq.addListener(handler as any);
+      mq.addListener(handler);
     }
+
     return () => {
       if ('removeEventListener' in mq) {
-        mq.removeEventListener('change', handler as any);
+        mq.removeEventListener('change', handler);
       } else {
         // @ts-ignore
-        mq.removeListener(handler as any);
+        mq.removeListener(handler);
       }
     };
   }, []);
@@ -65,8 +85,9 @@ export default function ChartComponent(props: ChartProps) {
   const CustomTooltip = useCallback(
     ({ active, payload, label }: TooltipContentProps<ValueType, NameType>) => {
       if (!active || !payload || !payload.length) return null;
+
       return (
-        <div className='bg-[var(--bg-tertiary-dark)] border border-white/12 rounded-lg px-3 py-2 shadow-lg text-sm backdrop-blur-sm'>
+        <div className={TOOLTIP_CLASSES}>
           <div className='text-sm text-white/70 mb-1'>
             {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
           </div>
@@ -92,6 +113,7 @@ export default function ChartComponent(props: ChartProps) {
   return (
     <ResponsiveContainer width='99%' height='100%'>
       <AreaChart data={sparkline}>
+        {/* Gradient Definition */}
         <defs>
           <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
             <stop
@@ -105,6 +127,8 @@ export default function ChartComponent(props: ChartProps) {
               stopOpacity={0.06}
             />
           </linearGradient>
+
+          {/* Glow Filter */}
           <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
             <feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
             <feMerge>
@@ -113,19 +137,16 @@ export default function ChartComponent(props: ChartProps) {
             </feMerge>
           </filter>
         </defs>
+
         <Area
           dataKey='value'
           stroke='var(--brand-blue)'
           strokeWidth={2}
           fill='url(#color)'
           filter='url(#glow)'
-          activeDot={{
-            r: 4,
-            stroke: 'var(--brand-blue)',
-            strokeWidth: 2,
-            fill: '#fff',
-          }}
+          activeDot={ACTIVE_DOT_CONFIG}
         />
+
         <XAxis
           dataKey='date'
           axisLine={false}
@@ -133,17 +154,20 @@ export default function ChartComponent(props: ChartProps) {
           tickFormatter={handleTickFormatterXAxis}
           hide={isMobile}
         />
+
         <YAxis
           dataKey='value'
-          domain={['auto', 'auto']}
+          domain={Y_AXIS_CONFIG.domain}
           axisLine={false}
           tickLine={false}
-          tickCount={8}
+          tickCount={Y_AXIS_CONFIG.tickCount}
           tickFormatter={handleTickFormatterYAxis}
-          width={70}
+          width={Y_AXIS_CONFIG.width}
           hide={isMobile}
         />
+
         <Tooltip content={CustomTooltip} />
+
         <CartesianGrid opacity={0.05} vertical={false} strokeDasharray='3 3' />
       </AreaChart>
     </ResponsiveContainer>

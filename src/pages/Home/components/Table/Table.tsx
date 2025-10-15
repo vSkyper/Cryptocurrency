@@ -3,9 +3,20 @@ import { StyledDataGrid } from './styled';
 import { columns } from 'constants/dataTable';
 import { TableProps } from './interface';
 
-function Table(props: TableProps) {
-  const { coins } = props;
+const PAGINATION_CONFIG = {
+  pageSize: 50,
+  pageSizeOptions: [50, 100],
+};
 
+const TABLE_STYLES = {
+  height: 'auto',
+  minHeight: 400,
+  '& .MuiDataGrid-virtualScroller': {
+    minHeight: 400,
+  },
+};
+
+function Table({ coins }: TableProps) {
   return (
     <div className='mt-2 sm:mt-3 rounded-xl sm:rounded-2xl bg-transparent relative overflow-hidden transform-gpu will-change-transform [contain:layout_style_paint]'>
       <StyledDataGrid
@@ -15,16 +26,14 @@ function Table(props: TableProps) {
         rows={coins}
         columns={columns}
         initialState={{
-          pagination: { paginationModel: { pageSize: 50 } },
-        }}
-        pageSizeOptions={[50, 100]}
-        sx={{
-          height: 'auto',
-          minHeight: 400,
-          '& .MuiDataGrid-virtualScroller': {
-            minHeight: 400,
+          pagination: {
+            paginationModel: {
+              pageSize: PAGINATION_CONFIG.pageSize,
+            },
           },
         }}
+        pageSizeOptions={PAGINATION_CONFIG.pageSizeOptions}
+        sx={TABLE_STYLES}
       />
     </div>
   );
