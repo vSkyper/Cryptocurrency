@@ -85,18 +85,14 @@ export default function Exchange(props: ExchangeProps) {
     currencyAmount,
   ]);
 
-  // legacy helpers (not used with Headless UI Combobox)
-
   const handleChangeAutocomplete = useCallback((value: string | null) => {
     if (value) setCurrencyOption(value);
   }, []);
 
-  // clear typed query when selection changes
   useEffect(() => {
     setQuery('');
   }, [currencyOption]);
 
-  // Filter currencies by the current query (or selected option if query empty)
   const filteredCurrencies = (currencies ?? [])
     .filter((c) => c.startsWith((query ?? currencyOption ?? '').toLowerCase()))
     .slice(0, 5);
@@ -190,7 +186,7 @@ export default function Exchange(props: ExchangeProps) {
           </div>
 
           {/* Swap Icon */}
-          <div className='mx-auto my-4 w-12 h-12 rounded-full bg-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] flex items-center justify-center pointer-events-none'>
+          <div className='mx-auto my-4 w-12 h-12 rounded-full bg-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] flex items-center justify-center pointer-events-none text-white/90'>
             <SwapVertIcon />
           </div>
 
@@ -279,7 +275,7 @@ export default function Exchange(props: ExchangeProps) {
         </div>
 
         {/* Exchange Rate Display */}
-        <div className='flex items-center justify-center gap-2 p-2 mt-4 rounded-lg bg-[var(--bg-tertiary-dark)] min-h-[48px] text-white/90'>
+        <div className='flex items-center justify-center gap-2 p-2 mt-4 rounded-lg bg-[var(--bg-tertiary-dark)] min-h-[48px] text-white/50'>
           {isLoadingRate ? (
             <svg
               className='animate-spin h-4 w-4 text-[var(--brand-blue)]'

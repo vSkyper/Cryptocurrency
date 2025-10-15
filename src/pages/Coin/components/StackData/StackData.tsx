@@ -1,4 +1,3 @@
-// icons removed (using text/inline chips instead of MUI icons)
 import { format, formatDistance } from 'date-fns';
 import { StackDataProps } from './interface';
 

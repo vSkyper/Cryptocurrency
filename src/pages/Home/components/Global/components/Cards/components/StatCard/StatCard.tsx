@@ -10,7 +10,6 @@ function StatCard({ config, toggle }: Omit<StatCardProps, 'isMobile'>) {
 
   useEffect(() => {
     if (toggle) {
-      // Use setTimeout for staggered animation on desktop only
       const timer = setTimeout(() => setShow(true), config.timeout);
       return () => clearTimeout(timer);
     } else {

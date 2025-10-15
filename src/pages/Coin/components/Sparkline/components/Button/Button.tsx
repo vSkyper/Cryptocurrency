@@ -10,7 +10,6 @@ export default function ButtonComponent(props: ButtonProps) {
 
   const isActive = actualDays === days;
 
-  // Tailwind equivalent of the previous MUI styled button
   return (
     <button
       type='button'

@@ -23,7 +23,7 @@ export const columns: GridColDef[] = [
           />
         </div>
         <span
-          className='text-white/95 text-sm font-bold truncate'
+          className='text-white/95 font-bold truncate'
           title={String(params.value)}
         >
           {params.value}
