@@ -67,3 +67,28 @@
 .recharts-wrapper * {
   outline: none;
 }
+
+/* Force MUI popover / menu text to use the theme's light text color.
+   This covers emotion-generated classes (e.g., css-xxxxxx) that may set
+   an unwanted black color on some labels. */
+.MuiPopover-paper,
+.MuiPopover-paper *,
+.MuiMenu-paper,
+.MuiMenu-paper *,
+.MuiPaper-root,
+.MuiPaper-root *,
+.MuiPopover-root [class^='css-'],
+.MuiPopover-root [class^='css-'] *,
+.MuiMenu-paper [class^='css-'],
+.MuiMenu-paper [class^='css-'] * {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Specific override for DataGrid's empty text shown in the columns management menu.
+   Matches emotion-generated names like css-x27bku-MuiDataGrid-columnsManagementEmptyText */
+[class*='MuiDataGrid-columnsManagementEmptyText'],
+.MuiDataGrid-columnsManagementEmptyText,
+.MuiMenu-paper [class*='MuiDataGrid-columnsManagementEmptyText'],
+.MuiPopover-paper [class*='MuiDataGrid-columnsManagementEmptyText'] {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
