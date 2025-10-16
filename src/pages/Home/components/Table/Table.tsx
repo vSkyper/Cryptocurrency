@@ -1,6 +1,9 @@
 import { StyledDataGrid } from './styled';
 import { columns } from 'constants/dataTable';
 import { TableProps } from './interface';
+import { ThemeProvider } from '@mui/material/styles';
+import darkTheme, { createDarkThemeFromVars } from 'styles/muiTheme';
+import { useEffect, useMemo, useState } from 'react';
 
 const PAGINATION_CONFIG = {
   pageSize: 50,
@@ -16,24 +19,36 @@ const TABLE_STYLES = {
 };
 
 export default function Table({ coins }: TableProps) {
+  // Use a client-side theme created from CSS variables when available.
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const runtimeTheme = useMemo(() => {
+    return mounted ? createDarkThemeFromVars() : darkTheme;
+  }, [mounted]);
   return (
     <div className='mt-2 sm:mt-3 rounded-xl sm:rounded-2xl bg-transparent relative overflow-hidden transform-gpu will-change-transform'>
-      <StyledDataGrid
-        density='comfortable'
-        pagination
-        disableRowSelectionOnClick
-        rows={coins}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: PAGINATION_CONFIG.pageSize,
+      <ThemeProvider theme={runtimeTheme}>
+        <StyledDataGrid
+          density='comfortable'
+          pagination
+          disableRowSelectionOnClick
+          rows={coins}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: PAGINATION_CONFIG.pageSize,
+              },
             },
-          },
-        }}
-        pageSizeOptions={PAGINATION_CONFIG.pageSizeOptions}
-        sx={TABLE_STYLES}
-      />
+          }}
+          pageSizeOptions={PAGINATION_CONFIG.pageSizeOptions}
+          sx={TABLE_STYLES}
+        />
+      </ThemeProvider>
     </div>
   );
 }
