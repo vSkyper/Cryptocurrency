@@ -15,9 +15,10 @@
 
 ## Technologies Used
 
-- ReactJS - version 19.1.9
+- React - version 19.1.1
 - Vite - version 7.1.1
 - TypeScript - version 5.9.2
+- Tailwind CSS - version 4.1.14
 - MUI - version 7.3.1
 
 ## Features
