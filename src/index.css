@@ -63,3 +63,7 @@
     max-width: 100%;
   }
 }
+
+.recharts-wrapper * {
+  outline: none;
+}

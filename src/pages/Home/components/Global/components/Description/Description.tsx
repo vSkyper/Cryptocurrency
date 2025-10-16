@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { useMemo } from 'react';
 import { DescriptionProps } from './interface';
 import { Highlight } from './components';
 
@@ -16,7 +16,7 @@ const percentageFormatter = new Intl.NumberFormat('en-US', {
 
 const numberFormatter = new Intl.NumberFormat('en-US');
 
-function Description({ globalData }: DescriptionProps) {
+export default function Description({ globalData }: DescriptionProps) {
   const { data } = globalData;
 
   const stats = useMemo(() => {
@@ -65,5 +65,3 @@ function Description({ globalData }: DescriptionProps) {
     </p>
   );
 }
-
-export default memo(Description);

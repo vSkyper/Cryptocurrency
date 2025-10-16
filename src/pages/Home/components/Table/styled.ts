@@ -35,17 +35,10 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     background: TRANSPARENT,
   },
 
-  // Virtual scroller optimization
-  '& .MuiDataGrid-virtualScroller': {
-    transform: 'translateZ(0)',
-    willChange: 'transform',
-  },
-
   // Row styles
   '& .MuiDataGrid-row': {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    contain: 'layout style paint',
     pointerEvents: 'auto',
     willChange: 'background-color',
 

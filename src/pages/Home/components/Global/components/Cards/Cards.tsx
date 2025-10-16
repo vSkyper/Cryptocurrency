@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { useMemo } from 'react';
 import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
 
@@ -23,7 +23,7 @@ const formatPercentage = (value: number): string =>
   percentageFormatter.format(value / 100);
 const formatNumber = (value: number): string => numberFormatter.format(value);
 
-function Cards({ toggle, globalData }: CardsProps) {
+export default function Cards({ toggle, globalData }: CardsProps) {
   const { data } = globalData;
 
   const cardConfigs: CardConfig[] = useMemo(
@@ -79,5 +79,3 @@ function Cards({ toggle, globalData }: CardsProps) {
     </div>
   );
 }
-
-export default memo(Cards);

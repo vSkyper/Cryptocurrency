@@ -10,38 +10,56 @@ import { LinksProps } from './interface';
 import { ChipLink } from './components';
 
 const SECTION_TITLE_CLASSES =
-  'text-center text-[0.75rem] uppercase tracking-wide font-semibold ' +
-  'text-[color-mix(in_srgb,var(--brand-blue)_80%,transparent)] mb-3';
+  'text-center text-[0.75rem] uppercase tracking-wider font-semibold ' +
+  'text-white/60 mb-3';
 
 const PRIMARY_CHIP_CLASSES =
-  'bg-[var(--chip-bg)] border border-[var(--chip-border)] text-[var(--brand-blue)]';
+  'bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] to-[color-mix(in_srgb,var(--brand-blue)_8%,transparent)] ' +
+  'border border-[color-mix(in_srgb,var(--brand-blue)_30%,transparent)] text-[var(--brand-blue)] ' +
+  'hover:from-[color-mix(in_srgb,var(--brand-blue)_25%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] ' +
+  'hover:border-[color-mix(in_srgb,var(--brand-blue)_50%,transparent)]';
 
 const BLOCKCHAIN_CHIP_CLASSES =
-  'bg-[var(--chip-bg)] border border-[var(--chip-border)] text-[var(--brand-blue-light)] text-xs';
+  'bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue-light)_12%,transparent)] to-[color-mix(in_srgb,var(--brand-blue-light)_6%,transparent)] ' +
+  'border border-[color-mix(in_srgb,var(--brand-blue-light)_25%,transparent)] text-[var(--brand-blue-light)] text-xs ' +
+  'hover:from-[color-mix(in_srgb,var(--brand-blue-light)_20%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue-light)_12%,transparent)] ' +
+  'hover:border-[color-mix(in_srgb,var(--brand-blue-light)_45%,transparent)]';
 
-const ICON_SIZE = { fontSize: 16 };
+const ICON_SIZE = { fontSize: 18 };
 
 const SOCIAL_LINKS = {
   reddit: {
     className:
-      'text-sm bg-[linear-gradient(135deg,rgba(255,69,0,0.2),rgba(255,69,0,0.1))] border border-[rgba(255,69,0,0.5)] text-[#CC3700]',
+      'bg-gradient-to-br from-[rgba(255,69,0,0.15)] to-[rgba(255,69,0,0.08)] ' +
+      'border border-[rgba(255,69,0,0.4)] text-[#FF4500] ' +
+      'hover:from-[rgba(255,69,0,0.25)] hover:to-[rgba(255,69,0,0.15)] ' +
+      'hover:border-[rgba(255,69,0,0.6)]',
     label: 'Reddit',
   },
   twitter: {
     className:
-      'text-sm bg-[linear-gradient(135deg,rgba(29,161,242,0.2),rgba(29,161,242,0.1))] border border-[rgba(29,161,242,0.5)] text-[#1B8CD3]',
+      'bg-gradient-to-br from-[rgba(29,161,242,0.15)] to-[rgba(29,161,242,0.08)] ' +
+      'border border-[rgba(29,161,242,0.4)] text-[#1DA1F2] ' +
+      'hover:from-[rgba(29,161,242,0.25)] hover:to-[rgba(29,161,242,0.15)] ' +
+      'hover:border-[rgba(29,161,242,0.6)]',
     label: 'Twitter',
     getUrl: (username: string) => `https://twitter.com/${username}/`,
   },
   facebook: {
     className:
-      'text-sm bg-[linear-gradient(135deg,rgba(24,119,242,0.2),rgba(24,119,242,0.1))] border border-[rgba(24,119,242,0.5)] text-[#1565C0]',
+      'bg-gradient-to-br from-[rgba(24,119,242,0.15)] to-[rgba(24,119,242,0.08)] ' +
+      'border border-[rgba(24,119,242,0.4)] text-[#1877F2] ' +
+      'hover:from-[rgba(24,119,242,0.25)] hover:to-[rgba(24,119,242,0.15)] ' +
+      'hover:border-[rgba(24,119,242,0.6)]',
     label: 'Facebook',
     getUrl: (username: string) => `https://www.facebook.com/${username}/`,
   },
   github: {
     className:
-      'text-sm bg-[linear-gradient(135deg,rgba(139,148,158,0.2),rgba(139,148,158,0.1))] border border-[rgba(139,148,158,0.5)] text-[#7D8590]',
+      'bg-gradient-to-br from-[rgba(139,148,158,0.15)] to-[rgba(139,148,158,0.08)] ' +
+      'border border-[rgba(139,148,158,0.4)] text-[#8B949E] ' +
+      'hover:from-[rgba(139,148,158,0.25)] hover:to-[rgba(139,148,158,0.15)] ' +
+      'hover:border-[rgba(139,148,158,0.6)]',
     label: 'GitHub',
   },
 };
@@ -56,17 +74,17 @@ export default function Links({ data }: LinksProps) {
     new URL(url).hostname.replace('www.', '');
 
   return (
-    <div className='p-4 rounded-lg bg-[var(--bg-tertiary)]'>
+    <div className='p-5 rounded-xl bg-[var(--bg-tertiary)] shadow-sm'>
       {/* Header */}
-      <div className='mb-4 pb-4 border-b border-[color-mix(in_srgb,var(--brand-blue)20%,transparent)]'>
-        <div className='text-center font-bold text-lg sm:text-xl bg-clip-text text-transparent bg-[linear-gradient(135deg,var(--brand-blue)_0%,var(--brand-blue-light)_70%)]'>
+      <div className='mb-5 pb-4 border-b border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)]'>
+        <div className='text-center font-bold text-lg sm:text-xl bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)]'>
           Official Links & Community
         </div>
-        <div className='mx-auto mt-2 h-1 w-14 rounded-sm bg-[linear-gradient(90deg,var(--brand-blue),var(--brand-blue-light))]' />
+        <div className='mx-auto mt-2.5 h-1 w-16 rounded-full bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)]' />
       </div>
 
       {/* Primary Links Section */}
-      <div className='flex flex-wrap gap-2 justify-center'>
+      <div className='flex flex-wrap gap-2.5 justify-center mb-4'>
         {links?.homepage?.[0] && (
           <ChipLink
             href={links.homepage[0]}
@@ -74,7 +92,7 @@ export default function Links({ data }: LinksProps) {
               <img
                 src={image?.large}
                 alt='logo'
-                className='w-5 h-5 rounded-full object-cover border'
+                className='w-5 h-5 rounded-full object-cover border border-white/30 shadow-sm'
               />
             }
             className={PRIMARY_CHIP_CLASSES}
@@ -98,7 +116,7 @@ export default function Links({ data }: LinksProps) {
 
       {/* Blockchain Explorer Links */}
       {hasBlockchainSites && (
-        <div className='mt-3'>
+        <div className='mb-4'>
           <div className={SECTION_TITLE_CLASSES}>Blockchain Explorers</div>
           <div className='flex flex-wrap gap-2 justify-center'>
             {links?.blockchain_site?.slice(0, 3).map(
@@ -124,7 +142,7 @@ export default function Links({ data }: LinksProps) {
       )}
 
       {/* Social Media Links */}
-      <div className='mt-3'>
+      <div>
         <div className={SECTION_TITLE_CLASSES}>Social Media</div>
         <div className='flex flex-wrap gap-2 justify-center'>
           {links?.subreddit_url && (

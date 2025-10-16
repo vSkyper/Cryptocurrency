@@ -1,8 +1,8 @@
-import { useState, memo } from 'react';
+import { useState } from 'react';
 import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
 
-function Global({ globalData }: GlobalProps) {
+export default function Global({ globalData }: GlobalProps) {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const cardsTransitionClasses = toggle
@@ -35,12 +35,13 @@ function Global({ globalData }: GlobalProps) {
 
       {/* Stats Cards with Animation */}
       <div
-        className={`transition-all duration-150 ease-out translate-z-0 will-change-[max-height,opacity] ${cardsTransitionClasses}`}
+        className={`transition-all duration-700 ease-out transform-gpu will-change-[max-height,opacity] ${cardsTransitionClasses}`}
+        style={{
+          transitionDelay: toggle ? '0ms' : '500ms',
+        }}
       >
         <Cards toggle={toggle} globalData={globalData} />
       </div>
     </>
   );
 }
-
-export default memo(Global);

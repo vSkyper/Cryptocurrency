@@ -1,11 +1,11 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import { SwitchProps } from './interface';
 import {
   BarChart as BarChartIcon,
   BarChartOutlined as BarChartOutlinedIcon,
 } from '@mui/icons-material';
 
-function Switch({ toggle, setToggle, mobile }: SwitchProps) {
+export default function Switch({ toggle, setToggle, mobile }: SwitchProps) {
   const handleToggle = useCallback(() => {
     setToggle((prev) => !prev);
   }, [setToggle]);
@@ -68,5 +68,3 @@ function Switch({ toggle, setToggle, mobile }: SwitchProps) {
     </div>
   );
 }
-
-export default memo(Switch);

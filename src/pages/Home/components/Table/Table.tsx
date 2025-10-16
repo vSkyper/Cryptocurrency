@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { StyledDataGrid } from './styled';
 import { columns } from 'constants/dataTable';
 import { TableProps } from './interface';
@@ -16,9 +15,9 @@ const TABLE_STYLES = {
   },
 };
 
-function Table({ coins }: TableProps) {
+export default function Table({ coins }: TableProps) {
   return (
-    <div className='mt-2 sm:mt-3 rounded-xl sm:rounded-2xl bg-transparent relative overflow-hidden transform-gpu will-change-transform [contain:layout_style_paint]'>
+    <div className='mt-2 sm:mt-3 rounded-xl sm:rounded-2xl bg-transparent relative overflow-hidden transform-gpu will-change-transform'>
       <StyledDataGrid
         density='comfortable'
         pagination
@@ -38,5 +37,3 @@ function Table({ coins }: TableProps) {
     </div>
   );
 }
-
-export default memo(Table);

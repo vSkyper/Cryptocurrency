@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { AreaChart, ResponsiveContainer, Area, YAxis } from 'recharts';
+import { AreaChart, Area, YAxis, ResponsiveContainer } from 'recharts';
 
 // Formatters
 const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -30,11 +30,16 @@ const formatPercentage = (value: number) =>
 
 // Class constants
 const COIN_IMAGE_CLASSES =
-  'w-9 h-9 rounded-full shadow-md overflow-hidden flex-shrink-0 transition-transform ' +
-  'duration-200 hover:scale-110 border border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)]';
+  'w-9 h-9 overflow-hidden flex-shrink-0 transition-all ' +
+  'duration-300 ease-out group-hover:scale-110';
 
 const COIN_LINK_CLASSES =
-  'inline-flex items-center gap-2 transition-colors duration-200 hover:underline';
+  'inline-flex items-center gap-3 transition-all duration-300 ease-out group relative ' +
+  'hover:gap-4 w-full';
+
+const COIN_NAME_CLASSES =
+  'text-white/95 font-bold truncate transition-all duration-300 ease-out ' +
+  'group-hover:text-[var(--brand-blue)] group-hover:translate-x-1';
 
 const SYMBOL_BADGE_CLASSES =
   'text-xs font-bold rounded-full px-2 py-1 backdrop-blur-sm transition-transform ' +
@@ -53,7 +58,6 @@ const NEGATIVE_BADGE_CLASSES =
   'border-[color-mix(in_srgb,var(--brand-negative)_30%,transparent)] ' +
   'bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-negative)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-negative)_8%,transparent)_100%)]';
 
-// Reusable components
 function CoinName(params: GridRenderCellParams) {
   return (
     <RouterLink to={`/coins/${params.row.id}`} className={COIN_LINK_CLASSES}>
@@ -64,12 +68,23 @@ function CoinName(params: GridRenderCellParams) {
           className='w-full h-full object-cover'
         />
       </div>
-      <span
-        className='text-white/95 font-bold truncate'
-        title={String(params.value)}
-      >
+      <span className={COIN_NAME_CLASSES} title={String(params.value)}>
         {params.value}
       </span>
+
+      <svg
+        className='w-4 h-4 text-[var(--brand-blue)] opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 flex-shrink-0'
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke='currentColor'
+      >
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth={2}
+          d='M9 5l7 7-7 7'
+        />
+      </svg>
     </RouterLink>
   );
 }
@@ -79,7 +94,7 @@ function SymbolBadge(params: GridRenderCellParams) {
   return <span className={SYMBOL_BADGE_CLASSES}>{label}</span>;
 }
 
-function PercentageChangeBadge(params: GridRenderCellParams) {
+function PercentageChange(params: GridRenderCellParams) {
   const value = Number(params.value ?? 0);
   const label = formatPercentage(value);
   const isPositive = value >= 0;
@@ -100,21 +115,30 @@ function PercentageChangeBadge(params: GridRenderCellParams) {
   );
 }
 
+// Optimized Sparkline with Recharts
 function SparklineChart(params: GridRenderCellParams) {
   const isNegative = params.row.price_change_percentage_7d_in_currency < 0;
   const color = isNegative ? 'var(--brand-negative)' : 'var(--brand-positive)';
   const gradientId = `linearColor${params.row.id}`;
 
+  // Sample data to reduce points (every 3rd point)
+  const prices = params.value.price;
+  const sampledData = prices.filter(
+    (_: number, index: number) => index % 3 === 0
+  );
+
   return (
     <ResponsiveContainer>
       <AreaChart
-        data={params.value.price}
-        margin={{ left: 0, right: 0, top: 6, bottom: 0 }}
+        width={180}
+        height={50}
+        data={sampledData}
+        margin={{ left: 0, right: 0, top: 2, bottom: 0 }}
       >
         <defs>
           <linearGradient id={gradientId} x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor={color} stopOpacity={0.4} />
-            <stop offset='75%' stopColor={color} stopOpacity={0.05} />
+            <stop offset='5%' stopColor={color} stopOpacity={0.3} />
+            <stop offset='95%' stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
         <Area
@@ -122,6 +146,8 @@ function SparklineChart(params: GridRenderCellParams) {
           stroke={color}
           strokeWidth={1.5}
           fill={`url(#${gradientId})`}
+          dot={false}
+          activeDot={false}
         />
         <YAxis dataKey={(value) => value} domain={['auto', 'auto']} hide />
       </AreaChart>
@@ -143,7 +169,7 @@ function createPercentageColumn(
     flex,
     minWidth,
     valueFormatter: (value) => formatPercentage(Number(value ?? 0)),
-    renderCell: PercentageChangeBadge,
+    renderCell: PercentageChange,
   };
 }
 
