@@ -29,7 +29,9 @@ const formatCurrencyRate = (rate: number, currency: string): string => {
   }).format(rate);
 };
 
-const CONTAINER_CLASSES = 'p-6 rounded-lg bg-[var(--bg-tertiary)]';
+const CARD_CLASSES =
+  'p-6 rounded-lg bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] ' +
+  'backdrop-blur-sm';
 
 const TITLE_CLASSES =
   'font-bold text-lg md:text-xl bg-clip-text text-transparent ' +
@@ -41,7 +43,8 @@ const SWAP_ICON_CLASSES =
 
 const RATE_DISPLAY_CLASSES =
   'flex items-center justify-center gap-2 p-2 mt-4 rounded-lg ' +
-  'bg-[var(--bg-tertiary-dark)] min-h-12 text-white/50';
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_55%,transparent)_100%)] ' +
+  'min-h-12 text-white/50';
 
 const COMBOBOX_INPUT_CLASSES =
   'w-full bg-transparent text-sm font-semibold uppercase focus:outline-none pr-6 text-white/90';
@@ -173,7 +176,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
     <div className='transition-opacity duration-800'>
       <style>{HIDE_SPINNER_STYLES}</style>
 
-      <div className={CONTAINER_CLASSES}>
+      <div className={CARD_CLASSES}>
         {/* Header */}
         <div className='flex items-center justify-center mb-4 gap-2'>
           <CalculateIcon

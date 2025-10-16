@@ -30,6 +30,11 @@ const PROGRESS_TRACK_CLASSES =
   'w-full bg-[linear-gradient(90deg,color-mix(in_srgb,var(--brand-blue)_8%,transparent),color-mix(in_srgb,var(--brand-blue-light)_5%,transparent))] ' +
   'h-2.5 rounded-full overflow-hidden';
 
+const CARD_CLASSES =
+  'p-4 sm:p-6 rounded-xl ' +
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] ' +
+  'backdrop-blur-sm';
+
 export default function PriceCard({ data }: PriceCardProps) {
   const { market_data } = data;
 
@@ -41,7 +46,7 @@ export default function PriceCard({ data }: PriceCardProps) {
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='bg-[var(--bg-tertiary)] p-4 sm:p-6 rounded-xl'>
+      <div className={CARD_CLASSES}>
         {/* Current Price */}
         <div className='text-center mb-6'>
           <Price marketData={market_data} />

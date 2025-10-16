@@ -27,6 +27,10 @@ const BLOCKCHAIN_CHIP_CLASSES =
 
 const ICON_SIZE = { fontSize: 18 };
 
+const CARD_CLASSES =
+  'p-5 rounded-xl ' +
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)]';
+
 const SOCIAL_LINKS = {
   reddit: {
     className:
@@ -74,7 +78,7 @@ export default function Links({ data }: LinksProps) {
     new URL(url).hostname.replace('www.', '');
 
   return (
-    <div className='p-5 rounded-xl bg-[var(--bg-tertiary)] shadow-sm'>
+    <div className={CARD_CLASSES}>
       {/* Header */}
       <div className='mb-5 pb-4 border-b border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)]'>
         <div className='text-center font-bold text-lg sm:text-xl bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)]'>
@@ -92,7 +96,7 @@ export default function Links({ data }: LinksProps) {
               <img
                 src={image?.large}
                 alt='logo'
-                className='w-5 h-5 rounded-full object-cover border border-white/30 shadow-sm'
+                className='w-5 h-5 rounded-full object-cover border border-white/30'
               />
             }
             className={PRIMARY_CHIP_CLASSES}

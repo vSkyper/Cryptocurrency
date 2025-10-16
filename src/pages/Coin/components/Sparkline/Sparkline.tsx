@@ -19,8 +19,9 @@ const formatSparklineData = (prices: number[][]) => {
 };
 
 const CHART_CONTAINER_CLASSES =
-  'relative w-full bg-[var(--bg-tertiary)] rounded-xl overflow-hidden ' +
-  'p-2 sm:p-3 h-[280px] sm:h-[320px] md:h-[480px]';
+  'relative w-full rounded-xl overflow-hidden p-3 sm:p-4 ' +
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] ' +
+  'h-[280px] sm:h-[320px] md:h-[480px]';
 
 const LOADING_OVERLAY_CLASSES =
   'absolute inset-0 z-20 flex items-center justify-center bg-transparent';

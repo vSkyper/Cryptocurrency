@@ -14,7 +14,8 @@ const formatNumber = (value: number, maxDecimals = 0) =>
   value.toLocaleString('en-US', { maximumFractionDigits: maxDecimals });
 
 const CONTAINER_CLASSES =
-  'bg-[var(--bg-tertiary)] p-4 sm:p-6 rounded-lg sm:rounded-xl';
+  'p-4 sm:p-6 rounded-lg sm:rounded-xl ' +
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)]';
 
 const TITLE_CLASSES =
   'mb-4 font-bold text-lg sm:text-xl bg-clip-text text-transparent ' +

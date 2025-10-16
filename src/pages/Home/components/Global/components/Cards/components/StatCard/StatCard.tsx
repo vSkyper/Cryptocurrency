@@ -7,8 +7,8 @@ import { StatCardProps } from './interface';
 
 const CARD_BASE_CLASSES =
   'flex flex-col justify-center items-center relative overflow-hidden rounded-xl ' +
-  'bg-[color-mix(in_srgb,var(--bg-tertiary)_40%,transparent)] backdrop-blur-md ' +
-  'p-4 sm:p-5 transition-all duration-300';
+  'p-4 sm:p-5 transition-all duration-300 ' +
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] backdrop-blur-sm';
 
 const BADGE_BASE_CLASSES =
   'inline-flex items-center gap-0.5 px-1.5 py-1 sm:px-3 sm:py-1.5 text-xs ' +

@@ -11,8 +11,8 @@ const formatPercentage = (value: number): string =>
   percentageFormatter.format(value / 100);
 
 const BASE_CARD_CLASSES =
-  'flex flex-col items-center justify-center p-4 sm:p-6 rounded-xl ' +
-  'bg-[var(--bg-tertiary)] relative overflow-hidden';
+  'flex flex-col items-center justify-center p-4 sm:p-6 rounded-xl relative overflow-hidden ' +
+  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_60%,transparent)_100%)]';
 
 export default function PriceChange({ marketData, days }: PriceChangeProps) {
   const key = `price_change_percentage_${days}` as keyof IMarketData;
