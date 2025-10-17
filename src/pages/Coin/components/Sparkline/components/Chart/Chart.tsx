@@ -4,7 +4,6 @@ import {
   YAxis,
   Tooltip,
   AreaChart,
-  ResponsiveContainer,
   Area,
   TooltipContentProps,
 } from 'recharts';
@@ -111,65 +110,55 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
   );
 
   return (
-    <ResponsiveContainer width='99%' height='100%'>
-      <AreaChart data={sparkline}>
-        {/* Gradient Definition */}
-        <defs>
-          <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
-            <stop
-              offset='5%'
-              stopColor='var(--brand-blue)'
-              stopOpacity={0.45}
-            />
-            <stop
-              offset='75%'
-              stopColor='var(--brand-blue)'
-              stopOpacity={0.06}
-            />
-          </linearGradient>
+    <AreaChart data={sparkline} responsive width='100%' height='100%'>
+      {/* Gradient Definition */}
+      <defs>
+        <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
+          <stop offset='5%' stopColor='var(--brand-blue)' stopOpacity={0.45} />
+          <stop offset='75%' stopColor='var(--brand-blue)' stopOpacity={0.06} />
+        </linearGradient>
 
-          {/* Glow Filter */}
-          <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
-            <feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
-            <feMerge>
-              <feMergeNode in='coloredBlur' />
-              <feMergeNode in='SourceGraphic' />
-            </feMerge>
-          </filter>
-        </defs>
+        {/* Glow Filter */}
+        <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
+          <feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
+          <feMerge>
+            <feMergeNode in='coloredBlur' />
+            <feMergeNode in='SourceGraphic' />
+          </feMerge>
+        </filter>
+      </defs>
 
-        <Area
-          dataKey='value'
-          stroke='var(--brand-blue)'
-          strokeWidth={2}
-          fill='url(#color)'
-          filter='url(#glow)'
-          activeDot={ACTIVE_DOT_CONFIG}
-        />
+      <Area
+        dataKey='value'
+        stroke='var(--brand-blue)'
+        strokeWidth={2}
+        fill='url(#color)'
+        filter='url(#glow)'
+        activeDot={ACTIVE_DOT_CONFIG}
+      />
 
-        <XAxis
-          dataKey='date'
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={handleTickFormatterXAxis}
-          hide={isMobile}
-        />
+      <XAxis
+        dataKey='date'
+        axisLine={false}
+        tickLine={false}
+        tickFormatter={handleTickFormatterXAxis}
+        hide={isMobile}
+      />
 
-        <YAxis
-          dataKey='value'
-          domain={Y_AXIS_CONFIG.domain}
-          axisLine={false}
-          tickLine={false}
-          tickCount={Y_AXIS_CONFIG.tickCount}
-          tickFormatter={handleTickFormatterYAxis}
-          width={Y_AXIS_CONFIG.width}
-          hide={isMobile}
-        />
+      <YAxis
+        dataKey='value'
+        domain={Y_AXIS_CONFIG.domain}
+        axisLine={false}
+        tickLine={false}
+        tickCount={Y_AXIS_CONFIG.tickCount}
+        tickFormatter={handleTickFormatterYAxis}
+        width={Y_AXIS_CONFIG.width}
+        hide={isMobile}
+      />
 
-        <Tooltip content={CustomTooltip} />
+      <Tooltip content={CustomTooltip} />
 
-        <CartesianGrid opacity={0.05} vertical={false} strokeDasharray='3 3' />
-      </AreaChart>
-    </ResponsiveContainer>
+      <CartesianGrid opacity={0.05} vertical={false} strokeDasharray='3 3' />
+    </AreaChart>
   );
 }

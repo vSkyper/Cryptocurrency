@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { AreaChart, Area, YAxis, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, YAxis } from 'recharts';
 
 // Formatters
 const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -128,30 +128,29 @@ function SparklineChart(params: GridRenderCellParams) {
   );
 
   return (
-    <ResponsiveContainer>
-      <AreaChart
-        width={180}
-        height={50}
-        data={sampledData}
-        margin={{ left: 0, right: 0, top: 2, bottom: 0 }}
-      >
-        <defs>
-          <linearGradient id={gradientId} x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor={color} stopOpacity={0.3} />
-            <stop offset='95%' stopColor={color} stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <Area
-          dataKey={(value) => value}
-          stroke={color}
-          strokeWidth={1.5}
-          fill={`url(#${gradientId})`}
-          dot={false}
-          activeDot={false}
-        />
-        <YAxis dataKey={(value) => value} domain={['auto', 'auto']} hide />
-      </AreaChart>
-    </ResponsiveContainer>
+    <AreaChart
+      width={180}
+      height={50}
+      data={sampledData}
+      responsive
+      margin={{ left: 0, right: 0, top: 2, bottom: 0 }}
+    >
+      <defs>
+        <linearGradient id={gradientId} x1='0' y1='0' x2='0' y2='1'>
+          <stop offset='5%' stopColor={color} stopOpacity={0.3} />
+          <stop offset='95%' stopColor={color} stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <Area
+        dataKey={(value) => value}
+        stroke={color}
+        strokeWidth={1.5}
+        fill={`url(#${gradientId})`}
+        dot={false}
+        activeDot={false}
+      />
+      <YAxis dataKey={(value) => value} domain={['auto', 'auto']} hide />
+    </AreaChart>
   );
 }
 
