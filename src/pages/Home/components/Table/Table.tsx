@@ -3,7 +3,7 @@ import { columns } from 'constants/dataTable';
 import { TableProps } from './interface';
 import { ThemeProvider } from '@mui/material/styles';
 import darkTheme, { createDarkThemeFromVars } from 'styles/muiTheme';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const PAGINATION_CONFIG = {
   pageSize: 50,
@@ -26,9 +26,8 @@ export default function Table({ coins }: TableProps) {
     setMounted(true);
   }, []);
 
-  const runtimeTheme = useMemo(() => {
-    return mounted ? createDarkThemeFromVars() : darkTheme;
-  }, [mounted]);
+  const runtimeTheme = mounted ? createDarkThemeFromVars() : darkTheme;
+
   return (
     <div className='mt-2 sm:mt-3 rounded-xl sm:rounded-2xl bg-transparent relative overflow-hidden transform-gpu will-change-transform'>
       <ThemeProvider theme={runtimeTheme}>
