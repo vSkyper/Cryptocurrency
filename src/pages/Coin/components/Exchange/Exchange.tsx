@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   SwapVert as SwapVertIcon,
   Calculate as CalculateIcon,
@@ -130,45 +130,41 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
     setQuery('');
   }, [currencyOption]);
 
-  const handleChangeAutocomplete = useCallback((value: string | null) => {
+  const handleChangeAutocomplete = (value: string | null) => {
     if (value) setCurrencyOption(value);
-  }, []);
+  };
 
-  const handleCryptoInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setCryptoAmount(value);
-      setLastEditedField('crypto');
+  const handleCryptoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCryptoAmount(value);
+    setLastEditedField('crypto');
 
-      if (value && exchangeRate) {
-        const rate = exchangeRate[id]?.[currencyOption];
-        const currencyValue = Number(value) * rate;
-        setCurrencyAmount(
-          isFinite(currencyValue) ? currencyValue.toString() : ''
-        );
-      } else {
-        setCurrencyAmount('');
-      }
-    },
-    [exchangeRate, id, currencyOption]
-  );
+    if (value && exchangeRate) {
+      const rate = exchangeRate[id]?.[currencyOption];
+      const currencyValue = Number(value) * rate;
+      setCurrencyAmount(
+        isFinite(currencyValue) ? currencyValue.toString() : ''
+      );
+    } else {
+      setCurrencyAmount('');
+    }
+  };
 
-  const handleCurrencyInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setCurrencyAmount(value);
-      setLastEditedField('currency');
+  const handleCurrencyInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
+    setCurrencyAmount(value);
+    setLastEditedField('currency');
 
-      if (value && exchangeRate) {
-        const rate = exchangeRate[id]?.[currencyOption];
-        const cryptoValue = Number(value) / rate;
-        setCryptoAmount(isFinite(cryptoValue) ? cryptoValue.toString() : '');
-      } else {
-        setCryptoAmount('');
-      }
-    },
-    [exchangeRate, id, currencyOption]
-  );
+    if (value && exchangeRate) {
+      const rate = exchangeRate[id]?.[currencyOption];
+      const cryptoValue = Number(value) / rate;
+      setCryptoAmount(isFinite(cryptoValue) ? cryptoValue.toString() : '');
+    } else {
+      setCryptoAmount('');
+    }
+  };
 
   if (currenciesError || exchangeRateError) return <ErrorModal />;
 

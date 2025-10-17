@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { SwitchProps } from './interface';
 import {
   BarChart as BarChartIcon,
@@ -6,9 +5,9 @@ import {
 } from '@mui/icons-material';
 
 export default function Switch({ toggle, setToggle, mobile }: SwitchProps) {
-  const handleToggle = useCallback(() => {
+  const handleToggle = () => {
     setToggle((prev) => !prev);
-  }, [setToggle]);
+  };
 
   const iconSize = mobile ? '1rem' : '1.2rem';
 

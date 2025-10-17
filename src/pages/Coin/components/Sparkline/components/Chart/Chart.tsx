@@ -8,7 +8,7 @@ import {
   TooltipContentProps,
 } from 'recharts';
 import { format } from 'date-fns';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   NameType,
   ValueType,
@@ -81,33 +81,29 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
     };
   }, []);
 
-  const CustomTooltip = useCallback(
-    ({ active, payload, label }: TooltipContentProps<ValueType, NameType>) => {
-      if (!active || !payload || !payload.length) return null;
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: TooltipContentProps<ValueType, NameType>) => {
+    if (!active || !payload || !payload.length) return null;
 
-      return (
-        <div className={TOOLTIP_CLASSES}>
-          <div className='text-sm text-white/70 mb-1'>
-            {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
-          </div>
-          <div className='font-medium text-white'>
-            {formatCurrency(Number(payload[0].value))}
-          </div>
+    return (
+      <div className={TOOLTIP_CLASSES}>
+        <div className='text-sm text-white/70 mb-1'>
+          {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
         </div>
-      );
-    },
-    []
-  );
+        <div className='font-medium text-white'>
+          {formatCurrency(Number(payload[0].value))}
+        </div>
+      </div>
+    );
+  };
 
-  const handleTickFormatterXAxis = useCallback(
-    (value: string) => getTickFormat(days, value),
-    [days]
-  );
+  const handleTickFormatterXAxis = (value: string) =>
+    getTickFormat(days, value);
 
-  const handleTickFormatterYAxis = useCallback(
-    (value: number) => `$${value}`,
-    []
-  );
+  const handleTickFormatterYAxis = (value: number) => `$${value}`;
 
   return (
     <AreaChart data={sparkline} responsive width='100%' height='100%'>

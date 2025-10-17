@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { ButtonProps } from './interface';
 
 const BASE_BUTTON_CLASSES =
@@ -25,9 +24,9 @@ export default function ButtonComponent({
   actualDays,
   mobileDisappear,
 }: ButtonProps) {
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     setDays(days);
-  }, [days, setDays]);
+  };
 
   const isActive = actualDays === days;
 

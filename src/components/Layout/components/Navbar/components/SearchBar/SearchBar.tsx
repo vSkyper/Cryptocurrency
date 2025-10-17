@@ -1,4 +1,4 @@
-import { useState, useCallback, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Combobox,
@@ -46,25 +46,22 @@ export default function SearchBar() {
           )
           .slice(0, MAX_RESULTS);
 
-  const handleChange = useCallback(
-    (coin: ICoinsList | null) => {
-      if (!coin) return;
-      setSelectedCoin(null);
-      setQuery('');
-      navigate(`/coins/${coin.id}`);
-    },
-    [navigate]
-  );
+  const handleChange = (coin: ICoinsList | null) => {
+    if (!coin) return;
+    setSelectedCoin(null);
+    setQuery('');
+    navigate(`/coins/${coin.id}`);
+  };
 
-  const handleBlur = useCallback(() => {
+  const handleBlur = () => {
     setTimeout(() => setQuery(''), BLUR_DELAY);
-  }, []);
+  };
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
       setQuery('');
     }
-  }, []);
+  };
 
   const displayValue = (coin: ICoinsList | null) =>
     coin ? `${coin.name} (${coin.symbol?.toUpperCase()})` : '';
