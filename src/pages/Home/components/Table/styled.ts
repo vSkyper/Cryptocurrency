@@ -35,12 +35,21 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     background: TRANSPARENT,
   },
 
+  // Virtual scroller optimization
+  '& .MuiDataGrid-virtualScroller': {
+    transform: 'translateZ(0)',
+    willChange: 'transform',
+    backfaceVisibility: 'hidden',
+    perspective: 1000,
+  },
+
   // Row styles
   '& .MuiDataGrid-row': {
     alignItems: 'center',
     backgroundColor: 'transparent',
+    contain: 'layout style paint',
     pointerEvents: 'auto',
-    willChange: 'background-color',
+    transition: 'background-color 150ms ease',
 
     // Focus states
     '&:focus, &:focus-within': {
@@ -66,7 +75,6 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
     // Desktop hover effect
     [theme.breakpoints.up('md')]: {
-      transition: 'background-color 100ms ease',
       '&:hover': {
         backgroundColor: `${createColorMix('var(--brand-blue)', 8)} !important`,
       },
@@ -92,6 +100,7 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     padding: '12px 16px',
     fontSize: '0.875rem',
     fontWeight: 500,
+    contain: 'layout style',
 
     '&:focus, &:focus-within': {
       backgroundColor: TRANSPARENT,

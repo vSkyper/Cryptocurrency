@@ -28,18 +28,13 @@ const formatCompactCurrency = (value: number) =>
 const formatPercentage = (value: number) =>
   percentageFormatter.format(value / 100);
 
-// Class constants
-const COIN_IMAGE_CLASSES =
-  'w-9 h-9 overflow-hidden flex-shrink-0 transition-all ' +
-  'duration-300 ease-out group-hover:scale-110';
+const COIN_IMAGE_CLASSES = 'w-9 h-9 overflow-hidden flex-shrink-0';
 
 const COIN_LINK_CLASSES =
-  'inline-flex items-center gap-3 transition-all duration-300 ease-out group relative ' +
-  'hover:gap-4 w-full';
+  'inline-flex items-center gap-3 group relative w-full';
 
 const COIN_NAME_CLASSES =
-  'text-white/95 font-bold truncate transition-all duration-300 ease-out ' +
-  'group-hover:text-[var(--brand-blue)] group-hover:translate-x-1';
+  'text-white/95 font-bold truncate group-hover:text-[var(--brand-blue)]';
 
 const SYMBOL_BADGE_CLASSES =
   'text-xs font-bold rounded-full px-2 py-1 backdrop-blur-sm transition-transform ' +

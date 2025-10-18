@@ -11,7 +11,7 @@ const CARD_BASE_CLASSES =
   'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] backdrop-blur-sm';
 
 const BADGE_BASE_CLASSES =
-  'inline-flex items-center gap-0.5 px-1.5 py-1 sm:px-3 sm:py-1.5 text-xs ' +
+  'inline-flex items-center gap-0.5 px-2 py-1 text-xs ' +
   'font-semibold border rounded-full';
 
 export default function StatCard({
