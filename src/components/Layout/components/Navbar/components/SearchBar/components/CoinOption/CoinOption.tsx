@@ -1,9 +1,9 @@
 import { ArrowForwardIos } from '@mui/icons-material';
 import { CoinOptionProps } from './interface';
-import { BADGE, UTILITY } from 'styles/styles';
+import { UTILITY } from 'styles/styles';
 
 const CHIP_CLASSES =
-  `${BADGE.base} text-[0.7rem] px-2 py-0.5 h-5 ` +
+  `inline-flex items-center justify-center text-[0.7rem] px-2 h-5 font-semibold rounded-full backdrop-blur-sm border ` +
   'bg-[var(--chip-bg)] text-[var(--brand-blue)] border-[var(--chip-border)]';
 
 export default function CoinOption({ coin, isFocused }: CoinOptionProps) {

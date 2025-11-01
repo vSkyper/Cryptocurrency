@@ -1,6 +1,10 @@
 import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
-import { formatCompactCurrency, formatPercentage } from 'utils/formatters';
+import {
+  formatCompactCurrency,
+  formatCompactNumber,
+  formatPercentage,
+} from 'utils/formatters';
 
 const numberFormatter = new Intl.NumberFormat('en-US');
 
@@ -13,6 +17,7 @@ export default function Cards({ toggle, globalData }: CardsProps) {
     {
       key: 'marketCap',
       value: formatCompactCurrency(data.total_market_cap.usd),
+      mobileValue: formatCompactNumber(data.total_market_cap.usd),
       label: 'Market Cap',
       color: 'var(--brand-blue)',
       percentage: {
@@ -24,6 +29,7 @@ export default function Cards({ toggle, globalData }: CardsProps) {
     {
       key: 'totalVolume',
       value: formatCompactCurrency(data.total_volume.usd),
+      mobileValue: formatCompactNumber(data.total_volume.usd),
       label: '24h Volume',
       color: 'var(--brand-blue-light)',
       timeout: 100,

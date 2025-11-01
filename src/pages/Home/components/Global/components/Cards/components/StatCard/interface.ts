@@ -1,6 +1,7 @@
 export interface CardConfig {
   key: string;
   value: string;
+  mobileValue?: string;
   label: string;
   color: string;
   percentage?: {

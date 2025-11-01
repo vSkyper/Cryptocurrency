@@ -55,24 +55,37 @@ export default function StatCard({
       }}
     >
       <div className={CARD_BASE_CLASSES}>
-        <div className='flex flex-col gap-2'>
-          <div className='flex items-center gap-2'>
-            <h3 className='text-base sm:text-lg font-bold text-white'>
+        <div className='flex flex-col gap-2 w-full'>
+          <div className='flex items-center justify-center gap-2'>
+            {/* Mobile value - shorter */}
+            {config.mobileValue && (
+              <h3 className='block sm:hidden text-base font-bold text-white text-center break-words'>
+                {config.mobileValue}
+              </h3>
+            )}
+            {/* Desktop value - full */}
+            <h3
+              className={`${
+                config.mobileValue ? 'hidden sm:block' : 'block'
+              } text-base sm:text-lg font-bold text-white text-center break-words`}
+            >
               {config.value}
             </h3>
 
             {hasPercentage && config.percentage && (
               <span
-                className={`${BADGE_BASE_CLASSES} text-xs font-semibold border rounded-full px-2 py-1 ${badgeColorClasses}`}
+                className={`${BADGE_BASE_CLASSES} text-[0.65rem] sm:text-xs font-semibold border rounded-full px-1.5 sm:px-2 py-0.5 sm:py-1 ${badgeColorClasses}`}
               >
                 {config.percentage.value}
-                <TrendIcon sx={{ fontSize: '0.875rem' }} />
+                <TrendIcon
+                  sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+                />
               </span>
             )}
           </div>
         </div>
 
-        <p className='mt-2 text-xs sm:text-sm text-white/50 font-normal'>
+        <p className='mt-2 text-xs sm:text-sm text-white/50 font-normal text-center'>
           {config.label}
         </p>
       </div>
