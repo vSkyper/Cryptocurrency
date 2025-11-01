@@ -1,6 +1,7 @@
 import { PercentageBadge } from './components';
 import { ExtremeValueRowProps } from './interface';
 import { format, formatDistance } from 'date-fns';
+import { formatCurrency } from 'utils/formatters';
 
 const ROW_CLASSES =
   'flex justify-between items-center p-4 rounded-xl transition-colors duration-150 ' +
@@ -8,15 +9,6 @@ const ROW_CLASSES =
 
 const DIVIDER_CLASSES =
   'my-2 h-px bg-[linear-gradient(90deg,transparent_0%,color-mix(in_srgb,var(--brand-blue)_30%,transparent)_50%,transparent_100%)]';
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 8,
-  style: 'currency',
-  currency: 'USD',
-});
-
-const formatCurrency = (value: number) => currencyFormatter.format(value);
 
 const formatDateWithDistance = (date: string | number | Date) => {
   const dateObj = new Date(date);

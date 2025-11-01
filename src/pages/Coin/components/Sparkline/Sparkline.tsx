@@ -7,8 +7,9 @@ import useFetch from 'hooks/useFetch';
 import { buttons } from 'constants/coin';
 import { SparklineProps } from './interface';
 import { CircularProgress } from '@mui/material';
+import { API_ENDPOINTS } from 'config/api';
+import { CARD, LOADING } from 'styles/styles';
 
-const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
 const DEFAULT_DAYS = '7';
 
 const formatSparklineData = (prices: number[][]) => {
@@ -18,19 +19,14 @@ const formatSparklineData = (prices: number[][]) => {
   }));
 };
 
-const CHART_CONTAINER_CLASSES =
-  'relative w-full rounded-xl overflow-hidden p-3 sm:p-4 ' +
-  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] ' +
-  'h-[280px] sm:h-[320px] md:h-[480px]';
-
-const LOADING_OVERLAY_CLASSES =
-  'absolute inset-0 z-20 flex items-center justify-center bg-transparent';
+const CHART_CONTAINER_CLASSES = `relative w-full rounded-xl overflow-hidden p-3 sm:p-4 ${CARD.tertiary} h-[280px] sm:h-[320px] md:h-[480px]`;
 
 export default function Sparkline({ id }: SparklineProps) {
   const [days, setDays] = useState<string>(DEFAULT_DAYS);
 
-  const apiUrl = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=${API_KEY}`;
-  const { data, error } = useFetch<ISparkline>(apiUrl);
+  const { data, error } = useFetch<ISparkline>(
+    API_ENDPOINTS.coinMarketChart(id, days)
+  );
 
   const sparkline = data?.prices ? formatSparklineData(data.prices) : undefined;
 
@@ -56,7 +52,7 @@ export default function Sparkline({ id }: SparklineProps) {
       <div className={CHART_CONTAINER_CLASSES}>
         {/* Loading State */}
         {!data && (
-          <div className={LOADING_OVERLAY_CLASSES}>
+          <div className={LOADING.overlay}>
             <CircularProgress />
           </div>
         )}

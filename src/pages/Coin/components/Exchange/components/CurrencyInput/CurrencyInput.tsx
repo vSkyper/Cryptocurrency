@@ -1,10 +1,8 @@
 import { CurrencyInputProps } from './interface';
+import { INPUT } from 'styles/styles';
 
 const INPUT_CONTAINER_CLASSES =
   'px-4 py-3 rounded-2xl bg-[var(--bg-tertiary-dark)] w-full h-15 flex items-center';
-
-const INPUT_CLASSES =
-  'w-full text-right text-lg font-medium bg-transparent outline-none text-white/90';
 
 const CURRENCY_BADGE_CLASSES =
   'w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ' +
@@ -33,7 +31,7 @@ export default function CurrencyInput({
 
         <div className={INPUT_CONTAINER_CLASSES}>
           <input
-            className={INPUT_CLASSES}
+            className={`${INPUT.number} text-right text-lg font-medium`}
             type='number'
             value={value}
             onChange={onChange}

@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 const PAGINATION_CONFIG = {
   pageSize: 50,
   pageSizeOptions: [50, 100],
-};
+} as const;
 
 const TABLE_STYLES = {
   height: 'auto',
@@ -16,7 +16,7 @@ const TABLE_STYLES = {
   '& .MuiDataGrid-virtualScroller': {
     minHeight: 400,
   },
-};
+} as const;
 
 export default function Table({ coins }: TableProps) {
   // Use a client-side theme created from CSS variables when available.

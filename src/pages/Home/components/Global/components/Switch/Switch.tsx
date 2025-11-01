@@ -3,6 +3,7 @@ import {
   BarChart as BarChartIcon,
   BarChartOutlined as BarChartOutlinedIcon,
 } from '@mui/icons-material';
+import { UTILITY } from 'styles/styles';
 
 export default function Switch({ toggle, setToggle, mobile }: SwitchProps) {
   const handleToggle = () => {
@@ -12,7 +13,7 @@ export default function Switch({ toggle, setToggle, mobile }: SwitchProps) {
   const iconSize = mobile ? '1rem' : '1.2rem';
 
   const baseClasses =
-    'inline-flex items-center justify-center gap-2 font-semibold rounded-full ' +
+    `${UTILITY.flexCenter} gap-2 font-semibold rounded-full ` +
     'backdrop-blur-md border transition-all duration-300 ease-out relative ' +
     'overflow-hidden group active:translate-y-0';
 

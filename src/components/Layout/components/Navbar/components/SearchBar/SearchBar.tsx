@@ -11,12 +11,10 @@ import { ICoinsList } from 'interfaces';
 import useFetch from 'hooks/useFetch';
 import { ErrorModal } from 'components';
 import { CoinOption, EmptyState, SearchIconContainer } from './components';
+import { API_ENDPOINTS } from 'config/api';
 
-const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
 const MAX_RESULTS = 8;
 const BLUR_DELAY = 100;
-
-const API_URL = `https://api.coingecko.com/api/v3/coins/list?include_platform=false&x_cg_demo_api_key=${API_KEY}`;
 
 const INPUT_CLASSES =
   'w-full bg-[var(--bg-tertiary-dark)] text-[var(--brand-blue)] rounded-xl ' +
@@ -35,7 +33,7 @@ export default function SearchBar() {
   const [selectedCoin, setSelectedCoin] = useState<ICoinsList | null>(null);
 
   const navigate = useNavigate();
-  const { data, error } = useFetch<ICoinsList[]>(API_URL);
+  const { data, error } = useFetch<ICoinsList[]>(API_ENDPOINTS.coinsList());
 
   const filteredCoins =
     query === ''

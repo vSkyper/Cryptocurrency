@@ -1,62 +1,20 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { AreaChart, Area, YAxis } from 'recharts';
-
-// Formatters
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 8,
-  style: 'currency',
-  currency: 'USD',
-});
-
-const compactCurrencyFormatter = new Intl.NumberFormat('en-US', {
-  maximumFractionDigits: 0,
-  style: 'currency',
-  currency: 'USD',
-});
-
-const percentageFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-  style: 'percent',
-});
-
-const formatCurrency = (value: number) => currencyFormatter.format(value);
-const formatCompactCurrency = (value: number) =>
-  compactCurrencyFormatter.format(value);
-const formatPercentage = (value: number) =>
-  percentageFormatter.format(value / 100);
-
-const COIN_IMAGE_CLASSES = 'w-9 h-9 overflow-hidden flex-shrink-0';
-
-const COIN_LINK_CLASSES =
-  'inline-flex items-center gap-3 group relative w-full';
+import {
+  formatCurrency,
+  formatCompactCurrency,
+  formatPercentage,
+} from 'utils/formatters';
+import { IMAGE, LINK, BADGE } from 'styles/styles';
 
 const COIN_NAME_CLASSES =
   'text-white/95 font-bold truncate group-hover:text-[var(--brand-blue)]';
 
-const SYMBOL_BADGE_CLASSES =
-  'text-xs font-bold rounded-full px-2 py-1 backdrop-blur-sm transition-transform ' +
-  'duration-200 hover:-translate-y-0.5 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-blue)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-blue)_8%,transparent)_100%)] ' +
-  'border border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] text-[var(--brand-blue)] tracking-wide';
-
-const PERCENTAGE_BADGE_BASE =
-  'text-xs font-semibold rounded-full px-2 py-1 backdrop-blur-sm transition-transform ' +
-  'duration-200 hover:-translate-y-0.5 border';
-
-const POSITIVE_BADGE_CLASSES =
-  'border-[color-mix(in_srgb,var(--brand-positive)_30%,transparent)] ' +
-  'bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-positive)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-positive)_8%,transparent)_100%)]';
-
-const NEGATIVE_BADGE_CLASSES =
-  'border-[color-mix(in_srgb,var(--brand-negative)_30%,transparent)] ' +
-  'bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-negative)_15%,transparent)_0%,color-mix(in_srgb,var(--brand-negative)_8%,transparent)_100%)]';
-
 function CoinName(params: GridRenderCellParams) {
   return (
-    <RouterLink to={`/coins/${params.row.id}`} className={COIN_LINK_CLASSES}>
-      <div className={COIN_IMAGE_CLASSES}>
+    <RouterLink to={`/coins/${params.row.id}`} className={LINK.withIcon}>
+      <div className={IMAGE.coinSmall}>
         <img
           src={params.row.image}
           alt={`${params.value} logo`}
@@ -86,7 +44,7 @@ function CoinName(params: GridRenderCellParams) {
 
 function SymbolBadge(params: GridRenderCellParams) {
   const label = String(params.value ?? '').toUpperCase();
-  return <span className={SYMBOL_BADGE_CLASSES}>{label}</span>;
+  return <span className={BADGE.symbol}>{label}</span>;
 }
 
 function PercentageChange(params: GridRenderCellParams) {
@@ -96,13 +54,11 @@ function PercentageChange(params: GridRenderCellParams) {
   const colorVar = isPositive
     ? 'var(--brand-positive)'
     : 'var(--brand-negative)';
-  const badgeColorClasses = isPositive
-    ? POSITIVE_BADGE_CLASSES
-    : NEGATIVE_BADGE_CLASSES;
+  const badgeColorClasses = isPositive ? BADGE.positive : BADGE.negative;
 
   return (
     <span
-      className={`${PERCENTAGE_BADGE_BASE} ${badgeColorClasses} text-[${colorVar}]`}
+      className={`${BADGE.base} ${badgeColorClasses} text-[${colorVar}]`}
       title={label}
     >
       {label}

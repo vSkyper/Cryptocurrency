@@ -1,25 +1,9 @@
 import { StatCard, CardConfig } from './components';
 import { CardsProps } from './interface';
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  notation: 'compact',
-  maximumFractionDigits: 2,
-});
-
-const percentageFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-  style: 'percent',
-});
+import { formatCompactCurrency, formatPercentage } from 'utils/formatters';
 
 const numberFormatter = new Intl.NumberFormat('en-US');
 
-const formatCurrency = (value: number): string =>
-  currencyFormatter.format(value);
-const formatPercentage = (value: number): string =>
-  percentageFormatter.format(value / 100);
 const formatNumber = (value: number): string => numberFormatter.format(value);
 
 export default function Cards({ toggle, globalData }: CardsProps) {
@@ -28,7 +12,7 @@ export default function Cards({ toggle, globalData }: CardsProps) {
   const cardConfigs: CardConfig[] = [
     {
       key: 'marketCap',
-      value: formatCurrency(data.total_market_cap.usd),
+      value: formatCompactCurrency(data.total_market_cap.usd),
       label: 'Market Cap',
       color: 'var(--brand-blue)',
       percentage: {
@@ -39,7 +23,7 @@ export default function Cards({ toggle, globalData }: CardsProps) {
     },
     {
       key: 'totalVolume',
-      value: formatCurrency(data.total_volume.usd),
+      value: formatCompactCurrency(data.total_volume.usd),
       label: '24h Volume',
       color: 'var(--brand-blue-light)',
       timeout: 100,

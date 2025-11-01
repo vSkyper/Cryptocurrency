@@ -14,16 +14,7 @@ import {
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 import { ChartProps } from './interface';
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 8,
-  style: 'currency',
-  currency: 'USD',
-});
-
-const formatCurrency = (value: number): string =>
-  currencyFormatter.format(value);
+import { formatCurrency } from 'utils/formatters';
 
 const getTickFormat = (days: string, value: string): string => {
   switch (days) {

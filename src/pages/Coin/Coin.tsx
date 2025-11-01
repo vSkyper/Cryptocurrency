@@ -11,9 +11,9 @@ import {
 import { ErrorModal, LoadingModal } from 'components';
 import { ICoin } from 'interfaces';
 import useFetch from 'hooks/useFetch';
-import { useEffect, useState } from 'react';
-
-const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
+import { useStaggeredAnimation } from 'hooks/useStaggeredAnimation';
+import { API_ENDPOINTS } from 'config/api';
+import { LAYOUT, GRID } from 'styles/styles';
 
 const ANIMATION_DELAYS = {
   chart: 100,
@@ -25,54 +25,18 @@ const ANIMATION_DELAYS = {
 
 export default function Coin() {
   const { id } = useParams();
+  const { data, error } = useFetch<ICoin>(
+    id ? API_ENDPOINTS.coin(id) : undefined
+  );
 
-  const apiUrl = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false&x_cg_demo_api_key=${API_KEY}`;
-
-  const { data, error } = useFetch<ICoin>(apiUrl);
-
-  const [animations, setAnimations] = useState({
-    chart: false,
-    priceCard: false,
-    stackData: false,
-    exchange: false,
-    links: false,
-  });
-
-  useEffect(() => {
-    if (!data) return;
-
-    const timers = [
-      setTimeout(
-        () => setAnimations((prev) => ({ ...prev, chart: true })),
-        ANIMATION_DELAYS.chart
-      ),
-      setTimeout(
-        () => setAnimations((prev) => ({ ...prev, priceCard: true })),
-        ANIMATION_DELAYS.priceCard
-      ),
-      setTimeout(
-        () => setAnimations((prev) => ({ ...prev, stackData: true })),
-        ANIMATION_DELAYS.stackData
-      ),
-      setTimeout(
-        () => setAnimations((prev) => ({ ...prev, exchange: true })),
-        ANIMATION_DELAYS.exchange
-      ),
-      setTimeout(
-        () => setAnimations((prev) => ({ ...prev, links: true })),
-        ANIMATION_DELAYS.links
-      ),
-    ];
-
-    return () => timers.forEach((timer) => clearTimeout(timer));
-  }, [data]);
+  const animations = useStaggeredAnimation(ANIMATION_DELAYS, !!data);
 
   if (!id || error) return <ErrorModal />;
   if (!data) return <LoadingModal />;
 
   return (
-    <main className='relative w-full min-h-screen'>
-      <div className='relative z-[1] container mx-auto py-6 sm:py-8 px-4 sm:px-2'>
+    <main className={LAYOUT.mainContainer}>
+      <div className={LAYOUT.contentContainer}>
         <CoinHeader
           name={data.name}
           symbol={data.symbol}
@@ -81,7 +45,7 @@ export default function Coin() {
         />
 
         {/* Chart & Price Card Row */}
-        <div className='grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 mt-4'>
+        <div className={`${GRID.responsive12Col} mt-4`}>
           <div className='lg:col-span-8'>
             <AnimatedSection show={animations.chart}>
               <Sparkline id={id} />
@@ -96,7 +60,7 @@ export default function Coin() {
         </div>
 
         {/* Stats, Exchange & Links Row */}
-        <div className='grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 mt-2 sm:mt-4'>
+        <div className={`${GRID.responsive12Col} mt-2 sm:mt-4`}>
           <div className='lg:col-span-8'>
             <AnimatedSection show={animations.stackData}>
               <StackData marketData={data.market_data} />

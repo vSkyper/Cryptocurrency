@@ -3,25 +3,7 @@ import {
   TrendingDownRounded as TrendingDownIcon,
 } from '@mui/icons-material';
 import { PriceProps } from './interface';
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 8,
-  style: 'currency',
-  currency: 'USD',
-});
-
-const percentageFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-  style: 'percent',
-});
-
-const formatCurrency = (value: number): string =>
-  currencyFormatter.format(value);
-
-const formatPercentage = (value: number): string =>
-  percentageFormatter.format(value / 100);
+import { formatCurrency, formatPercentage } from 'utils/formatters';
 
 const PRICE_GRADIENT_CLASSES =
   'text-3xl sm:text-4xl font-extrabold tracking-tight bg-clip-text text-transparent ' +

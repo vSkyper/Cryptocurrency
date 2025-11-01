@@ -16,51 +16,24 @@ import { IExchange } from 'interfaces';
 import { ErrorModal } from 'components';
 import { ExchangeProps } from './interface';
 import { ChevronIcon, CurrencyInput, LoadingSpinner } from './components';
+import { API_ENDPOINTS } from 'config/api';
+import { formatCurrencyWithOptions } from 'utils/formatters';
+import {
+  CARD,
+  TYPOGRAPHY,
+  INPUT,
+  DROPDOWN,
+  ICON_CONTAINER,
+  CSS_SNIPPETS,
+} from 'styles/styles';
 
-const API_KEY = 'CG-Gq8TjhLV8eipyhqmcRtXoZee';
 const MAX_DROPDOWN_ITEMS = 5;
 
-const formatCurrencyRate = (rate: number, currency: string): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency.toUpperCase(),
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 8,
-  }).format(rate);
-};
-
-const CARD_CLASSES =
-  'p-6 rounded-lg bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] ' +
-  'backdrop-blur-sm';
-
-const TITLE_CLASSES =
-  'font-bold text-lg md:text-xl bg-clip-text text-transparent ' +
-  'bg-[linear-gradient(135deg,rgb(256,256,256)_20%,var(--brand-blue-light)_90%)]';
-
-const SWAP_ICON_CLASSES =
-  'mx-auto my-4 w-10 h-10 rounded-full bg-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] ' +
-  'flex items-center justify-center pointer-events-none text-white/90';
+const SWAP_ICON_CLASSES = `${ICON_CONTAINER.medium} ${ICON_CONTAINER.brandBlue} mx-auto my-4 pointer-events-none text-white/90`;
 
 const RATE_DISPLAY_CLASSES =
   'flex items-center justify-center gap-2 p-2 mt-4 rounded-lg ' +
-  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_55%,transparent)_100%)] ' +
-  'min-h-12 text-white/50';
-
-const COMBOBOX_INPUT_CLASSES =
-  'w-full bg-transparent text-sm font-semibold uppercase focus:outline-none pr-6 text-white/90';
-
-const COMBOBOX_OPTIONS_CLASSES =
-  'absolute z-50 left-0 top-full mt-1 max-h-60 w-full overflow-auto ' +
-  'rounded-md bg-[var(--bg-tertiary-dark)] py-1 text-sm shadow-lg';
-
-const HIDE_SPINNER_STYLES = `
-  input[type=number]::-webkit-outer-spin-button,
-  input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  input[type=number] { -moz-appearance: textfield; }
-`;
+  `${CARD.tertiaryDark} min-h-12 text-white/50`;
 
 export default function Exchange({ id, symbol }: ExchangeProps) {
   const [currencyOption, setCurrencyOption] = useState<string>('usd');
@@ -72,17 +45,16 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
   const [isLoadingRate, setIsLoadingRate] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
 
-  const currenciesUrl = `https://api.coingecko.com/api/v3/simple/supported_vs_currencies?x_cg_demo_api_key=${API_KEY}`;
-  const exchangeRateUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${currencyOption}&x_cg_demo_api_key=${API_KEY}`;
-
-  const { data: currencies, error: currenciesError } =
-    useFetch<string[]>(currenciesUrl);
-  const { data: exchangeRate, error: exchangeRateError } =
-    useFetch<IExchange>(exchangeRateUrl);
+  const { data: currencies, error: currenciesError } = useFetch<string[]>(
+    API_ENDPOINTS.supportedCurrencies()
+  );
+  const { data: exchangeRate, error: exchangeRateError } = useFetch<IExchange>(
+    API_ENDPOINTS.exchangeRate(id, currencyOption)
+  );
 
   const currentRate = exchangeRate?.[id]?.[currencyOption];
   const formattedRate = currentRate
-    ? formatCurrencyRate(currentRate, currencyOption)
+    ? formatCurrencyWithOptions(currentRate, currencyOption)
     : '';
 
   const filteredCurrencies = (currencies ?? [])
@@ -170,16 +142,16 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
 
   return (
     <div className='transition-opacity duration-800'>
-      <style>{HIDE_SPINNER_STYLES}</style>
+      <style>{CSS_SNIPPETS.hideNumberInputSpinners}</style>
 
-      <div className={CARD_CLASSES}>
+      <div className={CARD.base}>
         {/* Header */}
         <div className='flex items-center justify-center mb-4 gap-2'>
           <CalculateIcon
             className='text-[var(--brand-blue)]'
             sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}
           />
-          <h3 className={TITLE_CLASSES}>Exchange Calculator</h3>
+          <h3 className={TYPOGRAPHY.title}>Exchange Calculator</h3>
         </div>
 
         {/* Currency Input Grid */}
@@ -211,7 +183,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
               >
                 <div className='relative flex items-center'>
                   <ComboboxInput
-                    className={COMBOBOX_INPUT_CLASSES}
+                    className={INPUT.combobox}
                     displayValue={() => currencyOption.toUpperCase()}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setQuery(e.target.value)
@@ -230,7 +202,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
                     {filteredCurrencies.length > 0 && (
                       <ComboboxOptions
                         modal={false}
-                        className={COMBOBOX_OPTIONS_CLASSES}
+                        className={DROPDOWN.options}
                       >
                         {filteredCurrencies.map((option) => (
                           <ComboboxOption

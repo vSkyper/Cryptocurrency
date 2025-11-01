@@ -1,18 +1,7 @@
 import { IMarketData } from 'interfaces';
 import { PriceChangeProps } from './interface';
-
-const percentageFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-  style: 'percent',
-});
-
-const formatPercentage = (value: number): string =>
-  percentageFormatter.format(value / 100);
-
-const BASE_CARD_CLASSES =
-  'flex flex-col items-center justify-center p-4 sm:p-6 rounded-xl relative overflow-hidden ' +
-  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_60%,transparent)_100%)]';
+import { formatPercentage } from 'utils/formatters';
+import { CARD } from 'styles/styles';
 
 export default function PriceChange({ marketData, days }: PriceChangeProps) {
   const key = `price_change_percentage_${days}` as keyof IMarketData;
@@ -29,7 +18,9 @@ export default function PriceChange({ marketData, days }: PriceChangeProps) {
 
   return (
     <div className='col-span-1 sm:col-span-1 lg:col-span-1'>
-      <div className={`${BASE_CARD_CLASSES} ${colorClass}`}>
+      <div
+        className={`flex flex-col items-center justify-center relative overflow-hidden ${CARD.tertiary} ${colorClass}`}
+      >
         <div
           className={`absolute top-0 left-0 right-0 h-1 rounded-t-xl opacity-80 ${topBarClass}`}
         />

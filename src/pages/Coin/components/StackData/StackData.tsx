@@ -1,39 +1,20 @@
 import { StackDataProps } from './interface';
 import { ExtremeValueRow, StatRow } from './components';
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 8,
-  style: 'currency',
-  currency: 'USD',
-});
-
-const formatCurrency = (value: number) => currencyFormatter.format(value);
+import { formatCurrency } from 'utils/formatters';
+import { CARD, TYPOGRAPHY, BADGE } from 'styles/styles';
 
 const formatNumber = (value: number, maxDecimals = 0) =>
   value.toLocaleString('en-US', { maximumFractionDigits: maxDecimals });
-
-const CONTAINER_CLASSES =
-  'p-4 sm:p-6 rounded-lg sm:rounded-xl ' +
-  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)]';
-
-const TITLE_CLASSES =
-  'mb-4 font-bold text-lg sm:text-xl bg-clip-text text-transparent ' +
-  'bg-[linear-gradient(135deg,rgba(255,255,255,0.95),color-mix(in_srgb,var(--brand-blue)_40%,transparent))] ' +
-  'select-none';
-
-const RANK_BADGE_CLASSES =
-  'inline-flex items-center py-0.5 px-3 sm:py-1 text-xs sm:text-sm rounded-full font-bold ' +
-  'text-[var(--brand-blue)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-blue)_20%,transparent)_0%,color-mix(in_srgb,var(--brand-blue-light)_20%,transparent)_100%)] ' +
-  'border border-[color-mix(in_srgb,var(--brand-blue)_40%,transparent)]';
 
 export default function StackData({ marketData }: StackDataProps) {
   const volumeToMarketCap =
     (marketData.total_volume?.usd || 0) / (marketData.market_cap?.usd || 1);
 
   return (
-    <div className={CONTAINER_CLASSES}>
-      <div className={TITLE_CLASSES}>Market Statistics</div>
+    <div className={CARD.tertiary}>
+      <div className={`${TYPOGRAPHY.title} mb-4 select-none`}>
+        Market Statistics
+      </div>
 
       <div className='flex flex-col text-sm sm:text-base'>
         <StatRow
@@ -69,7 +50,7 @@ export default function StackData({ marketData }: StackDataProps) {
         <StatRow
           label='Market Cap Rank'
           value={
-            <span className={RANK_BADGE_CLASSES}>
+            <span className={BADGE.symbol}>
               {marketData.market_cap_rank
                 ? `#${marketData.market_cap_rank}`
                 : 'N/A'}

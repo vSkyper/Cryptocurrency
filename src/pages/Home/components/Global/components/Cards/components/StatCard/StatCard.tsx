@@ -4,15 +4,13 @@ import {
   TrendingDownRounded as TrendingDownIcon,
 } from '@mui/icons-material';
 import { StatCardProps } from './interface';
+import { CARD } from 'styles/styles';
 
 const CARD_BASE_CLASSES =
-  'flex flex-col justify-center items-center relative overflow-hidden rounded-xl ' +
-  'p-4 sm:p-5 transition-all duration-300 ' +
-  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)] backdrop-blur-sm';
+  'flex flex-col justify-center items-center relative overflow-hidden transition-all duration-300 ' +
+  CARD.tertiary;
 
-const BADGE_BASE_CLASSES =
-  'inline-flex items-center gap-0.5 px-2 py-1 text-xs ' +
-  'font-semibold border rounded-full';
+const BADGE_BASE_CLASSES = 'inline-flex items-center gap-0.5';
 
 export default function StatCard({
   config,
@@ -59,12 +57,14 @@ export default function StatCard({
       <div className={CARD_BASE_CLASSES}>
         <div className='flex flex-col gap-2'>
           <div className='flex items-center gap-2'>
-            <h3 className='text-xl sm:text-2xl font-bold text-white'>
+            <h3 className='text-base sm:text-lg font-bold text-white'>
               {config.value}
             </h3>
 
             {hasPercentage && config.percentage && (
-              <span className={`${BADGE_BASE_CLASSES} ${badgeColorClasses}`}>
+              <span
+                className={`${BADGE_BASE_CLASSES} text-xs font-semibold border rounded-full px-2 py-1 ${badgeColorClasses}`}
+              >
                 {config.percentage.value}
                 <TrendIcon sx={{ fontSize: '0.875rem' }} />
               </span>

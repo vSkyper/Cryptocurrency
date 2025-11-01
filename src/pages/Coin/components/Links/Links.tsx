@@ -8,28 +8,25 @@ import {
 } from '@mui/icons-material';
 import { LinksProps } from './interface';
 import { ChipLink } from './components';
+import { CARD } from 'styles/styles';
 
 const SECTION_TITLE_CLASSES =
-  'text-center text-[0.75rem] uppercase tracking-wider font-semibold ' +
-  'text-white/60 mb-3';
+  'text-center text-[0.7rem] uppercase tracking-widest font-bold ' +
+  'text-white/50 mb-3.5 select-none';
 
 const PRIMARY_CHIP_CLASSES =
-  'bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] to-[color-mix(in_srgb,var(--brand-blue)_8%,transparent)] ' +
-  'border border-[color-mix(in_srgb,var(--brand-blue)_30%,transparent)] text-[var(--brand-blue)] ' +
-  'hover:from-[color-mix(in_srgb,var(--brand-blue)_25%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue)_15%,transparent)] ' +
-  'hover:border-[color-mix(in_srgb,var(--brand-blue)_50%,transparent)]';
+  'bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] to-[color-mix(in_srgb,var(--brand-blue)_10%,transparent)] ' +
+  'border border-[color-mix(in_srgb,var(--brand-blue)_35%,transparent)] text-[var(--brand-blue-light)] ' +
+  'hover:from-[color-mix(in_srgb,var(--brand-blue)_30%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue)_18%,transparent)] ' +
+  'hover:border-[color-mix(in_srgb,var(--brand-blue)_55%,transparent)] hover:shadow-[0_4px_16px_color-mix(in_srgb,var(--brand-blue)_20%,transparent)]';
 
 const BLOCKCHAIN_CHIP_CLASSES =
-  'bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue-light)_12%,transparent)] to-[color-mix(in_srgb,var(--brand-blue-light)_6%,transparent)] ' +
-  'border border-[color-mix(in_srgb,var(--brand-blue-light)_25%,transparent)] text-[var(--brand-blue-light)] text-xs ' +
-  'hover:from-[color-mix(in_srgb,var(--brand-blue-light)_20%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue-light)_12%,transparent)] ' +
-  'hover:border-[color-mix(in_srgb,var(--brand-blue-light)_45%,transparent)]';
+  'bg-gradient-to-br from-[color-mix(in_srgb,var(--brand-blue-light)_15%,transparent)] to-[color-mix(in_srgb,var(--brand-blue-light)_8%,transparent)] ' +
+  'border border-[color-mix(in_srgb,var(--brand-blue-light)_28%,transparent)] text-[var(--brand-blue-light)] text-xs ' +
+  'hover:from-[color-mix(in_srgb,var(--brand-blue-light)_24%,transparent)] hover:to-[color-mix(in_srgb,var(--brand-blue-light)_14%,transparent)] ' +
+  'hover:border-[color-mix(in_srgb,var(--brand-blue-light)_48%,transparent)] hover:shadow-[0_4px_12px_color-mix(in_srgb,var(--brand-blue-light)_18%,transparent)]';
 
 const ICON_SIZE = { fontSize: 18 };
-
-const CARD_CLASSES =
-  'p-5 rounded-xl ' +
-  'bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary)_85%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary)_55%,transparent)_100%)]';
 
 const SOCIAL_LINKS = {
   reddit: {
@@ -78,17 +75,17 @@ export default function Links({ data }: LinksProps) {
     new URL(url).hostname.replace('www.', '');
 
   return (
-    <div className={CARD_CLASSES}>
+    <div className={CARD.base}>
       {/* Header */}
-      <div className='mb-5 pb-4 border-b border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)]'>
-        <div className='text-center font-bold text-lg sm:text-xl bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)]'>
+      <div className='mb-6 text-center'>
+        <div className='font-bold text-lg sm:text-xl bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] mb-2'>
           Official Links & Community
         </div>
-        <div className='mx-auto mt-2.5 h-1 w-16 rounded-full bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)]' />
+        <div className='mx-auto h-1 w-20 rounded-full bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-light)] to-[var(--brand-blue)] opacity-60' />
       </div>
 
       {/* Primary Links Section */}
-      <div className='flex flex-wrap gap-2.5 justify-center mb-4'>
+      <div className='flex flex-wrap gap-3 justify-center mb-6'>
         {links?.homepage?.[0] && (
           <ChipLink
             href={links.homepage[0]}
@@ -96,7 +93,7 @@ export default function Links({ data }: LinksProps) {
               <img
                 src={image?.large}
                 alt='logo'
-                className='w-5 h-5 rounded-full object-cover border border-white/30'
+                className='w-5 h-5 rounded-full object-cover border border-white/30 shadow-sm'
               />
             }
             className={PRIMARY_CHIP_CLASSES}
@@ -120,9 +117,9 @@ export default function Links({ data }: LinksProps) {
 
       {/* Blockchain Explorer Links */}
       {hasBlockchainSites && (
-        <div className='mb-4'>
+        <div className='mb-6'>
           <div className={SECTION_TITLE_CLASSES}>Blockchain Explorers</div>
-          <div className='flex flex-wrap gap-2 justify-center'>
+          <div className='flex flex-wrap gap-2.5 justify-center'>
             {links?.blockchain_site?.slice(0, 3).map(
               (blockchain) =>
                 blockchain && (
@@ -148,7 +145,7 @@ export default function Links({ data }: LinksProps) {
       {/* Social Media Links */}
       <div>
         <div className={SECTION_TITLE_CLASSES}>Social Media</div>
-        <div className='flex flex-wrap gap-2 justify-center'>
+        <div className='flex flex-wrap gap-2.5 justify-center'>
           {links?.subreddit_url && (
             <ChipLink
               href={links.subreddit_url}

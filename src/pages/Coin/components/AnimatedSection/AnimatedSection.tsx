@@ -1,7 +1,7 @@
 import { AnimatedSectionProps } from './interface';
+import { UTILITY } from 'styles/styles';
 
-const ANIMATION_CLASSES =
-  'transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]';
+const ANIMATION_CLASSES = `${UTILITY.transitionAll} duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]`;
 
 export default function AnimatedSection({
   show,
