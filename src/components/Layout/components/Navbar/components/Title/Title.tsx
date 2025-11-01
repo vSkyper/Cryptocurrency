@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { TrendingUp as TrendingUpIcon } from '@mui/icons-material';
+import { UTILITY } from 'styles/styles';
 
 const LOGO_BASE_CLASSES =
-  'inline-flex items-center justify-center backdrop-blur-md rounded-lg transition-all ' +
+  `${UTILITY.flexCenter} backdrop-blur-md rounded-lg ${UTILITY.transitionAll} ` +
   'duration-300 ease-out relative overflow-hidden group';
 
 const LOGO_GRADIENT_CLASSES =
@@ -24,9 +25,9 @@ const SHINE_EFFECT_CLASSES =
   'transition-all duration-500 group-hover:left-full';
 
 const DESKTOP_TITLE_BASE_CLASSES =
-  'relative bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-light)] ' +
-  'to-[var(--brand-blue)] bg-[length:200%_100%] bg-clip-text text-transparent ' +
-  'transition-all duration-[400ms] ease-out no-underline';
+  `relative bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-light)] ` +
+  `to-[var(--brand-blue)] bg-[length:200%_100%] bg-clip-text text-transparent ` +
+  `${UTILITY.transitionAll} duration-[400ms] ease-out no-underline`;
 
 const DESKTOP_TITLE_HOVER_CLASSES =
   'hover:bg-[position:100%_0] hover:-translate-y-px ' +
@@ -35,11 +36,11 @@ const DESKTOP_TITLE_HOVER_CLASSES =
 const DESKTOP_TITLE_UNDERLINE_CLASSES =
   "after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-0.5 " +
   'after:bg-gradient-to-r after:from-[var(--brand-blue)] after:to-[var(--brand-blue-light)] ' +
-  'after:rounded-b-xs after:transition-[width] after:duration-300 after:ease-out hover:after:w-full';
+  `after:rounded-b-xs after:${UTILITY.transitionAll} after:duration-300 after:ease-out hover:after:w-full`;
 
 const MOBILE_TITLE_CLASSES =
-  'bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] ' +
-  'bg-clip-text text-transparent transition-all duration-300 ease-out no-underline ' +
+  `bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-blue-light)] ` +
+  `bg-clip-text text-transparent ${UTILITY.transitionAll} duration-300 ease-out no-underline ` +
   'hover:[filter:drop-shadow(0_2px_4px_color-mix(in_srgb,var(--brand-blue)_40%,transparent))]';
 
 export default function Title() {
@@ -47,7 +48,7 @@ export default function Title() {
   const desktopTitleClasses = `${DESKTOP_TITLE_BASE_CLASSES} ${DESKTOP_TITLE_HOVER_CLASSES} ${DESKTOP_TITLE_UNDERLINE_CLASSES}`;
 
   return (
-    <div className='flex items-center gap-2 sm:gap-3'>
+    <div className={`${UTILITY.flexCenter} gap-2 sm:gap-3`}>
       {/* Logo Button */}
       <Link to='/' title='Go to Homepage' className={logoClasses}>
         <span className={SHINE_EFFECT_CLASSES} />

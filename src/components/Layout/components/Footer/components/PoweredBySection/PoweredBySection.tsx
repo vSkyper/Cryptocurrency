@@ -1,8 +1,8 @@
+import { UTILITY } from 'styles/styles';
+
 const COINGECKO_URL = 'https://www.coingecko.com';
 
-const LINK_CLASSES =
-  'text-[var(--brand-blue)] font-semibold hover:text-[var(--brand-blue-light)] ' +
-  'transition-colors duration-200';
+const LINK_CLASSES = `text-[var(--brand-blue)] font-semibold hover:text-[var(--brand-blue-light)] ${UTILITY.transitionAll} duration-200`;
 
 export default function PoweredBySection() {
   return (

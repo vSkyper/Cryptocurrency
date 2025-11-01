@@ -1,9 +1,10 @@
 import { GitHub as GitHubIcon } from '@mui/icons-material';
+import { UTILITY } from 'styles/styles';
 
 const GITHUB_URL = 'https://github.com/vSkyper/cryptocurrency';
 
 const BUTTON_BASE_CLASSES =
-  'inline-flex items-center justify-center backdrop-blur-md rounded-lg transition-all ' +
+  `${UTILITY.flexCenter} backdrop-blur-md rounded-lg ${UTILITY.transitionAll} ` +
   'duration-300 ease-out p-2.5 sm:p-3 relative overflow-hidden group';
 
 const BUTTON_GRADIENT_CLASSES =
@@ -25,7 +26,7 @@ const SHINE_EFFECT_CLASSES =
   'transition-all duration-500 group-hover:left-full';
 
 const ICON_CLASSES =
-  '[filter:drop-shadow(var(--shadow-dropdown))] transition-all duration-300 ' +
+  `[filter:drop-shadow(var(--shadow-dropdown))] ${UTILITY.transitionAll} duration-300 ` +
   'group-hover:-rotate-[5deg] group-hover:scale-110 ' +
   'group-hover:[filter:drop-shadow(0_4px_8px_color-mix(in_srgb,var(--brand-blue)_40%,transparent))]';
 

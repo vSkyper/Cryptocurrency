@@ -1,8 +1,7 @@
 import { CoinGeckoBadge, PoweredBySection } from './components';
+import { UTILITY } from 'styles/styles';
 
-const FOOTER_CLASSES =
-  'w-full bg-[color-mix(in_srgb,var(--bg-primary)_80%,transparent)] px-2 py-4 ' +
-  'flex justify-center items-center';
+const FOOTER_CLASSES = `w-full bg-[color-mix(in_srgb,var(--bg-primary)_80%,transparent)] px-2 py-4 ${UTILITY.flexCenter}`;
 
 const CONTAINER_CLASSES =
   'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 w-full ' +
