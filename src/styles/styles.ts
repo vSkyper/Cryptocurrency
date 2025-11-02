@@ -427,21 +427,6 @@ export const HOME = {
     styles: {
       height: 'auto',
       minHeight: 400,
-      '& .MuiDataGrid-virtualScroller': {
-        minHeight: 400,
-      },
-      '& .MuiDataGrid-row': {
-        minHeight: '56px !important',
-        maxHeight: '56px !important',
-        '@media (min-width: 600px)': {
-          minHeight: '60px !important',
-          maxHeight: '60px !important',
-        },
-        '@media (min-width: 960px)': {
-          minHeight: '64px !important',
-          maxHeight: '64px !important',
-        },
-      },
     } as const,
   },
 } as const;

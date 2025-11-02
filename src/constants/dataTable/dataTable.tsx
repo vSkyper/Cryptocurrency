@@ -46,7 +46,7 @@ function SymbolBadge(params: GridRenderCellParams) {
   const label = String(params.value ?? '').toUpperCase();
   return (
     <span
-      className={`${BADGE.symbol} !text-[0.6rem] sm:!text-xs !px-1.5 sm:!px-2 !py-0.5 sm:!py-1`}
+      className={`${BADGE.symbol} !text-[0.6rem] sm:!text-xs !px-1.5 sm:!px-2 !py-0.5 sm:!py-1 inline-flex items-center justify-center !max-h-6 sm:!max-h-7`}
     >
       {label}
     </span>
@@ -143,11 +143,12 @@ export const columns: GridColDef[] = [
     field: 'symbol',
     headerName: 'Symbol',
     flex: 0.9,
-    minWidth: 100,
+    minWidth: 110,
     align: 'center',
     headerAlign: 'center',
     valueFormatter: (value) => String(value ?? '').toUpperCase(),
     renderCell: SymbolBadge,
+    cellClassName: 'symbol-cell',
   },
   {
     type: 'number',
