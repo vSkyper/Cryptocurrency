@@ -2,13 +2,7 @@ import { PercentageBadge } from './components';
 import { ExtremeValueRowProps } from './interface';
 import { format, formatDistance } from 'date-fns';
 import { formatCurrency } from 'utils/formatters';
-
-const ROW_CLASSES =
-  'flex justify-between items-center p-4 rounded-xl transition-colors duration-150 ' +
-  'hover:bg-[rgba(64,156,255,0.06)] md:hover:bg-[color-mix(in_srgb,var(--brand-blue)_8%,transparent)]';
-
-const DIVIDER_CLASSES =
-  'my-2 h-px bg-[linear-gradient(90deg,transparent_0%,color-mix(in_srgb,var(--brand-blue)_30%,transparent)_50%,transparent_100%)]';
+import { COIN } from 'styles/styles';
 
 const formatDateWithDistance = (date: string | number | Date) => {
   const dateObj = new Date(date);
@@ -26,21 +20,21 @@ export default function ExtremeValueRow({
 }: ExtremeValueRowProps) {
   return (
     <>
-      <div className={`${ROW_CLASSES} items-start`}>
-        <div className='font-semibold text-white'>{label}</div>
-        <div className='text-right'>
-          <div className='flex items-center gap-2 justify-end'>
-            <div className='font-semibold text-white/80'>
+      <div className={`${COIN.stackData.row} items-start`}>
+        <div className={COIN.stackData.label}>{label}</div>
+        <div className={COIN.stackData.extremeValue.container}>
+          <div className={COIN.stackData.extremeValue.priceWrapper}>
+            <div className={COIN.stackData.extremeValue.price}>
               {formatCurrency(price)}
             </div>
             <PercentageBadge value={percentage} />
           </div>
-          <div className='text-xs sm:text-sm text-white/60 mt-1'>
+          <div className={COIN.stackData.extremeValue.date}>
             {formatDateWithDistance(date)}
           </div>
         </div>
       </div>
-      <div className={DIVIDER_CLASSES} />
+      <div className={COIN.stackData.divider} />
     </>
   );
 }

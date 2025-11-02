@@ -1,7 +1,7 @@
 import { StackDataProps } from './interface';
 import { ExtremeValueRow, StatRow } from './components';
 import { formatCurrency } from 'utils/formatters';
-import { CARD, TYPOGRAPHY, BADGE } from 'styles/styles';
+import { CARD, TYPOGRAPHY, BADGE, COIN } from 'styles/styles';
 
 const formatNumber = (value: number, maxDecimals = 0) =>
   value.toLocaleString('en-US', { maximumFractionDigits: maxDecimals });
@@ -12,11 +12,11 @@ export default function StackData({ marketData }: StackDataProps) {
 
   return (
     <div className={CARD.tertiary}>
-      <div className={`${TYPOGRAPHY.title} mb-4 select-none`}>
+      <div className={`${TYPOGRAPHY.title} ${COIN.stackData.title}`}>
         Market Statistics
       </div>
 
-      <div className='flex flex-col text-sm sm:text-base'>
+      <div className={COIN.stackData.container}>
         <StatRow
           label='Market Capitalization'
           value={formatCurrency(marketData.market_cap?.usd || 0)}
@@ -35,12 +35,12 @@ export default function StackData({ marketData }: StackDataProps) {
         <StatRow
           label='24h Low / 24h High'
           value={
-            <div className='text-right'>
-              <div className='font-semibold text-red-400'>
+            <div className={COIN.stackData.lowHighContainer}>
+              <div className={COIN.stackData.lowValue}>
                 {formatCurrency(marketData.low_24h?.usd || 0)}
               </div>
-              <div className='text-white/60'>/</div>
-              <div className='font-semibold text-green-400'>
+              <div className={COIN.stackData.separator}>/</div>
+              <div className={COIN.stackData.highValue}>
                 {formatCurrency(marketData.high_24h?.usd || 0)}
               </div>
             </div>

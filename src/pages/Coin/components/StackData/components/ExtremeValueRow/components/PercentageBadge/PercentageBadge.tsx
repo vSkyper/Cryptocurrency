@@ -1,6 +1,6 @@
 import { PercentageBadgeProps } from './interface';
 import { formatPercentage } from 'utils/formatters';
-import { BADGE } from 'styles/styles';
+import { BADGE, COIN } from 'styles/styles';
 
 export default function PercentageBadge({ value }: PercentageBadgeProps) {
   const isNegative = value < 0;
@@ -8,7 +8,7 @@ export default function PercentageBadge({ value }: PercentageBadgeProps) {
 
   return (
     <span
-      className={`${BADGE.base} ${badgeClasses} px-2 py-0.5 text-xs sm:text-sm`}
+      className={`${BADGE.base} ${badgeClasses} ${COIN.percentageBadge.base}`}
     >
       {formatPercentage(value)}
     </span>

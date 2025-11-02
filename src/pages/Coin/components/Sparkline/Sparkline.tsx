@@ -8,7 +8,7 @@ import { buttons } from 'constants/coin';
 import { SparklineProps } from './interface';
 import { CircularProgress } from '@mui/material';
 import { API_ENDPOINTS } from 'config/api';
-import { CARD, LOADING } from 'styles/styles';
+import { LOADING, COIN } from 'styles/styles';
 
 const DEFAULT_DAYS = '7';
 
@@ -18,8 +18,6 @@ const formatSparklineData = (prices: number[][]) => {
     value: priceData[1],
   }));
 };
-
-const CHART_CONTAINER_CLASSES = `relative w-full rounded-xl overflow-hidden p-3 sm:p-4 ${CARD.tertiary} h-[280px] sm:h-[320px] md:h-[480px]`;
 
 export default function Sparkline({ id }: SparklineProps) {
   const [days, setDays] = useState<string>(DEFAULT_DAYS);
@@ -35,8 +33,8 @@ export default function Sparkline({ id }: SparklineProps) {
   return (
     <>
       {/* Time Period Buttons */}
-      <div className='mb-4'>
-        <div className='flex justify-end gap-2 flex-wrap'>
+      <div className={COIN.sparkline.buttonWrapper}>
+        <div className={COIN.sparkline.buttonGroup}>
           {buttons.map((button) => (
             <ButtonComponent
               key={button.days}
@@ -49,7 +47,7 @@ export default function Sparkline({ id }: SparklineProps) {
       </div>
 
       {/* Chart Container */}
-      <div className={CHART_CONTAINER_CLASSES}>
+      <div className={COIN.sparkline.chartContainer}>
         {/* Loading State */}
         {!data && (
           <div className={LOADING.overlay}>

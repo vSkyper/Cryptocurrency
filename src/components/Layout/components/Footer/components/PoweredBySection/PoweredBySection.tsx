@@ -1,24 +1,22 @@
-import { UTILITY } from 'styles/styles';
+import { FOOTER } from 'styles/styles';
 
 const COINGECKO_URL = 'https://www.coingecko.com';
 
-const LINK_CLASSES = `text-[var(--brand-blue)] font-semibold hover:text-[var(--brand-blue-light)] ${UTILITY.transitionAll} duration-200`;
-
 export default function PoweredBySection() {
   return (
-    <div className='flex flex-col items-center sm:items-start gap-1'>
-      <span className='text-lg font-medium text-white/70'>
+    <div className={FOOTER.poweredBy.container}>
+      <span className={FOOTER.poweredBy.text}>
         Powered by{' '}
         <a
           href={COINGECKO_URL}
           target='_blank'
           rel='noopener noreferrer'
-          className={LINK_CLASSES}
+          className={FOOTER.poweredBy.link}
         >
           CoinGecko API
         </a>
       </span>
-      <span className='text-xs font-normal text-white/40'>
+      <span className={FOOTER.poweredBy.subtext}>
         Real-time cryptocurrency data
       </span>
     </div>

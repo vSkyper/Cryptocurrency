@@ -6,15 +6,15 @@ import {
   formatCompactCurrency,
   formatPercentage,
 } from 'utils/formatters';
-import { IMAGE, LINK, BADGE } from 'styles/styles';
+import { LINK, BADGE } from 'styles/styles';
 
 const COIN_NAME_CLASSES =
-  'text-white/95 font-bold truncate group-hover:text-[var(--brand-blue)]';
+  'text-white/95 font-bold truncate group-hover:text-[var(--brand-blue)] text-[0.7rem] sm:text-sm md:text-base';
 
 function CoinName(params: GridRenderCellParams) {
   return (
     <RouterLink to={`/coins/${params.row.id}`} className={LINK.withIcon}>
-      <div className={IMAGE.coinSmall}>
+      <div className='!w-6 !h-6 sm:!w-8 sm:!h-8 md:!w-9 md:!h-9 overflow-hidden flex-shrink-0'>
         <img
           src={params.row.image}
           alt={`${params.value} logo`}
@@ -26,7 +26,7 @@ function CoinName(params: GridRenderCellParams) {
       </span>
 
       <svg
-        className='w-4 h-4 text-[var(--brand-blue)] opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 flex-shrink-0'
+        className='w-3 h-3 sm:w-4 sm:h-4 text-[var(--brand-blue)] opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 flex-shrink-0'
         fill='none'
         viewBox='0 0 24 24'
         stroke='currentColor'
@@ -44,7 +44,13 @@ function CoinName(params: GridRenderCellParams) {
 
 function SymbolBadge(params: GridRenderCellParams) {
   const label = String(params.value ?? '').toUpperCase();
-  return <span className={BADGE.symbol}>{label}</span>;
+  return (
+    <span
+      className={`${BADGE.symbol} !text-[0.6rem] sm:!text-xs !px-1.5 sm:!px-2 !py-0.5 sm:!py-1`}
+    >
+      {label}
+    </span>
+  );
 }
 
 function PercentageChange(params: GridRenderCellParams) {
@@ -58,7 +64,7 @@ function PercentageChange(params: GridRenderCellParams) {
 
   return (
     <span
-      className={`${BADGE.base} ${badgeColorClasses} text-[${colorVar}]`}
+      className={`${BADGE.base} ${badgeColorClasses} text-[${colorVar}] !text-[0.6rem] sm:!text-xs !px-1.5 sm:!px-2 !py-0.5 sm:!py-1`}
       title={label}
     >
       {label}
@@ -128,7 +134,7 @@ export const columns: GridColDef[] = [
     field: 'name',
     headerName: 'Name',
     flex: 1,
-    minWidth: 250,
+    minWidth: 140,
     align: 'left',
     headerAlign: 'left',
     renderCell: CoinName,
@@ -137,7 +143,7 @@ export const columns: GridColDef[] = [
     field: 'symbol',
     headerName: 'Symbol',
     flex: 0.9,
-    minWidth: 135,
+    minWidth: 100,
     align: 'center',
     headerAlign: 'center',
     valueFormatter: (value) => String(value ?? '').toUpperCase(),
@@ -148,18 +154,33 @@ export const columns: GridColDef[] = [
     field: 'current_price',
     headerName: 'Price',
     flex: 1,
-    minWidth: 150,
+    minWidth: 100,
     valueFormatter: (value) => formatCurrency(Number(value ?? 0)),
   },
-  createPercentageColumn('price_change_percentage_1h_in_currency', '1h'),
-  createPercentageColumn('price_change_percentage_24h_in_currency', '24h'),
-  createPercentageColumn('price_change_percentage_7d_in_currency', '7d'),
+  createPercentageColumn(
+    'price_change_percentage_1h_in_currency',
+    '1h',
+    0.7,
+    75
+  ),
+  createPercentageColumn(
+    'price_change_percentage_24h_in_currency',
+    '24h',
+    0.7,
+    75
+  ),
+  createPercentageColumn(
+    'price_change_percentage_7d_in_currency',
+    '7d',
+    0.7,
+    75
+  ),
   {
     type: 'number',
     field: 'total_volume',
     headerName: '24h Volume',
     flex: 1,
-    minWidth: 180,
+    minWidth: 110,
     valueFormatter: (value) => formatCompactCurrency(Number(value ?? 0)),
   },
   {
@@ -167,14 +188,14 @@ export const columns: GridColDef[] = [
     field: 'market_cap',
     headerName: 'Market Cap',
     flex: 1,
-    minWidth: 180,
+    minWidth: 110,
     valueFormatter: (value) => formatCompactCurrency(Number(value ?? 0)),
   },
   {
     field: 'sparkline_in_7d',
     headerName: 'Last 7 Days',
     flex: 1,
-    minWidth: 190,
+    minWidth: 130,
     renderCell: SparklineChart,
   },
 ];

@@ -1,12 +1,5 @@
 import { CurrencyInputProps } from './interface';
-import { INPUT } from 'styles/styles';
-
-const INPUT_CONTAINER_CLASSES =
-  'px-4 py-3 rounded-2xl bg-[var(--bg-tertiary-dark)] w-full h-15 flex items-center';
-
-const CURRENCY_BADGE_CLASSES =
-  'w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ' +
-  'bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-blue-light)] text-white/90';
+import { INPUT, COIN } from 'styles/styles';
 
 export default function CurrencyInput({
   label,
@@ -16,22 +9,18 @@ export default function CurrencyInput({
   children,
 }: CurrencyInputProps) {
   return (
-    <div className='w-full'>
-      <div className='flex flex-col gap-3 w-full'>
-        <div className='flex items-center gap-3 mb-2'>
-          <div className={CURRENCY_BADGE_CLASSES}>
+    <div className={COIN.currencyInput.container}>
+      <div className={COIN.currencyInput.innerContainer}>
+        <div className={COIN.currencyInput.headerWrapper}>
+          <div className={COIN.currencyInput.badge}>
             {symbol.charAt(0).toUpperCase()}
           </div>
-          {children || (
-            <div className='font-semibold uppercase text-sm text-white/90'>
-              {label}
-            </div>
-          )}
+          {children || <div className={COIN.currencyInput.label}>{label}</div>}
         </div>
 
-        <div className={INPUT_CONTAINER_CLASSES}>
+        <div className={COIN.currencyInput.inputContainer}>
           <input
-            className={`${INPUT.number} text-right text-lg font-medium`}
+            className={`${INPUT.number} ${COIN.currencyInput.input}`}
             type='number'
             value={value}
             onChange={onChange}

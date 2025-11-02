@@ -45,7 +45,7 @@ export default function Coin() {
         />
 
         {/* Chart & Price Card Row */}
-        <div className={`${GRID.responsive12Col} mt-4`}>
+        <div className={`${GRID.responsive12Col} mt-3 sm:mt-4`}>
           <div className='lg:col-span-8'>
             <AnimatedSection show={animations.chart}>
               <Sparkline id={id} />
@@ -60,14 +60,14 @@ export default function Coin() {
         </div>
 
         {/* Stats, Exchange & Links Row */}
-        <div className={`${GRID.responsive12Col} mt-2 sm:mt-4`}>
+        <div className={`${GRID.responsive12Col} mt-1.5 sm:mt-2 md:mt-4`}>
           <div className='lg:col-span-8'>
             <AnimatedSection show={animations.stackData}>
               <StackData marketData={data.market_data} />
             </AnimatedSection>
           </div>
 
-          <div className='lg:col-span-4 flex flex-col gap-2 sm:gap-4'>
+          <div className='lg:col-span-4 flex flex-col gap-1.5 sm:gap-2 md:gap-4'>
             <AnimatedSection show={animations.exchange}>
               <Exchange id={id} symbol={data.symbol} />
             </AnimatedSection>

@@ -102,6 +102,17 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     fontWeight: 500,
     contain: 'layout style',
 
+    // Mobile responsive sizing
+    [theme.breakpoints.down('sm')]: {
+      padding: '6px 8px',
+      fontSize: '0.7rem',
+    },
+
+    [theme.breakpoints.between('sm', 'md')]: {
+      padding: '8px 10px',
+      fontSize: '0.75rem',
+    },
+
     '&:focus, &:focus-within': {
       backgroundColor: TRANSPARENT,
       outline: 'none',
@@ -117,6 +128,22 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     display: 'none !important',
   },
 
+  // Column separator / resize handle
+  '& .MuiDataGrid-columnSeparator': {
+    // Mobile - thinner separator
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiDataGrid-iconSeparator': {
+        transform: 'scaleX(0.5)',
+      },
+    },
+
+    [theme.breakpoints.between('sm', 'md')]: {
+      '& .MuiDataGrid-iconSeparator': {
+        transform: 'scaleX(0.7)',
+      },
+    },
+  },
+
   // Column headers
   '& .MuiDataGrid-columnHeaders': {
     backgroundColor: 'var(--bg-tertiary-dark) !important',
@@ -129,10 +156,28 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     minHeight: '56px !important',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
 
+    // Mobile responsive sizing
+    [theme.breakpoints.down('sm')]: {
+      minHeight: '40px !important',
+    },
+
+    [theme.breakpoints.between('sm', 'md')]: {
+      minHeight: '48px !important',
+    },
+
     '& .MuiDataGrid-columnHeader': {
       backgroundColor: TRANSPARENT,
       background: TRANSPARENT,
       padding: '0 16px',
+
+      // Mobile responsive padding
+      [theme.breakpoints.down('sm')]: {
+        padding: '0 8px',
+      },
+
+      [theme.breakpoints.between('sm', 'md')]: {
+        padding: '0 10px',
+      },
 
       '&:focus': {
         outline: 'none',
@@ -145,6 +190,17 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
       fontSize: '0.85rem',
       letterSpacing: '0.8px',
       textTransform: 'uppercase',
+
+      // Mobile responsive font sizes
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '0.65rem',
+        letterSpacing: '0.5px',
+      },
+
+      [theme.breakpoints.between('sm', 'md')]: {
+        fontSize: '0.7rem',
+        letterSpacing: '0.6px',
+      },
     },
   },
 
@@ -155,11 +211,30 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     color: 'rgba(255, 255, 255, 0.8)',
     borderBottomLeftRadius: BORDER_RADIUS,
     borderBottomRightRadius: BORDER_RADIUS,
+
+    // Mobile responsive sizing
+    [theme.breakpoints.down('sm')]: {
+      minHeight: '40px',
+    },
   },
 
   // Pagination
   '& .MuiTablePagination-root': {
     color: 'rgba(255, 255, 255, 0.8)',
+
+    // Mobile responsive font sizes
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.7rem',
+
+      '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows':
+        {
+          fontSize: '0.7rem',
+        },
+
+      '& .MuiTablePagination-select': {
+        fontSize: '0.7rem',
+      },
+    },
   },
 
   // Icon buttons

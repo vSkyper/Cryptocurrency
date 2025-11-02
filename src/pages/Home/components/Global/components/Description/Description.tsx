@@ -1,6 +1,7 @@
 import { DescriptionProps } from './interface';
 import { Highlight } from './components';
 import { formatCompactCurrency, formatPercentage } from 'utils/formatters';
+import { HOME } from 'styles/styles';
 
 const numberFormatter = new Intl.NumberFormat('en-US');
 
@@ -26,7 +27,7 @@ export default function Description({ globalData }: DescriptionProps) {
     : 'text-[var(--brand-positive)]';
 
   return (
-    <p className='text-sm sm:text-base text-white/70 leading-relaxed max-w-5xl'>
+    <p className={HOME.description.text}>
       The global cryptocurrency market cap today is{' '}
       <Highlight className='text-white'>{stats().marketCap}</Highlight>, a{' '}
       <Highlight className={changeColorClass}>

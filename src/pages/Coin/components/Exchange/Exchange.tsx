@@ -23,17 +23,11 @@ import {
   TYPOGRAPHY,
   INPUT,
   DROPDOWN,
-  ICON_CONTAINER,
   CSS_SNIPPETS,
+  COIN,
 } from 'styles/styles';
 
 const MAX_DROPDOWN_ITEMS = 5;
-
-const SWAP_ICON_CLASSES = `${ICON_CONTAINER.medium} ${ICON_CONTAINER.brandBlue} mx-auto my-4 pointer-events-none text-white/90`;
-
-const RATE_DISPLAY_CLASSES =
-  'flex items-center justify-center gap-2 p-2 mt-4 rounded-lg ' +
-  `${CARD.tertiaryDark} min-h-12 text-white/50`;
 
 export default function Exchange({ id, symbol }: ExchangeProps) {
   const [currencyOption, setCurrencyOption] = useState<string>('usd');
@@ -146,10 +140,10 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
 
       <div className={CARD.base}>
         {/* Header */}
-        <div className='flex items-center justify-center mb-4 gap-2'>
+        <div className={COIN.exchange.headerWrapper}>
           <CalculateIcon
             className='text-[var(--brand-blue)]'
-            sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}
+            sx={{ fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.5rem' } }}
           />
           <h3 className={TYPOGRAPHY.title}>Exchange Calculator</h3>
         </div>
@@ -165,7 +159,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
           />
 
           {/* Swap Icon */}
-          <div className={SWAP_ICON_CLASSES}>
+          <div className={COIN.exchange.swapIcon}>
             <SwapVertIcon />
           </div>
 
@@ -229,12 +223,12 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
         </div>
 
         {/* Exchange Rate Display */}
-        <div className={RATE_DISPLAY_CLASSES}>
+        <div className={COIN.exchange.rateDisplay}>
           {isLoadingRate ? (
             <LoadingSpinner />
           ) : (
             currentRate && (
-              <div className='font-semibold text-sm text-[var(--text-secondary)]'>
+              <div className='font-semibold text-xs sm:text-sm text-[var(--text-secondary)]'>
                 1 {symbol.toUpperCase()} = {formattedRate}
               </div>
             )

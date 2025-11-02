@@ -1,10 +1,5 @@
 import { CoinHeaderProps } from './interface';
-import { IMAGE, BADGE } from 'styles/styles';
-
-const BORDER_COLOR =
-  'border-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)]';
-
-const RANK_BADGE_CLASSES = `${BADGE.base} ${BADGE.symbol}`;
+import { BADGE, COIN } from 'styles/styles';
 
 export default function CoinHeader({
   name,
@@ -13,12 +8,10 @@ export default function CoinHeader({
   marketCapRank,
 }: CoinHeaderProps) {
   return (
-    <div className='mb-6'>
-      <div className='flex items-center gap-4'>
+    <div className={COIN.header.container}>
+      <div className={COIN.header.contentWrapper}>
         {/* Coin Image */}
-        <div
-          className={`${IMAGE.coinMedium} rounded-full border-2 ${BORDER_COLOR}`}
-        >
+        <div className={COIN.header.imageWrapper}>
           {image ? (
             <img
               src={image}
@@ -31,18 +24,16 @@ export default function CoinHeader({
         </div>
 
         {/* Coin Info */}
-        <div className='flex-1'>
-          <div className='flex items-center gap-3 flex-wrap'>
-            <h1 className='text-2xl sm:text-3xl font-extrabold text-white tracking-tight'>
-              {name}
-            </h1>
+        <div className={COIN.header.infoWrapper}>
+          <div className={COIN.header.titleWrapper}>
+            <h1 className={COIN.header.title}>{name}</h1>
 
-            <span className='text-md sm:text-lg font-semibold text-white/70 uppercase'>
-              {symbol}
-            </span>
+            <span className={COIN.header.symbol}>{symbol}</span>
 
             {marketCapRank && (
-              <span className={RANK_BADGE_CLASSES}>#{marketCapRank}</span>
+              <span className={`${BADGE.base} ${BADGE.symbol}`}>
+                #{marketCapRank}
+              </span>
             )}
           </div>
         </div>

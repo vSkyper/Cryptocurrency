@@ -15,6 +15,7 @@ import {
 } from 'recharts/types/component/DefaultTooltipContent';
 import { ChartProps } from './interface';
 import { formatCurrency } from 'utils/formatters';
+import { COIN } from 'styles/styles';
 
 const getTickFormat = (days: string, value: string): string => {
   switch (days) {
@@ -25,23 +26,6 @@ const getTickFormat = (days: string, value: string): string => {
     default:
       return format(new Date(value), '| MMM, d |');
   }
-};
-
-const TOOLTIP_CLASSES =
-  'bg-[var(--bg-tertiary-dark)] border border-white/12 rounded-lg px-3 py-2 ' +
-  'shadow-lg text-sm backdrop-blur-sm';
-
-const ACTIVE_DOT_CONFIG = {
-  r: 4,
-  stroke: 'var(--brand-blue)',
-  strokeWidth: 2,
-  fill: '#fff',
-};
-
-const Y_AXIS_CONFIG = {
-  domain: ['auto', 'auto'] as [string, string],
-  width: 70,
-  tickCount: 8,
 };
 
 export default function ChartComponent({ sparkline, days }: ChartProps) {
@@ -80,11 +64,11 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
     if (!active || !payload || !payload.length) return null;
 
     return (
-      <div className={TOOLTIP_CLASSES}>
-        <div className='text-sm text-white/70 mb-1'>
+      <div className={COIN.chart.tooltip}>
+        <div className={COIN.chart.tooltipDate}>
           {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
         </div>
-        <div className='font-medium text-white'>
+        <div className={COIN.chart.tooltipValue}>
           {formatCurrency(Number(payload[0].value))}
         </div>
       </div>
@@ -121,7 +105,7 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
         strokeWidth={2}
         fill='url(#color)'
         filter='url(#glow)'
-        activeDot={ACTIVE_DOT_CONFIG}
+        activeDot={COIN.chart.activeDot}
       />
 
       <XAxis
@@ -134,12 +118,12 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
 
       <YAxis
         dataKey='value'
-        domain={Y_AXIS_CONFIG.domain}
+        domain={COIN.chart.yAxis.domain}
         axisLine={false}
         tickLine={false}
-        tickCount={Y_AXIS_CONFIG.tickCount}
+        tickCount={COIN.chart.yAxis.tickCount}
         tickFormatter={handleTickFormatterYAxis}
-        width={Y_AXIS_CONFIG.width}
+        width={COIN.chart.yAxis.width}
         hide={isMobile}
       />
 

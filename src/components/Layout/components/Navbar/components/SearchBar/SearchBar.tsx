@@ -12,21 +12,10 @@ import useFetch from 'hooks/useFetch';
 import { ErrorModal } from 'components';
 import { CoinOption, EmptyState, SearchIconContainer } from './components';
 import { API_ENDPOINTS } from 'config/api';
+import { NAVBAR } from 'styles/styles';
 
 const MAX_RESULTS = 8;
 const BLUR_DELAY = 100;
-
-const INPUT_CLASSES =
-  'w-full bg-[var(--bg-tertiary-dark)] text-[var(--brand-blue)] rounded-xl ' +
-  'py-2.5 sm:py-3 pl-12 sm:pl-14 pr-4 text-[0.95rem] sm:text-base font-medium ' +
-  'placeholder:text-[color-mix(in_srgb,var(--brand-blue)_50%,transparent)] ' +
-  'transition-all duration-200 focus:outline-none ' +
-  'focus:bg-[color-mix(in_srgb,var(--bg-tertiary-dark)_85%,var(--brand-blue)_15%)] ' +
-  'hover:bg-[color-mix(in_srgb,var(--bg-tertiary-dark)_90%,var(--brand-blue)_10%)]';
-
-const DROPDOWN_CLASSES =
-  'absolute mt-0.5 w-full overflow-hidden rounded-2xl bg-[var(--bg-dropdown)] ' +
-  'backdrop-blur-3xl backdrop-saturate-200 shadow-[var(--shadow-dropdown)] z-50';
 
 export default function SearchBar() {
   const [query, setQuery] = useState<string>('');
@@ -76,7 +65,7 @@ export default function SearchBar() {
           <SearchIconContainer isLoading={!data} />
 
           <ComboboxInput
-            className={INPUT_CLASSES}
+            className={NAVBAR.searchBar.input}
             placeholder={placeholder}
             displayValue={displayValue}
             onChange={(event) => setQuery(event.target.value)}
@@ -93,7 +82,10 @@ export default function SearchBar() {
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <ComboboxOptions modal={false} className={DROPDOWN_CLASSES}>
+            <ComboboxOptions
+              modal={false}
+              className={NAVBAR.searchBar.dropdown}
+            >
               {filteredCoins.length === 0 ? (
                 <EmptyState />
               ) : (
@@ -102,8 +94,10 @@ export default function SearchBar() {
                     key={coin.id}
                     value={coin}
                     className={({ focus }) =>
-                      `relative cursor-pointer select-none px-4 py-3 transition-all duration-150 ${
-                        focus ? 'bg-white/[0.08]' : 'bg-transparent'
+                      `${NAVBAR.searchBar.optionBase} ${
+                        focus
+                          ? NAVBAR.searchBar.optionFocused
+                          : NAVBAR.searchBar.optionUnfocused
                       }`
                     }
                   >

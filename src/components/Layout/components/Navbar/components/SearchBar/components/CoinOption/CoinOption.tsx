@@ -1,37 +1,33 @@
 import { ArrowForwardIos } from '@mui/icons-material';
 import { CoinOptionProps } from './interface';
-import { UTILITY } from 'styles/styles';
-
-const CHIP_CLASSES =
-  `inline-flex items-center justify-center text-[0.7rem] px-2 h-5 font-semibold rounded-full backdrop-blur-sm border ` +
-  'bg-[var(--chip-bg)] text-[var(--brand-blue)] border-[var(--chip-border)]';
+import { NAVBAR } from 'styles/styles';
 
 export default function CoinOption({ coin, isFocused }: CoinOptionProps) {
   return (
-    <div className={`${UTILITY.flexBetween} gap-4`}>
-      <div className='flex flex-col flex-1 min-w-0'>
+    <div className={NAVBAR.coinOption.container}>
+      <div className={NAVBAR.coinOption.contentWrapper}>
         <span
-          className={`font-semibold text-[0.95rem] leading-tight ${
-            UTILITY.truncate
-          } ${isFocused ? 'text-white' : 'text-white/90'}`}
+          className={`${NAVBAR.coinOption.name} ${
+            isFocused
+              ? NAVBAR.coinOption.nameFocused
+              : NAVBAR.coinOption.nameUnfocused
+          }`}
         >
           {coin.name}
         </span>
-        <div className={`${UTILITY.flexCenter} gap-2 mt-2.5`}>
-          <span className={CHIP_CLASSES}>{coin.symbol?.toUpperCase()}</span>
-          <span
-            className={`text-[0.75rem] text-white/40 ${UTILITY.truncate} flex-1`}
-          >
-            {coin.id}
+        <div className={NAVBAR.coinOption.badgeRow}>
+          <span className={NAVBAR.coinOption.chip}>
+            {coin.symbol?.toUpperCase()}
           </span>
+          <span className={NAVBAR.coinOption.id}>{coin.id}</span>
         </div>
       </div>
       <ArrowForwardIos
         sx={{ fontSize: '0.9rem' }}
-        className={`${UTILITY.transitionAll} duration-200 flex-shrink-0 ${
+        className={`${NAVBAR.coinOption.icon} ${
           isFocused
-            ? 'text-[var(--brand-blue)] translate-x-1'
-            : 'text-white/20 translate-x-0'
+            ? NAVBAR.coinOption.iconFocused
+            : NAVBAR.coinOption.iconUnfocused
         }`}
       />
     </div>
