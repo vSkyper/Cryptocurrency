@@ -95,7 +95,7 @@ export const COIN = {
   // Exchange
   exchange: {
     swapIcon:
-      'w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] mx-auto my-2 sm:my-3 md:my-4 pointer-events-none text-white/90',
+      'w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] mx-auto my-4 pointer-events-none text-white/90',
     rateDisplay:
       'flex items-center justify-center gap-2 mt-2 sm:mt-3 rounded-lg px-4 py-3 rounded-xl bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_55%,transparent)_100%)] backdrop-blur-sm min-h-10 sm:min-h-11 text-white/50',
     headerWrapper:
@@ -167,11 +167,11 @@ export const COIN = {
     innerContainer: 'flex flex-col gap-3 w-full',
     headerWrapper: 'flex items-center gap-3 mb-2',
     badge:
-      'w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-blue-light)] text-white shadow-[0_2px_8px_color-mix(in_srgb,var(--brand-blue)_20%,transparent)]',
+      'w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-xs font-bold bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-blue-light)] text-white shadow-[0_2px_8px_color-mix(in_srgb,var(--brand-blue)_20%,transparent)]',
     label: 'font-semibold uppercase text-sm text-white/90',
     inputContainer:
-      'px-4 py-3 rounded-xl bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_90%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_70%,transparent)_100%)] border border-white/5 hover:border-white/10 transition-all duration-200 w-full h-14 flex items-center shadow-inner',
-    input: 'text-right text-lg font-semibold text-white/95',
+      'px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_90%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_70%,transparent)_100%)] border border-white/5 hover:border-white/10 transition-all duration-200 w-full h-12 sm:h-14 flex items-center shadow-inner',
+    input: 'text-right text-base sm:text-lg font-semibold text-white/95',
   },
   // PriceCard
   priceCard: {
@@ -245,7 +245,7 @@ export const COIN = {
   },
   // PercentageBadge
   percentageBadge: {
-    base: 'px-2 py-0.5 text-xs sm:text-sm',
+    base: 'px-1.5 py-0.5 text-[0.65rem] sm:px-2 sm:text-xs',
   },
 } as const;
 
