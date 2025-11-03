@@ -35,15 +35,16 @@ export const BADGE = {
 
 // Input Classes
 export const INPUT = {
-  number: 'w-full bg-transparent focus:outline-none text-white/90',
+  number:
+    'w-full bg-transparent focus:outline-none text-white/95 placeholder:text-white/30',
   combobox:
-    'w-full bg-transparent text-sm font-semibold uppercase focus:outline-none pr-6 text-white/90',
+    'w-full bg-transparent text-sm font-bold uppercase focus:outline-none pr-6 text-white/95',
 } as const;
 
 // Dropdown/Select Classes
 export const DROPDOWN = {
   options:
-    'absolute z-50 left-0 top-full mt-1 max-h-60 w-full overflow-auto rounded-md bg-[var(--bg-tertiary-dark)] py-1 text-sm shadow-lg',
+    'z-20 mt-2 max-h-60 w-18 overflow-auto rounded-xl bg-[var(--bg-tertiary-dark)] py-1.5 text-sm shadow-[0_8px_24px_rgba(0,0,0,0.4)] border border-white/10 backdrop-blur-sm',
 } as const;
 
 // Link Classes
@@ -96,7 +97,7 @@ export const COIN = {
     swapIcon:
       'w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-[color-mix(in_srgb,var(--brand-blue)_20%,transparent)] mx-auto my-2 sm:my-3 md:my-4 pointer-events-none text-white/90',
     rateDisplay:
-      'flex items-center justify-center gap-2 p-2 mt-2 sm:mt-3 md:mt-4 rounded-lg p-3 sm:p-4 md:p-6 rounded-xl bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_55%,transparent)_100%)] backdrop-blur-sm min-h-10 sm:min-h-12 text-white/50',
+      'flex items-center justify-center gap-2 mt-2 sm:mt-3 rounded-lg px-4 py-3 rounded-xl bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_80%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_55%,transparent)_100%)] backdrop-blur-sm min-h-10 sm:min-h-11 text-white/50',
     headerWrapper:
       'flex items-center justify-center mb-2 sm:mb-3 md:mb-4 gap-2',
   },
@@ -166,11 +167,11 @@ export const COIN = {
     innerContainer: 'flex flex-col gap-3 w-full',
     headerWrapper: 'flex items-center gap-3 mb-2',
     badge:
-      'w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-blue-light)] text-white/90',
+      'w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-blue-light)] text-white shadow-[0_2px_8px_color-mix(in_srgb,var(--brand-blue)_20%,transparent)]',
     label: 'font-semibold uppercase text-sm text-white/90',
     inputContainer:
-      'px-4 py-3 rounded-2xl bg-[var(--bg-tertiary-dark)] w-full h-15 flex items-center',
-    input: 'text-right text-lg font-medium',
+      'px-4 py-3 rounded-xl bg-[linear-gradient(180deg,color-mix(in_srgb,var(--bg-tertiary-dark)_90%,transparent)_0%,color-mix(in_srgb,var(--bg-tertiary-dark)_70%,transparent)_100%)] border border-white/5 hover:border-white/10 transition-all duration-200 w-full h-14 flex items-center shadow-inner',
+    input: 'text-right text-lg font-semibold text-white/95',
   },
   // PriceCard
   priceCard: {
@@ -381,7 +382,7 @@ export const HOME = {
   },
   // Cards
   cards: {
-    grid: 'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 mb-6',
+    grid: 'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6',
   },
   // Description
   description: {

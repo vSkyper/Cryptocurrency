@@ -60,8 +60,13 @@ export default function Cards({ toggle, globalData }: CardsProps) {
 
   return (
     <div className={HOME.cards.grid}>
-      {cardConfigs.map((config) => (
-        <StatCard key={config.key} config={config} toggle={toggle} />
+      {cardConfigs.map((config, index) => (
+        <StatCard
+          key={config.key}
+          config={config}
+          toggle={toggle}
+          className={index === 0 ? 'lg:col-span-2' : ''}
+        />
       ))}
     </div>
   );

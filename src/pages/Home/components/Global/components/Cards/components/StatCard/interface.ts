@@ -15,4 +15,5 @@ export interface StatCardProps {
   config: CardConfig;
   toggle: boolean;
   isMobile: boolean;
+  className?: string;
 }

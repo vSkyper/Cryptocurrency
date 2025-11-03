@@ -170,7 +170,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
             value={currencyAmount}
             onChange={handleCurrencyInputChange}
           >
-            <div className='w-20'>
+            <div className='w-16'>
               <Combobox
                 value={currencyOption}
                 onChange={handleChangeAutocomplete}
@@ -183,7 +183,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
                       setQuery(e.target.value)
                     }
                   />
-                  <ComboboxButton className='absolute right-0 mr-1 p-1'>
+                  <ComboboxButton className='absolute right-0 p-1'>
                     <ChevronIcon />
                   </ComboboxButton>
 
@@ -196,6 +196,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
                     {filteredCurrencies.length > 0 && (
                       <ComboboxOptions
                         modal={false}
+                        anchor='bottom start'
                         className={DROPDOWN.options}
                       >
                         {filteredCurrencies.map((option) => (

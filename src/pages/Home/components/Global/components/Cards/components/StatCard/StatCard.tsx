@@ -9,6 +9,7 @@ import { CARD, HOME } from 'styles/styles';
 export default function StatCard({
   config,
   toggle,
+  className = '',
 }: Omit<StatCardProps, 'isMobile'>) {
   const [show, setShow] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -43,7 +44,7 @@ export default function StatCard({
 
   return (
     <div
-      className={`${HOME.statCard.animation.wrapper} ${animationClasses}`}
+      className={`${HOME.statCard.animation.wrapper} ${animationClasses} ${className}`}
       style={{
         transitionDelay: show ? `${config.timeout}ms` : '0ms',
       }}

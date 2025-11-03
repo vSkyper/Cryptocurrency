@@ -37,6 +37,10 @@ export default function Global({ globalData }: GlobalProps) {
         className={`${HOME.global.cardsTransition} ${cardsTransitionClasses}`}
         style={{
           transitionDelay: toggle ? '0ms' : '500ms',
+          marginBottom: toggle ? '1.5rem' : '0',
+          transition: toggle
+            ? 'max-height 700ms ease-out, opacity 700ms ease-out, margin-bottom 0ms'
+            : 'max-height 700ms ease-out, opacity 700ms ease-out, margin-bottom 0ms 700ms',
         }}
       >
         <Cards toggle={toggle} globalData={globalData} />
