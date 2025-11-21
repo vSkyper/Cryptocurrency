@@ -48,7 +48,7 @@ export default function StatCard({
         transitionDelay: show ? `${config.timeout}ms` : '0ms',
       }}
     >
-      <div className='flex flex-col justify-center items-center relative overflow-hidden transition-all duration-300 bg-white/5 backdrop-blur-md rounded-2xl p-3 sm:p-5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,0,0,0.2)] group'>
+      <div className='flex flex-col justify-center items-center relative overflow-hidden transition-all duration-300 bg-[#0a0a0f]/60 backdrop-blur-xl backdrop-saturate-150 rounded-2xl p-3 sm:p-5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] group'>
         <div className='flex flex-col gap-2 w-full items-center relative z-10'>
           <div className='flex items-center justify-center gap-2'>
             {/* Mobile value - shorter */}
@@ -79,7 +79,7 @@ export default function StatCard({
           </div>
         </div>
 
-        <p className='mt-1 text-[0.65rem] sm:text-xs text-white/50 font-bold text-center uppercase tracking-widest group-hover:text-white/80 transition-colors'>
+        <p className='mt-1 text-[0.65rem] sm:text-xs text-white/50 font-bold text-center uppercase tracking-widest transition-colors'>
           {config.label}
         </p>
       </div>

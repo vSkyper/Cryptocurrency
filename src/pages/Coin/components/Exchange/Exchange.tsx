@@ -125,7 +125,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
   if (currenciesError || exchangeRateError) return <ErrorModal />;
 
   return (
-    <div className='relative z-10 p-4 sm:p-5 rounded-3xl bg-white/5 border border-white/5 backdrop-blur-sm'>
+    <div className='relative z-10 p-4 sm:p-5 rounded-3xl bg-[#0a0a0f]/60 backdrop-blur-xl backdrop-saturate-150 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]'>
       <div>
         {/* Header */}
         <div className='flex items-center justify-between mb-3 sm:mb-5'>
