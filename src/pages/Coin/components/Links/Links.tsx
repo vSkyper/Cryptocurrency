@@ -8,7 +8,6 @@ import {
 } from '@mui/icons-material';
 import { LinksProps } from './interface';
 import { ChipLink } from './components';
-import { CARD, COIN } from 'styles/styles';
 
 const SOCIAL_LINKS = {
   reddit: {
@@ -37,16 +36,18 @@ export default function Links({ data }: LinksProps) {
     new URL(url).hostname.replace('www.', '');
 
   return (
-    <div className={CARD.tertiary}>
+    <div className='mt-6 sm:mt-10'>
       {/* Header */}
-      <div className={COIN.links.header}>
-        <div className={COIN.links.headerLine}></div>
-        <h2 className={COIN.links.headerTitle}>Official Links</h2>
-        <div className={COIN.links.headerLine}></div>
+      <div className='flex items-center gap-4 mb-4 sm:mb-6 opacity-50'>
+        <div className='h-px flex-1 bg-linear-to-r from-transparent via-white/20 to-transparent'></div>
+        <h2 className='text-xs font-bold uppercase tracking-[0.2em] text-white'>
+          Official Links
+        </h2>
+        <div className='h-px flex-1 bg-linear-to-r from-transparent via-white/20 to-transparent'></div>
       </div>
 
       {/* Primary Links Section */}
-      <div className={COIN.links.primaryLinks}>
+      <div className='flex flex-wrap gap-2 sm:gap-3 mb-4'>
         {links?.homepage?.[0] && (
           <ChipLink
             href={links.homepage[0]}
@@ -57,7 +58,6 @@ export default function Links({ data }: LinksProps) {
                 className='w-5 h-5 rounded-full object-cover border border-white/30 shadow-sm'
               />
             }
-            className={COIN.links.chip.primary}
           >
             Official Website
           </ChipLink>
@@ -68,11 +68,10 @@ export default function Links({ data }: LinksProps) {
             href={links.official_forum_url[0]}
             left={
               <ForumIcon
-                sx={COIN.links.iconSize}
-                className='text-[var(--brand-blue)]'
+                sx={{ fontSize: 16 }}
+                className='text-(--brand-blue)'
               />
             }
-            className={COIN.links.chip.primary}
           >
             Official Forum
           </ChipLink>
@@ -81,9 +80,11 @@ export default function Links({ data }: LinksProps) {
 
       {/* Blockchain Explorer Links */}
       {hasBlockchainSites && (
-        <div className={COIN.links.blockchainLinks}>
-          <div className={COIN.links.sectionTitle}>Blockchain Explorers</div>
-          <div className={COIN.links.chipGroup}>
+        <div className='mb-4'>
+          <div className='text-center text-[0.65rem] sm:text-xs md:text-xs uppercase tracking-[0.2em] font-bold text-(--brand-blue) mb-3 sm:mb-4 md:mb-5 select-none'>
+            Blockchain Explorers
+          </div>
+          <div className='flex flex-wrap gap-2'>
             {links?.blockchain_site?.slice(0, 3).map(
               (blockchain) =>
                 blockchain && (
@@ -92,11 +93,10 @@ export default function Links({ data }: LinksProps) {
                     href={blockchain}
                     left={
                       <WebsiteIcon
-                        sx={COIN.links.iconSize}
-                        className='text-[var(--brand-blue-light)]'
+                        sx={{ fontSize: 16 }}
+                        className='text-(--brand-blue-light)'
                       />
                     }
-                    className={COIN.links.chip.blockchain}
                   >
                     {extractHostname(blockchain)}
                   </ChipLink>
@@ -108,13 +108,15 @@ export default function Links({ data }: LinksProps) {
 
       {/* Social Media Links */}
       <div>
-        <div className={COIN.links.sectionTitle}>Social Media</div>
-        <div className={COIN.links.chipGroup}>
+        <div className='text-center text-[0.65rem] sm:text-xs md:text-xs uppercase tracking-[0.2em] font-bold text-(--brand-blue) mb-3 sm:mb-4 md:mb-5 select-none'>
+          Social Media
+        </div>
+        <div className='flex flex-wrap gap-2'>
           {links?.subreddit_url && (
             <ChipLink
               href={links.subreddit_url}
-              left={<RedditIcon sx={COIN.links.iconSize} />}
-              className={COIN.links.chip.social.reddit}
+              left={<RedditIcon sx={{ fontSize: 16 }} />}
+              className='hover:border-[#FF4500]/50 hover:shadow-[0_0_20px_rgba(255,69,0,0.2)]'
             >
               {SOCIAL_LINKS.reddit.label}
             </ChipLink>
@@ -123,8 +125,8 @@ export default function Links({ data }: LinksProps) {
           {links?.twitter_screen_name && (
             <ChipLink
               href={SOCIAL_LINKS.twitter.getUrl(links.twitter_screen_name)}
-              left={<TwitterIcon sx={COIN.links.iconSize} />}
-              className={COIN.links.chip.social.twitter}
+              left={<TwitterIcon sx={{ fontSize: 16 }} />}
+              className='hover:border-[#1DA1F2]/50 hover:shadow-[0_0_20px_rgba(29,161,242,0.2)]'
             >
               {SOCIAL_LINKS.twitter.label}
             </ChipLink>
@@ -133,8 +135,8 @@ export default function Links({ data }: LinksProps) {
           {links?.facebook_username && (
             <ChipLink
               href={SOCIAL_LINKS.facebook.getUrl(links.facebook_username)}
-              left={<FacebookIcon sx={COIN.links.iconSize} />}
-              className={COIN.links.chip.social.facebook}
+              left={<FacebookIcon sx={{ fontSize: 16 }} />}
+              className='hover:border-[#1877F2]/50 hover:shadow-[0_0_20px_rgba(24,119,242,0.2)]'
             >
               {SOCIAL_LINKS.facebook.label}
             </ChipLink>
@@ -143,8 +145,8 @@ export default function Links({ data }: LinksProps) {
           {links?.repos_url?.github?.[0] && (
             <ChipLink
               href={links.repos_url.github[0]}
-              left={<GitHubIcon sx={COIN.links.iconSize} />}
-              className={COIN.links.chip.social.github}
+              left={<GitHubIcon sx={{ fontSize: 16 }} />}
+              className='hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]'
             >
               {SOCIAL_LINKS.github.label}
             </ChipLink>

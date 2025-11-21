@@ -1,33 +1,32 @@
 import { ArrowForwardIos } from '@mui/icons-material';
 import { CoinOptionProps } from './interface';
-import { NAVBAR } from 'styles/styles';
 
 export default function CoinOption({ coin, isFocused }: CoinOptionProps) {
   return (
-    <div className={NAVBAR.coinOption.container}>
-      <div className={NAVBAR.coinOption.contentWrapper}>
+    <div className='flex items-center justify-between gap-4'>
+      <div className='flex flex-col flex-1 min-w-0'>
         <span
-          className={`${NAVBAR.coinOption.name} ${
-            isFocused
-              ? NAVBAR.coinOption.nameFocused
-              : NAVBAR.coinOption.nameUnfocused
+          className={`font-semibold text-xs sm:text-[0.95rem] leading-tight truncate ${
+            isFocused ? 'text-white' : 'text-white/90'
           }`}
         >
           {coin.name}
         </span>
-        <div className={NAVBAR.coinOption.badgeRow}>
-          <span className={NAVBAR.coinOption.chip}>
+        <div className='flex items-center justify-center gap-2 mt-2.5'>
+          <span className='inline-flex items-center justify-center text-[0.6rem] sm:text-[0.7rem] px-1.5 sm:px-2 h-4 sm:h-5 font-semibold rounded-full backdrop-blur-sm border bg-(--chip-bg) text-(--brand-blue) border-(--chip-border)'>
             {coin.symbol?.toUpperCase()}
           </span>
-          <span className={NAVBAR.coinOption.id}>{coin.id}</span>
+          <span className='text-[0.65rem] sm:text-[0.75rem] text-white/40 truncate flex-1'>
+            {coin.id}
+          </span>
         </div>
       </div>
       <ArrowForwardIos
         sx={{ fontSize: '0.9rem' }}
-        className={`${NAVBAR.coinOption.icon} ${
+        className={`transition-all duration-200 shrink-0 ${
           isFocused
-            ? NAVBAR.coinOption.iconFocused
-            : NAVBAR.coinOption.iconUnfocused
+            ? 'text-(--brand-blue) translate-x-1'
+            : 'text-white/20 translate-x-0'
         }`}
       />
     </div>

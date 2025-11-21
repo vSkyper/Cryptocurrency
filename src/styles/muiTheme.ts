@@ -2,10 +2,10 @@ import { createTheme } from '@mui/material/styles';
 
 // Default literal fallbacks (used during SSR or if CSS vars are unavailable)
 const FALLBACKS = {
-  brandBlue: '#409cff',
-  bgTertiaryDark: 'rgba(22, 35, 57, 0.8)',
-  textPrimary: 'rgba(255,255,255,0.9)',
-  textSecondary: 'rgba(230,238,248,0.8)',
+  brandBlue: '#8b5cf6',
+  bgTertiaryDark: 'rgba(10, 10, 15, 0.9)',
+  textPrimary: '#ffffff',
+  textSecondary: 'rgba(255,255,255,0.7)',
 };
 
 // Create a base theme using explicit colors (safe for SSR)
@@ -13,8 +13,8 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      paper: FALLBACKS.bgTertiaryDark,
-      default: FALLBACKS.bgTertiaryDark,
+      paper: '#0a0a0f',
+      default: '#050505',
     },
     primary: {
       main: FALLBACKS.brandBlue,
@@ -28,15 +28,19 @@ export const darkTheme = createTheme({
     MuiMenu: {
       styleOverrides: {
         paper: {
-          background: FALLBACKS.bgTertiaryDark,
+          background: '#0a0a0f',
           color: FALLBACKS.textPrimary,
+          border: '1px solid rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(10px)',
         },
       },
     },
     MuiPopover: {
       styleOverrides: {
         paper: {
-          background: FALLBACKS.bgTertiaryDark,
+          background: '#0a0a0f',
+          border: '1px solid rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(10px)',
         },
       },
     },
@@ -67,9 +71,10 @@ export function createDarkThemeFromVars() {
   const styles = getComputedStyle(document.documentElement);
   const brandBlue =
     styles.getPropertyValue('--brand-blue')?.trim() || FALLBACKS.brandBlue;
-  const bgTertiaryDark =
-    styles.getPropertyValue('--bg-tertiary-dark')?.trim() ||
-    FALLBACKS.bgTertiaryDark;
+  const bgPrimary =
+    styles.getPropertyValue('--bg-primary')?.trim() || '#050505';
+  // Use a slightly lighter shade for paper if not defined, or fallback to secondary
+  const bgPaper = '#0a0a0f';
   const textPrimary =
     styles.getPropertyValue('--text-primary')?.trim() || FALLBACKS.textPrimary;
   const textSecondary =
@@ -80,8 +85,8 @@ export function createDarkThemeFromVars() {
     palette: {
       mode: 'dark',
       background: {
-        paper: bgTertiaryDark,
-        default: bgTertiaryDark,
+        paper: bgPaper,
+        default: bgPrimary,
       },
       primary: {
         main: brandBlue,
@@ -95,15 +100,19 @@ export function createDarkThemeFromVars() {
       MuiMenu: {
         styleOverrides: {
           paper: {
-            background: bgTertiaryDark,
+            background: bgPaper,
             color: textPrimary,
+            border: '1px solid rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
           },
         },
       },
       MuiPopover: {
         styleOverrides: {
           paper: {
-            background: bgTertiaryDark,
+            background: bgPaper,
+            border: '1px solid rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
           },
         },
       },

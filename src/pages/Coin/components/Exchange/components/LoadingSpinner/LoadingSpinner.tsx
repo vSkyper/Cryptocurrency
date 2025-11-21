@@ -1,7 +1,7 @@
 export default function LoadingSpinner() {
   return (
     <svg
-      className='animate-spin h-4 w-4 text-[var(--brand-blue)]'
+      className='animate-spin h-4 w-4 text-(--brand-blue)'
       viewBox='0 0 24 24'
     >
       <circle

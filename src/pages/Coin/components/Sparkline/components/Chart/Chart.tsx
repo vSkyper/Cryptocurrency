@@ -15,7 +15,6 @@ import {
 } from 'recharts/types/component/DefaultTooltipContent';
 import { ChartProps } from './interface';
 import { formatCurrency } from 'utils/formatters';
-import { COIN } from 'styles/styles';
 
 const getTickFormat = (days: string, value: string): string => {
   switch (days) {
@@ -64,11 +63,11 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
     if (!active || !payload || !payload.length) return null;
 
     return (
-      <div className={COIN.chart.tooltip}>
-        <div className={COIN.chart.tooltipDate}>
+      <div className='bg-[rgba(10,10,15,0.9)] border border-(--brand-blue)/30 rounded-xl px-3 py-2 shadow-[0_0_20px_rgba(0,0,0,0.5)] text-xs backdrop-blur-xl'>
+        <div className='text-[0.65rem] text-white/50 mb-1 font-medium uppercase tracking-wide'>
           {format(new Date(label ?? 0), 'eeee, d MMM, yyyy')}
         </div>
-        <div className={COIN.chart.tooltipValue}>
+        <div className='font-bold text-(--brand-blue) text-base'>
           {formatCurrency(Number(payload[0].value))}
         </div>
       </div>
@@ -105,7 +104,12 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
         strokeWidth={2}
         fill='url(#color)'
         filter='url(#glow)'
-        activeDot={COIN.chart.activeDot}
+        activeDot={{
+          r: 5,
+          stroke: 'var(--brand-blue)',
+          strokeWidth: 2,
+          fill: '#000',
+        }}
       />
 
       <XAxis
@@ -118,12 +122,12 @@ export default function ChartComponent({ sparkline, days }: ChartProps) {
 
       <YAxis
         dataKey='value'
-        domain={COIN.chart.yAxis.domain}
+        domain={['auto', 'auto']}
         axisLine={false}
         tickLine={false}
-        tickCount={COIN.chart.yAxis.tickCount}
+        tickCount={6}
         tickFormatter={handleTickFormatterYAxis}
-        width={COIN.chart.yAxis.width}
+        width={60}
         hide={isMobile}
       />
 

@@ -13,12 +13,21 @@ export const currencyFormatter = new Intl.NumberFormat('en-US', {
 });
 
 /**
- * Compact currency formatter (no decimal places)
+ * Compact currency formatter (e.g. $1.2M, $3.4B)
  */
 export const compactCurrencyFormatter = new Intl.NumberFormat('en-US', {
-  maximumFractionDigits: 0,
+  notation: 'compact',
+  maximumFractionDigits: 2,
   style: 'currency',
   currency: 'USD',
+});
+
+/**
+ * Number formatter with compact notation (e.g., 1.2M, 3.4B)
+ */
+export const compactNumberFormatter = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  maximumFractionDigits: 2,
 });
 
 /**
@@ -31,12 +40,9 @@ export const percentageFormatter = new Intl.NumberFormat('en-US', {
 });
 
 /**
- * Number formatter with compact notation (e.g., 1.2M, 3.4B)
+ * Standard number formatter (e.g., 1,234.56)
  */
-export const compactNumberFormatter = new Intl.NumberFormat('en-US', {
-  notation: 'compact',
-  maximumFractionDigits: 2,
-});
+export const numberFormatter = new Intl.NumberFormat('en-US');
 
 /**
  * Format a number as currency with full precision
@@ -77,20 +83,36 @@ export const formatCompactNumber = (
 };
 
 /**
+ * Format a number with standard notation
+ * Example: 1234.56 -> "1,234.56"
+ */
+export const formatNumber = (
+  value: number | null | undefined,
+  maximumFractionDigits?: number
+): string => {
+  if (value == null) return 'N/A';
+  if (maximumFractionDigits !== undefined) {
+    return value.toLocaleString('en-US', { maximumFractionDigits });
+  }
+  return numberFormatter.format(value);
+};
+
+/**
  * Format a number as currency with specific currency and options
  */
-export const formatCurrencyWithOptions = (
-  value: number,
-  currency: string,
-  options?: Intl.NumberFormatOptions
-): string => {
+export const formatRateWithSuffix = (rate: number, currency: string) => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currency.toUpperCase(),
-    minimumFractionDigits: options?.minimumFractionDigits ?? 2,
-    maximumFractionDigits: options?.maximumFractionDigits ?? 8,
-    ...options,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 8,
   });
-
-  return formatter.format(value);
+  const parts = formatter.formatToParts(rate);
+  const symbol = parts.find((p) => p.type === 'currency')?.value;
+  const val = parts
+    .filter((p) => p.type !== 'currency')
+    .map((p) => p.value)
+    .join('')
+    .trim();
+  return `${val} ${symbol}`;
 };

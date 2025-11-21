@@ -1,5 +1,5 @@
 import ErrorModal from './ErrorModal';
-import LoadingModal from './LoadingModal';
 import Layout from './Layout';
+import InlineLoader from './InlineLoader';
 
-export { Layout, ErrorModal, LoadingModal };
+export { Layout, ErrorModal, InlineLoader };

@@ -1,15 +1,18 @@
 import { AnimatedSectionProps } from './interface';
-import { COIN } from 'styles/styles';
 
 export default function AnimatedSection({
   show,
   children,
   className = '',
 }: AnimatedSectionProps) {
-  const visibilityClasses = show ? COIN.animated.visible : COIN.animated.hidden;
+  const visibilityClasses = show
+    ? 'opacity-100 translate-y-0'
+    : 'opacity-0 translate-y-12';
 
   return (
-    <div className={`${COIN.animated.base} ${visibilityClasses} ${className}`}>
+    <div
+      className={`transition-all duration-500 ease-in-out ${visibilityClasses} ${className}`}
+    >
       {children}
     </div>
   );

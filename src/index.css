@@ -4,32 +4,29 @@
 @layer base {
   :root {
     /* Custom brand color variables - change these to update colors across the entire app */
-    --brand-blue: #409cff;
-    --brand-blue-light: #3b82f6;
-    --brand-positive: #51cf66;
-    --brand-negative: #ff6b6b;
+    --brand-blue: #8b5cf6;
+    --brand-blue-light: #a78bfa;
+    --brand-positive: #00ff9d;
+    --brand-negative: #ff0055;
     --brand-bitcoin: #f7931a;
     --brand-ethereum: #627eea;
 
     /* Background color variables - change these to update the app background */
-    --bg-primary: #0f172a;
-    --bg-secondary: #111827;
-    --bg-tertiary: rgba(28, 38, 56, 0.25);
-    --bg-tertiary-dark: rgba(22, 35, 57, 0.8);
-    --bg-dropdown: rgba(22, 35, 57, 0.95);
+    --bg-primary: #050505;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: rgba(20, 20, 30, 0.4);
+    --bg-tertiary-dark: rgba(10, 10, 15, 0.8);
+    --bg-dropdown: rgba(15, 10, 20, 0.95);
     --bg-gradient-1: color-mix(in srgb, var(--brand-blue) 8%, transparent);
-    --bg-gradient-2: color-mix(
-      in srgb,
-      var(--brand-blue-light) 6%,
-      transparent
-    );
+    --bg-gradient-2: color-mix(in srgb, #ec4899 5%, transparent);
 
     /* Chip/Badge colors for crypto symbols */
-    --chip-bg: rgba(64, 156, 255, 0.15);
-    --chip-border: rgba(64, 156, 255, 0.2);
+    --chip-bg: rgba(255, 255, 255, 0.05);
+    --chip-border: rgba(255, 255, 255, 0.1);
 
     /* Shadow variables */
-    --shadow-dropdown: 0 4px 14px rgba(0, 0, 0, 0.35);
+    --shadow-dropdown: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.25);
   }
 
   html,
@@ -39,22 +36,16 @@
     overflow-x: hidden;
     min-width: 100%;
     background-color: var(--bg-primary);
-    background: radial-gradient(
-        ellipse 1000px 1000px at 10% 20%,
+    background-attachment: fixed;
+    background-image: radial-gradient(
+        circle at 50% 0%,
         var(--bg-gradient-1),
-        transparent 70%
+        transparent 50%
       ),
-      radial-gradient(
-        ellipse 1200px 1200px at 90% 80%,
-        var(--bg-gradient-2),
-        transparent 70%
-      ),
-      linear-gradient(
-        135deg,
-        var(--bg-primary) 0%,
-        var(--bg-secondary) 50%,
-        var(--bg-primary) 100%
-      );
+      radial-gradient(circle at 90% 10%, var(--bg-gradient-2), transparent 40%),
+      radial-gradient(circle at 10% 10%, var(--bg-gradient-1), transparent 40%);
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   #root {
@@ -70,4 +61,16 @@
 
 [class^='css-'] {
   color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Hide number input spinners */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }

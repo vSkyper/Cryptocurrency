@@ -9,9 +9,10 @@ const createColorMix = (color: string, percentage: number) =>
 
 export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   borderRadius: BORDER_RADIUS,
-  border: 'none',
-  backgroundColor: TRANSPARENT,
-  background: TRANSPARENT,
+  border: '1px solid rgba(255, 255, 255, 0.05)',
+  backgroundColor: 'rgba(10, 10, 15, 0.4)',
+  backdropFilter: 'blur(20px)',
+  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
 
   // Main container
   '& .MuiDataGrid-main': {
@@ -20,12 +21,12 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
   // Border colors
   '& .MuiDataGrid-withBorderColor': {
-    borderColor: TRANSPARENT,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
 
   // Remove cell borders
   '& .MuiDataGrid-cell, & .MuiDataGrid-row, & .MuiDataGrid-columnHeader': {
-    borderBottom: 'none !important',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.03) !important',
     borderTop: 'none !important',
   },
 
@@ -53,30 +54,25 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
     // Focus states
     '&:focus, &:focus-within': {
-      backgroundColor: `${createColorMix('var(--brand-blue)', 10)} !important`,
+      backgroundColor: `${createColorMix('var(--brand-blue)', 5)} !important`,
       outline: 'none',
     },
 
     // Selected state
     '&.Mui-selected': {
-      backgroundColor: `${createColorMix('var(--brand-blue)', 12)} !important`,
+      backgroundColor: `${createColorMix('var(--brand-blue)', 8)} !important`,
       '&:hover': {
         backgroundColor: `${createColorMix(
           'var(--brand-blue)',
-          15
+          12
         )} !important`,
       },
-    },
-
-    // Alternating row pattern
-    '&:nth-of-type(even)': {
-      backgroundColor: 'rgba(20, 30, 48, 0.4)',
     },
 
     // Desktop hover effect
     [theme.breakpoints.up('md')]: {
       '&:hover': {
-        backgroundColor: `${createColorMix('var(--brand-blue)', 8)} !important`,
+        backgroundColor: 'rgba(255, 255, 255, 0.03) !important',
       },
     },
 
@@ -97,20 +93,20 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     color: 'rgba(255, 255, 255, 0.9)',
-    padding: '12px 16px',
-    fontSize: '0.875rem',
+    padding: '16px 24px',
+    fontSize: '0.9rem',
     fontWeight: 500,
     contain: 'layout style',
 
     // Mobile responsive sizing
     [theme.breakpoints.down('sm')]: {
-      padding: '6px 8px',
-      fontSize: '0.7rem',
+      padding: '10px 12px',
+      fontSize: '0.75rem',
     },
 
     [theme.breakpoints.between('sm', 'md')]: {
-      padding: '8px 10px',
-      fontSize: '0.75rem',
+      padding: '12px 16px',
+      fontSize: '0.8rem',
     },
 
     '&:focus, &:focus-within': {
@@ -130,53 +126,29 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
   // Column separator / resize handle
   '& .MuiDataGrid-columnSeparator': {
-    // Mobile - thinner separator
-    [theme.breakpoints.down('sm')]: {
-      '& .MuiDataGrid-iconSeparator': {
-        transform: 'scaleX(0.5)',
-      },
-    },
-
-    [theme.breakpoints.between('sm', 'md')]: {
-      '& .MuiDataGrid-iconSeparator': {
-        transform: 'scaleX(0.7)',
-      },
-    },
+    display: 'none',
   },
 
   // Column headers
   '& .MuiDataGrid-columnHeaders': {
-    backgroundColor: 'var(--bg-tertiary-dark) !important',
-    background: 'var(--bg-tertiary-dark) !important',
-    borderBottom: 'none',
-    borderTopLeftRadius: BORDER_RADIUS,
-    borderTopRightRadius: BORDER_RADIUS,
-    color: 'var(--brand-blue)',
+    backgroundColor: 'rgba(15, 15, 20, 0.8) !important',
+    backdropFilter: 'blur(10px)',
+    color: 'rgba(255, 255, 255, 0.6)',
     fontWeight: 700,
-    minHeight: '56px !important',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+    minHeight: '60px !important',
 
     // Mobile responsive sizing
     [theme.breakpoints.down('sm')]: {
-      minHeight: '40px !important',
-    },
-
-    [theme.breakpoints.between('sm', 'md')]: {
       minHeight: '48px !important',
     },
 
     '& .MuiDataGrid-columnHeader': {
       backgroundColor: TRANSPARENT,
-      background: TRANSPARENT,
-      padding: '0 16px',
+      padding: '0 24px',
 
       // Mobile responsive padding
       [theme.breakpoints.down('sm')]: {
-        padding: '0 8px',
-      },
-
-      [theme.breakpoints.between('sm', 'md')]: {
-        padding: '0 10px',
+        padding: '0 12px',
       },
 
       '&:focus': {
@@ -185,10 +157,10 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     },
 
     '& .MuiDataGrid-columnHeaderTitle': {
-      color: 'rgba(255, 255, 255, 0.95)',
-      fontWeight: 600,
-      fontSize: '0.85rem',
-      letterSpacing: '0.8px',
+      color: 'rgba(255, 255, 255, 0.5)',
+      fontWeight: 700,
+      fontSize: '0.75rem',
+      letterSpacing: '1px',
       textTransform: 'uppercase',
 
       // Mobile responsive font sizes
@@ -196,83 +168,92 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
         fontSize: '0.65rem',
         letterSpacing: '0.5px',
       },
-
-      [theme.breakpoints.between('sm', 'md')]: {
-        fontSize: '0.7rem',
-        letterSpacing: '0.6px',
-      },
     },
   },
 
   // Footer
   '& .MuiDataGrid-footerContainer': {
-    backgroundColor: createColorMix('var(--brand-blue)', 5),
-    borderTop: `1px solid ${createColorMix('var(--brand-blue)', 15)}`,
-    color: 'rgba(255, 255, 255, 0.8)',
-    borderBottomLeftRadius: BORDER_RADIUS,
-    borderBottomRightRadius: BORDER_RADIUS,
+    backgroundColor: 'rgba(10, 10, 15, 0.6)',
+    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+    color: 'rgba(255, 255, 255, 0.6)',
+    minHeight: '60px',
 
     // Mobile responsive sizing
     [theme.breakpoints.down('sm')]: {
-      minHeight: '40px',
+      minHeight: '50px',
     },
   },
 
   // Pagination
   '& .MuiTablePagination-root': {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.6)',
+    fontSize: '0.85rem',
+
+    '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+      fontSize: '0.85rem',
+      marginBottom: 0,
+    },
+
+    '& .MuiTablePagination-select': {
+      fontSize: '0.85rem',
+    },
+
+    '& .MuiTablePagination-actions': {
+      marginLeft: '16px',
+    },
 
     // Mobile responsive font sizes
     [theme.breakpoints.down('sm')]: {
-      fontSize: '0.7rem',
+      fontSize: '0.75rem',
 
       '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows':
         {
-          fontSize: '0.7rem',
+          fontSize: '0.75rem',
         },
 
       '& .MuiTablePagination-select': {
-        fontSize: '0.7rem',
+        fontSize: '0.75rem',
       },
     },
   },
 
   // Icon buttons
   '& .MuiIconButton-root': {
-    color: createColorMix('var(--brand-blue)', 80),
+    color: 'rgba(255, 255, 255, 0.4)',
     transition: 'background-color 150ms ease, color 150ms ease',
 
-    [theme.breakpoints.up('md')]: {
-      '&:hover': {
-        backgroundColor: createColorMix('var(--brand-blue)', 15),
-        color: 'var(--brand-blue)',
-      },
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      color: 'var(--brand-blue)',
+    },
+
+    '&.Mui-disabled': {
+      color: 'rgba(255, 255, 255, 0.1)',
     },
   },
 
   // Selected row count
   '& .MuiDataGrid-selectedRowCount': {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.5)',
   },
 
   // Custom scrollbar
   '& .MuiDataGrid-scrollbar': {
     '&::-webkit-scrollbar': {
-      width: '8px',
-      height: '8px',
+      width: '6px',
+      height: '6px',
     },
 
     '&::-webkit-scrollbar-track': {
-      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-      borderRadius: '4px',
+      backgroundColor: 'transparent',
     },
 
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: createColorMix('var(--brand-blue)', 30),
-      borderRadius: '4px',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      borderRadius: '3px',
 
       '&:hover': {
-        backgroundColor: createColorMix('var(--brand-blue)', 50),
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
       },
     },
   },

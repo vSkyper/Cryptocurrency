@@ -4,12 +4,8 @@ import {
   formatCompactCurrency,
   formatCompactNumber,
   formatPercentage,
+  formatNumber,
 } from 'utils/formatters';
-import { HOME } from 'styles/styles';
-
-const numberFormatter = new Intl.NumberFormat('en-US');
-
-const formatNumber = (value: number): string => numberFormatter.format(value);
 
 export default function Cards({ toggle, globalData }: CardsProps) {
   const { data } = globalData;
@@ -52,21 +48,23 @@ export default function Cards({ toggle, globalData }: CardsProps) {
     {
       key: 'activeCryptos',
       value: formatNumber(data.active_cryptocurrencies),
-      label: 'Active Cryptos',
-      color: '#ffffff',
+      label: 'Cryptos',
+      color: 'white',
       timeout: 400,
+    },
+    {
+      key: 'markets',
+      value: formatNumber(data.markets),
+      label: 'Markets',
+      color: 'white',
+      timeout: 500,
     },
   ];
 
   return (
-    <div className={HOME.cards.grid}>
-      {cardConfigs.map((config, index) => (
-        <StatCard
-          key={config.key}
-          config={config}
-          toggle={toggle}
-          className={index === 0 ? 'lg:col-span-2' : ''}
-        />
+    <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6'>
+      {cardConfigs.map((config) => (
+        <StatCard key={config.key} config={config} toggle={toggle} />
       ))}
     </div>
   );

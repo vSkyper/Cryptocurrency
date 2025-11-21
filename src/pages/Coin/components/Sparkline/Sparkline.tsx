@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { ButtonComponent, ChartComponent } from './components';
-import { ErrorModal } from 'components';
+import { ErrorModal, InlineLoader } from 'components';
 import { ISparkline } from 'interfaces';
 import useFetch from 'hooks/useFetch';
 import { buttons } from 'constants/coin';
 import { SparklineProps } from './interface';
-import { CircularProgress } from '@mui/material';
 import { API_ENDPOINTS } from 'config/api';
-import { LOADING, COIN } from 'styles/styles';
 
 const DEFAULT_DAYS = '7';
 
@@ -33,8 +31,8 @@ export default function Sparkline({ id }: SparklineProps) {
   return (
     <>
       {/* Time Period Buttons */}
-      <div className={COIN.sparkline.buttonWrapper}>
-        <div className={COIN.sparkline.buttonGroup}>
+      <div className='mb-4 sm:mb-6 flex justify-end'>
+        <div className='flex gap-1.5 p-1 bg-white/5 rounded-xl backdrop-blur-md border border-white/10'>
           {buttons.map((button) => (
             <ButtonComponent
               key={button.days}
@@ -47,11 +45,11 @@ export default function Sparkline({ id }: SparklineProps) {
       </div>
 
       {/* Chart Container */}
-      <div className={COIN.sparkline.chartContainer}>
+      <div className='relative w-full rounded-3xl overflow-hidden sm:p-0 bg-transparent h-[250px] sm:h-[350px] md:h-[450px] transition-all duration-500'>
         {/* Loading State */}
         {!data && (
-          <div className={LOADING.overlay}>
-            <CircularProgress />
+          <div className='absolute inset-0 z-20 flex items-center justify-center bg-transparent'>
+            <InlineLoader text='Loading chart...' />
           </div>
         )}
 

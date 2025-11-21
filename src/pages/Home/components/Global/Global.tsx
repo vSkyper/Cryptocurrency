@@ -1,40 +1,41 @@
 import { useState } from 'react';
 import { Cards, Description, Switch } from './components';
 import { GlobalProps } from './interface';
-import { HOME } from 'styles/styles';
 
 export default function Global({ globalData }: GlobalProps) {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const cardsTransitionClasses = toggle
-    ? HOME.global.cardsVisible
-    : HOME.global.cardsHidden;
+    ? 'max-h-[1000px] opacity-100'
+    : 'max-h-0 opacity-0 overflow-hidden';
 
   return (
     <>
-      <div className={HOME.global.container}>
-        <div className={HOME.global.header}>
+      <div className='mb-8 sm:mb-12'>
+        <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-6'>
           {/* Header and Description */}
-          <div className={HOME.global.headerContent}>
-            <h1 className={HOME.global.title}>Global Cryptocurrency Market</h1>
+          <div className='flex-1'>
+            <h1 className='text-2xl sm:text-3xl md:text-4xl font-black mb-4 tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-white via-white to-white/40 drop-shadow-sm'>
+              Global Cryptocurrency Market
+            </h1>
             <Description globalData={globalData} />
           </div>
 
           {/* Desktop Switch */}
-          <div className={HOME.global.switchDesktop}>
+          <div className='hidden md:flex md:justify-end'>
             <Switch toggle={toggle} setToggle={setToggle} mobile={false} />
           </div>
         </div>
 
         {/* Mobile Switch */}
-        <div className={HOME.global.switchMobile}>
+        <div className='md:hidden pt-6'>
           <Switch toggle={toggle} setToggle={setToggle} mobile />
         </div>
       </div>
 
       {/* Stats Cards with Animation */}
       <div
-        className={`${HOME.global.cardsTransition} ${cardsTransitionClasses}`}
+        className={`transition-all duration-700 ease-out transform-gpu will-change-[max-height,opacity] ${cardsTransitionClasses}`}
         style={{
           transitionDelay: toggle ? '0ms' : '500ms',
           marginBottom: toggle ? '1.5rem' : '0',

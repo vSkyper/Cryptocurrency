@@ -1,9 +1,10 @@
 import { DescriptionProps } from './interface';
 import { Highlight } from './components';
-import { formatCompactCurrency, formatPercentage } from 'utils/formatters';
-import { HOME } from 'styles/styles';
-
-const numberFormatter = new Intl.NumberFormat('en-US');
+import {
+  formatCompactCurrency,
+  formatPercentage,
+  formatNumber,
+} from 'utils/formatters';
 
 export default function Description({ globalData }: DescriptionProps) {
   const { data } = globalData;
@@ -17,17 +18,17 @@ export default function Description({ globalData }: DescriptionProps) {
       totalVolume: formatCompactCurrency(data.total_volume.usd),
       btcDominance: formatPercentage(data.market_cap_percentage.btc),
       ethDominance: formatPercentage(data.market_cap_percentage.eth),
-      cryptocurrencies: numberFormatter.format(data.active_cryptocurrencies),
+      cryptocurrencies: formatNumber(data.active_cryptocurrencies),
       isNegative: marketCapChange < 0,
     };
   };
 
   const changeColorClass = stats().isNegative
-    ? 'text-[var(--brand-negative)]'
-    : 'text-[var(--brand-positive)]';
+    ? 'text-(--brand-negative) bg-(--brand-negative)/10 border-(--brand-negative)/20'
+    : 'text-(--brand-positive) bg-(--brand-positive)/10 border-(--brand-positive)/20';
 
   return (
-    <p className={HOME.description.text}>
+    <p className='text-sm sm:text-base text-white/70 leading-relaxed max-w-4xl font-medium tracking-wide'>
       The global cryptocurrency market cap today is{' '}
       <Highlight className='text-white'>{stats().marketCap}</Highlight>, a{' '}
       <Highlight className={changeColorClass}>
@@ -37,11 +38,11 @@ export default function Description({ globalData }: DescriptionProps) {
       last day is at{' '}
       <Highlight className='text-white'>{stats().totalVolume}</Highlight>.
       Bitcoin dominance is at{' '}
-      <Highlight className='text-[var(--brand-bitcoin)]'>
+      <Highlight className='text-(--brand-bitcoin) bg-(--brand-bitcoin)/10 border-(--brand-bitcoin)/20'>
         {stats().btcDominance}
       </Highlight>{' '}
       and Ethereum dominance is at{' '}
-      <Highlight className='text-[var(--brand-ethereum)]'>
+      <Highlight className='text-(--brand-ethereum) bg-(--brand-ethereum)/10 border-(--brand-ethereum)/20'>
         {stats().ethDominance}
       </Highlight>
       . CoinGecko API is now tracking{' '}

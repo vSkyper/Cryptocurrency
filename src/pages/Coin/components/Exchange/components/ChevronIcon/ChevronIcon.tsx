@@ -1,7 +1,7 @@
 export default function ChevronIcon() {
   return (
     <svg
-      className='h-4 w-4 text-[var(--brand-blue)]'
+      className='h-4 w-4 text-(--brand-blue)'
       viewBox='0 0 20 20'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

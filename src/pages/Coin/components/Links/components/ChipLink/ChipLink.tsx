@@ -1,5 +1,4 @@
 import { ChipLinkProps } from './interface';
-import { COIN } from 'styles/styles';
 
 export default function ChipLink({
   href,
@@ -12,16 +11,20 @@ export default function ChipLink({
       href={href}
       target='_blank'
       rel='noopener noreferrer'
-      className={`${COIN.links.chip.base} ${COIN.links.chip.hover} ${className}`}
+      className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[0.65rem] sm:text-xs font-bold transition-all duration-300 ease-out relative overflow-hidden backdrop-blur-md group border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 hover:shadow-md ${className}`}
     >
       {/* Enhanced shine effect */}
-      <span className={COIN.links.chip.shineEffect} />
+      <span className='absolute inset-0 -left-full w-full h-full bg-linear-to-r from-transparent via-white/10 to-transparent transition-all duration-700 group-hover:left-full pointer-events-none' />
 
       {/* Left icon */}
-      <span className={COIN.links.chip.iconWrapper}>{left}</span>
+      <span className='flex items-center justify-center transition-transform duration-300 group-hover:scale-110 text-white/70 group-hover:text-white'>
+        {left}
+      </span>
 
       {/* Text */}
-      <span className={COIN.links.chip.text}>{children}</span>
+      <span className='leading-none font-bold tracking-wide text-white/70 group-hover:text-white transition-colors'>
+        {children}
+      </span>
     </a>
   );
 }

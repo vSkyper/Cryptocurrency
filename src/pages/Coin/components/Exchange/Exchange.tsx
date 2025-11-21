@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  SwapVert as SwapVertIcon,
-  Calculate as CalculateIcon,
-} from '@mui/icons-material';
+import { ArrowDownward as ArrowDownwardIcon } from '@mui/icons-material';
 import {
   Combobox,
   ComboboxButton,
@@ -17,15 +14,7 @@ import { ErrorModal } from 'components';
 import { ExchangeProps } from './interface';
 import { ChevronIcon, CurrencyInput, LoadingSpinner } from './components';
 import { API_ENDPOINTS } from 'config/api';
-import { formatCurrencyWithOptions } from 'utils/formatters';
-import {
-  CARD,
-  TYPOGRAPHY,
-  INPUT,
-  DROPDOWN,
-  CSS_SNIPPETS,
-  COIN,
-} from 'styles/styles';
+import { formatRateWithSuffix } from 'utils/formatters';
 
 const MAX_DROPDOWN_ITEMS = 5;
 
@@ -47,8 +36,9 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
   );
 
   const currentRate = exchangeRate?.[id]?.[currencyOption];
+
   const formattedRate = currentRate
-    ? formatCurrencyWithOptions(currentRate, currencyOption)
+    ? formatRateWithSuffix(currentRate, currencyOption)
     : '';
 
   const filteredCurrencies = (currencies ?? [])
@@ -135,17 +125,13 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
   if (currenciesError || exchangeRateError) return <ErrorModal />;
 
   return (
-    <div className='transition-opacity duration-800'>
-      <style>{CSS_SNIPPETS.hideNumberInputSpinners}</style>
-
-      <div className={CARD.base}>
+    <div className='relative z-10 p-4 sm:p-5 rounded-3xl bg-white/5 border border-white/5 backdrop-blur-sm'>
+      <div>
         {/* Header */}
-        <div className={COIN.exchange.headerWrapper}>
-          <CalculateIcon
-            className='text-[var(--brand-blue)]'
-            sx={{ fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.5rem' } }}
-          />
-          <h3 className={TYPOGRAPHY.title}>Exchange Calculator</h3>
+        <div className='flex items-center justify-between mb-3 sm:mb-5'>
+          <h3 className='text-lg sm:text-xl font-black text-white tracking-tighter'>
+            Exchange Calculator
+          </h3>
         </div>
 
         {/* Currency Input Grid */}
@@ -159,8 +145,8 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
           />
 
           {/* Swap Icon */}
-          <div className={COIN.exchange.swapIcon}>
-            <SwapVertIcon />
+          <div className='flex items-center justify-center text-white/20 mx-auto my-1 sm:my-2'>
+            <ArrowDownwardIcon />
           </div>
 
           {/* Fiat Currency Input with Combobox */}
@@ -170,14 +156,14 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
             value={currencyAmount}
             onChange={handleCurrencyInputChange}
           >
-            <div className='w-16'>
+            <div className='w-14 sm:w-16'>
               <Combobox
                 value={currencyOption}
                 onChange={handleChangeAutocomplete}
               >
                 <div className='relative flex items-center'>
                   <ComboboxInput
-                    className={INPUT.combobox}
+                    className='w-full bg-transparent text-xs sm:text-sm font-bold uppercase focus:outline-none pr-6 text-white/95 tracking-wide'
                     displayValue={() => currencyOption.toUpperCase()}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setQuery(e.target.value)
@@ -197,14 +183,14 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
                       <ComboboxOptions
                         modal={false}
                         anchor='bottom start'
-                        className={DROPDOWN.options}
+                        className='z-20 mt-2 max-h-60 w-18 overflow-auto rounded-xl bg-(--bg-dropdown) py-1 sm:py-1.5 text-xs sm:text-sm shadow-(--shadow-dropdown) border border-white/10 backdrop-blur-xl'
                       >
                         {filteredCurrencies.map((option) => (
                           <ComboboxOption
                             key={option}
                             value={option}
                             className={({ focus }) =>
-                              `cursor-pointer select-none px-4 py-2 text-white/90 font-bold ${
+                              `cursor-pointer select-none px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-base text-white/90 font-bold ${
                                 focus
                                   ? 'bg-[color-mix(in_srgb,var(--brand-blue)_10%,transparent)]'
                                   : ''
@@ -224,12 +210,12 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
         </div>
 
         {/* Exchange Rate Display */}
-        <div className={COIN.exchange.rateDisplay}>
+        <div className='flex items-center justify-center gap-2 mt-3 sm:mt-5 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 bg-black/20 text-white/60 font-mono text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wide uppercase'>
           {isLoadingRate ? (
             <LoadingSpinner />
           ) : (
             currentRate && (
-              <div className='font-semibold text-xs sm:text-sm text-[var(--text-secondary)]'>
+              <div className='font-semibold text-xs sm:text-sm text-(--text-secondary)'>
                 1 {symbol.toUpperCase()} = {formattedRate}
               </div>
             )

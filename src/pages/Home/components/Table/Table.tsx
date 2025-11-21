@@ -4,7 +4,6 @@ import { TableProps } from './interface';
 import { ThemeProvider } from '@mui/material/styles';
 import darkTheme, { createDarkThemeFromVars } from 'styles/muiTheme';
 import { useEffect, useState } from 'react';
-import { HOME } from 'styles/styles';
 
 const PAGINATION_CONFIG = {
   pageSize: 50,
@@ -22,7 +21,7 @@ export default function Table({ coins }: TableProps) {
   const runtimeTheme = mounted ? createDarkThemeFromVars() : darkTheme;
 
   return (
-    <div className={HOME.table.container}>
+    <div className='mt-6 sm:mt-8 relative transform-gpu will-change-transform'>
       <ThemeProvider theme={runtimeTheme}>
         <StyledDataGrid
           density='comfortable'
@@ -38,7 +37,7 @@ export default function Table({ coins }: TableProps) {
             },
           }}
           pageSizeOptions={PAGINATION_CONFIG.pageSizeOptions}
-          sx={HOME.table.styles}
+          sx={{ height: 'auto', minHeight: 400, border: 'none' }}
         />
       </ThemeProvider>
     </div>

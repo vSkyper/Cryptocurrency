@@ -1,7 +1,7 @@
-import { NAVBAR } from 'styles/styles';
-
 export default function EmptyState() {
   return (
-    <div className={NAVBAR.emptyState.base}>No cryptocurrencies found</div>
+    <div className='relative cursor-default select-none py-4 px-4 text-center text-[0.9rem] font-medium text-white/70'>
+      No cryptocurrencies found
+    </div>
   );
 }
