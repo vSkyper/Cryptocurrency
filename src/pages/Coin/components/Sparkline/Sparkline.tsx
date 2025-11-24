@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { ButtonComponent, ChartComponent } from './components';
-import { ErrorModal, InlineLoader } from 'components';
+import { InlineLoader } from 'components';
 import { ISparkline } from 'interfaces';
 import useFetch from 'hooks/useFetch';
 import { buttons } from 'constants/coin';
@@ -26,8 +26,6 @@ export default function Sparkline({ id }: SparklineProps) {
 
   const sparkline = data?.prices ? formatSparklineData(data.prices) : undefined;
 
-  if (error) return <ErrorModal />;
-
   return (
     <>
       {/* Time Period Buttons */}
@@ -47,13 +45,22 @@ export default function Sparkline({ id }: SparklineProps) {
       {/* Chart Container */}
       <div className='relative w-full rounded-3xl overflow-hidden sm:p-0 bg-transparent h-[250px] sm:h-[350px] md:h-[450px] transition-all duration-500'>
         {/* Loading State */}
-        {!data && (
+        {!data && !error && (
           <div className='absolute inset-0 z-20 flex items-center justify-center bg-transparent'>
             <InlineLoader text='Loading chart...' />
           </div>
         )}
 
-        {sparkline && <ChartComponent sparkline={sparkline} days={days} />}
+        {/* Error State */}
+        {error && (
+          <div className='absolute inset-0 z-20 flex flex-col items-center justify-center bg-transparent text-slate-400 gap-2'>
+            <p>Chart data unavailable</p>
+          </div>
+        )}
+
+        {sparkline && !error && (
+          <ChartComponent sparkline={sparkline} days={days} />
+        )}
       </div>
     </>
   );

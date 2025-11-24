@@ -5,6 +5,7 @@ import Exchange from './Exchange';
 import Links from './Links';
 import CoinHeader from './CoinHeader';
 import AnimatedSection from './AnimatedSection';
+import Skeleton from './Skeleton';
 
 export {
   Sparkline,
@@ -14,4 +15,5 @@ export {
   Links,
   CoinHeader,
   AnimatedSection,
+  Skeleton,
 };
