@@ -186,6 +186,8 @@ export const columns: GridColDef[] = [
     headerName: 'Last 7 Days',
     flex: 1,
     minWidth: 130,
+    align: 'center',
+    headerAlign: 'center',
     renderCell: SparklineChart,
   },
 ];

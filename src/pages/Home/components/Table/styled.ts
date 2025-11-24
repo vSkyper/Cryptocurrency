@@ -131,15 +131,14 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
   // Column headers
   '& .MuiDataGrid-columnHeaders': {
-    backgroundColor: 'rgba(15, 15, 20, 0.8) !important',
-    backdropFilter: 'blur(10px)',
-    color: 'rgba(255, 255, 255, 0.6)',
-    fontWeight: 700,
-    minHeight: '60px !important',
+    backgroundColor: 'rgba(10, 10, 15, 0.7) !important',
+    backdropFilter: 'blur(20px) saturate(180%)',
+    color: 'rgba(255, 255, 255, 0.4)',
+    fontWeight: 800,
 
     // Mobile responsive sizing
     [theme.breakpoints.down('sm')]: {
-      minHeight: '48px !important',
+      height: '56px !important',
     },
 
     '& .MuiDataGrid-columnHeader': {
@@ -148,26 +147,43 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
       // Mobile responsive padding
       [theme.breakpoints.down('sm')]: {
-        padding: '0 12px',
+        padding: '0 16px',
+        height: '56px !important',
       },
 
       '&:focus': {
         outline: 'none',
       },
+
+      // Hover effect for sortable headers
+      '&:hover .MuiDataGrid-columnHeaderTitle': {
+        color: 'rgba(255, 255, 255, 0.9)',
+      },
     },
 
     '& .MuiDataGrid-columnHeaderTitle': {
-      color: 'rgba(255, 255, 255, 0.5)',
-      fontWeight: 700,
-      fontSize: '0.75rem',
-      letterSpacing: '1px',
+      color: 'rgba(255, 255, 255, 0.4)',
+      fontWeight: 800,
+      fontSize: '0.7rem',
+      letterSpacing: '0.1em',
       textTransform: 'uppercase',
+      transition: 'color 0.2s ease',
 
       // Mobile responsive font sizes
       [theme.breakpoints.down('sm')]: {
-        fontSize: '0.65rem',
-        letterSpacing: '0.5px',
+        fontSize: '0.75rem !important',
+        letterSpacing: '0.05em',
       },
+    },
+
+    // Sort icon style
+    '& .MuiDataGrid-sortIcon': {
+      color: 'rgba(255, 255, 255, 0.4)',
+      opacity: 0.5,
+      transition: 'opacity 0.2s ease',
+    },
+    '& .MuiDataGrid-columnHeader:hover .MuiDataGrid-sortIcon': {
+      opacity: 1,
     },
   },
 
@@ -258,3 +274,53 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     },
   },
 }));
+
+export const gridMenuSx = {
+  '& .MuiPaper-root': {
+    background:
+      'linear-gradient(145deg, rgba(25, 25, 35, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%) !important',
+    backdropFilter: 'blur(20px) saturate(180%)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    borderRadius: '16px',
+    boxShadow:
+      '0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+  },
+  '& .MuiMenuItem-root': {
+    fontFamily: 'inherit',
+    fontSize: '0.85rem',
+    fontWeight: 500,
+    padding: '10px 16px',
+    color: 'rgba(255, 255, 255, 0.8)',
+    transition: 'all 0.2s ease',
+    gap: '8px',
+
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      color: '#fff',
+    },
+
+    '& .MuiListItemIcon-root': {
+      minWidth: 'auto',
+      color: 'rgba(255, 255, 255, 0.5)',
+    },
+  },
+
+  // Mobile adjustments
+  '@media (max-width: 600px)': {
+    '& .MuiPaper-root': {
+      minWidth: '110px !important',
+    },
+    '& .MuiMenuItem-root': {
+      fontSize: '0.6rem',
+      padding: '4px 8px',
+      minHeight: '28px',
+      gap: '6px',
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: '20px !important',
+      '& svg': {
+        fontSize: '1.1rem',
+      },
+    },
+  },
+};
