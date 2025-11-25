@@ -275,6 +275,119 @@ export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }));
 
+export const gridPanelSx = {
+  '& .MuiPaper-root, &.MuiPaper-root': {
+    background:
+      'linear-gradient(145deg, rgba(25, 25, 35, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%) !important',
+    backdropFilter: 'blur(20px) saturate(180%)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    borderRadius: '16px',
+    boxShadow:
+      '0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+    padding: '12px',
+  },
+
+  // Ensure the panel content doesn't override the background
+  '& .MuiDataGrid-panelContent, & .MuiDataGrid-panelFooter, & .MuiDataGrid-panelHeader':
+    {
+      background: 'transparent !important',
+      backgroundColor: 'transparent !important',
+    },
+
+  // Search input
+  '& .MuiInputBase-root': {
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '8px',
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: '0.9rem',
+    padding: '4px 8px',
+    transition: 'all 0.2s ease',
+
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      borderColor: 'rgba(255, 255, 255, 0.2)',
+    },
+
+    '&.Mui-focused': {
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      borderColor: 'var(--brand-blue)',
+      boxShadow: '0 0 0 2px rgba(0, 240, 255, 0.1)',
+    },
+
+    '& input': {
+      padding: '8px',
+    },
+  },
+
+  // Checkboxes
+  '& .MuiFormControlLabel-root': {
+    margin: 0,
+    padding: '6px 8px',
+    borderRadius: '8px',
+    transition: 'background-color 0.2s ease',
+
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    },
+
+    '& .MuiTypography-root': {
+      fontSize: '0.9rem',
+      color: 'rgba(255, 255, 255, 0.7)',
+      marginLeft: '12px',
+    },
+  },
+
+  '& .MuiCheckbox-root': {
+    color: 'rgba(255, 255, 255, 0.3)',
+    padding: 0,
+
+    '&.Mui-checked': {
+      color: 'var(--brand-blue)',
+    },
+  },
+
+  // Buttons (Show/Hide All)
+  '& .MuiButton-root': {
+    color: 'var(--brand-blue)',
+    fontSize: '0.8rem',
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    padding: '6px 12px',
+    borderRadius: '6px',
+
+    '&:hover': {
+      backgroundColor: 'rgba(0, 240, 255, 0.1)',
+    },
+  },
+
+  // Panel Header
+  '& .MuiDataGrid-panelHeader': {
+    padding: '8px 4px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    marginBottom: '8px',
+  },
+
+  // Mobile adjustments
+  '@media (max-width: 600px)': {
+    '& .MuiPaper-root': {
+      minWidth: '280px !important',
+      maxWidth: 'calc(100vw - 32px) !important',
+      padding: '12px',
+    },
+    '& .MuiFormControlLabel-root': {
+      padding: '8px',
+      '& .MuiTypography-root': {
+        fontSize: '0.85rem',
+      },
+    },
+    '& .MuiInputBase-root': {
+      fontSize: '0.85rem',
+    },
+  },
+};
+
 export const gridMenuSx = {
   '& .MuiPaper-root': {
     background:

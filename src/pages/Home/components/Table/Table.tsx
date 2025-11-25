@@ -1,4 +1,4 @@
-import { StyledDataGrid, gridMenuSx } from './styled';
+import { StyledDataGrid, gridMenuSx, gridPanelSx } from './styled';
 import { columns } from 'constants/dataTable';
 import { TableProps } from './interface';
 import { ThemeProvider } from '@mui/material/styles';
@@ -39,6 +39,9 @@ export default function Table({ coins }: TableProps) {
           pageSizeOptions={PAGINATION_CONFIG.pageSizeOptions}
           slotProps={{
             basePopper: { sx: gridMenuSx } as any,
+            panel: { sx: gridPanelSx } as any,
+            columnsPanel: { sx: gridPanelSx } as any,
+            filterPanel: { sx: gridPanelSx } as any,
           }}
           sx={{ height: 'auto', minHeight: 400, border: 'none' }}
         />
