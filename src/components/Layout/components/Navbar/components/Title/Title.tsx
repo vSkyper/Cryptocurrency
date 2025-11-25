@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { TrendingUp as TrendingUpIcon } from '@mui/icons-material';
+import { MdTrendingUp as TrendingUpIcon } from 'react-icons/md';
 
 export default function Title() {
   return (

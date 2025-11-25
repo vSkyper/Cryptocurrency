@@ -1,11 +1,13 @@
 import {
-  Reddit as RedditIcon,
-  Facebook as FacebookIcon,
-  Twitter as TwitterIcon,
-  GitHub as GitHubIcon,
-  Language as WebsiteIcon,
-  Forum as ForumIcon,
-} from '@mui/icons-material';
+  FaReddit as RedditIcon,
+  FaFacebook as FacebookIcon,
+  FaTwitter as TwitterIcon,
+  FaGithub as GitHubIcon,
+} from 'react-icons/fa';
+import {
+  MdLanguage as WebsiteIcon,
+  MdForum as ForumIcon,
+} from 'react-icons/md';
 import { LinksProps } from './interface';
 import { ChipLink } from './components';
 
@@ -66,12 +68,7 @@ export default function Links({ data }: LinksProps) {
         {links?.official_forum_url?.[0] && (
           <ChipLink
             href={links.official_forum_url[0]}
-            left={
-              <ForumIcon
-                sx={{ fontSize: 16 }}
-                className='text-(--brand-blue)'
-              />
-            }
+            left={<ForumIcon size={16} className='text-(--brand-blue)' />}
           >
             Official Forum
           </ChipLink>
@@ -93,7 +90,7 @@ export default function Links({ data }: LinksProps) {
                     href={blockchain}
                     left={
                       <WebsiteIcon
-                        sx={{ fontSize: 16 }}
+                        size={16}
                         className='text-(--brand-blue-light)'
                       />
                     }
@@ -115,7 +112,7 @@ export default function Links({ data }: LinksProps) {
           {links?.subreddit_url && (
             <ChipLink
               href={links.subreddit_url}
-              left={<RedditIcon sx={{ fontSize: 16 }} />}
+              left={<RedditIcon size={16} />}
               className='hover:border-[#FF4500]/50 hover:shadow-[0_0_20px_rgba(255,69,0,0.2)]'
             >
               {SOCIAL_LINKS.reddit.label}
@@ -125,7 +122,7 @@ export default function Links({ data }: LinksProps) {
           {links?.twitter_screen_name && (
             <ChipLink
               href={SOCIAL_LINKS.twitter.getUrl(links.twitter_screen_name)}
-              left={<TwitterIcon sx={{ fontSize: 16 }} />}
+              left={<TwitterIcon size={16} />}
               className='hover:border-[#1DA1F2]/50 hover:shadow-[0_0_20px_rgba(29,161,242,0.2)]'
             >
               {SOCIAL_LINKS.twitter.label}
@@ -135,7 +132,7 @@ export default function Links({ data }: LinksProps) {
           {links?.facebook_username && (
             <ChipLink
               href={SOCIAL_LINKS.facebook.getUrl(links.facebook_username)}
-              left={<FacebookIcon sx={{ fontSize: 16 }} />}
+              left={<FacebookIcon size={16} />}
               className='hover:border-[#1877F2]/50 hover:shadow-[0_0_20px_rgba(24,119,242,0.2)]'
             >
               {SOCIAL_LINKS.facebook.label}
@@ -145,7 +142,7 @@ export default function Links({ data }: LinksProps) {
           {links?.repos_url?.github?.[0] && (
             <ChipLink
               href={links.repos_url.github[0]}
-              left={<GitHubIcon sx={{ fontSize: 16 }} />}
+              left={<GitHubIcon size={16} />}
               className='hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]'
             >
               {SOCIAL_LINKS.github.label}

@@ -1,6 +1,5 @@
-import { CircularProgress } from '@mui/material';
 import { SearchIconContainerProps } from './interface';
-import { Search as SearchIcon } from '@mui/icons-material';
+import { MdSearch as SearchIcon } from 'react-icons/md';
 
 export default function SearchIconContainer({
   isLoading,
@@ -8,7 +7,7 @@ export default function SearchIconContainer({
   return (
     <div className='absolute inset-y-0 left-0 flex items-center justify-center pl-3 sm:pl-5 pointer-events-none z-10 text-(--brand-blue)'>
       {isLoading ? (
-        <CircularProgress size={18} sx={{ color: 'var(--brand-blue)' }} />
+        <div className='animate-spin h-[18px] w-[18px] border-2 border-white/10 border-t-(--brand-blue) rounded-full' />
       ) : (
         <SearchIcon className='text-(--brand-blue) text-[1rem]! sm:text-[1.5rem]!' />
       )}

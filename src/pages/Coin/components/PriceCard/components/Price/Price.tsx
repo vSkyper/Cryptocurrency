@@ -1,7 +1,7 @@
 import {
-  TrendingUpRounded as TrendingUpIcon,
-  TrendingDownRounded as TrendingDownIcon,
-} from '@mui/icons-material';
+  MdTrendingUp as TrendingUpIcon,
+  MdTrendingDown as TrendingDownIcon,
+} from 'react-icons/md';
 import { PriceProps } from './interface';
 import { formatCurrency, formatPercentage } from 'utils/formatters';
 
@@ -25,7 +25,7 @@ export default function Price({ marketData }: PriceProps) {
         className={`ml-3 sm:ml-4 inline-flex items-center font-bold text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border backdrop-blur-md transition-all duration-300 tracking-wide ${badgeColorClass}`}
       >
         {formatPercentage(priceChange)}
-        <TrendIcon sx={{ fontSize: '1rem', ml: '4px' }} />
+        <TrendIcon size='1rem' className='ml-1' />
       </span>
     </div>
   );

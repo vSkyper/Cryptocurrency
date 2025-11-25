@@ -19,7 +19,6 @@
 - Vite - version 7.2.2
 - TypeScript - version 5.9.3
 - Tailwind CSS - version 4.1.17
-- MUI - version 7.3.5
 
 ## Features
 

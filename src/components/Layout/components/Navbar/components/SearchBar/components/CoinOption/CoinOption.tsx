@@ -1,4 +1,4 @@
-import { ArrowForwardIos } from '@mui/icons-material';
+import { MdArrowForwardIos } from 'react-icons/md';
 import { CoinOptionProps } from './interface';
 
 export default function CoinOption({ coin, isFocused }: CoinOptionProps) {
@@ -21,8 +21,8 @@ export default function CoinOption({ coin, isFocused }: CoinOptionProps) {
           </span>
         </div>
       </div>
-      <ArrowForwardIos
-        sx={{ fontSize: '0.9rem' }}
+      <MdArrowForwardIos
+        size='0.9rem'
         className={`transition-all duration-200 shrink-0 ${
           isFocused
             ? 'text-(--brand-blue) translate-x-1'

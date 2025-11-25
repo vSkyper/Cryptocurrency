@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import {
-  TrendingUpRounded as TrendingUpIcon,
-  TrendingDownRounded as TrendingDownIcon,
-} from '@mui/icons-material';
+  MdTrendingUp as TrendingUpIcon,
+  MdTrendingDown as TrendingDownIcon,
+} from 'react-icons/md';
 import { StatCardProps } from './interface';
 
 export default function StatCard({
@@ -73,7 +73,7 @@ export default function StatCard({
                 className={`inline-flex items-center gap-0.5 sm:gap-1 text-[0.65rem] sm:text-xs font-bold border rounded-full px-1.5 py-0.5 sm:px-2.5 sm:py-1 backdrop-blur-sm shadow-sm ${badgeColorClasses}`}
               >
                 {config.percentage.value}
-                <TrendIcon sx={{ fontSize: { xs: '0.7rem', sm: '0.9rem' } }} />
+                <TrendIcon className='text-[0.7rem] sm:text-[0.9rem]' />
               </span>
             )}
           </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowDownward as ArrowDownwardIcon } from '@mui/icons-material';
+import { MdArrowDownward as ArrowDownwardIcon } from 'react-icons/md';
 import {
   Combobox,
   ComboboxButton,

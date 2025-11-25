@@ -1,8 +1,8 @@
 import { SwitchProps } from './interface';
 import {
-  BarChart as BarChartIcon,
-  BarChartOutlined as BarChartOutlinedIcon,
-} from '@mui/icons-material';
+  MdBarChart as BarChartIcon,
+  MdOutlineBarChart as BarChartOutlinedIcon,
+} from 'react-icons/md';
 
 export default function Switch({ toggle, setToggle, mobile }: SwitchProps) {
   const handleToggle = () => {
@@ -37,8 +37,8 @@ export default function Switch({ toggle, setToggle, mobile }: SwitchProps) {
 
         <span className='relative z-10 flex items-center gap-2 transition-all duration-200'>
           <Icon
-            sx={{
-              fontSize: iconSize,
+            size={iconSize}
+            style={{
               transition: 'all 200ms ease',
             }}
           />

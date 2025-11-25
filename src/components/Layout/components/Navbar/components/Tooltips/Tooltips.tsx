@@ -1,4 +1,4 @@
-import { GitHub as GitHubIcon } from '@mui/icons-material';
+import { FaGithub as GitHubIcon } from 'react-icons/fa';
 
 const GITHUB_URL = 'https://github.com/vSkyper/cryptocurrency';
 

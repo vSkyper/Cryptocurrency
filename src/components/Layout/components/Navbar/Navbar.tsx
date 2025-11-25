@@ -25,7 +25,7 @@ export default function Navbar() {
       </nav>
 
       {/* Spacer */}
-      <div className='h-24 sm:h-32' />
+      <div className='h-24 sm:h-38' />
     </div>
   );
 }

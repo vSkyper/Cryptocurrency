@@ -83,7 +83,7 @@ export default function SearchBar() {
           >
             <ComboboxOptions
               modal={false}
-              className='absolute mt-2 w-full overflow-hidden rounded-2xl bg-(--bg-dropdown) backdrop-blur-3xl border border-white/10 shadow-(--shadow-dropdown) z-50'
+              className='absolute mt-2 w-full overflow-hidden rounded-2xl bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 shadow-(--shadow-dropdown) z-50'
             >
               {filteredCoins.length === 0 ? (
                 <EmptyState />
