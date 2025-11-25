@@ -11,7 +11,17 @@ import {
   FilterFn,
 } from '@tanstack/react-table';
 import { useState, Fragment, useEffect, useRef } from 'react';
-import { Menu, Transition, Listbox } from '@headlessui/react';
+import {
+  Menu,
+  Transition,
+  Listbox,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  ListboxOption,
+  ListboxOptions,
+  ListboxButton,
+} from '@headlessui/react';
 import {
   MdArrowUpward,
   MdArrowDownward,
@@ -24,8 +34,8 @@ import {
   MdCheck,
   MdKeyboardArrowDown,
 } from 'react-icons/md';
-import { columns } from 'constants/dataTable/tanStackColumns';
 import { TableProps } from './interface';
+import { columns } from 'constants/dataTable';
 
 const PAGINATION_CONFIG = {
   pageSize: 50,
@@ -273,30 +283,27 @@ export default function Table({ coins }: TableProps) {
           <h2 className='text-lg sm:text-xl font-bold text-white/90 tracking-tight hidden sm:block'>
             Market Overview
           </h2>
-          <div className='flex items-center gap-3 w-full sm:w-auto'>
+          <div className='flex items-center gap-2 sm:gap-3 w-full sm:w-auto'>
             <div className='relative group flex-1 sm:flex-none'>
-              <MdSearch
-                className='absolute left-3 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-(--brand-blue) transition-colors duration-200'
-                size={20}
-              />
+              <MdSearch className='absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-(--brand-blue) transition-colors duration-200 w-4 h-4 sm:w-5 sm:h-5' />
               <input
                 value={globalFilter ?? ''}
                 onChange={(e) => setGlobalFilter(e.target.value)}
                 placeholder='Search coins...'
-                className='bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm text-white/90 placeholder-white/40 focus:outline-none focus:border-(--brand-blue)/50 focus:bg-white/10 transition-all duration-200 w-full sm:w-64 shadow-inner'
+                className='bg-white/5 border border-white/10 rounded-xl py-1.5 sm:py-2 pl-8 sm:pl-10 pr-3 sm:pr-4 text-xs sm:text-sm text-white/90 placeholder-white/40 focus:outline-none focus:border-(--brand-blue)/50 focus:bg-white/10 transition-all duration-200 w-full sm:w-64 shadow-inner'
               />
             </div>
             <button
               ref={filterButtonRef}
               onClick={handleFilterClick}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 border ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl transition-all duration-200 border ${
                 isFilterOpen
                   ? 'bg-(--brand-blue)/10 text-(--brand-blue) border-(--brand-blue)/20'
                   : 'bg-white/5 text-white/60 border-white/10 hover:text-white hover:bg-white/10 hover:border-white/20'
               }`}
             >
-              <MdFilterList size={20} />
-              <span className='text-sm font-medium hidden sm:block'>
+              <MdFilterList className='w-4 h-4 sm:w-5 sm:h-5' />
+              <span className='text-xs sm:text-sm font-medium hidden sm:block'>
                 Filters
               </span>
             </button>
@@ -315,10 +322,10 @@ export default function Table({ coins }: TableProps) {
           >
             <div
               ref={filterRef}
-              className='absolute right-0 sm:right-4 top-full mt-2 z-50 w-[calc(100%-1rem)] sm:w-[600px] mx-2 sm:mx-0 bg-[#0a0a0f]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-5 ring-1 ring-white/5'
+              className='absolute right-0 sm:right-4 top-full mt-2 z-50 w-[calc(100%-1rem)] sm:w-[600px] mx-2 sm:mx-0 bg-[#0a0a0f]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-2 sm:p-5 ring-1 ring-white/5'
               onMouseDown={(e) => e.stopPropagation()}
             >
-              <div className='flex items-center justify-between mb-5 pb-4 border-b border-white/5'>
+              <div className='flex items-center justify-between mb-2 pb-2 sm:mb-5 sm:pb-4 border-b border-white/5'>
                 <div className='flex items-center gap-2'>
                   <div className='p-1.5 rounded-lg bg-(--brand-blue)/10 text-(--brand-blue)'>
                     <MdFilterList size={20} />
@@ -334,10 +341,10 @@ export default function Table({ coins }: TableProps) {
                   <MdClose size={20} />
                 </button>
               </div>
-              <div className='flex flex-col sm:flex-row gap-4 sm:items-end'>
+              <div className='flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-end'>
                 {/* Column Select */}
                 <div className='flex flex-col gap-1.5 w-full sm:w-auto sm:min-w-[180px]'>
-                  <span className='text-[11px] font-bold text-white/40 uppercase tracking-wider ml-1'>
+                  <span className='text-[10px] sm:text-[11px] font-bold text-white/40 uppercase tracking-wider ml-1'>
                     Column
                   </span>
                   <Listbox
@@ -345,7 +352,7 @@ export default function Table({ coins }: TableProps) {
                     onChange={handleColumnChange}
                   >
                     <div className='relative'>
-                      <Listbox.Button className='relative w-full cursor-default rounded-xl bg-white/5 py-2.5 pl-4 pr-10 text-left text-sm text-white border border-white/10 focus:outline-none focus-visible:border-(--brand-blue) focus-visible:ring-2 focus-visible:ring-white/75 hover:bg-white/10 hover:border-white/20 transition-all'>
+                      <ListboxButton className='relative w-full cursor-default rounded-xl bg-white/5 py-1.5 sm:py-2.5 pl-3 sm:pl-4 pr-8 sm:pr-10 text-left text-xs sm:text-sm text-white border border-white/10 focus:outline-none focus-visible:border-(--brand-blue) focus-visible:ring-2 focus-visible:ring-white/75 hover:bg-white/10 hover:border-white/20 transition-all'>
                         <span className='block truncate font-medium'>
                           {
                             table
@@ -360,20 +367,20 @@ export default function Table({ coins }: TableProps) {
                             aria-hidden='true'
                           />
                         </span>
-                      </Listbox.Button>
+                      </ListboxButton>
                       <Transition
                         as={Fragment}
                         leave='transition ease-in duration-100'
                         leaveFrom='opacity-100'
                         leaveTo='opacity-0'
                       >
-                        <Listbox.Options className='absolute mt-2 max-h-60 w-full overflow-auto rounded-xl bg-[#1a1a20] py-1 text-base shadow-xl ring-1 ring-black/5 focus:outline-none sm:text-sm border border-white/10 z-50'>
+                        <ListboxOptions className='absolute mt-2 max-h-48 sm:max-h-60 w-full overflow-auto rounded-xl bg-[#1a1a20] py-1 text-xs sm:text-sm shadow-xl ring-1 ring-black/5 focus:outline-none border border-white/10 z-50'>
                           {table.getAllColumns().map((column) => (
-                            <Listbox.Option
+                            <ListboxOption
                               key={column.id}
-                              className={({ active }) =>
-                                `relative cursor-default select-none py-2.5 pl-10 pr-4 transition-colors ${
-                                  active
+                              className={({ focus }) =>
+                                `relative cursor-default select-none py-1.5 sm:py-2.5 pl-8 sm:pl-10 pr-3 sm:pr-4 transition-colors ${
+                                  focus
                                     ? 'bg-white/10 text-white'
                                     : 'text-white/70'
                                 }`
@@ -392,18 +399,18 @@ export default function Table({ coins }: TableProps) {
                                     {column.columnDef.header as string}
                                   </span>
                                   {selected ? (
-                                    <span className='absolute inset-y-0 left-0 flex items-center pl-3 text-(--brand-blue)'>
+                                    <span className='absolute inset-y-0 left-0 flex items-center pl-2 sm:pl-3 text-(--brand-blue)'>
                                       <MdCheck
-                                        className='h-5 w-5'
+                                        className='h-4 w-4 sm:h-5 sm:w-5'
                                         aria-hidden='true'
                                       />
                                     </span>
                                   ) : null}
                                 </>
                               )}
-                            </Listbox.Option>
+                            </ListboxOption>
                           ))}
-                        </Listbox.Options>
+                        </ListboxOptions>
                       </Transition>
                     </div>
                   </Listbox>
@@ -411,12 +418,12 @@ export default function Table({ coins }: TableProps) {
 
                 {/* Operator Select */}
                 <div className='flex flex-col gap-1.5 w-full sm:w-auto sm:min-w-[140px]'>
-                  <span className='text-[11px] font-bold text-white/40 uppercase tracking-wider ml-1'>
+                  <span className='text-[10px] sm:text-[11px] font-bold text-white/40 uppercase tracking-wider ml-1'>
                     Operator
                   </span>
                   <Listbox value={activeOperator} onChange={setActiveOperator}>
                     <div className='relative'>
-                      <Listbox.Button className='relative w-full cursor-default rounded-xl bg-white/5 py-2.5 pl-4 pr-10 text-left text-sm text-white border border-white/10 focus:outline-none focus-visible:border-(--brand-blue) focus-visible:ring-2 focus-visible:ring-white/75 hover:bg-white/10 hover:border-white/20 transition-all'>
+                      <ListboxButton className='relative w-full cursor-default rounded-xl bg-white/5 py-1.5 sm:py-2.5 pl-3 sm:pl-4 pr-8 sm:pr-10 text-left text-xs sm:text-sm text-white border border-white/10 focus:outline-none focus-visible:border-(--brand-blue) focus-visible:ring-2 focus-visible:ring-white/75 hover:bg-white/10 hover:border-white/20 transition-all'>
                         <span className='block truncate font-medium'>
                           {activeOperator}
                         </span>
@@ -426,21 +433,21 @@ export default function Table({ coins }: TableProps) {
                             aria-hidden='true'
                           />
                         </span>
-                      </Listbox.Button>
+                      </ListboxButton>
                       <Transition
                         as={Fragment}
                         leave='transition ease-in duration-100'
                         leaveFrom='opacity-100'
                         leaveTo='opacity-0'
                       >
-                        <Listbox.Options className='absolute mt-2 max-h-60 w-full overflow-auto rounded-xl bg-[#1a1a20] py-1 text-base shadow-xl ring-1 ring-black/5 focus:outline-none sm:text-sm border border-white/10 z-50'>
+                        <ListboxOptions className='absolute mt-2 max-h-48 sm:max-h-60 w-full overflow-auto rounded-xl bg-[#1a1a20] py-1 text-xs sm:text-sm shadow-xl ring-1 ring-black/5 focus:outline-none border border-white/10 z-50'>
                           {getOperatorsForColumn(activeFilterColumn).map(
                             (op) => (
-                              <Listbox.Option
+                              <ListboxOption
                                 key={op}
-                                className={({ active }) =>
-                                  `relative cursor-default select-none py-2.5 pl-10 pr-4 transition-colors ${
-                                    active
+                                className={({ focus }) =>
+                                  `relative cursor-default select-none py-1.5 sm:py-2.5 pl-8 sm:pl-10 pr-3 sm:pr-4 transition-colors ${
+                                    focus
                                       ? 'bg-white/10 text-white'
                                       : 'text-white/70'
                                   }`
@@ -459,19 +466,19 @@ export default function Table({ coins }: TableProps) {
                                       {op}
                                     </span>
                                     {selected ? (
-                                      <span className='absolute inset-y-0 left-0 flex items-center pl-3 text-(--brand-blue)'>
+                                      <span className='absolute inset-y-0 left-0 flex items-center pl-2 sm:pl-3 text-(--brand-blue)'>
                                         <MdCheck
-                                          className='h-5 w-5'
+                                          className='h-4 w-4 sm:h-5 sm:w-5'
                                           aria-hidden='true'
                                         />
                                       </span>
                                     ) : null}
                                   </>
                                 )}
-                              </Listbox.Option>
+                              </ListboxOption>
                             )
                           )}
-                        </Listbox.Options>
+                        </ListboxOptions>
                       </Transition>
                     </div>
                   </Listbox>
@@ -480,28 +487,28 @@ export default function Table({ coins }: TableProps) {
                 {/* Value Input */}
                 {!['up', 'down'].includes(activeOperator) && (
                   <div className='flex flex-col gap-1.5 w-full'>
-                    <span className='text-[11px] font-bold text-white/40 uppercase tracking-wider ml-1'>
+                    <span className='text-[10px] sm:text-[11px] font-bold text-white/40 uppercase tracking-wider ml-1'>
                       Value
                     </span>
                     <input
                       value={activeValue}
                       onChange={(e) => setActiveValue(e.target.value)}
                       placeholder='Enter value...'
-                      className='w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-(--brand-blue) focus:bg-white/10 hover:border-white/20 transition-all'
+                      className='w-full bg-white/5 border border-white/10 rounded-xl py-1.5 sm:py-2.5 px-3 sm:px-4 text-xs sm:text-sm text-white placeholder-white/30 focus:outline-none focus:border-(--brand-blue) focus:bg-white/10 hover:border-white/20 transition-all'
                     />
                   </div>
                 )}
               </div>
-              <div className='flex justify-end gap-3 mt-6 pt-4 border-t border-white/5'>
+              <div className='flex justify-end gap-2 sm:gap-3 mt-2 sm:mt-6 pt-2 sm:pt-4 border-t border-white/5'>
                 <button
                   onClick={handleFilterClear}
-                  className='px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium'
+                  className='px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium'
                 >
                   Clear All
                 </button>
                 <button
                   onClick={handleFilterSave}
-                  className='px-6 py-2.5 text-sm font-bold text-white bg-(--brand-blue) rounded-xl shadow-lg shadow-(--brand-blue)/20 border border-white/10 hover:shadow-(--brand-blue)/40 hover:brightness-110 transition-all duration-200'
+                  className='px-3 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm font-bold text-white bg-(--brand-blue) rounded-xl shadow-lg shadow-(--brand-blue)/20 border border-white/10 hover:shadow-(--brand-blue)/40 hover:brightness-110 transition-all duration-200'
                 >
                   Apply Filter
                 </button>
@@ -629,24 +636,24 @@ export default function Table({ coins }: TableProps) {
                         onClick={(e) => e.stopPropagation()}
                       >
                         <Menu>
-                          <Menu.Button className='p-1 rounded hover:bg-white/10 text-white/40 hover:text-white focus:outline-none'>
+                          <MenuButton className='p-1 rounded hover:bg-white/10 text-white/40 hover:text-white focus:outline-none'>
                             <MdMoreVert size={20} />
-                          </Menu.Button>
-                          <Menu.Items
+                          </MenuButton>
+                          <MenuItems
                             transition
                             anchor={{ to: 'bottom end', gap: 8 }}
                             className='w-40 sm:w-48 origin-top-right divide-y divide-white/5 rounded-xl bg-[#0a0a0f]/95 backdrop-blur-xl shadow-xl ring-1 ring-white/10 focus:outline-none border border-white/10 z-50 transition duration-100 ease-out data-closed:scale-95 data-closed:opacity-0'
                           >
                             <div className='px-1 py-1'>
-                              <Menu.Item>
-                                {({ active }) => {
+                              <MenuItem>
+                                {({ focus }) => {
                                   const isSorted = header.column.getIsSorted();
                                   const showDesc =
                                     !isSorted || isSorted === 'asc';
                                   return (
                                     <button
                                       className={`${
-                                        active
+                                        focus
                                           ? 'bg-white/10 text-white'
                                           : 'text-white/70 hover:text-white'
                                       } group flex w-full items-center rounded-lg px-2 py-2 text-xs sm:text-sm transition-colors`}
@@ -665,15 +672,15 @@ export default function Table({ coins }: TableProps) {
                                     </button>
                                   );
                                 }}
-                              </Menu.Item>
-                              <Menu.Item>
-                                {({ active }) => {
+                              </MenuItem>
+                              <MenuItem>
+                                {({ focus }) => {
                                   const isSorted = header.column.getIsSorted();
                                   if (isSorted) {
                                     return (
                                       <button
                                         className={`${
-                                          active
+                                          focus
                                             ? 'bg-white/10 text-white'
                                             : 'text-white/70 hover:text-white'
                                         } group flex w-full items-center rounded-lg px-2 py-2 text-xs sm:text-sm transition-colors`}
@@ -689,7 +696,7 @@ export default function Table({ coins }: TableProps) {
                                   return (
                                     <button
                                       className={`${
-                                        active
+                                        focus
                                           ? 'bg-white/10 text-white'
                                           : 'text-white/70 hover:text-white'
                                       } group flex w-full items-center rounded-lg px-2 py-2 text-xs sm:text-sm transition-colors`}
@@ -702,14 +709,14 @@ export default function Table({ coins }: TableProps) {
                                     </button>
                                   );
                                 }}
-                              </Menu.Item>
+                              </MenuItem>
                             </div>
                             <div className='px-1 py-1'>
-                              <Menu.Item>
-                                {({ active }) => (
+                              <MenuItem>
+                                {({ focus }) => (
                                   <button
                                     className={`${
-                                      active
+                                      focus
                                         ? 'bg-white/10 text-white'
                                         : 'text-white/70 hover:text-white'
                                     } group flex w-full items-center rounded-lg px-2 py-2 text-xs sm:text-sm transition-colors`}
@@ -721,9 +728,9 @@ export default function Table({ coins }: TableProps) {
                                     Filter
                                   </button>
                                 )}
-                              </Menu.Item>
+                              </MenuItem>
                             </div>
-                          </Menu.Items>
+                          </MenuItems>
                         </Menu>
                       </div>
                     </th>

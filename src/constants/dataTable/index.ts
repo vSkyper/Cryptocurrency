@@ -1,3 +1,3 @@
-import { columns } from './dataTable';
+import { columns } from './tanStackColumns';
 
 export { columns };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MdArrowDownward as ArrowDownwardIcon } from 'react-icons/md';
+import { MdArrowDownward, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import {
   Combobox,
   ComboboxButton,
@@ -12,7 +12,7 @@ import useFetch from 'hooks/useFetch';
 import { IExchange } from 'interfaces';
 import { ErrorModal } from 'components';
 import { ExchangeProps } from './interface';
-import { ChevronIcon, CurrencyInput, LoadingSpinner } from './components';
+import { CurrencyInput } from './components';
 import { API_ENDPOINTS } from 'config/api';
 import { formatRateWithSuffix } from 'utils/formatters';
 
@@ -146,7 +146,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
 
           {/* Swap Icon */}
           <div className='flex items-center justify-center text-white/20 mx-auto my-1 sm:my-2'>
-            <ArrowDownwardIcon />
+            <MdArrowDownward size={25} />
           </div>
 
           {/* Fiat Currency Input with Combobox */}
@@ -170,7 +170,7 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
                     }
                   />
                   <ComboboxButton className='absolute right-0 p-1'>
-                    <ChevronIcon />
+                    <MdOutlineKeyboardArrowDown />
                   </ComboboxButton>
 
                   <Transition
@@ -183,21 +183,23 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
                       <ComboboxOptions
                         modal={false}
                         anchor='bottom start'
-                        className='z-20 mt-2 max-h-60 w-18 overflow-auto rounded-xl bg-(--bg-dropdown) py-1 sm:py-1.5 text-xs sm:text-sm shadow-(--shadow-dropdown) border border-white/10 backdrop-blur-xl'
+                        className='z-20 mt-2 max-h-48 sm:max-h-60 w-18 sm:w-20 overflow-auto rounded-xl bg-[#1a1a20] py-1 text-xs sm:text-sm shadow-xl ring-1 ring-black/5 focus:outline-none border border-white/10 backdrop-blur-xl'
                       >
                         {filteredCurrencies.map((option) => (
                           <ComboboxOption
                             key={option}
                             value={option}
                             className={({ focus }) =>
-                              `cursor-pointer select-none px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-base text-white/90 font-bold ${
+                              `relative cursor-default select-none py-1.5 sm:py-2.5 px-3 sm:px-4 transition-colors ${
                                 focus
-                                  ? 'bg-[color-mix(in_srgb,var(--brand-blue)_10%,transparent)]'
-                                  : ''
+                                  ? 'bg-white/10 text-white'
+                                  : 'text-white/70'
                               }`
                             }
                           >
-                            {option.toUpperCase()}
+                            <span className='block truncate font-bold'>
+                              {option.toUpperCase()}
+                            </span>
                           </ComboboxOption>
                         ))}
                       </ComboboxOptions>
@@ -210,9 +212,9 @@ export default function Exchange({ id, symbol }: ExchangeProps) {
         </div>
 
         {/* Exchange Rate Display */}
-        <div className='flex items-center justify-center gap-2 mt-3 sm:mt-5 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 bg-black/20 text-white/60 font-mono text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wide uppercase'>
+        <div className='flex h-8 items-center justify-center gap-2 mt-3 sm:mt-5 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 bg-black/20 text-white/60 font-mono text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wide uppercase'>
           {isLoadingRate ? (
-            <LoadingSpinner />
+            <div className='animate-spin h-[18px] w-[18px] border-2 border-white/10 border-t-(--brand-blue) rounded-full' />
           ) : (
             currentRate && (
               <div className='font-semibold text-xs sm:text-sm text-(--text-secondary)'>
