@@ -55,7 +55,7 @@ export default function SearchBar() {
   if (error) return <ErrorModal />;
 
   const hasQuery = query.length > 0;
-  const placeholder = data ? 'Search cryptocurrencies...' : 'Loading coins...';
+  const placeholder = data ? 'Search coins...' : 'Loading coins...';
 
   return (
     <Combobox value={selectedCoin} onChange={handleChange}>

@@ -33,6 +33,7 @@ import {
   MdChevronRight,
   MdCheck,
   MdKeyboardArrowDown,
+  MdSearchOff,
 } from 'react-icons/md';
 import { TableProps } from './interface';
 import { columns } from 'constants/dataTable';
@@ -739,34 +740,67 @@ export default function Table({ coins }: TableProps) {
               ))}
             </thead>
             <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr
-                  key={row.id}
-                  className='border-b border-white/3 last:border-b-0 transition-colors duration-150 ease-out hover:bg-white/3 focus-within:bg-(--brand-blue)/5 active:bg-(--brand-blue)/10'
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className={`py-0.5 sm:py-2.5 text-white/90 text-xs sm:text-sm font-medium ${
-                        cell.column.id === 'name'
-                          ? 'pl-4 pr-2 sm:px-4 text-left'
-                          : [
-                              'current_price',
-                              'total_volume',
-                              'market_cap',
-                            ].includes(cell.column.id)
-                          ? 'px-2 sm:px-4 text-right'
-                          : 'px-2 sm:px-4 text-center'
-                      }`}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
+              {table.getRowModel().rows.length > 0 ? (
+                table.getRowModel().rows.map((row) => (
+                  <tr
+                    key={row.id}
+                    className='border-b border-white/3 last:border-b-0 transition-colors duration-150 ease-out hover:bg-white/3 focus-within:bg-(--brand-blue)/5 active:bg-(--brand-blue)/10'
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        className={`py-0.5 sm:py-2.5 text-white/90 text-xs sm:text-sm font-medium ${
+                          cell.column.id === 'name'
+                            ? 'pl-4 pr-2 sm:px-4 text-left'
+                            : [
+                                'current_price',
+                                'total_volume',
+                                'market_cap',
+                              ].includes(cell.column.id)
+                            ? 'px-2 sm:px-4 text-right'
+                            : 'px-2 sm:px-4 text-center'
+                        }`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr className='border-b border-white/3'>
+                  <td
+                    colSpan={table.getVisibleFlatColumns().length}
+                    className='py-12 sm:py-20 text-center'
+                  >
+                    <div className='flex flex-col items-center justify-center gap-2 text-white/40'>
+                      <div className='p-4 rounded-full bg-white/5'>
+                        <MdSearchOff size={32} />
+                      </div>
+                      <div className='flex flex-col gap-1'>
+                        <span className='font-bold text-lg text-white/60'>
+                          No coins found
+                        </span>
+                        <span className='text-xs sm:text-sm'>
+                          Try adjusting your search or filters to find what
+                          you're looking for.
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setGlobalFilter('');
+                          setColumnFilters([]);
+                        }}
+                        className='mt-3 text-xs text-(--brand-blue) hover:text-(--brand-blue)/80 hover:underline transition-all'
+                      >
+                        Clear all filters
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -798,9 +832,11 @@ export default function Table({ coins }: TableProps) {
           </div>
           <div className='flex items-center gap-1 min-w-[100px] justify-center'>
             <span>
-              {table.getState().pagination.pageIndex *
-                table.getState().pagination.pageSize +
-                1}
+              {table.getFilteredRowModel().rows.length === 0
+                ? 0
+                : table.getState().pagination.pageIndex *
+                    table.getState().pagination.pageSize +
+                  1}
               -
               {Math.min(
                 (table.getState().pagination.pageIndex + 1) *
